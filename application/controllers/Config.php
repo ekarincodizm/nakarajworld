@@ -5,7 +5,7 @@ class Config extends CI_Controller{
     parent::__construct();
     if(!isset($_SESSION))
     {
-      session_start();
+      session_start(); 
     }
   }
   public function LoadPage($value){
