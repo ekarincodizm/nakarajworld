@@ -1,0 +1,15 @@
+{
+  "transport": "ftp",
+  "uploadOnSave": true,
+  "useAtomicWrites": false,
+  "deleteLocal": false,
+  "hostname": "150.107.29.179",
+  "target": "/",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**"
+  ],
+  "username": "demoweb@esanstudio.com",
+  "password": "1q2w3e4r5t",
+  "watch": []
+}

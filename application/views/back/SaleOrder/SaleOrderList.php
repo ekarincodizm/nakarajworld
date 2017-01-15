@@ -1,0 +1,61 @@
+<section class="content" ng-controller="">
+  <div class="container-fluid">
+    <div class="block-header">
+      <h1>สินค้า</h1>
+    </div>
+    <div class="row clearfix">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
+            <h2>
+              รายการสินค้า
+            </h2>
+
+          </div>
+          <div class="body">
+
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>รหัสสั่งซื้อ</th>
+                      <th>วันที่สั่งซื้อ</th>
+                      <th>จำนวนรายการสินค้า</th>
+                      <th>ราคารวม</th>
+                      <th>สถานะ</th>
+                      <th>ตัวเลือก</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php $i=1; foreach ($SaleOrderList as $row): ?>
+                      <tr>
+                        <td><?php echo $i; ?></td>
+                        <td><?php echo $row['shop_detail_code'] ?></td>
+                        <td><?php echo $this->thaidate->ShortDateTime($row['shop_detail_date']); ?></td>
+                        <td><?php echo number_format($row['shop_detail_total_quantity']) ?></td>
+                        <td><?php echo number_format($row['shop_detail_total_price']) ?></td>
+                        <td>
+                          <?php if ($row['shop_detail_status']==1): ?>
+                            <span class="font-bold col-teal">ชำระเงินแล้ว</span>
+                          <?php elseif ($row['shop_detail_status']==2): ?>
+                            <span class="font-bold col-orange">ค้างชำระ</span>
+                          <?php elseif ($row['shop_detail_status']==0): ?>
+                            <span class="font-bold col-pink">ยกเลิก</span>
+
+                          <?php endif; ?>
+                        </td>
+                        <td>
+                          <a href="<?php echo site_url('SaleOrder/SaleOrderDetail/'.$row['shop_detail_id'])  ?>" class="btn btn-info">รายละเอียด</a>
+                        </td>
+                      </tr>
+                      <?php $i++; endforeach; ?>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
