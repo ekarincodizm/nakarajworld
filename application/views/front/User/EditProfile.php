@@ -53,7 +53,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 			<div class="col-lg-8 col-lg-offset-2" ng-hide="SendForm">
 
 					<!-- <form class="form-horizontal form" novalidate ng-submit="SubmitProfile()"> -->
-					<?php echo form_open_multipart('/HomePage/SubmitProfile', array('id' => "SubmitRegister", 'name' => "SubmitRegister", 'novalidate'=>'')); ?>
+					<?php echo form_open_multipart('/HomePage/SubmitEditProfile', array('id' => "SubmitRegister", 'name' => "SubmitRegister", 'novalidate'=>'')); ?>
 					<input type="hidden" name="member_id" value="<?php echo $Profile[0]['member_id']  ?>">
 						<div class="row">
 							<div class="col-md-2">
@@ -205,7 +205,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						</div>
 					</div>
 
-					<div class="row text-center">
+					<!-- <div class="row text-center">
 						<div class="col-lg-12" style="padding-top:20px">
 							<h6>แก้ไขรหัสผ่าน</h6>
 							<span class="title-separator"></span>
@@ -222,7 +222,8 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
+
 					</div>
 
 					<div class="row">
