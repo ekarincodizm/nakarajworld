@@ -24,9 +24,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 // $config['base_url'] = 'http://www.baramesh.com/demo/mlm/';
-//$config['base_url'] = 'http://localhost/nakarajworld/';
+$config['base_url'] = 'http://localhost/nakarajworld/';
 // $config['base_url'] = 'http://www.esanstudio.com/demo/';
- $config['base_url'] = 'http://www.esanstudio.com/demo/';
+ // $config['base_url'] = 'http://www.esanstudio.com/demo/';
 
 /*
 |--------------------------------------------------------------------------
