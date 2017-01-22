@@ -31,7 +31,7 @@
 
             </td>
             <td>
-              <!-- <?php if ($HistoryAccount['account_history_status']==2): ?>
+              <?php if ($HistoryAccount['account_history_status']==2): ?>
                 <a href="<?php echo site_url('/AccountController/ProcessEnableAccount/'.$HistoryAccount['account_history_id']); ?>"
                   class="btn btn-info">ชำระค่าสมัคร</a>
                 <?php elseif($HistoryAccount['account_history_status']==1): ?>
@@ -39,8 +39,12 @@
                     class="btn btn-info">พิมพ์ใบแจ้งหนี้</a>
                   <?php else: ?>
                     <span class="label bg-blue-grey">รอดำเนินการ</span>
-                  <?php endif; ?> -->
+                  <?php endif; ?>
+                  <!-- Start button Continue Extend -->
+                    <?php ?>
 
+                    <?php ?>
+                  <!-- End button Continue Extend -->
                 </td>
               </tr>
               <?php $i++; endforeach; ?>
