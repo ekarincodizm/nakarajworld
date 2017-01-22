@@ -10,6 +10,7 @@
           <div class="col-md-12 text-center">
 
             <h4><?php echo $Profile[0]['member_prefix'].$Profile[0]['member_firstname']." ".$Profile[0]['member_lastname'] ?></h4>
+            <h5><?php echo "PV: ". $PV; ?></h5>
           </div>
         </div>
         <div class="row">

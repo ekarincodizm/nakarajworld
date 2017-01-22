@@ -17,7 +17,7 @@ class SaleOrderHistory extends CI_Controller{
 
   public function index() {
     $for_date = isset($_POST['for_date'])?$_POST['for_date']:'';
-        $to_date = isset($_POST['to_date'])?$_POST['to_date']:'';
+    $to_date = isset($_POST['to_date'])?$_POST['to_date']:'';
     // $SaleOrderHistory = $this->ProductsModel->SaleOrderHistory();
     $SaleOrderHistory = $this->ProductsModel->SaleOrderHistory($for_date,$to_date);
     // $this->debuger->prevalue($SaleOrderHistory);
@@ -28,7 +28,9 @@ class SaleOrderHistory extends CI_Controller{
     $value = array(
       'Result' => array(
         'loadJQ'=> 'true',
-        'SaleOrderHistory' => $SaleOrderHistory
+        'for' => $for_date,
+        'to'  => $to_date,
+        'SaleOrderHistory' => $SaleOrderHistory,
       ),
       'View' => 'back/SaleOrder/SaleOrderHistory'
     );

@@ -65,6 +65,7 @@ class Products extends CI_Controller{
         'products_detail' => $_POST['products_detail'],
 
         'products_name' => $_POST['products_name'],
+        'products_pv' => $_POST['products_pv'],
         'products_price_narmal' => $_POST['products_price_narmal'],
         'products_price_discount' => $_POST['products_price_discount'],
         'products_stock' => $_POST['products_stock'],
@@ -98,6 +99,7 @@ class Products extends CI_Controller{
 
         'products_detail' => $_POST['products_detail'],
         'products_name' => $_POST['products_name'],
+        'products_pv' => $_POST['products_pv'],
         'products_price_narmal' => $_POST['products_price_narmal'],
         'products_price_discount' => $_POST['products_price_discount'],
         'products_stock' => $_POST['products_stock'],

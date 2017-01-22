@@ -18,11 +18,19 @@
             <input type="hidden" name="products_id" value="<?php echo $ProductsDetail[0]['products_id'] ?>">
 
             <div class="row">
-              <div class="col-sm-12">
+              <div class="col-sm-6">
                 <div class="form-group">
                   <label for="">ชื่อสินค้า</label>
                   <div class="form-line">
                     <input name="products_name" type="text" class="form-control input-lg" value="<?php echo $ProductsDetail[0]['products_name'] ?>">
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label for="">ค่า PV</label>
+                  <div class="form-line">
+                    <input name="products_pv" type="text" class="form-control input-lg" value="<?php echo $ProductsDetail[0]['products_pv'] ?>">
                   </div>
                 </div>
               </div>

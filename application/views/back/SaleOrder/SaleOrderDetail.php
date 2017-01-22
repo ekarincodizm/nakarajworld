@@ -19,9 +19,11 @@
                       <th>#</th>
                       <th>รหัสสินค้า</th>
                       <th>ชื่อสินค้า</th>
+                      <th>PV</th>
                       <th>ราคา</th>
                       <th style="width:10%">จำนวน</th>
                       <th>ราคารวม</th>
+                      <th>PV รวม</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -30,9 +32,11 @@
                         <td><?php echo $i; ?></td>
                         <td><?php echo $row['products_code'] ?></td>
                         <td><?php echo $row['products_name'] ?></td>
+                        <td><?php echo $row['shop_items_pv'] ?></td>
                         <td><?php echo number_format($row['shop_items_price']) ?></td>
                         <td><?php echo number_format($row['shop_items_quantity']) ?></td>
                         <td><?php echo number_format($row['shop_items_price']*$row['shop_items_quantity']) ?></td>
+                        <td><?php echo number_format($row['shop_items_pv']*$row['shop_items_quantity']) ?></td>
                       </td>
                     </tr>
 

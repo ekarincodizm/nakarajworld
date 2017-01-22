@@ -17,7 +17,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
         <div class="card">
           <div class="header">
             <h2>
-              สรุปการขายสินค้า
+              สรุปการขายสินค้า<br><br>
             </h2>
             <?php echo form_open('/SaleOrderHistory') ?>
 
@@ -26,7 +26,8 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
               <div class="form-group">
                 <label for="name">ตั้งแต่วันที่</label>
                 <div class='input-group date bootstrap-datepicker form-line' id='search_for_datepicker'>
-                  <input name="for_date" type='datetime' class="form-control" >
+                  <input name="for_date" type='datetime' class="form-control" value="<?php echo $for ?>">
+
                   <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                   </span>
@@ -38,7 +39,8 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
               <label for="name">ถึงวันที่</label>
               <div class="form-group">
                 <div class='input-group date bootstrap-datepicker form-line' id='search_to_datepicker'>
-                  <input name="to_date" type='datetime' class="form-control" >
+                  <input name="to_date" type='datetime' class="form-control" value="<?php echo $to ?>">
+
                   <span class="input-group-addon">
                     <span class="glyphicon glyphicon-calendar"></span>
                   </span>

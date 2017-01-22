@@ -50,13 +50,14 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 		<div class="row" id="RegisterForm" ng-hide="<?php echo $Registered ?>">
 			<div class="col-lg-8 col-lg-offset-2" >
 				<!-- <form class="form-horizontal form" novalidate ng-submit="SubmitProfile()"> -->
-				<?php echo form_open_multipart('/HomePage/SubmitProfile', array('id' => "SubmitRegister", 'name' => "SubmitRegister", 'novalidate'=>'')); ?>
+				<?php echo form_open_multipart('/HomePage/SubmitProfile'); ?>
 
 				<div class="row">
 					<div class="col-md-2">
 						<label for="name">คำนำหน้า</label>
 						<div class="form-group">
-							<select name="member_prefix" required class="form-control" ng-model="member_prefix">
+							<select name="member_prefix" required class="form-control">
+								<option value="">-เลือก-</option>
 								<option value="นาย">นาย</option>
 								<option value="นาง">นาง</option>
 								<option value="นางสาว">นางสาว</option>
@@ -66,13 +67,13 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 					<div class="col-md-4">
 						<label for="name">ชื่อ (ภาษาไทย)</label>
 						<div class="form-group">
-							<input class="form-control" name="member_firstname" type="text" placeholder="" autocomplete="off" ng-model="member_firstname"/>
+							<input class="form-control" name="member_firstname" required type="text" placeholder="" autocomplete="off" ng-model="member_firstname"/>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<label for="name">นามสกุล (ภาษาไทย)</label>
 						<div class="form-group">
-							<input class="form-control" name="member_lastname" type="text" placeholder="" autocomplete="off" ng-model="member_lastname"/>
+							<input class="form-control" name="member_lastname" required type="text" placeholder="" autocomplete="off" ng-model="member_lastname"/>
 						</div>
 					</div>
 				</div>
@@ -81,7 +82,8 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 					<div class="col-md-2">
 						<label for="name">คำนำหน้า</label>
 						<div class="form-group">
-							<select name="member_prefix_eng" required class="form-control" ng-model="member_prefix_eng">
+							<select name="member_prefix_eng" required class="form-control">
+								<option value="">-Select-</option>
 								<option value="Mr.">Mr.</option>
 								<option value="Mrs.">Mrs.</option>
 								<option value="Miss">Miss</option>
@@ -91,13 +93,13 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 					<div class="col-md-4">
 						<label for="name">ชื่อ (ภาษาอังกฤษ)</label>
 						<div class="form-group">
-							<input class="form-control" name="member_firstname_eng" type="text" placeholder="" autocomplete="off" ng-model="member_firstname_eng"/>
+							<input class="form-control" name="member_firstname_eng" required type="text" placeholder="" autocomplete="off" ng-model="member_firstname_eng"/>
 						</div>
 					</div>
 					<div class="col-md-6">
 						<label for="name">นามสกุล (ภาษาอังกฤษ)</label>
 						<div class="form-group">
-							<input class="form-control" name="member_lastname_eng" type="text" placeholder="" autocomplete="off" ng-model="member_lastname_eng"/>
+							<input class="form-control" name="member_lastname_eng" required type="text" placeholder="" autocomplete="off" ng-model="member_lastname_eng"/>
 						</div>
 					</div>
 				</div>
@@ -117,7 +119,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						<label for="name">วันเกิด</label>
 						<div class="form-group">
 							<div class='input-group date bootstrap-datepicker' id='member_born_datepicker'>
-								<input name="member_born" type='datetime' class="form-control"  value="{{member_born}}">
+								<input name="member_born" required type='datetime' class="form-control"  value="{{member_born}}">
 
 								<span class="input-group-addon">
 									<span class="glyphicon glyphicon-calendar"></span>
@@ -127,19 +129,10 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						</div>
 					</div>
 
-					<div class="col-md-2">
-						<label for="name">อายุ</label>
-						<div class="form-group">
-							<div class="input-group">
-								<input class="form-control" name="member_age" type="text" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" autocomplete="off" ng-model="member_age"/>
-								<span class="input-group-addon">ปี</span>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
+					<div class="col-md-6">
 						<label for="name">อีเมล</label>
 						<div class="form-group">
-							<input class="form-control" name="member_email" type="text" placeholder="" autocomplete="off" ng-model="member_email"/>
+							<input class="form-control" name="member_email" required type="text" placeholder="" autocomplete="off" ng-model="member_email"/>
 						</div>
 					</div>
 				</div>
@@ -147,7 +140,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 					<div class="col-md-8">
 						<label for="name">ที่อยู่</label>
 						<div class="form-group">
-							<textarea class="form-control" name="member_address" style="height:60px;" ng-model="member_address"></textarea>
+							<textarea class="form-control" name="member_address" required style="height:60px;" ng-model="member_address"></textarea>
 						</div>
 					</div>
 				</div>
@@ -155,7 +148,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 					<div class="col-md-8">
 						<label for="name">ที่อยู่สำรอง กรณีติดต่อไม่ได้</label>
 						<div class="form-group">
-							<textarea class="form-control" name="member_address2" style="height:60px;" ng-model="member_address2"></textarea>
+							<textarea class="form-control" name="member_address2" required style="height:60px;" ng-model="member_address2"></textarea>
 						</div>
 					</div>
 				</div>
@@ -163,19 +156,19 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 					<div class="col-md-4">
 						<label for="name">เบอร์โทรศัพท์</label>
 						<div class="form-group">
-							<input class="form-control" name="member_phone" type="text" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" autocomplete="off" ng-model="member_phone"/>
+							<input class="form-control" name="member_phone" required type="text" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" autocomplete="off" ng-model="member_phone"/>
 						</div>
 					</div>
 					<div class="col-md-4">
 						<label for="name">Line ID</label>
 						<div class="form-group">
-							<input class="form-control" name="member_line_id" type="text" placeholder="" autocomplete="off" ng-model="member_line_id"/>
+							<input class="form-control" name="member_line_id" required type="text" placeholder="" autocomplete="off" ng-model="member_line_id"/>
 						</div>
 					</div>
 					<div class="col-md-4">
 						<label for="name">Skype</label>
 						<div class="form-group">
-							<input class="form-control" name="member_skype" type="text" placeholder="" autocomplete="off" ng-model="member_skype"/>
+							<input class="form-control" name="member_skype" required type="text" placeholder="" autocomplete="off" ng-model="member_skype"/>
 						</div>
 					</div>
 				</div>
@@ -183,19 +176,19 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 					<div class="col-md-4">
 						<label for="name">What App</label>
 						<div class="form-group">
-							<input class="form-control input-lg" name="member_whatapp" type="text" placeholder="" autocomplete="off" ng-model="member_whatapp"/>
+							<input class="form-control input-lg" name="member_whatapp" required type="text" placeholder="" autocomplete="off" ng-model="member_whatapp"/>
 						</div>
 					</div>
 					<div class="col-md-4">
 						<label for="name">ช่องทางการติดต่ออื่นๆ / etc.</label>
 						<div class="form-group">
-							<input class="form-control input-lg" name="member_contact_etc" type="text" autocomplete="off"  ng-model="member_contact_etc"/>
+							<input class="form-control input-lg" name="member_contact_etc" required type="text" autocomplete="off"  ng-model="member_contact_etc"/>
 						</div>
 					</div>
 					<div class="col-md-4">
 						<label for="name">รูปโปรไฟล์</label>
 						<div class="form-group">
-							<input type="file" class="filestyle" name="member_photo" id="member_photo" OnChange="readIMG(this)"/>
+							<input type="file" class="filestyle" name="member_photo" required id="member_photo" OnChange="readIMG(this)"/>
 						</div>
 					</div>
 				</div>

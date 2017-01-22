@@ -15,11 +15,19 @@
           <div class="body">
             <?php echo form_open_multipart('/Products/SaveProducts'); ?>
             <div class="row">
-              <div class="col-sm-12">
+              <div class="col-sm-6">
                 <div class="form-group">
                   <label for="">ชื่อสินค้า</label>
                   <div class="form-line">
                     <input name="products_name" type="text" class="form-control input-lg">
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label for="">ค่า PV</label>
+                  <div class="form-line">
+                    <input name="products_pv" type="text" class="form-control input-lg">
                   </div>
                 </div>
               </div>

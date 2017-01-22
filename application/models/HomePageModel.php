@@ -84,4 +84,29 @@ class HomePageModel extends CI_Model {
     ->where('member_id', $data['member_id'])
     ->update('mlm_member',$data);
   }
+
+  public function allpv($id)
+  {
+    $member_id = $this->db
+    ->where('member_id', $id)
+    ->get('mlm_member')
+    ->result_array();
+
+    $shop_detail = $this->db
+    ->where('member_id',$member_id[0]['member_id'])
+    ->where('shop_detail_status',1)
+    ->join('mlm_shop_items', 'mlm_shop_detail.shop_detail_id = mlm_shop_items.shop_detail_id')
+    ->get('mlm_shop_detail')
+    ->result_array();
+
+    $pv=0;
+    foreach ($shop_detail as $row){
+    $pv += $row['shop_items_pv']*$row['shop_items_quantity'];
+    }
+
+    //[ยังไม่ทำ]ต้องลบกับรายการใช้ PV ก่อน
+
+    return $pv;
+  }
+  
 }

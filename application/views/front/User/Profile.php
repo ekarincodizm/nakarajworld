@@ -5,7 +5,7 @@
       <div class="col-lg-6">
         <div class="row">
           <div class="col-lg-8">
-            <h6>โปรไฟล์</h6>
+            <h6>โปรไฟล์</h6><br>
           </div>
           <div class="col-md-4 text-center col-md-offset-1">
             <img src="<?php echo base_url('/assets/image/profile/'.$Profile[0]['member_photo']); ?>" class="img-circle" style="height: 200px;width: 200px;">
@@ -13,6 +13,7 @@
         </div>
 
         <h2><?php echo $Profile[0]['member_prefix'].$Profile[0]['member_firstname']." ".$Profile[0]['member_lastname'] ?></h2>
+        <h4>PV: <?php echo $PV ?></h4  >
         <p>
           <?php echo $Profile[0]['member_id_card_type_name']?> : <strong><?php echo $Profile[0]['member_citizen_id']?></strong>  <br>
           วันเกิด : <strong><?php echo $this->thaidate->FullDate($Profile[0]['member_born']) ?></strong><br>

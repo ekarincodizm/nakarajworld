@@ -116,6 +116,7 @@ class Store extends CI_Controller{
 			$input = array(
 				'shop_items_quantity' => $row['shop_temp_quantity'],
 				'shop_items_price' => $total,
+				'shop_items_pv' => $row['shop_temp_pv'],
 				'shop_detail_id' => $DeatilID,
 				'products_id' => $row['products_id'],
 

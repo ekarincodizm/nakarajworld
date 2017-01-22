@@ -123,7 +123,7 @@ class HomePage extends CI_Controller{
 				$this->HomePageModel->UpdateUser( $UpdateUser );
 			}
 
-			unset($RegisterForm['user_pass'],$RegisterForm['user_pass_confirm']);
+			unset($RegisterForm['user_pass'],$RegisterForm['user_pass_confirm'],$RegisterForm['member_pv']);
 
 			$Member = $this->HomePageModel->UpdateMember( $RegisterForm );
 			$member_id = $RegisterForm['member_id'];
@@ -236,7 +236,7 @@ class HomePage extends CI_Controller{
 		if (isset($_SESSION['MEMBER_ID'])) {
 			$Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
 			// $ProfileDateOfBirth = json_decode(json_encode($this->HomePageModel->LoadProfileDateOfBirth( $_SESSION['MEMBER_ID'] )), true);
-
+			$pv = $this->HomePageModel->allpv($_SESSION['MEMBER_ID']);
 			$today = getdate();
 			 $d1 = new DateTime($today["year"].'-'.$today["mon"].'-'.$today["mday"]);
 			 $d2 = new DateTime($Profile[0]['member_born']);
@@ -252,16 +252,13 @@ class HomePage extends CI_Controller{
 			} elseif ($Profile[0]['member_id_card_type']==3) {
 				$Profile[0]['member_id_card_type_name'] = 'Work Permit';
 			}
-
-
-
 		}
 		// $this->debuger->prevalue($Profile);
-
 		$value = array(
 			'Result' => array(
 				'Profile' => $Profile,
 				'AccountList' => $AccountList,
+				'PV' => $pv,
 			),
 			'View' => 'front/User/Profile'
 		);

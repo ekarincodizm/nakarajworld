@@ -26,6 +26,7 @@
                   <th>ประเภทบัตร</th>
                   <th>เลขบัตรประจำตัว</th>
                   <th>ชื่อ-สกุล</th>
+                  <!-- <th>PV</th> -->
                   <th>สถานะ</th>
                   <th class="noExport">ตัวเลือก</th>
                 </tr>
@@ -44,7 +45,8 @@
                       <?php  endif  ?>
                     </td>
                     <td><?php echo $row['member_citizen_id'] ?></td>
-                    <td><?php echo $row['member_prefix'].$row['member_firstname']." ".$row['member_lastname'] ?></td>
+                    <td><?php echo $row['member_prefix'].$row['member_firstname']." ".$row['member_lastname']." <font color='blue'>(PV:".$row['total_pv'].")</font>" ?></td>
+                    <!-- <td><?php echo $PV ?> </td> -->
                     <td>
                       <?php  if ($row['member_status']==1): ?>
                         <span class="font-bold col-teal">เปิดการใช้งาน</span>

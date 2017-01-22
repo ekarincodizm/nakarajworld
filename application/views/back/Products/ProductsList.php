@@ -31,6 +31,7 @@
                       <th>ราคาปกติ</th>
                       <th>ส่วนลด (%)</th>
                       <th>ราคาขาย</th>
+                      <th>PV</th>
                       <th>สินค้าคงเหลือ</th>
                       <th>แก้ไขล่าสุด</th>
                       <th>สถานะ</th>
@@ -46,6 +47,7 @@
                       <td><?php echo $row['products_price_narmal'] ?></td>
                       <td><?php echo $row['products_price_discount'] ?></td>
                       <td><?php echo $row['products_price_narmal']-($row['products_price_narmal']*$row['products_price_discount']/100) ?></td>
+                      <td><?php echo $row['products_pv'] ?></td>
                       <td><?php echo $row['products_stock']." ".$row['products_unit'] ?></td>
 
                       <td><?php echo $this->thaidate->FullDate($row['products_update_date']); ?></td>
@@ -55,7 +57,7 @@
                         <?php elseif ($row['products_status']==0): ?>
                             ปิดการใช้งาน
                         <?php endif; ?>
-                    
+
                       </td>
                       <td>
                         <a href="<?php echo site_url('Products/EditProducts/'.$row['products_id']); ?>" class="btn btn-info">

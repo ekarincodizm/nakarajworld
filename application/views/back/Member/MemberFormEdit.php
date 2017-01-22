@@ -57,7 +57,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
         <div class="card">
           <div class="header">
             <h2>
-              เพิ่มสมาชิกใหม่
+              แก้ไขสมาชิก
             </h2>
           </div>
           <div class="body">
@@ -83,7 +83,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                 <div class="form-group">
                   <div class="input-group input-group-lg">
                     <div class="form-line">
-                      <input class="form-control" name="member_firstname" type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_firstname']  ?>"/>
+                      <input class="form-control" name="member_firstname" required type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_firstname']  ?>"/>
                     </div>
                   </div>
                 </div>
@@ -93,7 +93,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                 <div class="form-group">
                   <div class="input-group input-group-lg">
                     <div class="form-line">
-                      <input class="form-control" name="member_lastname" type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_lastname']  ?>"/>
+                      <input class="form-control" name="member_lastname" required type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_lastname']  ?>"/>
                     </div>
                   </div>
                 </div>
@@ -101,7 +101,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                 <div class="col-md-2">
                   <label for="name">คำนำหน้า</label>
                   <div class="form-group">
-                    <select name="member_prefix_eng" required="required" class="form-control" id="member_prefix_eng">
+                    <select name="member_prefix_eng" required class="form-control" id="member_prefix_eng">
                       <option value="Mr.">Mr.</option>
                       <option value="Mrs.">Mrs.</option>
                       <option value="Miss">Miss</option>
@@ -111,20 +111,28 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                 <div class="col-md-4">
                   <label for="name">ชื่อ (ภาษาอังกฤษ)</label>
                   <div class="form-group">
-                    <input class="form-control" name="member_firstname_eng" type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_firstname_eng']  ?>"/>
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <label for="name">นามสกุล (ภาษาอังกฤษ)</label>
-                  <div class="form-group">
-                    <input class="form-control" name="member_lastname_eng" type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_lastname_eng']?>"/>
+                    <div class="input-group input-group-lg">
+                      <div class="form-line">
+                    <input class="form-control" name="member_firstname_eng" required type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_firstname_eng']  ?>"/>
                   </div>
                 </div>
               </div>
+            </div>
+                <div class="col-md-6">
+                  <label for="name">นามสกุล (ภาษาอังกฤษ)</label>
+                  <div class="form-group">
+                    <div class="input-group input-group-lg">
+                      <div class="form-line">
+                    <input class="form-control" name="member_lastname_eng" required type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_lastname_eng']?>"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
             <div class="row">
               <div class="col-md-3">
                 <label for="name">ประเภทบัตร</label>
-                <select id="member_id_card_type" name="member_id_card_type" class="form-control text-center">
+                <select id="member_id_card_type" name="member_id_card_type" required class="form-control text-center">
                   <option value="1">เลขบัตรประจำตัวประชาชน</option>
                   <option value="2">Passport</option>
                   <option value="3">Work Permit</option>
@@ -139,7 +147,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                 <div class="form-group">
                   <div class="input-group input-group-lg">
                     <div class="form-line">
-                      <input class="form-control" name="member_citizen_id" type="text" value="<?php echo $Profile[0]['member_citizen_id']  ?>" />
+                      <input class="form-control" name="member_citizen_id" required type="text" value="<?php echo $Profile[0]['member_citizen_id']  ?>" />
                     </div>
                   </div>
                 </div>
@@ -148,19 +156,10 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                 <label for="name">วันเกิด</label>
                 <div class="form-group">
                   <div class='input-group date bootstrap-datepicker form-line' id='member_born_datepicker'>
-                    <input name="member_born" type='datetime' class="form-control"  value="<?php echo $Profile[0]['member_born']  ?>" >
+                    <input name="member_born" type='datetime' required class="form-control"  value="<?php echo $Profile[0]['member_born']  ?>" >
                     <span class="input-group-addon">
                       <span class="glyphicon glyphicon-calendar"></span>
                     </span>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-2">
-                <label for="name">อายุ</label>
-                <div class="form-group">
-                  <div class="input-group form-line">
-                    <input class="form-control" name="member_age" type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_age']  ?>" />
-                    <span class="input-group-addon">ปี</span>
                   </div>
                 </div>
               </div>
@@ -168,7 +167,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                 <label for="name">อีเมล</label>
                 <div class="form-group ">
                   <div class="input-group form-line">
-                    <input class="form-control" name="member_email" type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_email']  ?>" />
+                    <input class="form-control" name="member_email" required type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_email']  ?>" />
                   </div>
                 </div>
               </div>
@@ -178,7 +177,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                 <label for="name">ที่อยู่</label>
                 <div class="form-group">
                   <div class="input-group form-line">
-                    <textarea class="form-control" name="member_address" style="height:60px;"><?php echo $Profile[0]['member_address'] ?></textarea>
+                    <textarea class="form-control" name="member_address" required style="height:60px;"><?php echo $Profile[0]['member_address'] ?></textarea>
                   </div>
                 </div>
               </div>
@@ -188,7 +187,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                 <label for="name">ที่อยู่สำรอง กรณีติดต่อไม่ได้</label>
                 <div class="form-group">
                   <div class="input-group form-line">
-                    <textarea class="form-control" name="member_address2" style="height:60px;"><?php echo $Profile[0]['member_address2'] ?></textarea>
+                    <textarea class="form-control" name="member_address2" required style="height:60px;"><?php echo $Profile[0]['member_address2'] ?></textarea>
                   </div>
                 </div>
               </div>
@@ -198,7 +197,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                 <label for="name">เบอร์โทรศัพท์</label>
                 <div class="form-group">
                   <div class="input-group form-line">
-                    <input class="form-control" name="member_phone" type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_phone']  ?>"/>
+                    <input class="form-control" name="member_phone" required type="text" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" autocomplete="off" value="<?php echo $Profile[0]['member_phone']  ?>"/>
                   </div>
                 </div>
               </div>
@@ -207,7 +206,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                 <div class="form-group">
                   <div class="input-group form-line">
 
-                    <input class="form-control" name="member_line_id" type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_line_id']  ?>"/>
+                    <input class="form-control" name="member_line_id" required type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_line_id']  ?>"/>
                   </div>
                 </div>
               </div>
@@ -216,7 +215,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                 <div class="form-group">
                   <div class="input-group form-line">
 
-                    <input class="form-control" name="member_skype" type="text" placeholder="" autocomplete="off"  value="<?php echo $Profile[0]['member_skype']  ?>"/>
+                    <input class="form-control" name="member_skype" required type="text" placeholder="" autocomplete="off"  value="<?php echo $Profile[0]['member_skype']  ?>"/>
                   </div>
                 </div>
               </div>
@@ -227,7 +226,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                 <div class="form-group">
                   <div class="input-group form-line">
 
-                    <input class="form-control input-lg" name="member_whatapp" type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_whatapp']  ?>" />
+                    <input class="form-control input-lg" name="member_whatapp" required type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_whatapp']  ?>" />
                   </div>
                 </div>
               </div>
@@ -236,7 +235,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                 <div class="form-group">
                   <div class="input-group form-line">
 
-                    <input class="form-control input-lg" name="member_contact_etc" type="text" autocomplete="off"  value="<?php echo $Profile[0]['member_contact_etc']  ?>"/>
+                    <input class="form-control input-lg" name="member_contact_etc" required type="text" autocomplete="off"  value="<?php echo $Profile[0]['member_contact_etc']  ?>"/>
                   </div>
                 </div>
               </div>
