@@ -1,5 +1,5 @@
 var HomePageApp = angular.module('HomePageApp', ['ngAnimate', 'ngSanitize']);
-
+SITE_URL = "http://localhost/nakaraworld/index.php";
 HomePageApp.controller('AddBookBankCtrl', function ($scope, $http) {
 
 	$scope.FormSubmit = function (data) {

@@ -15,21 +15,7 @@ class MemberService extends REST_Controller {
 
 	}
 
-	public function MemberList_get() {
-		$this->response( $this->MemberModel->MemberList() );
-	}
 
-	public function LoadProfile_post()
-	{
-		$id = $this->post('id');
-		$Profile = $this->HomePageModel->LoadProfile( $id );
-		$AccountList = $this->AccountModel->LoadAccountByMember( $id );
-		$this->response(array(
-			'Profile' => $Profile,
-			'AccountList' => $AccountList
-
-		));
-	}
 
 	public function AddBookBank_post()
   {
