@@ -71,13 +71,13 @@
   </div>
 </div>
 <div class="modal fade" id="SelectBookBank" tabindex="-1" role="dialog" style="display: none;" ng-app="HomePageApp">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog modal-lg" role="document"  ng-controller="AddBookBankCtrl">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="largeModalLabel">เลือกบัญชีธนาคาร</h4>
                     </div>
                     <div class="modal-body">
-                      <div class="row clearfix" ng-controller="AddBookBankCtrl">
+                      <div class="row clearfix">
                         <form class="form-inline" ng-submit="FormSubmit()">
                         <?php //echo form_open('/Member/AddBookbank/'.$Profile[0]['member_id']); ?>
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
@@ -131,6 +131,9 @@
                       </div>
                       <hr>
                       <div class="row clearfix">
+                        <script type="text/javascript">
+                          var member_id = <?php echo $Profile[0]['member_id']; ?>
+                        </script>
                         <table class="table table-striped">
                           <thead>
                             <tr>
@@ -145,26 +148,23 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <?php $i=1; foreach ($BookbankList as $row): ?>
-                              <?php echo form_open('/Member/SaveBookbankToAccount/'.$Account[0]['account_id']); ?>
-                              <input type="hidden" name="bookbank_id" value="<?php echo $row['bookbank_id']; ?>">
-                              <tr>
-                                <td><?php echo $i; ?></td>
-                                <td><?php echo $row['bank_name']; ?></td>
-                                <td><?php echo $row['bookbank_bank_branch']; ?></td>
-                                <td><?php echo $row['bookbank_account']; ?></td>
-                                <td><?php echo $row['bookbank_number']; ?></td>
+                              <tr ng-repeat="row in ListBookBank">
+                                <?php echo form_open('/Member/SaveBookbankToAccount/'.$Account[0]['account_id']); ?>
+                                <input type="hidden" name="bookbank_id" value="{{row.bookbank_id}}">
+                                <td>{{$index+1}}</td>
+                                <td>{{row.bank_name}}</td>
+                                <td>{{row.bookbank_bank_branch}}</td>
+                                <td>{{row.bookbank_account}}</td>
+                                <td>{{row.bookbank_number}}</td>
                                 <td>
                                   <button type="submit" class="btn btn-xs btn-info" style="font-size: 15px;">
                                     <i class="material-icons"  style="font-size: 15px;">account_box</i> เลือก</button>
                                 </td>
                                 <td>
-                                  <a href="<?php echo site_url('Member/DeleteBook/'.$row['bookbank_id']."/".$Account[0]['account_id']); ?>" class="btn btn-xs bg-red waves-effect" style="font-size: 13px;">ลบ</a>
+                                  <a href="<?php echo site_url('Member/DeleteBook/'."{{row.bookbank_id}}"."/".$Account[0]['account_id']); ?>" class="btn btn-xs bg-red waves-effect" style="font-size: 13px;">ลบ</a>
                                 </td>
+                                <?php echo form_close(); ?>
                               </tr>
-                              <?php echo form_close(); ?>
-                            <?php $i++; endforeach; ?>
-
                           </tbody>
                         </table>
                       </div>
