@@ -123,7 +123,7 @@
                           </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                          <input type="hidden" ng-model="BookBankObject.member_id" value = "<?php echo $Profile[0]['member_id'] ?>">
+                          <input type="hidden" ng-model="BookBankObject.member_id" ng-init="BookBankObject.member_id=<?php echo $Profile[0]['member_id'] ?>">
                           <button type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect">บันทึก</button>
                         </div>
                         <?php //echo form_close(); ?>

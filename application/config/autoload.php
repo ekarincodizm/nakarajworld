@@ -1,6 +1,4 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-
+<?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /*
 | -------------------------------------------------------------------
 | AUTO-LOADER
@@ -11,8 +9,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | absolute minimal resources are loaded by default. For example,
 | the database is not connected to automatically since no assumption
 | is made regarding whether you intend to use it.  This file lets
-| request.
 | you globally define which systems you would like loaded with every
+| request.
 |
 | -------------------------------------------------------------------
 | Instructions
@@ -22,65 +20,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 | 1. Packages
 | 2. Libraries
-| 3. Drivers
-| 4. Helper files
-| 5. Custom config files
-| 6. Language files
-| 7. Models
+| 3. Helper files
+| 4. Custom config files
+| 5. Language files
+| 6. Models
 |
 */
 
 /*
 | -------------------------------------------------------------------
-|  Auto-load Packages
+|  Auto-load Packges
 | -------------------------------------------------------------------
 | Prototype:
 |
 |  $autoload['packages'] = array(APPPATH.'third_party', '/usr/local/shared');
 |
 */
-$autoload['packages'] = array();
+
+$autoload['packages'] = array(APPPATH.'third_party');
+
 
 /*
 | -------------------------------------------------------------------
 |  Auto-load Libraries
 | -------------------------------------------------------------------
-| These are the classes located in system/libraries/ or your
-| application/libraries/ directory, with the addition of the
-| 'database' library, which is somewhat of a special case.
+| These are the classes located in the system/libraries folder
+| or in your application/libraries folder.
 |
 | Prototype:
 |
-|	$autoload['libraries'] = array('database', 'email', 'session');
-|
-| You can also supply an alternative library name to be assigned
-| in the controller:
-|
-|	$autoload['libraries'] = array('user_agent' => 'ua');
+|$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
-// $autoload['libraries'] = array();
-$autoload['libraries'] = array('database','user_agent','debuger', 'webpage', 'thaidate');
 
-/*
-| -------------------------------------------------------------------
-|  Auto-load Drivers
-| -------------------------------------------------------------------
-| These classes are located in system/libraries/ or in your
-| application/libraries/ directory, but are also placed inside their
-| own subdirectory and they extend the CI_Driver_Library class. They
-| offer multiple interchangeable driver options.
-|
-| Prototype:
-|
-|	$autoload['drivers'] = array('cache');
-|
-| You can also supply an alternative property name to be assigned in
-| the controller:
-|
-|	$autoload['drivers'] = array('cache' => 'cch');
-|
-*/
-$autoload['drivers'] = array('session');
+$autoload['libraries'] = array('session', 'database','user_agent','debuger', 'webpage', 'thaidate');
 
 
 /*
@@ -91,7 +63,7 @@ $autoload['drivers'] = array('session');
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-// $autoload['helper'] = array();
+
 $autoload['helper'] = array('url', 'file', 'date', 'form');
 
 /*
@@ -106,7 +78,9 @@ $autoload['helper'] = array('url', 'file', 'date', 'form');
 | config files.  Otherwise, leave it blank.
 |
 */
+
 $autoload['config'] = array();
+
 
 /*
 | -------------------------------------------------------------------
@@ -120,7 +94,9 @@ $autoload['config'] = array();
 | "codeigniter_lang.php" would be referenced as array('codeigniter');
 |
 */
+
 $autoload['language'] = array();
+
 
 /*
 | -------------------------------------------------------------------
@@ -128,19 +104,20 @@ $autoload['language'] = array();
 | -------------------------------------------------------------------
 | Prototype:
 |
-|	$autoload['model'] = array('first_model', 'second_model');
+|	$autoload['model'] = array('model1', 'model2');
 |
-| You can also supply an alternative model name to be assigned
-| in the controller:
-|
-|	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('HomePageModel',
-'MemberModel',
-'AccountModel',
-'AccountingModel',
-'BusinessSettingModel',
-'ProductsModel',
-'DashBoardModel',
-'PermissionModel',
-'ConfigModel');
+
+$autoload['model'] = array( 'HomePageModel',
+                            'MemberModel',
+                            'AccountModel',
+                            'AccountingModel',
+                            'BusinessSettingModel',
+                            'ProductsModel',
+                            'DashBoardModel',
+                            'PermissionModel',
+                            'ConfigModel');
+
+
+/* End of file autoload.php */
+/* Location: ./application/config/autoload.php */

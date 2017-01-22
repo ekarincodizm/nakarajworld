@@ -5,6 +5,7 @@
 				var MEMBER_ID = "<?php echo $MEMBER_ID ?>";
 			</script>
 	<?php } ?>
+
 	<!doctype html>
 	<html lang="en">
 	<head>
@@ -29,7 +30,9 @@
 		$this->debuger->load_back_css('style');
 		$this->debuger->load_back_css('themes/theme-cyan.min');
 		?>
-
+<script type="text/javascript">
+	var SITE_URL = "<?php echo site_url(); ?>"
+</script>
 <style media="screen">
 	table{
 		font-family: 'tahoma';
