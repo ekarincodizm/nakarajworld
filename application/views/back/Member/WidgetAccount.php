@@ -70,22 +70,23 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="SelectBookBank" tabindex="-1" role="dialog" style="display: none;">
+<div class="modal fade" id="SelectBookBank" tabindex="-1" role="dialog" style="display: none;" ng-app="HomePageApp">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="largeModalLabel">เลือกบัญชีธนาคาร</h4>
                     </div>
                     <div class="modal-body">
-                      <div class="row clearfix">
-                        <?php echo form_open('/Member/AddBookbank/'.$Profile[0]['member_id']); ?>
+                      <div class="row clearfix" ng-controller="AddBookBankCtrl">
+                        <form class="form-inline" ng-submit="FormSubmit()">
+                        <?php //echo form_open('/Member/AddBookbank/'.$Profile[0]['member_id']); ?>
                         <div class="col-lg-3 col-md-3 col-sm-3 col-xs-6">
                           <div class="form-group">
                             <label class="form-label">ธนาคาร</label>
 
                             <div class="form-line">
 
-                              <select name="bank_id" class="form-control show-tick">
+                              <select class="form-control show-tick" ng-model="BookBankObject.bank_id">
                                   <option value="">ราชื่อบัญชีธนาคาร</option>
                                   <?php foreach ($BankList as $row): ?>
                                     <option value="<?php echo $row['bank_id'] ?>" ><?php echo $row['bank_name'] ?></option>
@@ -99,7 +100,7 @@
                             <label class="form-label">สาขา</label>
 
                             <div class="form-line">
-                              <input name="bookbank_bank_branch" type="text" class="form-control text-center">
+                              <input type="text" class="form-control text-center" ng-model="BookBankObject.bookbank_bank_branch">
                             </div>
                           </div>
                         </div>
@@ -108,7 +109,7 @@
                             <label class="form-label">ชื่อบัญชี</label>
 
                             <div class="form-line">
-                              <input name="bookbank_account" type="text" class="form-control text-center">
+                              <input type="text" class="form-control text-center" ng-model="BookBankObject.bookbank_account">
                             </div>
                           </div>
                         </div>
@@ -117,15 +118,16 @@
                             <label class="form-label">หมายเลขบัญชี</label>
 
                             <div class="form-line">
-                              <input name="bookbank_number" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" type="text" class="form-control text-center">
+                              <input oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" type="text" class="form-control text-center" ng-model="BookBankObject.bookbank_number">
                             </div>
                           </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-
+                          <input type="hidden" ng-model="BookBankObject.member_id" value = "<?php echo $Profile[0]['member_id'] ?>">
                           <button type="submit" class="btn btn-primary btn-lg m-l-15 waves-effect">บันทึก</button>
                         </div>
-                        <?php echo form_close(); ?>
+                        <?php //echo form_close(); ?>
+                        </form>
                       </div>
                       <hr>
                       <div class="row clearfix">

@@ -18,6 +18,7 @@ class MemberService extends REST_Controller {
 	public function MemberList_get() {
 		$this->response( $this->MemberModel->MemberList() );
 	}
+
 	public function LoadProfile_post()
 	{
 		$id = $this->post('id');
@@ -29,6 +30,25 @@ class MemberService extends REST_Controller {
 
 		));
 	}
+
+	public function AddBookBank_post()
+  {
+		$input =  $this->post();
+		print_r($input);
+		// $this->db->insert('admin', $input);
+		//
+    // $member_id = $this->uri->segment(3);
+    // $input = array(
+    //   'bank_id' => $_POST['bank_id'],
+    //   'bookbank_account' => $_POST['bookbank_account'],
+    //   'bookbank_number' => $_POST['bookbank_number'],
+    //   'bookbank_bank_branch' => $_POST['bookbank_bank_branch'],
+    //   'member_id' =>$member_id,
+    // );
+    $this->db->insert('mlm_bookbank', $input);
+    //redirect($this->agent->referrer(), 'refresh');
+
+  }
 
 
 }

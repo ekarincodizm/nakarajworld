@@ -29,6 +29,10 @@ $this->debuger->load_back_js('admin');
 
 
 ?>
+<script type="text/javascript" src="<?php echo base_url('assets/theme/back-end/js/angular-animate.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/theme/back-end/js/angular-sanitize.min.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/theme/back-end/js/angular.js') ?>"></script>
+<script type="text/javascript" src="<?php echo base_url('assets/app/app.js') ?>"></script>
 
 <script type="text/javascript">
 $('.selectpicker').selectpicker({
