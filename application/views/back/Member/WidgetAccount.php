@@ -148,8 +148,9 @@
                             </tr>
                           </thead>
                           <tbody>
+
                               <tr ng-repeat="row in ListBookBank">
-                                <?php echo form_open('/Member/SaveBookbankToAccount/'.$Account[0]['account_id']); ?>
+
                                 <input type="hidden" name="bookbank_id" value="{{row.bookbank_id}}">
                                 <td>{{$index+1}}</td>
                                 <td>{{row.bank_name}}</td>
@@ -157,14 +158,14 @@
                                 <td>{{row.bookbank_account}}</td>
                                 <td>{{row.bookbank_number}}</td>
                                 <td>
-                                  <button type="submit" class="btn btn-xs btn-info" style="font-size: 15px;">
-                                    <i class="material-icons"  style="font-size: 15px;">account_box</i> เลือก</button>
+                                    <a href="<?php echo site_url('/Member/SaveBookbankToAccount/'.$Account[0]['account_id']."/"."{{row.bookbank_id}}"); ?>" class="btn btn-xs btn-info" style="font-size: 15px;"><i class="material-icons"  style="font-size: 15px;">account_box</i> เลือก</a>
                                 </td>
                                 <td>
                                   <a href="<?php echo site_url('Member/DeleteBook/'."{{row.bookbank_id}}"."/".$Account[0]['account_id']); ?>" class="btn btn-xs bg-red waves-effect" style="font-size: 13px;">ลบ</a>
                                 </td>
-                                <?php echo form_close(); ?>
+
                               </tr>
+
                           </tbody>
                         </table>
                       </div>
