@@ -15,7 +15,7 @@ class Member extends CI_Controller{
     $this->load->view('back/template/footer');
   }
   public function index() {
-    $MemberList = $this->MemberModel->MemberList();
+    $MemberList = $this->MemberModel->MemberListWhithPV();
     $MemberList = json_decode(json_encode($MemberList), true);
 
     $value = array(
@@ -352,18 +352,26 @@ class Member extends CI_Controller{
   public function ApprovedMember()
   {
     $member_id = $this->uri->segment(3);
-    $setting = $this->db->order_by('setting_id', 'DESC')->get('mlm_fee_setting')->result_array();
-    $input = array(
-      'accounting_date' => Date('Y-m-d'),
-      'accounting_source_id' => '',
-      'accounting_amount' => $setting[0]['setting_register_fee'],
-      'journals_id' => 1,
-      'member_id' => $member_id,
-    );
-    $this->db->insert('mlm_accounting', $input);
+  $setting = $this->db->order_by('setting_id', 'DESC')->get('mlm_fee_setting')->result_array();
 
+  $input = array(
+    'accounting_date' => Date('Y-m-d'),
+    'accounting_source_id' => '',
+    'accounting_amount' => $setting[0]['setting_register_fee'],
+    'journals_id' => 1,
+    'member_id' => $member_id,
+  );
+
+  $check = $this->MemberModel->checkaccounting($member_id);
+
+  if (!empty($check)){
     redirect('/Accounting/');
   }
+
+  $this->db->insert('mlm_accounting', $input);
+  redirect('/Accounting/');
+  }
+
   public function NewMember()
   {
     $value = array(
