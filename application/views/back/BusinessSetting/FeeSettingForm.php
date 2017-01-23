@@ -8,7 +8,7 @@
                 </h2>
             </div>
             <div class="body">
-                
+
                 <?php echo form_open('/BusinessSetting/SaveFee/'); ?>
 
                 <div class="row clearfix">
@@ -26,6 +26,15 @@
                             <span class="input-group-addon">ค่าผู้แนะนำ</span>
                             <div class="form-line">
                                 <input name="setting_adviser_income" type="text" class="form-control text-center" value="<?php echo $BusinessSetting[0]['setting_adviser_income'] ?>">
+                            </div>
+                            <span class="input-group-addon">บาท</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">ค่าต่ออายุ</span>
+                            <div class="form-line">
+                                <input name="setting_extend_fee" type="text" class="form-control text-center" value="<?php echo $BusinessSetting[0]['setting_extend_fee'] ?>">
                             </div>
                             <span class="input-group-addon">บาท</span>
                         </div>

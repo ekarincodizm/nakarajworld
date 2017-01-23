@@ -52,7 +52,9 @@ class BusinessSetting extends CI_Controller{
 			'setting_date' => Date('Y-m-d'),
 			'setting_adviser_income' => $_POST['setting_adviser_income'],
 			'setting_register_fee' => $_POST['setting_register_fee'],
+			'setting_extend_fee' => $_POST['setting_extend_fee'],
 		);
+
 		$this->db->where('setting_id', 1)->update('mlm_fee_setting', $input);
 		redirect($this->agent->referrer(), 'refresh');
 

@@ -4,7 +4,7 @@
     <div class="block-header">
       <h1>เว็บไซต์</h1>
     </div>
-    <div class="row clearfix">
+    <div class="row clearfix ">
       <div class="col-md-12">
         <div class="card">
           <div class="header bg-cyan">
@@ -18,9 +18,9 @@
             <input type="hidden" name="mlm_config_id" value="<?php echo $ConfigDetail[0]['mlm_config_id'] ?>">
 
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-sm-offset-3 col-sm-6 text-center">
                 <div class="form-group">
-                  <label for="">โลโก้</label>
+                  <label for=""><h2>โลโก้</h2></label>
                   <div class="form-line">
                     <img src="<?php echo base_url('/assets/image/'.$ConfigDetail[0]['mlm_config_logo']) ?>" alt="">
                     <input type="hidden" name="mlm_config_logo_old" value="<?php echo $ConfigDetail[0]['mlm_config_logo']; ?>">
@@ -30,7 +30,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-sm-offset-3 col-sm-6 text-center">
                 <div class="form-group">
                   <label for="">ชื่อร้านค้า</label>
                   <div class="form-line">
@@ -40,7 +40,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-sm-offset-3 col-sm-6 text-center">
                 <div class="form-group">
                   <label for="">ที่อยู่ร้านค้า</label>
                   <div class="form-line">
@@ -50,7 +50,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-sm-offset-3 col-sm-6 text-center">
                 <div class="form-group">
                   <label for="">อีเมล</label>
                   <div class="form-line">
@@ -61,7 +61,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-6">
+              <div class="col-sm-offset-3 col-sm-6 text-center">
                 <div class="form-group">
                   <label for="">เบอร์โทรศัพท์</label>
                   <div class="form-line">

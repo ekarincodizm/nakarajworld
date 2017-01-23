@@ -20,7 +20,7 @@
             <div class="row">
               <div class="col-sm-12">
                 <div class="form-group">
-                  <label for="">รายละเอียดร้านค้า</label>
+                  <label for=""><h3>รายละเอียดร้านค้า</h3></label>
                   <div class="form-line">
                     <textarea name="mlm_config_detail"  rows="20" cols="80" class="form-control input-lg ckeditor"><?php echo $ConfigDetail[0]['mlm_config_detail'] ?></textarea>
                   </div>

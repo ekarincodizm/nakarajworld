@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jan 22, 2017 at 02:51 PM
+-- Generation Time: Jan 23, 2017 at 02:36 PM
 -- Server version: 5.5.16
 -- PHP Version: 5.3.8
 
@@ -48,7 +48,7 @@ INSERT INTO `mlm_account` (`account_id`, `account_team`, `account_level`, `accou
 (2, 'N', 2, 2, 1, 1, 1, 0, 1),
 (3, 'N', 2, 3, 1, 1, 1, 0, 1),
 (4, 'N', 2, 4, 1, 1, 1, 0, 1),
-(5, 'A', 3, 1, 5, 2, 2, 1, 1),
+(5, 'A', 3, 1, 33, 2, 2, 1, 1),
 (6, 'A', 4, 2, 5, 5, 5, 0, 1),
 (7, 'A', 4, 3, 5, 5, 5, 0, 1),
 (8, 'A', 4, 4, 5, 5, 5, 0, 1),
@@ -341,6 +341,7 @@ CREATE TABLE IF NOT EXISTS `mlm_fee_setting` (
   `setting_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `setting_register_fee` int(11) NOT NULL,
   `setting_adviser_income` int(11) NOT NULL,
+  `setting_extend_fee` int(11) NOT NULL,
   PRIMARY KEY (`setting_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
 
@@ -348,8 +349,8 @@ CREATE TABLE IF NOT EXISTS `mlm_fee_setting` (
 -- Dumping data for table `mlm_fee_setting`
 --
 
-INSERT INTO `mlm_fee_setting` (`setting_id`, `setting_date`, `setting_register_fee`, `setting_adviser_income`) VALUES
-(1, '2017-01-08 17:00:00', 300, 101);
+INSERT INTO `mlm_fee_setting` (`setting_id`, `setting_date`, `setting_register_fee`, `setting_adviser_income`, `setting_extend_fee`) VALUES
+(1, '2017-01-22 17:00:00', 300, 101, 150);
 
 -- --------------------------------------------------------
 
@@ -458,7 +459,7 @@ CREATE TABLE IF NOT EXISTS `mlm_member` (
 --
 
 INSERT INTO `mlm_member` (`member_id`, `member_id_card_type`, `member_citizen_id`, `member_prefix`, `member_firstname`, `member_lastname`, `member_prefix_eng`, `member_firstname_eng`, `member_lastname_eng`, `member_born`, `member_age`, `member_address`, `member_address2`, `member_phone`, `member_career`, `member_email`, `member_line_id`, `member_skype`, `member_whatapp`, `member_contact_etc`, `member_status`, `member_photo`) VALUES
-(1, 1, '0405559003422', 'นาย', 'NAVA DRAGON WEALTH NETWORK', '', '', '', '', '2016-10-20', 0, '', '', '08080808', '', '', '', '', '', '', 1, ''),
+(1, 1, '0405559003422', '', 'NAVA DRAGON WEALTH NETWORK', '', '', '', '', '2016-10-20', 0, '', '', '08080808', '', '', '', '', '', '', 1, ''),
 (2, 1, '3409900783663', 'นาย', 'ธนัฐตรัยภพ', 'ลางคุลานนท์', '', '', '', '1963-07-08', 20, '', '', '0994625955', '', 'yaimanthai@yahoo.com', '', '', '', '', 1, ''),
 (3, 1, '3500700447482', 'นาย', 'ณัฐวัฒน์', 'ขอดแก้ว', '', '', '', '1967-02-27', 49, '72 หมู่ 6 ต.ขี้เหล็ก อ.แม่ริม จ.เชียงใหม่ 560180', '', '088-251379', '', 'nkhodkaeo198@gmail.com', '0882513798', '', '', '', 1, ''),
 (4, 1, '3401200013892', 'นาย', 'พัทธรินทร์', 'นารินทร์', '', '', '', '1966-12-25', 0, '', '', '0856438271', '', '', '', '', '', '', 1, ''),
