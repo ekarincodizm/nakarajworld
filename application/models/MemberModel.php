@@ -61,5 +61,6 @@ class MemberModel extends CI_Model {
     ->result_array();
     return $query;
   }
+  
 
 }

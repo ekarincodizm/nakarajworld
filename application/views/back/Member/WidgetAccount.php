@@ -161,7 +161,7 @@
                                     <a href="<?php echo site_url('/Member/SaveBookbankToAccount/'.$Account[0]['account_id']."/"."{{row.bookbank_id}}"); ?>" class="btn btn-xs btn-info" style="font-size: 15px;"><i class="material-icons"  style="font-size: 15px;">account_box</i> เลือก</a>
                                 </td>
                                 <td>
-                                  <a href="<?php echo site_url('Member/DeleteBook/'."{{row.bookbank_id}}"."/".$Account[0]['account_id']); ?>" class="btn btn-xs bg-red waves-effect" style="font-size: 13px;">ลบ</a>
+                                  <a href="<?php echo site_url('Member/DeleteBookBank/'.$Profile[0]['member_id']."/"."{{row.bookbank_id}}"); ?>" class="btn btn-xs bg-red waves-effect" style="font-size: 13px;">ลบ</a>
                                 </td>
 
                               </tr>

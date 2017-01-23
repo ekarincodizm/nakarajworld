@@ -258,6 +258,13 @@ public function AddDetail($query)
     ->where('bookbank_id', $id)
     ->delete('mlm_bookbank');
   }
+  public function DeleteBookbank($id)
+  {
+    $this->db
+    ->where('bookbank_id', $id['bookbank_id'])
+    ->where('member_id', $id['member_id'])
+    ->delete('mlm_bookbank');
+  }
 
   public function UpdateAccount($id2)
   {

@@ -340,8 +340,14 @@ class Member extends CI_Controller{
     redirect($this->agent->referrer(), 'refresh');
 
   }
-  public function DeleteBook(){
-    
+  public function DeleteBookBank(){
+    $member_id = $this->uri->segment(3);
+    $bookbank_id = $this->uri->segment(4);
+    $input = array(
+      'bookbank_id' => $bookbank_id,
+      'member_id' =>$member_id,
+    );
+    $this->AccountModel->DeleteBookbank( $input );
   }
   public function ApprovedMember()
   {
