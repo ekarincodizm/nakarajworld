@@ -109,8 +109,8 @@ $.AdminBSB.leftSideBar = {
         if (typeof $.fn.slimScroll != 'undefined') {
             var configs = $.AdminBSB.options.leftSideBar;
             var height = ($(window).height() - ($('.legal').outerHeight() + $('.user-info').outerHeight() + $('.navbar').innerHeight()));
-            console.log("window" +  jQuery(window).height() );
-            console.log("document" + $(document ).height());
+            // console.log("window" +  jQuery(window).height() );
+            // console.log("document" + $(document ).height());
 
             var $el = $('.list');
 

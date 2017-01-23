@@ -7,7 +7,7 @@
 	<?php } ?>
 
 	<!doctype html>
-	<html lang="en">
+	<html lang="en" ng-app="HomePageApp">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/png" href="assets/img/favicon.ico">

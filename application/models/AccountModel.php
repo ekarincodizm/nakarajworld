@@ -162,6 +162,8 @@ public function AddDetail($query)
     $query = $this->db
     ->where('account_id', $id)
     ->get('mlm_account_history')->result();
+    // print_r($query);
+
     return $query;
 
   }

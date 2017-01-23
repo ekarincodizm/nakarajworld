@@ -35,13 +35,15 @@ class MemberService extends REST_Controller
 		public function DeleteBookBank_post()
 	  {
 			$input =  $this->post();
-			print_r($input);
+			// print_r($input);
 			$this->AccountModel->DeleteBookbank($input);
 	  }
 		public function AccountDetailExtend_post()
 	  {
-			$input =  $this->post();
-			print_r($input);
-			$this->AccountModel->HistoryAccount($input);
+			$input =  $this->post('account_id');
+			// print_r($input);
+			$AccountDetailExtend = $this->AccountModel->HistoryAccount($input);
+			$this->response($AccountDetailExtend);
+
 	  }
 }

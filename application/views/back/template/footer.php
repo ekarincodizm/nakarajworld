@@ -15,6 +15,8 @@ if (!isset($loadJQ)) {
       });
   </script>
 <?php }
+$this->debuger->load_back_js('moment-with-locales.min');
+
 $this->debuger->load_back_plugins('bootstrap-select/js/bootstrap-select');
 $this->debuger->load_back_plugins('jquery-slimscroll/jquery.slimscroll');
 $this->debuger->load_back_plugins('node-waves/waves');
@@ -24,6 +26,7 @@ $this->debuger->load_back_plugins('jquery-datatable/jquery.dataTables');
 $this->debuger->load_back_plugins('jquery-datatable/skin/bootstrap/js/dataTables.bootstrap');
 $this->debuger->load_back_plugins('jquery-datatable/extensions/export/dataTables.buttons.min');
 $this->debuger->load_back_plugins('jquery-datatable/extensions/export/buttons.print.min');
+
 $this->debuger->load_back_js('demo');
 $this->debuger->load_back_js('admin');
 

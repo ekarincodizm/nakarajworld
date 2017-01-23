@@ -1,6 +1,13 @@
-<div class="row" ng-app="HomePageApp">
-  <div class="col-md-12" style="padding:20px" ng-controller="PanelExtendCtrl">
-    <table class="table table-hover js-table">
+<!-- <div class="row" ng-app="HomePageApp"> -->
+<div class="row" ng-controller="PanelExtendCtrl">
+  <div class="col-md-12" style="padding:20px" >
+    <script type="text/javascript">
+      var account_id = <?php echo $this->uri->segment(3); ?>;
+    </script>
+    <button ng-if="LastListExtend.account_history_expired_date > date_now" type="button" class="btn bg-deep-orange">
+      ต่ออายุ
+    </button>
+    <table class="table table-hover">
       <thead>
         <tr>
           <th>#</th>
@@ -11,51 +18,31 @@
         </tr>
       </thead>
       <tbody>
-        <?php //$i=1; foreach ($HistoryAccount as $HistoryAccount): ?>
-
           <tr ng-repeat="row in ListExtend">
             <td>{{$index+1}}</td>
-            <td><?php echo $this->thaidate->FullDate('{{row.account_history_register_date}}');?></td>
-            <td><?php echo $this->thaidate->FullDate('{{row.account_history_expired_date}}');?></td>
+            <td>{{row.account_history_register_date | date:'dd MMMM yyyy'}}</td>
+            <td>{{row.account_history_expired_date | date:'dd MMMM yyyy'}}</td>
             <td>
-              <?php if ('{{row.account_history_expired_date}}'<Date('Y-m-d')): ?>
-                <span class="label bg-deep-orange">หมดอายุ</span>
-                <?php else: ?>
-                  <?php if ('{{row.account_history_status}}'==2): ?>
-                    <span class="label bg-deep-orange">ยังไม่เปิดใช้งาน</span>
-                  <?php elseif('{{row.account_history_status}}'==1): ?>
-                    <span class="label bg-green">เปิดใช้งาน</span>
-                  <?php else: ?>
-                    <span class="label bg-blue-grey">รอดำเนินการ</span>
-                  <?php endif; ?>
-              <?php endif; ?>
+              <span ng-if="row.account_history_expired_date < date_now" class="label bg-deep-orange">หมดอายุ</span>
+              <!-- <div ng-if="row.account_history_status == 2"> -->
+                <span ng-if="row.account_history_status == 2" class="label bg-deep-orange">ยังไม่เปิดใช้งาน</span>
+                <span ng-if="row.account_history_status == 1" class="label bg-green">เปิดใช้งาน</span>
+              <!-- </div> -->
 
             </td>
             <td>
-              <?php if ('{{row.account_history_status}}'==2): ?>
-                <a href="<?php echo site_url('/AccountController/ProcessEnableAccount/'.'{{row.account_history_id}}'); ?>"
+              <a ng-if="row.account_history_status == 1" target="_blank" href="<?php echo site_url('/AccountController/PrintAccountInvoice/'.'{{row.account_history_id}}'); ?>"
+                class="btn btn-info">พิมพ์ใบแจ้งหนี้</a>
+                <a ng-if="row.account_history_status == 2" href="<?php echo site_url('/AccountController/ProcessEnableAccount/'.'{{row.account_history_id}}'); ?>"
                   class="btn btn-info">ชำระค่าสมัคร</a>
-                <?php elseif('{{row.account_history_status}}'==1): ?>
-                  <a target="_blank" href="<?php echo site_url('/AccountController/PrintAccountInvoice/'.'{{row.account_history_id}}'); ?>"
-                    class="btn btn-info">พิมพ์ใบแจ้งหนี้</a>
-                  <?php else: ?>
-                    <span class="label bg-blue-grey">รอดำเนินการ</span>
-                  <?php endif; ?>
-                  <!-- Start button Continue Extend -->
-                    <?php ?>
-                <?php
-                $datenow = date("Y-m-d");
-                if($datenow>='{{row.account_history_expired_date}}'){
-                ?>
-                <a target="_blank" href="<?php //echo site_url('/AccountController/PrintAccountInvoice/'.$HistoryAccount['account_history_id']); ?>"
-                  class="btn btn-success">ต่ออายุสมาชิก</a>
-                <button ng-click="MemberExtend(<?php echo $Profile[0]['member_id'] ?>);" class="btn btn-success">ต่ออายุสมาชิก</button>
-                <?php } ?>
-                  <!-- End button Continue Extend -->
+                <span ng-if="row.account_history_status == 0" class="label bg-blue-grey">รอดำเนินการ</span>
+                <button ng-if="row.account_history_expired_date > date_now" ng-click="MemberExtend(<?php echo $Profile[0]['member_id'] ?>);" class="btn btn-success">ต่ออายุสมาชิก</button>
+
+
                 </td>
               </tr>
 
-              <?php //$i++; endforeach; ?>
+
             </tbody>
           </table>
         </div>
