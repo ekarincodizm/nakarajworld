@@ -42,8 +42,14 @@
                   <?php endif; ?>
                   <!-- Start button Continue Extend -->
                     <?php ?>
-
-                    <?php ?>
+                <?php
+                $datenow = date("Y-m-d");
+                //$newdate = $datenow['Y']."-".$datenow['m']."-".$datenow['d'];
+                if($datenow>=$HistoryAccount['account_history_expired_date']){
+                ?>
+                <a target="_blank" href="<?php //echo site_url('/AccountController/PrintAccountInvoice/'.$HistoryAccount['account_history_id']); ?>"
+                  class="btn btn-success">ต่ออายุสมาชิก</a>
+                <?php } ?>
                   <!-- End button Continue Extend -->
                 </td>
               </tr>

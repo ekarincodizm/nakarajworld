@@ -148,9 +148,7 @@
                             </tr>
                           </thead>
                           <tbody>
-
                               <tr ng-repeat="row in ListBookBank">
-
                                 <input type="hidden" name="bookbank_id" value="{{row.bookbank_id}}">
                                 <td>{{$index+1}}</td>
                                 <td>{{row.bank_name}}</td>
@@ -158,14 +156,12 @@
                                 <td>{{row.bookbank_account}}</td>
                                 <td>{{row.bookbank_number}}</td>
                                 <td>
-                                    <a href="<?php echo site_url('/Member/SaveBookbankToAccount/'.$Account[0]['account_id']."/"."{{row.bookbank_id}}"); ?>" class="btn btn-xs btn-info" style="font-size: 15px;"><i class="material-icons"  style="font-size: 15px;">account_box</i> เลือก</a>
+                                  <a href="<?php echo site_url('/Member/SaveBookbankToAccount/'.$Account[0]['account_id']."/"."{{row.bookbank_id}}"); ?>" class="btn btn-xs btn-info" style="font-size: 15px;"><i class="material-icons"  style="font-size: 15px;">account_box</i> เลือก</a>
                                 </td>
                                 <td>
-                                  <a href="<?php echo site_url('Member/DeleteBookBank/'.$Profile[0]['member_id']."/"."{{row.bookbank_id}}"); ?>" class="btn btn-xs bg-red waves-effect" style="font-size: 13px;">ลบ</a>
+                                  <button ng-click="DeleteBookBank(<?php echo $Profile[0]['member_id'] ?>,row.bookbank_id);" class="btn btn-xs bg-red waves-effect" style="font-size: 13px;">ลบ</button>
                                 </td>
-
                               </tr>
-
                           </tbody>
                         </table>
                       </div>

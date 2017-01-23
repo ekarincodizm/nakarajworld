@@ -32,4 +32,13 @@ class MemberService extends REST_Controller
 			// print_r($GetMemberProfile);
 			$this->response($ListBookBank);
 		}
+
+		public function DeleteBookBank_post()
+	  {
+			$input =  $this->post();
+			print_r($input);
+			echo $input['member_id']." -- ";
+			echo $input['bookbank_id'];
+			//$this->AccountModel->DeleteBookbank($input);
+	  }
 }
