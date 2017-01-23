@@ -15,12 +15,14 @@ class Member extends CI_Controller{
     $this->load->view('back/template/footer');
   }
   public function index() {
-    $MemberList = $this->MemberModel->MemberList();
-    $MemberList = json_decode(json_encode($MemberList), true);
+    $MemberList = $this->MemberModel->MemberListWhithPV();
+    // $MemberList = json_decode(json_encode($MemberList), true);
+    // $pv = $this->HomePageModel->allpvallmember();
 
     $value = array(
       'Result' => array(
-        'MemberList' => $MemberList
+        'MemberList' => $MemberList,
+        // 'PV' => $pv,
       ),
       'View' => 'back/Member/MemberList'
     );
@@ -45,12 +47,13 @@ class Member extends CI_Controller{
       $Profile[0]['member_id_card_type_name'] = 'Work Permit';
     }
     // $this->debuger->prevalue($Profile);
-
+    $pv = $this->HomePageModel->allpv($id);
     // $AccountList = json_decode(json_encode($this->AccountModel->AccountByMember($id)), true);
     $value = array(
       'Result' => array(
         'Profile' => $Profile,
         'AccountList' => $AccountList,
+        'PV' => $pv,
       ),
       'View' => 'back/Member/MemberProfile'
     );
@@ -331,28 +334,21 @@ class Member extends CI_Controller{
   public function SaveBookbankToAccount()
   {
     $account_id = $this->uri->segment(3);
-    $bookbank_id = $this->uri->segment(4);
     $input = array(
-      'bookbank_id' => $bookbank_id,
+      'bookbank_id' => $_POST['bookbank_id'],
       'account_id' =>$account_id,
     );
     $this->db->where('account_id', $account_id)->update('mlm_account', $input);
     redirect($this->agent->referrer(), 'refresh');
 
   }
-  public function DeleteBookBank(){
-    $member_id = $this->uri->segment(3);
-    $bookbank_id = $this->uri->segment(4);
-    $input = array(
-      'bookbank_id' => $bookbank_id,
-      'member_id' =>$member_id,
-    );
-    $this->AccountModel->DeleteBookbank( $input );
-  }
   public function ApprovedMember()
   {
     $member_id = $this->uri->segment(3);
     $setting = $this->db->order_by('setting_id', 'DESC')->get('mlm_fee_setting')->result_array();
+
+
+
     $input = array(
       'accounting_date' => Date('Y-m-d'),
       'accounting_source_id' => '',
@@ -360,10 +356,27 @@ class Member extends CI_Controller{
       'journals_id' => 1,
       'member_id' => $member_id,
     );
-    $this->db->insert('mlm_accounting', $input);
 
+    $check = $this->MemberModel->checkaccounting($member_id);
+
+    if (!empty($check)){
+      redirect('/Accounting/');
+    }
+
+    $this->db->insert('mlm_accounting', $input);
     redirect('/Accounting/');
   }
+
+  public function DeleteBookBank(){
+  $member_id = $this->uri->segment(3);
+  $bookbank_id = $this->uri->segment(4);
+  $input = array(
+    'bookbank_id' => $bookbank_id,
+    'member_id' =>$member_id,
+  );
+  $this->AccountModel->DeleteBookbank( $input );
+}
+
   public function NewMember()
   {
     $value = array(
@@ -402,7 +415,7 @@ class Member extends CI_Controller{
 				$this->HomePageModel->UpdateUser( $UpdateUser );
 			}
 
-      unset($RegisterForm['user_pass'],$RegisterForm['user_pass_confirm']);
+      unset($RegisterForm['user_pass'],$RegisterForm['user_pass_confirm'],$RegisterForm['member_pv']);
 
 			$Member = $this->HomePageModel->UpdateMember( $RegisterForm );
       $member_id = $RegisterForm['member_id'];
