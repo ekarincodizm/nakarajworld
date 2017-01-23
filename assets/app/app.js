@@ -44,7 +44,7 @@ HomePageApp.controller('PanelExtendCtrl', function ($scope, $http) {
 	},function (error){});
 
 	$scope.MemberExtend = function(member_id){
-		$http.post(SITE_URL + '/MemberService/AddAccountDetailExtend', {'member_id':member_id}).then(function (){
+		$http.post(SITE_URL + '/MemberService/AddAccountDetailExtend', {'member_id':member_id,'account_id':account_id}).then(function (){
 			$http.post(SITE_URL + '/MemberService/AccountDetailExtend', {'account_id':account_id}).then(function (response){
 				$scope.date_now = moment().format('YYY-MM-DD');
 				$scope.ListExtend = response.data;
