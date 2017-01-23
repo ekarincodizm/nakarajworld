@@ -58,19 +58,20 @@ class MemberService extends REST_Controller
 	      'account_history_expired_date' => $expired,
 	    );
 
-			$this->db->get_where();
-
-			$data = array(
-				'journals_id' => 2,
-				'accounting_amount' => 150,
-				'accounting_tax' => 0,
-				'member_id' => $input['member_id'],
-				'accounting_source_id' => ,
-				'accounting_date' => ,
-				'accounting_no' => ,
-				'accounting_system_note' => ,
-			);
-	    $this->AccountModel->SaveAccountHistory($NewAccountHistory);
-			$this->AccountModel->AddAccounting($data);
+			$query = $this->db->where('setting_id', 1)->get('mlm_fee_setting')->result_array();
+			print_r($query['setting_extend_fee']) ;
+			//echo $query[0]['setting_extend_fee'];
+			// $data = array(
+			// 	'journals_id' => 2,
+			// 	'accounting_amount' => $query['setting_extend_fee'],
+			// 	'accounting_tax' => 0,
+			// 	'member_id' => $input['member_id'],
+			// 	'accounting_source_id' => ,
+			// 	'accounting_date' => ,
+			// 	'accounting_no' => ,
+			// 	'accounting_system_note' => ,
+			// );
+	    // $this->AccountModel->SaveAccountHistory($NewAccountHistory);
+			// $this->AccountModel->AddAccounting($data);
 	  }
 }
