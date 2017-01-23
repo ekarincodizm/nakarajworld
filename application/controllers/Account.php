@@ -24,4 +24,10 @@ class Account extends CI_Controller{
     );
     $this->LoadPage($value);
   }
+
+  public function AccountPermission(){
+    $input = $this->input->post();
+    $this->AccountingModel->Account_Transfer($input);
+    redirect($this->agent->referrer(), 'refresh');
+  }
 }

@@ -25,7 +25,6 @@
               เกี่ยวกับบัญชีธุรกิจ รหัส <?php echo $Account[0]['account_team'].sprintf("%04d", $Account[0]['account_level']).sprintf("%04d", $Account[0]['account_code']); ?>
               <!-- <small>Add quick, dynamic tab functionality to transition through panes of local content</small> -->
             </h2>
-
           </div>
           <div class="row">
             <div class="col-md-10">

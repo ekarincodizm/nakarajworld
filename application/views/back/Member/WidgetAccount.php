@@ -34,6 +34,20 @@
             ดาวน์ไลน์ติดตัว: <?php echo count($ThreeDownline); ?> รหัส<br>
             แนะนำผู้อื่น: <?php echo count($AdviserList); ?> รหัส<br>
             <!-- สถานะบัญชีนักธุรกิจอิสระ: <br> -->
+			<hr><center>
+            <font color="red">โอนกรรมสิทธิ์บัญชีนี้ </font> ให้แก่ <br>
+            <?php echo form_open('/Account/AccountPermission'); ?>
+            <input type="hidden" name="account_id" value="<?php echo $Account[0]['account_id']?>">
+              <select name="member_id">
+                <option value=" ">-เลือก-</option>
+                <?php foreach ($member as $row): ?>
+                  <option value="<?php echo $row['member_id'] ?>"><?php echo $row['member_prefix']."".$row['member_firstname']." ".$row['member_lastname'] ?></option>
+                <?php endforeach; ?>
+              </select>
+              <hr>
+              <p class="text-center"><button type="submit" class="btn btn-fill btn-xs btn-danger">ตกลง</button></p>
+            <?php echo form_close(); ?>
+          </center>
           </div>
         </div>
       </div>

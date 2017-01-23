@@ -26,7 +26,6 @@ class Member extends CI_Controller{
     );
     $this->LoadPage($value);
   }
-
   public function MemberProfile() {
     $id = $this->uri->segment(3);
     $Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $id )), true);
@@ -45,12 +44,13 @@ class Member extends CI_Controller{
       $Profile[0]['member_id_card_type_name'] = 'Work Permit';
     }
     // $this->debuger->prevalue($Profile);
-
+    $pv = $this->HomePageModel->allpv($id);
     // $AccountList = json_decode(json_encode($this->AccountModel->AccountByMember($id)), true);
     $value = array(
       'Result' => array(
         'Profile' => $Profile,
         'AccountList' => $AccountList,
+        'PV' => $pv,
       ),
       'View' => 'back/Member/MemberProfile'
     );
@@ -66,6 +66,8 @@ class Member extends CI_Controller{
     $Upline = json_decode(json_encode($this->AccountModel->AccountByID( $Account[0]['account_upline_id'])), true);
     $Adviser = json_decode(json_encode($this->AccountModel->AccountByID( $Account[0]['account_adviser_id'])), true);
     $AdviserList = json_decode(json_encode($this->AccountModel->AdviserList( $Account[0]['account_id'])), true);
+    $Account2 = json_decode(json_encode($this->MemberModel->MemberList()), true);
+
 
     $HistoryAccount = json_decode(json_encode($this->AccountModel->HistoryAccount( $Account[0]['account_id'])), true);
     if ($Account[0]['bookbank_id']!=0) {
@@ -94,14 +96,18 @@ class Member extends CI_Controller{
 
         'BankList' => $BankList,
 
+        'member' => $Account2,
+
       ),
       'View' => 'back/Account/AccountDetail'
     );
     $this->LoadPage($value);
   }
-  public function AccountDetailExtend() {
+  
+    public function AccountDetailExtend() {
     $id = $this->uri->segment(3);
     $HistoryAccount = $this->AccountModel->HistoryAccount($id);
+	
   }
   public function FindAccountByAdviser() {
     $id = $this->uri->segment(3);
