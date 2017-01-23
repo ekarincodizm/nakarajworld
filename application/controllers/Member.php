@@ -103,11 +103,11 @@ class Member extends CI_Controller{
     );
     $this->LoadPage($value);
   }
-  
-    public function AccountDetailExtend() {
+
+  public function AccountDetailExtend() {
     $id = $this->uri->segment(3);
     $HistoryAccount = $this->AccountModel->HistoryAccount($id);
-	
+
   }
   public function FindAccountByAdviser() {
     $id = $this->uri->segment(3);

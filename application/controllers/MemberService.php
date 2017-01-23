@@ -44,6 +44,33 @@ class MemberService extends REST_Controller
 			// print_r($input);
 			$AccountDetailExtend = $this->AccountModel->HistoryAccount($input);
 			$this->response($AccountDetailExtend);
+	  }
+		public function AddAccountDetailExtend_post()
+	  {
+			$input = $this->post();
+			$time =  Date('Y-m-d');
+	    $expired = strtotime($time);
+	    $expired = strtotime("+365 day", $expired);
+	    $expired =  Date('Y-m-d', $expired);
+	    $NewAccountHistory = array(
+	      'account_id' => $input['member_id'],
+	      'account_history_register_date' => $time,
+	      'account_history_expired_date' => $expired,
+	    );
 
+			$this->db->get_where();
+
+			$data = array(
+				'journals_id' => 2,
+				'accounting_amount' => 150,
+				'accounting_tax' => 0,
+				'member_id' => $input['member_id'],
+				'accounting_source_id' => ,
+				'accounting_date' => ,
+				'accounting_no' => ,
+				'accounting_system_note' => ,
+			);
+	    $this->AccountModel->SaveAccountHistory($NewAccountHistory);
+			$this->AccountModel->AddAccounting($data);
 	  }
 }

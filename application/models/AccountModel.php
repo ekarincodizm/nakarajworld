@@ -157,6 +157,9 @@ public function AddDetail($query)
   {
     $this->db->insert('mlm_account_history', $value);
   }
+  public function AddAccounting($value){
+    $this->db->insert('mlm_accounting', $value);
+  }
   public function HistoryAccount($id)
   {
     $query = $this->db
