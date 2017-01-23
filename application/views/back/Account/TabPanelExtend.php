@@ -1,5 +1,5 @@
-<div class="row">
-  <div class="col-md-12" style="padding:20px">
+<div class="row" ng-app="HomePageApp">
+  <div class="col-md-12" style="padding:20px" ng-controller="PanelExtendCtrl">
     <table class="table table-hover js-table">
       <thead>
         <tr>
@@ -11,18 +11,19 @@
         </tr>
       </thead>
       <tbody>
-        <?php $i=1; foreach ($HistoryAccount as $HistoryAccount): ?>
-          <tr>
-            <td><?php echo $i; ?></td>
-            <td><?php echo $this->thaidate->FullDate($HistoryAccount['account_history_register_date']);?></td>
-            <td><?php echo $this->thaidate->FullDate($HistoryAccount['account_history_expired_date']);?></td>
+        <?php //$i=1; foreach ($HistoryAccount as $HistoryAccount): ?>
+
+          <tr ng-repeat="row in ListExtend">
+            <td>{{$index+1}}</td>
+            <td><?php echo $this->thaidate->FullDate('{{row.account_history_register_date}}');?></td>
+            <td><?php echo $this->thaidate->FullDate('{{row.account_history_expired_date}}');?></td>
             <td>
-              <?php if ($HistoryAccount['account_history_expired_date']<Date('Y-m-d')): ?>
+              <?php if ('{{row.account_history_expired_date}}'<Date('Y-m-d')): ?>
                 <span class="label bg-deep-orange">หมดอายุ</span>
                 <?php else: ?>
-                  <?php if ($HistoryAccount['account_history_status']==2): ?>
+                  <?php if ('{{row.account_history_status}}'==2): ?>
                     <span class="label bg-deep-orange">ยังไม่เปิดใช้งาน</span>
-                  <?php elseif($HistoryAccount['account_history_status']==1): ?>
+                  <?php elseif('{{row.account_history_status}}'==1): ?>
                     <span class="label bg-green">เปิดใช้งาน</span>
                   <?php else: ?>
                     <span class="label bg-blue-grey">รอดำเนินการ</span>
@@ -31,11 +32,11 @@
 
             </td>
             <td>
-              <?php if ($HistoryAccount['account_history_status']==2): ?>
-                <a href="<?php echo site_url('/AccountController/ProcessEnableAccount/'.$HistoryAccount['account_history_id']); ?>"
+              <?php if ('{{row.account_history_status}}'==2): ?>
+                <a href="<?php echo site_url('/AccountController/ProcessEnableAccount/'.'{{row.account_history_id}}'); ?>"
                   class="btn btn-info">ชำระค่าสมัคร</a>
-                <?php elseif($HistoryAccount['account_history_status']==1): ?>
-                  <a target="_blank" href="<?php echo site_url('/AccountController/PrintAccountInvoice/'.$HistoryAccount['account_history_id']); ?>"
+                <?php elseif('{{row.account_history_status}}'==1): ?>
+                  <a target="_blank" href="<?php echo site_url('/AccountController/PrintAccountInvoice/'.'{{row.account_history_id}}'); ?>"
                     class="btn btn-info">พิมพ์ใบแจ้งหนี้</a>
                   <?php else: ?>
                     <span class="label bg-blue-grey">รอดำเนินการ</span>
@@ -44,17 +45,17 @@
                     <?php ?>
                 <?php
                 $datenow = date("Y-m-d");
-                //$newdate = $datenow['Y']."-".$datenow['m']."-".$datenow['d'];
-                if($datenow>=$HistoryAccount['account_history_expired_date']){
+                if($datenow>='{{row.account_history_expired_date}}'){
                 ?>
                 <a target="_blank" href="<?php //echo site_url('/AccountController/PrintAccountInvoice/'.$HistoryAccount['account_history_id']); ?>"
                   class="btn btn-success">ต่ออายุสมาชิก</a>
+                <button ng-click="MemberExtend(<?php echo $Profile[0]['member_id'] ?>);" class="btn btn-success">ต่ออายุสมาชิก</button>
                 <?php } ?>
                   <!-- End button Continue Extend -->
                 </td>
               </tr>
-              <?php $i++; endforeach; ?>
 
+              <?php //$i++; endforeach; ?>
             </tbody>
           </table>
         </div>

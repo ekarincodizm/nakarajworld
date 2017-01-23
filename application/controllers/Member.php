@@ -99,6 +99,10 @@ class Member extends CI_Controller{
     );
     $this->LoadPage($value);
   }
+  public function AccountDetailExtend() {
+    $id = $this->uri->segment(3);
+    $HistoryAccount = $this->AccountModel->HistoryAccount($id);
+  }
   public function FindAccountByAdviser() {
     $id = $this->uri->segment(3);
     $Member = json_decode(json_encode($this->HomePageModel->LoadProfile($id)), true);

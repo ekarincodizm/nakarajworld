@@ -22,7 +22,6 @@ class MemberService extends REST_Controller
 		print_r($input);
     $this->db->insert('mlm_bookbank', $input);
     //redirect($this->agent->referrer(), 'refresh');
-
   }
 	function ListBookBank_post()
 		{
@@ -38,5 +37,11 @@ class MemberService extends REST_Controller
 			$input =  $this->post();
 			print_r($input);
 			$this->AccountModel->DeleteBookbank($input);
+	  }
+		public function AccountDetailExtend_post()
+	  {
+			$input =  $this->post();
+			print_r($input);
+			$this->AccountModel->HistoryAccount($input);
 	  }
 }
