@@ -37,8 +37,6 @@ class MemberService extends REST_Controller
 	  {
 			$input =  $this->post();
 			print_r($input);
-			echo $input['member_id']." -- ";
-			echo $input['bookbank_id'];
-			//$this->AccountModel->DeleteBookbank($input);
+			$this->AccountModel->DeleteBookbank($input);
 	  }
 }
