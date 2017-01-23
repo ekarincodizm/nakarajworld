@@ -356,7 +356,7 @@
             <ul class="ml-menu">
                 <!-- <li class="header">การขาย</li> -->
                 <li>
-                    <a href="<?php echo site_url('/Config');?>" class=" waves-effect waves-block">
+                    <a href="<?php echo site_url('/Config/ConfigDetail');?>" class=" waves-effect waves-block">
                         <i class="material-icons">format_color_text</i>
                         <span>เนื้อหา</span>
                     </a>

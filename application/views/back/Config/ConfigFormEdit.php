@@ -40,16 +40,6 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-12">
-                <div class="form-group">
-                  <label for="">รายละเอียดร้านค้า</label>
-                  <div class="form-line">
-                    <textarea name="mlm_config_detail"  rows="20" cols="80" class="form-control input-lg ckeditor"><?php echo $ConfigDetail[0]['mlm_config_detail'] ?></textarea>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="row">
               <div class="col-sm-6">
                 <div class="form-group">
                   <label for="">ที่อยู่ร้านค้า</label>

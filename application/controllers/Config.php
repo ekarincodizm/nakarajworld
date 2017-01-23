@@ -5,7 +5,7 @@ class Config extends CI_Controller{
     parent::__construct();
     if(!isset($_SESSION))
     {
-      session_start(); 
+      session_start();
     }
   }
   public function LoadPage($value){
@@ -32,6 +32,35 @@ class Config extends CI_Controller{
       'View' => 'back/Config/ConfigFormEdit'
     );
     $this->LoadPage($value);
+  }
+
+  public function ConfigDetail() {
+    $Config_id = $this->uri->segment(3);
+    $ConfigDetail =$this->ConfigModel->Config($Config_id);
+    $ConfigDetail = json_decode(json_encode($ConfigDetail), true);
+
+    $value = array(
+      'Result' => array(
+        'ConfigDetail' => $ConfigDetail,
+      ),
+      'View' => 'back/Config/ConfigFormEditDetail'
+    );
+    $this->LoadPage($value);
+  }
+
+  public function SaveConfigDetail()
+  {
+    // $ProductsCode = $this->db->get('mlm_config')->num_rows();
+    $Config = $this->db->get('mlm_config');
+    //$Config = sprintf("%04d",($Config+1));
+    $input = array(
+      'mlm_config_id' => $_POST['mlm_config_id'],
+      'mlm_config_detail' => $_POST['mlm_config_detail'],
+    );
+    $this->ConfigModel->UpdateConfig($input);
+
+    redirect('/Config/ConfigDetail');
+
   }
 
   public function SaveConfig()
@@ -61,7 +90,6 @@ class Config extends CI_Controller{
       'mlm_config_email' => $_POST['mlm_config_email'],
       'mlm_config_tel' => $_POST['mlm_config_tel'],
       'mlm_config_name' => $_POST['mlm_config_name'],
-      'mlm_config_detail' => $_POST['mlm_config_detail'],
       'mlm_config_address' => $_POST['mlm_config_address'],
       'mlm_config_logo' => $new_file,
     );
