@@ -69,7 +69,7 @@ class Member extends CI_Controller{
     $Account2 = json_decode(json_encode($this->MemberModel->MemberList()), true);
 
 
-    $HistoryAccount = json_decode(json_encode($this->AccountModel->HistoryAccount( $Account[0]['account_id'])), true);
+    $HistoryAccount = json_decode(json_encode($this->AccountModel->JounalExtendAccount( $Account[0]['account_id'])), true);
     if ($Account[0]['bookbank_id']!=0) {
       $BookbankDetail = json_decode(json_encode($this->AccountModel->BookbankDetail( $Account[0]['bookbank_id'])), true);
       // $this->debuger->prevalue($BookbankDetail);
@@ -106,7 +106,7 @@ class Member extends CI_Controller{
 
   public function AccountDetailExtend() {
     $id = $this->uri->segment(3);
-    $HistoryAccount = $this->AccountModel->HistoryAccount($id);
+    $HistoryAccount = $this->AccountModel->JounalExtendAccount($id);
 
   }
   public function FindAccountByAdviser() {
