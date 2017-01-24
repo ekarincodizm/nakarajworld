@@ -164,7 +164,7 @@ public function AddDetail($query)
   {
     $query = $this->db
     ->where('account_id', $id)
-    ->join('mlm_accounting', 'mlm_accounting.accounting_source_id = mlm_journal_extend.account_id')
+    ->join('mlm_accounting', 'mlm_accounting.accounting_source_id = mlm_journal_extend.journal_extend_id')
     ->get('mlm_journal_extend')->result();
     // print_r($query);
     return $query;
