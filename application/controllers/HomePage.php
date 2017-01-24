@@ -104,6 +104,7 @@ class HomePage extends CI_Controller{
 		$value = array(
 			'Result' => array(
 				'Registered'=> 'false',
+				'RegisStatus' =>1
 			),
 			'View' => 'front/User/RegisterForm'
 		);
@@ -202,12 +203,19 @@ class HomePage extends CI_Controller{
 				'member_citizen_id' => $Member[0]['member_citizen_id'],
 
 			);
+			if ($IDCard['member_id_card_type']==1) {
+				$IDCard['member_id_card_type_name'] = 'บัตรประชาชน';
+			} elseif ($IDCard['member_id_card_type']==2) {
+				$IDCard['member_id_card_type_name'] = 'Passport';
+			} elseif ($IDCard['member_id_card_type']==3) {
+				$IDCard['member_id_card_type_name'] = 'Work Permit';
+			}
 			$value = array(
 				'Result' => array(
 					'RegisterForm' => $RegisterForm,
 					'Member' => $Member,
 					'Registered'=> 'true',
-					'IDCard' => $IDCard
+					'IDCard' => $IDCard,
 				),
 				'View' => 'front/User/RegisterForm'
 			);
