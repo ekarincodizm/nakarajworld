@@ -147,7 +147,7 @@
         <div class="row clearfix">
           <script type="text/javascript">
           var member_id = <?php echo $Profile[0]['member_id']; ?>;
-          var newBankid = <?php echo $BookbankDetail[0]['bookbank_id']; ?>;
+          var newBankid = <?php //echo $BookbankDetail[0]['bookbank_id']; ?>;
           </script>
           <table class="table table-striped">
             <thead>
@@ -174,7 +174,7 @@
                   <a href="<?php echo site_url('/Member/SaveBookbankToAccount/'.$Account[0]['account_id']."/"."{{row.bookbank_id}}"); ?>" class="btn btn-xs btn-info" style="font-size: 15px;"><i class="material-icons"  style="font-size: 15px;">account_box</i> เลือก</a>
                 </td>
                 <td>
-                  <button ng-if="row.bookbank_id != <?php echo $BookbankDetail[0]['bookbank_id']; ?>" ng-click="DeleteBookBank(<?php echo $Profile[0]['member_id'] ?>,row.bookbank_id);" class="btn btn-xs bg-red waves-effect" style="font-size: 13px;">ลบ</button>
+                  <button ng-if="row.bookbank_id != <?php //echo $BookbankDetail[0]['bookbank_id']; ?>" ng-click="DeleteBookBank(<?php echo $Profile[0]['member_id'] ?>,row.bookbank_id);" class="btn btn-xs bg-red waves-effect" style="font-size: 13px;">ลบ</button>
                 </td>
               </tr>
             </tbody>
