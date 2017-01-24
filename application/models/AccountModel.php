@@ -60,6 +60,14 @@ public function AddDetail($query)
     ->result();
     return $query;
   }
+  public function FindAccountByID($id)
+  {
+    $query =  $this->db
+    ->where('account_id', $id)
+    ->get('mlm_account')
+    ->result_array();
+    return $query;
+  }
   public function AccountNonJoinByID($id)
   {
     $query =  $this->db
@@ -155,20 +163,31 @@ public function AddDetail($query)
 
   public function SaveAccountHistory($value)
   {
-    $this->db->insert('mlm_account_history', $value);
+    $this->db->insert('mlm_journal_extend', $value);
   }
   public function AddAccounting($value){
     $this->db->insert('mlm_accounting', $value);
   }
-  public function HistoryAccount($id)
+  public function JounalExtendAccount($id)
   {
     $query = $this->db
     ->where('account_id', $id)
-    ->get('mlm_account_history')->result();
+    ->join('mlm_accounting', 'mlm_accounting.accounting_source_id = mlm_journal_extend.journal_extend_id')
+    ->get('mlm_journal_extend')->result();
     // print_r($query);
-
     return $query;
-
+  }
+  public function JounalExtendAccountAll()
+  {
+    $query = $this->db
+    ->get('mlm_journal_extend')->num_rows();
+    return $query;
+  }
+  public function JounalFreeAccountAll()
+  {
+    $query = $this->db
+    ->get('mlm_journal_free')->num_rows();
+    return $query;
   }
   public function BookbankDetail($id)
   {

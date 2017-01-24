@@ -16,10 +16,10 @@ class Accounting extends CI_Controller{
   }
   public function index() {
 
-    $AllAccounting = json_decode(json_encode($this->AccountingModel->AllAccounting()), true);
+    $AccountingList = $this->AccountingModel->AccountingSelectAll();
     $value = array(
       'Result' => array(
-        'AllAccounting' => $AllAccounting,
+        'AccountingList' => $AccountingList,
       ),
       'View' => 'back/Accounting/AccountingList'
     );

@@ -362,14 +362,15 @@ class Member extends CI_Controller{
   public function ApprovedMember()
   {
     $member_id = $this->uri->segment(3);
-  $setting = $this->db->order_by('setting_id', 'DESC')->get('mlm_fee_setting')->result_array();
+    $setting = $this->db->order_by('setting_id', 'DESC')->get('mlm_fee_setting')->result_array();
+
+    $maxJounalFreeId = $this->db->AccountModel->JounalFreeAccountAll();
 
   $input = array(
-    'accounting_date' => Date('Y-m-d'),
-    'accounting_source_id' => '',
-    'accounting_amount' => $setting[0]['setting_register_fee'],
-    'journals_id' => 1,
+    'journal_fee_amount' => $setting[0]['setting_register_fee'],
+    'journal_fee_type' => 1,
     'member_id' => $member_id,
+    'journal_fee_code' => "FE".sprintf("%05d", $maxJounalFreeId),
   );
 
   $check = $this->MemberModel->checkaccounting($member_id);
@@ -378,7 +379,7 @@ class Member extends CI_Controller{
     redirect('/Accounting/');
   }
 
-  $this->db->insert('mlm_accounting', $input);
+  $this->db->insert('mlm_journal_fee', $input);
   redirect('/Accounting/');
   }
 
