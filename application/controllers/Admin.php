@@ -19,9 +19,15 @@ class Admin extends CI_Controller {
     // $this->debuger->prevalue($input);
 
     $Admin = $this->HomePageModel->AuthenAdmin($input);
+    // $this->debuger->prevalue($Admin);
 
     if (count($Admin)>0) {
       $_SESSION['ADMIN_ID'] = $Admin[0]['admin_id'];
+      $_SESSION['ADMIN_TEAM'] = $Admin[0]['admin_team'];
+      $_SESSION['ADMIN_TYPE'] = $Admin[0]['admin_type'];
+
+      // $this->debuger->prevalue($_SESSION);
+
       redirect('/DashBoardMain');
     } else {
       redirect('/Admin');

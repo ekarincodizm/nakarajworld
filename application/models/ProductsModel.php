@@ -39,7 +39,7 @@ class ProductsModel extends CI_Model {
   public function ShopDetailAll()
 	{
     $query = $this->db
-    ->get('mlm_shop_detail')
+    ->get('mlm_journal_sale_order_detail')
     ->num_rows();
     return $query;
 	}
@@ -57,18 +57,18 @@ class ProductsModel extends CI_Model {
     $query = $this->db
     ->where('member_id', $MEMBER_ID)
     // ->where('products_id', $products_id)
-    ->get('mlm_shop_detail')
+    ->get('mlm_journal_sale_order_detail')
     ->result_array();
     $i=0;
     foreach ($query as $row) {
       $item = $this->db
-      ->select_sum('shop_items_price')
-      ->where('shop_detail_id', $row['shop_detail_id'])->get('mlm_shop_items')->result_array();
+      ->select_sum('journal_sale_order_item_price')
+      ->where('journal_sale_order_detail_id', $row['journal_sale_order_detail_id'])->get('mlm_journal_sale_order_item')->result_array();
       $itemQ = $this->db
       // ->select_sum('shop_items_price')
-      ->where('shop_detail_id', $row['shop_detail_id'])->get('mlm_shop_items')->num_rows();
+      ->where('journal_sale_order_detail_id', $row['journal_sale_order_detail_id'])->get('mlm_journal_sale_order_item')->num_rows();
       $query[$i]['shop_detail_total_quantity'] = $itemQ;
-      $query[$i]['shop_detail_total_price'] = $item[0]['shop_items_price'];
+      $query[$i]['shop_detail_total_price'] = $item[0]['journal_sale_order_item_price'];
       $i++;
     }
     return $query;
@@ -76,37 +76,41 @@ class ProductsModel extends CI_Model {
   public function InvoiceDetail($id)
   {
     $query = $this->db
-    ->where('mlm_shop_items.shop_detail_id', $id)
-    ->join('mlm_shop_detail', 'mlm_shop_items.shop_detail_id = mlm_shop_detail.shop_detail_id')
-    ->join('mlm_products', 'mlm_shop_items.products_id = mlm_products.products_id')
-    ->get('mlm_shop_items')
+    ->where('mlm_journal_sale_order_item.journal_sale_order_detail_id', $id)
+    ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
+    ->join('mlm_products', 'mlm_journal_sale_order_item.products_id = mlm_products.products_id')
+    ->join('mlm_accounting', 'mlm_accounting.accounting_source_id = mlm_journal_sale_order_item.journal_sale_order_detail_id')
+    ->get('mlm_journal_sale_order_item')
     ->result_array();
     return $query;
 
   }
   public function CancelInvoice($id)
   {
-    $input['shop_detail_status'] = 0;
+    $input['accounting_status'] = 0;
     $query = $this->db
-    ->where('shop_detail_id', $id)
-    ->update('mlm_shop_detail', $input);
+    ->where('accounting_source_id', $id)
+    ->update('mlm_accounting', $input);
   }
 
   public function SaleOrderList()
   {
     $query = $this->db
-    ->get('mlm_shop_detail')
+    ->where('journals_id',7)
+    ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_detail.journal_sale_order_detail_id = mlm_accounting.accounting_source_id')
+    ->join('mlm_journal_sale_order_item', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_accounting.accounting_source_id')
+    ->get('mlm_accounting')
     ->result_array();
     $i=0;
     foreach ($query as $row) {
       $item = $this->db
-      ->select_sum('shop_items_price')
-      ->where('shop_detail_id', $row['shop_detail_id'])->get('mlm_shop_items')->result_array();
+      ->select_sum('journal_sale_order_item_price')
+      ->where('journal_sale_order_detail_id', $row['journal_sale_order_detail_id'])->get('mlm_journal_sale_order_item')->result_array();
       $itemQ = $this->db
       // ->select_sum('shop_items_price')
-      ->where('shop_detail_id', $row['shop_detail_id'])->get('mlm_shop_items')->num_rows();
+      ->where('journal_sale_order_detail_id', $row['journal_sale_order_detail_id'])->get('mlm_journal_sale_order_item')->num_rows();
       $query[$i]['shop_detail_total_quantity'] = $itemQ;
-      $query[$i]['shop_detail_total_price'] = $item[0]['shop_items_price'];
+      $query[$i]['shop_detail_total_price'] = $item[0]['journal_sale_order_item_price'];
       $i++;
     }
     return $query;
@@ -161,39 +165,39 @@ class ProductsModel extends CI_Model {
     foreach ($ProductsList as $row) {
       if ($for_date!='' && $to_date!='') {
         $query = $this->db
-        ->where('shop_detail_date >=', $for_date)
-        ->where('shop_detail_date <=', $to_date)
-        ->where('mlm_shop_items.products_id', $row['products_id'])
-        ->where('shop_detail_status', 1)
-        ->join('mlm_products', 'mlm_shop_items.products_id = mlm_products.products_id')
-        ->join('mlm_shop_detail', 'mlm_shop_items.shop_detail_id = mlm_shop_detail.shop_detail_id')
-        ->get('mlm_shop_items')
+        ->where('journal_sale_order_detail_date >=', $for_date)
+        ->where('journal_sale_order_detail_date <=', $to_date)
+        ->where('mlm_journal_sale_order_item.products_id', $row['products_id'])
+        ->where('journal_sale_order_detail_status', 1)
+        ->join('mlm_products', 'mlm_journal_sale_order_item.products_id = mlm_products.products_id')
+        ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
+        ->get('mlm_journal_sale_order_items')
         ->result_array();
       }elseif ($for_date!='' && $to_date=='') {
         $query = $this->db
-        ->where('shop_detail_date >=', $for_date)
-        ->where('mlm_shop_items.products_id', $row['products_id'])
-        ->where('shop_detail_status', 1)
-        ->join('mlm_products', 'mlm_shop_items.products_id = mlm_products.products_id')
-        ->join('mlm_shop_detail', 'mlm_shop_items.shop_detail_id = mlm_shop_detail.shop_detail_id')
-        ->get('mlm_shop_items')
+        ->where('journal_sale_order_detail_date >=', $for_date)
+        ->where('mlm_journal_sale_order_item.products_id', $row['products_id'])
+        ->where('journal_sale_order_detail_status', 1)
+        ->join('mlm_products', 'mlm_journal_sale_order_items.products_id = mlm_products.products_id')
+        ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
+        ->get('mlm_journal_sale_order_item')
         ->result_array();
       }elseif ($for_date=='' && $to_date!='') {
         $query = $this->db
-        ->where('shop_detail_date <=', $to_date)
-        ->where('mlm_shop_items.products_id', $row['products_id'])
-        ->where('shop_detail_status', 1)
-        ->join('mlm_products', 'mlm_shop_items.products_id = mlm_products.products_id')
-        ->join('mlm_shop_detail', 'mlm_shop_items.shop_detail_id = mlm_shop_detail.shop_detail_id')
-        ->get('mlm_shop_items')
+        ->where('journal_sale_order_detail_date <=', $to_date)
+        ->where('mlm_journal_sale_order_item.products_id', $row['products_id'])
+        ->where('journal_sale_order_detail_status', 1)
+        ->join('mlm_products', 'mlm_journal_sale_order_item.products_id = mlm_products.products_id')
+        ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
+        ->get('mlm_journal_sale_order_item')
         ->result_array();
       }elseif ($for_date=='' && $to_date=='') {
         $query = $this->db
-        ->where('mlm_shop_items.products_id', $row['products_id'])
-        ->where('shop_detail_status', 1)
-        ->join('mlm_products', 'mlm_shop_items.products_id = mlm_products.products_id')
-        ->join('mlm_shop_detail', 'mlm_shop_items.shop_detail_id = mlm_shop_detail.shop_detail_id')
-        ->get('mlm_shop_items')
+        ->where('mlm_journal_sale_order_item.products_id', $row['products_id'])
+        ->where('journal_sale_order_detail_status', 1)
+        ->join('mlm_products', 'mlm_journal_sale_order_item.products_id = mlm_products.products_id')
+        ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
+        ->get('mlm_journal_sale_order_item')
         ->result_array();
       }
       // $query = $this->db
@@ -219,10 +223,11 @@ class ProductsModel extends CI_Model {
   public function SaleOrderDetail($id)
   {
     $query = $this->db
-    ->where('mlm_shop_items.shop_detail_id', $id)
-    ->join('mlm_shop_detail', 'mlm_shop_items.shop_detail_id = mlm_shop_detail.shop_detail_id')
-    ->join('mlm_products', 'mlm_shop_items.products_id = mlm_products.products_id')
-    ->get('mlm_shop_items')
+    ->where('mlm_journal_sale_order_item.journal_sale_order_detail_id', $id)
+    ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
+    ->join('mlm_products', 'mlm_journal_sale_order_item.products_id = mlm_products.products_id')
+    ->join('mlm_accounting', 'mlm_accounting.accounting_source_id = mlm_journal_sale_order_item.journal_sale_order_detail_id')
+    ->get('mlm_journal_sale_order_item')
     ->result_array();
     return $query;
   }
@@ -230,21 +235,21 @@ class ProductsModel extends CI_Model {
   public function SaleOrderResult($id)
   {
     $query = $this->db
-    ->where('mlm_shop_items.shop_detail_id', $id)
-    ->join('mlm_shop_detail', 'mlm_shop_items.shop_detail_id = mlm_shop_detail.shop_detail_id')
-    ->join('mlm_products', 'mlm_shop_items.products_id = mlm_products.products_id')
-    ->join('mlm_member', 'mlm_shop_detail.member_id = mlm_member.member_id')
-    ->get('mlm_shop_items')
+    ->where('mlm_journal_sale_order_item.journal_sale_order_detail_id', $id)
+    ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
+    ->join('mlm_products', 'mlm_journal_sale_order_item.products_id = mlm_products.products_id')
+    ->join('mlm_member', 'mlm_journal_sale_order_detail.member_id = mlm_member.member_id')
+    ->get('mlm_journal_sale_order_item')
     ->result_array();
     return $query;
   }
 
 	public function ConfirmPayment($id)
 	{
-		$input['shop_detail_status'] = 1;
+    $input['accounting_status'] = 1;
 		$this->db
-		->where('shop_detail_id', $id)
-		->update('mlm_shop_detail',$input);
+		->where('accounting_source_id', $id)
+		->update('mlm_accounting',$input);
 	}
 
 }

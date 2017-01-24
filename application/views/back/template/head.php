@@ -20,6 +20,7 @@
 		<?php
 		$this->debuger->load_back_plugins_css('bootstrap/css/bootstrap');
 		$this->debuger->front_load_css('bootstrap-datetimepicker.min');
+		// $this->debuger->load_back_plugins_css('assets/font/stylesheet');
 		$this->debuger->load_back_plugins_css('node-waves/waves.min');
 		$this->debuger->load_back_plugins_css('animate-css/animate.min');
 		$this->debuger->load_back_plugins_css('morrisjs/morris');
@@ -41,4 +42,8 @@
 </style>
 	</head>
 	<body class="theme-cyan">
- <?php $this->load->view('back/template/menu'); ?>
+		<?php if ($_SESSION['ADMIN_TYPE']==1): ?>
+ 		<?php $this->load->view('back/template/menu'); ?>
+		<?php else: ?>
+		<?php $this->load->view('back/template/menuteam'); ?>
+  	<?php endif; ?>

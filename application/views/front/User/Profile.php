@@ -13,7 +13,7 @@
         </div>
 
         <h2><?php echo $Profile[0]['member_prefix'].$Profile[0]['member_firstname']." ".$Profile[0]['member_lastname'] ?></h2>
-        <h4>PV: <?php echo $PV ?></h4  >
+        <!-- <h4>PV: <?php echo $PV ?></h4  > -->
         <p>
           <?php echo $Profile[0]['member_id_card_type_name']?> : <strong><?php echo $Profile[0]['member_citizen_id']?></strong>  <br>
           วันเกิด : <strong><?php echo $this->thaidate->FullDate($Profile[0]['member_born']) ?></strong><br>
