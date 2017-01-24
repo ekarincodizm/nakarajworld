@@ -4,7 +4,7 @@
     <script type="text/javascript">
       var account_id = <?php echo $this->uri->segment(3); ?>;
     </script>
-    <button ng-if="LastListExtend.account_history_expired_date > date_now" type="button" class="btn bg-deep-orange" ng-click="MemberExtend(<?php echo $Profile[0]['member_id'] ?>);">
+    <button ng-if="LastListExtend.account_history_expired_date < date_now" type="button" class="btn bg-deep-orange" ng-click="MemberExtend(<?php echo $Profile[0]['member_id'] ?>);">
       ต่ออายุ
     </button>
     <table class="table table-hover">

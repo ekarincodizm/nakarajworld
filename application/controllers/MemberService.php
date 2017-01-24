@@ -40,9 +40,9 @@ class MemberService extends REST_Controller
 	  }
 		public function AccountDetailExtend_post()
 	  {
-			$input =  $this->post('account_id');
-			// print_r($input);
-			$AccountDetailExtend = $this->AccountModel->HistoryAccount($input);
+			$input =  $this->post();
+			//print_r($input);
+			$AccountDetailExtend = $this->AccountModel->HistoryAccount($input['account_id']);
 			$this->response($AccountDetailExtend);
 	  }
 		public function AddAccountDetailExtend_post()
@@ -53,15 +53,13 @@ class MemberService extends REST_Controller
 	    $expired = strtotime("+365 day", $expired);
 	    $expired =  Date('Y-m-d', $expired);
 	    $NewAccountHistory = array(
-	      'account_id' => $input['member_id'],
+	      'account_id' => $input['account_id'],
 	      'account_history_register_date' => $time,
 	      'account_history_expired_date' => $expired,
 	    );
 			$this->AccountModel->SaveAccountHistory($NewAccountHistory);
 
 			$query = $this->db->where('setting_id', 1)->get('mlm_fee_setting')->result_array();
-			// print_r($query) ;
-			// echo $query[0]['setting_extend_fee'];
 			$data = array(
 				'journals_id' => 2,
 				'accounting_amount' => $query[0]['setting_extend_fee'],
@@ -73,7 +71,7 @@ class MemberService extends REST_Controller
 			);
 
 		  $this->AccountModel->AddAccounting($data);
-			$AccountDetailExtend = $this->AccountModel->HistoryAccount($input);
+			$AccountDetailExtend = $this->AccountModel->HistoryAccount($input['account_id']);
 			$this->response($AccountDetailExtend);
 	  }
 }
