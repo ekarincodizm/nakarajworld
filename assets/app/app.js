@@ -12,7 +12,10 @@ HomePageApp.controller('AddBookBankCtrl', function ($scope, $http) {
 			console.log($scope.BookBankObject);
 			data = $scope.BookBankObject;
 			$http.post(SITE_URL + '/MemberService/AddBookBank', data).then(function (){
-				$scope.BookBankObject = '';
+				$scope.BookBankObject.bank_id = null;
+				$scope.BookBankObject.bookbank_bank_branch = null;
+				$scope.BookBankObject.bookbank_account = null;
+				$scope.BookBankObject.bookbank_number = null;
 				$http.post(SITE_URL + '/MemberService/ListBookBank', {'id':member_id}).then(function (response){
 					console.log(response.data);
 					$scope.ListBookBank = response.data;
