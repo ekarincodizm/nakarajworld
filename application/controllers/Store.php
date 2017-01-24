@@ -170,15 +170,15 @@ class Store extends CI_Controller{
 	public function UploadFileSlip()
 	{
 		$InvoiceID = $this->uri->segment(3);
-		if ($_FILES["journal_sale_detail_slip"]["name"]!='') {
-			$ext = pathinfo($_FILES["journal_sale_detail_slip"]["name"],PATHINFO_EXTENSION);
-			$new_file = 'slip'.$_POST['journal_sale_detail_code'].'.'.$ext;
-			copy($_FILES["journal_sale_detail_slip"]["tmp_name"],"assets/image/slip/".$new_file);
+		if ($_FILES["journal_sale_order_detail_slip"]["name"]!='') {
+			$ext = pathinfo($_FILES["journal_sale_order_detail_slip"]["name"],PATHINFO_EXTENSION);
+			$new_file = 'slip'.$InvoiceID.'.'.$ext;
+			copy($_FILES["journal_sale_order_detail_slip"]["tmp_name"],"assets/image/slip/".$new_file);
 
 			$input = array(
-				'journal_sale_detail_slip' => $new_file,
+				'journal_sale_order_detail_slip' => $new_file,
 			);
-			$this->db->where('journal_sale_detail_id', $InvoiceID)->update('mlm_journal_sale_order_detail', $input);
+			$this->db->where('journal_sale_order_detail_id', $InvoiceID)->update('mlm_journal_sale_order_detail', $input);
 		}
 		redirect($this->agent->referrer(), 'refresh');
 

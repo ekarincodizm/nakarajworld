@@ -43,7 +43,7 @@ class MemberModel extends CI_Model {
 
       $pv=0;
       foreach ($shop_detail as $row){
-      $pv += $row['shop_items_pv']*$row['shop_items_quantity'];
+      $pv += $row['journal_sale_order_item_pv']*$row['journal_sale_order_item_quantity'];
       }
       $member[$i]['total_pv'] = $pv;
       $i++;
