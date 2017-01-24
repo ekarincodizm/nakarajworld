@@ -61,12 +61,10 @@ class MemberService extends REST_Controller
 				'accounting_tax' => 0,
 				'journals_id' => 2,
 			);
-			$this->AccountModel->AddAccounting($data);
 
-			$returnAccounting_id = $this->db->insert_id();
-			$returnAccounting_id = $returnAccounting_id+1;
 
-			$maxJounalExtendId = $this->db->JounalExtendAccountAll();
+			$maxJounalExtendId = $this->AccountModel->JounalExtendAccountAll();
+			$maxJounalExtendId = $maxJounalExtendId+1;
 
 	    $NewAccountHistory = array(
 	      'account_id' => $input['account_id'],
@@ -77,8 +75,18 @@ class MemberService extends REST_Controller
 				'journal_extend_code' => "EX".sprintf("%05d", $maxJounalExtendId);
 	    );
 			$this->AccountModel->SaveAccountHistory($NewAccountHistory);
+			$returnAccounting_id = $this->db->insert_id();
 
-			$AccountDetailExtend = $this->AccountModel->HistoryAccount($input['account_id']);
+			$data = array(
+				'accounting_date' => $time,
+				'accounting_no' => 0,
+				'accounting_source_id' => $returnAccounting_id,
+				'accounting_tax' => 0,
+				'journals_id' => 2,
+			);
+			$this->AccountModel->AddAccounting($data);
+
+			$AccountDetailExtend = $this->AccountModel->JounalExtendAccount($input['account_id']);
 			$this->response($AccountDetailExtend);
 	  }
 }

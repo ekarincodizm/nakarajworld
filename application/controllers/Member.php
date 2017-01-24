@@ -69,20 +69,20 @@ class Member extends CI_Controller{
 
     // $this->debuger->prevalue($Account[0]['account_id']);
 
-    $JounalExtendAccount = json_decode(json_encode($this->AccountModel->JounalExtendAccount( $Account[0]['account_id'])), true);
-    $this->debuger->prevalue($JounalExtendAccount);
+    $JounalExtendAccount = $this->AccountModel->JounalExtendAccount( $Account[0]['account_id']);
+    // $this->debuger->prevalue($JounalExtendAccount);
 
-<<<<<<< HEAD
-=======
-    $HistoryAccount = json_decode(json_encode($this->AccountModel->JounalExtendAccount( $Account[0]['account_id'])), true);
->>>>>>> origin/master
+
+    // $HistoryAccount = json_decode(json_encode($this->AccountModel->JounalExtendAccount( $Account[0]['account_id'])), true);
+
     if ($Account[0]['bookbank_id']!=0) {
       $BookbankDetail = json_decode(json_encode($this->AccountModel->BookbankDetail( $Account[0]['bookbank_id'])), true);
       // $this->debuger->prevalue($BookbankDetail);
     } else {
       $BookbankDetail = 'false';
     }
-    $BookbankList = json_decode(json_encode($this->AccountModel->BookbankList( $Account[0]['member_id'])), true);
+    // $BookbankList = $this->AccountModel->BookbankList( $Account[0]['member_id'] );
+    // $this->debuger->prevalue($this->AccountModel->BookbankList( $Account[0]['member_id']));
 
     $BankList = $this->db->get('mlm_bank')->result_array();
 
@@ -98,7 +98,7 @@ class Member extends CI_Controller{
 
         'JounalExtendAccount' => $JounalExtendAccount,
         'BookbankDetail' => $BookbankDetail,
-        'BookbankList' => $BookbankList,
+        // 'BookbankList' => $BookbankList,
 
         'BankList' => $BankList,
 
@@ -112,11 +112,11 @@ class Member extends CI_Controller{
 
   public function AccountDetailExtend() {
     $id = $this->uri->segment(3);
-<<<<<<< HEAD
+
     $JounalExtendAccount = $this->AccountModel->JounalExtendAccount($id);
-=======
+
     $HistoryAccount = $this->AccountModel->JounalExtendAccount($id);
->>>>>>> origin/master
+
 
   }
   public function FindAccountByAdviser() {
