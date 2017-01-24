@@ -141,6 +141,7 @@ public function AddDetail($query)
   public function SaveAccount($value, $adviser_id) {
     $this->db->insert('mlm_account', $value);
     $NewID = $this->db->insert_id();
+    $NewID = $NewID+1;
     // Insert Temp Count Downline
     $Account = json_decode(json_encode($this->AccountByID($NewID)), true);
     $upline_id = $Account[0]['account_upline_id'];

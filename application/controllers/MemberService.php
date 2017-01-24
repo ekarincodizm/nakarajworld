@@ -64,6 +64,8 @@ class MemberService extends REST_Controller
 			$this->AccountModel->AddAccounting($data);
 
 			$returnAccounting_id = $this->db->insert_id();
+			$returnAccounting_id = $returnAccounting_id+1;
+
 			$maxJounalExtendId = $this->db->JounalExtendAccountAll();
 
 	    $NewAccountHistory = array(
