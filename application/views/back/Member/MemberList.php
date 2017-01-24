@@ -1,4 +1,4 @@
-<section class="content" ng-controller="MemberCtrl">
+<section class="content">
   <div class="container-fluid">
     <div class="block-header">
       <h1>สมาชิก</h1>

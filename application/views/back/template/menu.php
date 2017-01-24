@@ -320,14 +320,14 @@
             </a>
 
         </li>
-        <li>
+        <li >
             <a href="javascript:void(0);" class="menu-toggle">
                 <i class="material-icons">store</i>
                 <span>ร้านค้า</span>
             </a>
             <ul class="ml-menu">
                 <!-- <li class="header">การขาย</li> -->
-                <li>
+                <li >
                     <a href="<?php echo site_url('/Products');?>" class=" waves-effect waves-block">
                         <i class="material-icons">card_giftcard</i>
                         <span>สินค้า</span>

@@ -9,7 +9,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
  ?>
 
 
-<section class="content" ng-controller="MemberCtrl">
+<section class="content">
         <?php
         $colorArr = array(
                 '0' => 'teal',
@@ -140,4 +140,3 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
     <!-- Morris Plugin Js -->
     <script src="<?php echo base_url('assets/theme/back-end/plugins/raphael/raphael.min.js')  ?>"></script>
     <script src="<?php echo base_url('assets/theme/back-end/plugins/morrisjs/morris.js') ?>"></script>
-    

@@ -59,5 +59,23 @@ $(function () {
     });
 });
 </script>
+<script type="text/javascript">
+console.log(window.location.href);
+$(function() {
+  $(".menu ul li a").each(function(){
+    console.log($(this).attr("href"));
+
+    if( $(this).attr("href") == window.location.href ){
+      $(this).parent().addClass('active');
+      $(this).parent().parent().parent().children("a:first-child").addClass('toggled');
+      $(this).parent().parent().parent().children("ul").css("display", "block");
+
+      $(this).parent().parent().parent().addClass('active');
+
+    }
+  })
+});
+</script>
+
 </body>
 </html>
