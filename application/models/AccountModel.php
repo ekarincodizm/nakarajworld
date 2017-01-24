@@ -168,7 +168,7 @@ public function AddDetail($query)
   public function AddAccounting($value){
     $this->db->insert('mlm_accounting', $value);
   }
-  public function HistoryAccount($id)
+  public function JounalExtendAccount($id)
   {
     $query = $this->db
     ->where('account_id', $id)
@@ -177,10 +177,16 @@ public function AddDetail($query)
     // print_r($query);
     return $query;
   }
-  public function HistoryAccountAll()
+  public function JounalExtendAccountAll()
   {
     $query = $this->db
     ->get('mlm_journal_extend')->num_rows();
+    return $query;
+  }
+  public function JounalFreeAccountAll()
+  {
+    $query = $this->db
+    ->get('mlm_journal_free')->num_rows();
     return $query;
   }
   public function BookbankDetail($id)

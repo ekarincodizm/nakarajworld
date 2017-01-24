@@ -42,7 +42,7 @@ class MemberService extends REST_Controller
 	  {
 			$input =  $this->post();
 			//print_r($input);
-			$AccountDetailExtend = $this->AccountModel->HistoryAccount($input['account_id']);
+			$AccountDetailExtend = $this->AccountModel->JounalExtendAccount($input['account_id']);
 			$this->response($AccountDetailExtend);
 	  }
 		public function AddAccountDetailExtend_post()
@@ -64,7 +64,7 @@ class MemberService extends REST_Controller
 			$this->AccountModel->AddAccounting($data);
 
 			$returnAccounting_id = $this->db->insert_id();
-			$maxJounalExtendId = $this->db->HistoryAccountAll();
+			$maxJounalExtendId = $this->db->JounalExtendAccountAll();
 
 	    $NewAccountHistory = array(
 	      'account_id' => $input['account_id'],
