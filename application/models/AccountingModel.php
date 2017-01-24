@@ -14,14 +14,19 @@ class AccountingModel extends CI_Model
       $type = $row['journals_id'];
       $source_id = $row['accounting_source_id'];
       $source_detail = $this->FindAccountingSourceDetail($type, $source_id);
+
       $query[$index]['source_detail'] = $source_detail;
-      $query[$index]['accounting_amount'] = 0;
+      // $this->debuger->prevalue($source_detail);
+
+      $query[$index]['source_amount'] = $source_detail['source_amount'];
       $query[$index]['source_code'] = $source_detail['source_code'];
       $query[$index]['member'] = $source_detail['member_detail'];
       $query[$index]['account'] = $source_detail['account_detail'];
+
       unset($query[$index]['source_detail']['account_detail']);
       unset($query[$index]['source_detail']['member_detail']);
       unset($query[$index]['source_detail']['source_code']);
+      unset($query[$index]['source_detail']['amount']);
       $index++;
     }
 
@@ -37,14 +42,17 @@ class AccountingModel extends CI_Model
       $source_table = 'mlm_journal_fee';
       $source_detail = $this->SelectSourceDetail($source_id, $source_table);
       $source_detail['source_code'] = $source_detail['journal_fee_code'];
+      $source_detail['source_amount'] = $source_detail['journal_fee_amount'];
     } elseif ($type==2) {
       $source_table = 'mlm_journal_extend';
       $source_detail = $this->SelectSourceDetail($source_id, $source_table);
       $source_detail['source_code'] = $source_detail['journal_extend_code'];
+      $source_detail['source_amount'] = $source_detail['journal_extend_amount'];
     } elseif ($type==3 || $type==4 || $type==5 || $type==6) {
       $source_table = 'mlm_journal_dividend';
       $source_detail = $this->SelectSourceDetail($source_id, $source_table);
       $source_detail['source_code'] = $source_detail['journal_dividend_code'];
+      $source_detail['source_amount'] = $source_detail['journal_dividend_amount'];
     } elseif ($type==7) {
       $source_table = 'mlm_journal_sale_order_detail';
       $source_detail = $this->SelectSourceDetail($source_id, $source_table);
@@ -57,6 +65,7 @@ class AccountingModel extends CI_Model
   public function SelectSourceDetail($id, $source_table)
   {
     $query = $this->db->get($source_table)->result_array();
+
     if (count($query)!=0) {
       $query = $query[0];
 

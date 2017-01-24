@@ -36,7 +36,7 @@
                     <td>
                       <?php echo $row['journals_detail']; ?>
                     </td>
-                    <td><?php echo $row['accounting_amount']; ?></td>
+                    <td><?php echo $row['source_amount']; ?></td>
                     <td>
                       <?php echo $row['member']['member_prefix'].$row['member']['member_firstname']." ".$row['member']['member_lastname']; ?>
                     </td>

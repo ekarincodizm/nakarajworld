@@ -164,6 +164,18 @@ public function AddDetail($query)
   public function SaveAccountHistory($value)
   {
     $this->db->insert('mlm_journal_extend', $value);
+    $id = $this->db->insert_id();
+    return $id;
+  }
+  public function SaveJournalExtend($value)
+  {
+    $this->db->insert('mlm_journal_extend', $value);
+    $id = $this->db->insert_id();
+    return $id;
+  }
+  public function SaveAccountingExtend($value)
+  {
+    $this->db->insert('mlm_accounting', $value);
   }
   public function AddAccounting($value){
     $this->db->insert('mlm_accounting', $value);

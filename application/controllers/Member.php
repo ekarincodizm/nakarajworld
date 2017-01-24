@@ -62,14 +62,16 @@ class Member extends CI_Controller{
     $Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $Account[0]['member_id'] )), true);
     $AllDownline = json_decode(json_encode($this->AccountModel->AllDownlineByAccount( $id )), true);
     $ThreeDownline = json_decode(json_encode($this->AccountModel->ThreeDownline( $id )), true);
-    // $this->debuger->prevalue($ThreeDownline);
     $Upline = json_decode(json_encode($this->AccountModel->AccountByID( $Account[0]['account_upline_id'])), true);
     $Adviser = json_decode(json_encode($this->AccountModel->AccountByID( $Account[0]['account_adviser_id'])), true);
     $AdviserList = json_decode(json_encode($this->AccountModel->AdviserList( $Account[0]['account_id'])), true);
     $Account2 = json_decode(json_encode($this->MemberModel->MemberList()), true);
 
+    // $this->debuger->prevalue($Account[0]['account_id']);
 
-    $HistoryAccount = json_decode(json_encode($this->AccountModel->HistoryAccount( $Account[0]['account_id'])), true);
+    $JounalExtendAccount = json_decode(json_encode($this->AccountModel->JounalExtendAccount( $Account[0]['account_id'])), true);
+    $this->debuger->prevalue($JounalExtendAccount);
+
     if ($Account[0]['bookbank_id']!=0) {
       $BookbankDetail = json_decode(json_encode($this->AccountModel->BookbankDetail( $Account[0]['bookbank_id'])), true);
       // $this->debuger->prevalue($BookbankDetail);
@@ -90,7 +92,7 @@ class Member extends CI_Controller{
         'Adviser' => $Adviser,
         'AdviserList' => $AdviserList,
 
-        'HistoryAccount' => $HistoryAccount,
+        'JounalExtendAccount' => $JounalExtendAccount,
         'BookbankDetail' => $BookbankDetail,
         'BookbankList' => $BookbankList,
 
@@ -106,7 +108,7 @@ class Member extends CI_Controller{
 
   public function AccountDetailExtend() {
     $id = $this->uri->segment(3);
-    $HistoryAccount = $this->AccountModel->HistoryAccount($id);
+    $JounalExtendAccount = $this->AccountModel->JounalExtendAccount($id);
 
   }
   public function FindAccountByAdviser() {
@@ -187,7 +189,7 @@ class Member extends CI_Controller{
     $expired = strtotime($time);
     $expired = strtotime("+365 day", $expired);
     $expired =  Date('Y-m-d', $expired);
-    $NewAccount = array(
+    $AccountInput = array(
       'account_team' => $AccountUpline[0]['account_team'],
       'account_level' => $AccountUpline[0]['account_level']+=1,
       'account_code' => $AccountListByTeam[0]['account_code']+=1,
@@ -195,15 +197,27 @@ class Member extends CI_Controller{
       'account_adviser_id' => $adviser_id,
       'member_id' => $member_id,
     );
-    $NewAccountID = $this->AccountModel->SaveAccount($NewAccount, $adviser_id);
+
+    $NewAccountID = $this->AccountModel->SaveAccount($AccountInput, $adviser_id);
     // echo $NewAccountID;
     //Insert New Account History
-    $NewAccountHistory = array(
+    $ExtendInput = array(
       'account_id' => $NewAccountID,
-      'account_history_register_date' => $time,
-      'account_history_expired_date' => $expired,
+      'member_id' => $member_id,
+      'journal_extend_start_date' => $time,
+      'journal_extend_expired_date' => $expired,
+      'journal_extend_amount' => 0
     );
-    $this->AccountModel->SaveAccountHistory($NewAccountHistory);
+    $ExtendNewID = $this->AccountModel->SaveJournalExtend($ExtendInput);
+
+    $AccountingInput = array(
+      'accounting_date' => $time,
+      'accounting_source_id' => $ExtendNewID,
+      'accounting_tax' => 0,
+      'accounting_status' => 1,
+      'journals_id' => 2,
+    );
+    $this->AccountModel->SaveAccountingExtend($AccountingInput);
     //Check Bussiness Code
     $arr = 0;
     // $id = $NewAccountID;
@@ -268,8 +282,14 @@ class Member extends CI_Controller{
       if ($GoalCheck["Count"]==$goal) {
         $GoalCheck["GoalStatus"] = 'true';
         $Plan = 1;
-        $income_percent = $this->db->where('income_percent_level', $lvlUp)->where('income_percent_plan', $Plan)->get('mlm_income_percent_setting')->result_array();
-        $income_adviser = $this->db->get('mlm_fee_setting')->result_array();
+        $income_percent = $this->db
+        ->where('income_percent_level', $lvlUp)
+        ->where('income_percent_plan', $Plan)
+        ->get('mlm_income_percent_setting')
+        ->result_array();
+        $income_adviser = $this->db
+        ->get('mlm_fee_setting')
+        ->result_array();
 
         $accounting_amount = $income_percent[0]['income_percent_point']*$income_percent[0]['income_percent_amount']/100;
         $income_adviser_total = 0;
@@ -292,7 +312,6 @@ class Member extends CI_Controller{
                 'accounting_amount' => $income_adviser[0]['setting_adviser_income'],
                 'journals_id' => 3,
                 'member_id' => $Account[0]['member_id'],
-                'accounting_system_note' => 'ค่าการแนะนำ',
               );
               $this->db->insert('mlm_accounting', $input);
             }

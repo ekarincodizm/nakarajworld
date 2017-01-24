@@ -36,8 +36,8 @@ class MemberModel extends CI_Model {
       $shop_detail = $this->db
       ->where('member_id', $member_row['member_id'])
       ->where('shop_detail_status',1)
-      ->join('mlm_shop_items', 'mlm_shop_detail.shop_detail_id = mlm_shop_items.shop_detail_id')
-      ->get('mlm_shop_detail')
+      ->join('mlm_shop_items', 'mlm_journal_sale_order_detail.journal_sale_order_detail_id = mlm_shop_items.shop_detail_id')
+      ->get('mlm_journal_sale_order_detail')
       ->result_array();
 
       $pv=0;

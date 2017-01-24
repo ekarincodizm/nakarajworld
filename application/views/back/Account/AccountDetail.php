@@ -3,12 +3,12 @@
     <div class="block-header">
       <h1>
         เกี่ยวกับบัญชีธุรกิจ รหัส <?php echo $Account[0]['account_team'].sprintf("%04d", $Account[0]['account_level']).sprintf("%04d", $Account[0]['account_code']); ?>
-        <?php if ($HistoryAccount[0]['account_history_expired_date']<Date('Y-m-d')): ?>
+        <?php if ($JounalExtendAccount[0]['account_history_expired_date']<Date('Y-m-d')): ?>
           <span class="">(หมดอายุ)</span>
           <?php else: ?>
-        <?php if ($HistoryAccount[0]['account_history_status']==2): ?>
+        <?php if ($JounalExtendAccount[0]['account_history_status']==2): ?>
           <span class="">(ยังไม่เปิดใช้งาน)</span>
-        <?php elseif($HistoryAccount[0]['account_history_status']==1): ?>
+        <?php elseif($JounalExtendAccount[0]['account_history_status']==1): ?>
           <span class="">(เปิดใช้งาน)</span>
         <?php else: ?>
           <span class="">(รอดำเนินการ)</span>
