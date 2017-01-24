@@ -72,7 +72,7 @@ class MemberService extends REST_Controller
 	      'journal_extend_expired_date' => $expired,
 				'journal_extend_amount' => $query[0]['setting_extend_fee'],
 				'member_id' => $input['member_id'],
-				'journal_extend_code' => "EX".sprintf("%05d", $maxJounalExtendId);
+				'journal_extend_code' => "EX".sprintf("%05d", $maxJounalExtendId),
 	    );
 			$this->AccountModel->SaveAccountHistory($NewAccountHistory);
 			$returnAccounting_id = $this->db->insert_id();
