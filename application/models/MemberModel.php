@@ -13,6 +13,15 @@ class MemberModel extends CI_Model {
     return $query;
 
   }
+
+  public function MemberByID($id)
+  {
+    $query = $this->db
+    ->where('member_id', $id)
+    ->get('mlm_member')
+    ->result_array();
+    return $query;
+  }
   public function MemberListWhithPV()
   {
     $member = $this->db
@@ -61,6 +70,6 @@ class MemberModel extends CI_Model {
     ->result_array();
     return $query;
   }
-  
+
 
 }

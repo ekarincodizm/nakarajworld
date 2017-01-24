@@ -60,6 +60,14 @@ public function AddDetail($query)
     ->result();
     return $query;
   }
+  public function FindAccountByID($id)
+  {
+    $query =  $this->db
+    ->where('account_id', $id)
+    ->get('mlm_account')
+    ->result_array();
+    return $query;
+  }
   public function AccountNonJoinByID($id)
   {
     $query =  $this->db
