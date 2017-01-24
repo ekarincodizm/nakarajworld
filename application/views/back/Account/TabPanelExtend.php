@@ -7,13 +7,15 @@
     <button ng-if="LastListExtend.account_history_expired_date < date_now" type="button" class="btn bg-deep-orange" ng-click="MemberExtend(<?php echo $Profile[0]['member_id'] ?>);">
       ต่ออายุ
     </button>
+    <span ng-if="LastListExtend.account_history_expired_date < date_now" class="label bg-deep-orange">หมดอายุ</span>
+    <span ng-if="LastListExtend.account_history_status == 2" class="label bg-deep-orange">ยังไม่เปิดใช้งาน</span>
+    <span ng-if="LastListExtend.account_history_status == 1" class="label bg-green">เปิดใช้งาน</span>
     <table class="table table-hover">
       <thead>
         <tr>
           <th>#</th>
           <th>วันที่ต่ออายุ</th>
           <th>วันที่หมดอายุ</th>
-          <th>สถานะ</th>
           <th>ตัวเลือก</th>
         </tr>
       </thead>
@@ -23,13 +25,11 @@
             <td>{{$index+1}}</td>
             <td>{{row.account_history_register_date | date:'dd MMMM yyyy'}}</td>
             <td>{{row.account_history_expired_date | date:'dd MMMM yyyy'}}</td>
-            <td>
-              <span ng-if="row.account_history_expired_date < date_now" class="label bg-deep-orange">หมดอายุ</span>
-              <!-- <div ng-if="row.account_history_status == 2"> -->
-                <span ng-if="row.account_history_status == 2" class="label bg-deep-orange">ยังไม่เปิดใช้งาน</span>
-                <span ng-if="row.account_history_status == 1" class="label bg-green">เปิดใช้งาน</span>
-              <!-- </div> -->
-            </td>
+            <!-- <td>
+                <span ng-if="($index+1) == ListExtend.length && row.account_history_expired_date < date_now" class="label bg-deep-orange">หมดอายุ</span>
+                <span ng-if="($index+1) == ListExtend.length && row.account_history_status == 2" class="label bg-deep-orange">ยังไม่เปิดใช้งาน</span>
+                <span ng-if="($index+1) == ListExtend.length && row.account_history_status == 1" class="label bg-green">เปิดใช้งาน</span>
+            </td> -->
             <td>
               <a ng-if="row.account_history_status == 1" target="_blank" href="<?php echo site_url('/AccountController/PrintAccountInvoice/'.'{{row.account_history_id}}'); ?>"
                 class="btn btn-info">พิมพ์ใบแจ้งหนี้</a>
