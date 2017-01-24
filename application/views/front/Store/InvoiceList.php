@@ -26,12 +26,12 @@
 
                   <tr>
                     <td><?php echo $i; ?></td>
-                    <td><?php echo $row['shop_detail_code'] ?></td>
-                    <td><?php echo $this->thaidate->ShortDateTime($row['shop_detail_date']); ?></td>
+                    <td><span style="font-family:Glass-Gauge"> <?php echo $row['journal_sale_order_detail_code'] ?> </span></td>
+                    <td><?php echo $this->thaidate->ShortDateTime($row['journal_sale_order_detail_date']); ?></td>
                     <td><?php echo number_format($row['shop_detail_total_quantity']) ?></td>
                     <td><?php echo number_format($row['shop_detail_total_price']) ?></td>
                     <td>
-                      <a href="<?php echo site_url('Store/InvoiceDetail/'.$row['shop_detail_id'])  ?>" class="btn btn-info">รายละเอียด</a>
+                      <a href="<?php echo site_url('Store/InvoiceDetail/'.$row['journal_sale_order_detail_id'])  ?>" class="btn btn-info">รายละเอียด</a>
                     </td>
                   </tr>
 

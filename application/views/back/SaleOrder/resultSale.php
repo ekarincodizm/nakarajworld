@@ -51,8 +51,8 @@ top: 0%;">
             <p class="text-center" id="border"><strong style="font-size:32px"><br>
               ใบสั่งซื้อ</strong></br>
               <strong><br>
-                เลขที่ <?php echo $SaleOrderDetail[0]['shop_detail_code'] ?></strong><br>
-                <strong>วันที่สั่งซื้อ</strong> <?php echo $this->thaidate->FullDate($SaleOrderDetail[0]['shop_detail_date']) ?> </p>
+                เลขที่ <?php echo $SaleOrderDetail[0]['journal_sale_order_detail_code'] ?></strong><br>
+                <strong>วันที่สั่งซื้อ</strong> <?php echo $this->thaidate->FullDate($SaleOrderDetail[0]['journal_sale_order_detail_date']) ?> </p>
               </div>
             </div>
           </div>
@@ -79,13 +79,13 @@ top: 0%;">
                     <td class="text-center" scope="row"><?php echo $item; ?></td>
                     <td><?php echo $row['products_code']; ?></td>
                     <td><?php echo $row['products_name']; ?></td>
-                    <td class="text-right"><?php echo number_format($row['shop_items_quantity']) ?></td>
-                    <td class="text-right"><?php echo number_format($row['shop_items_price']) ?></td>
-                    <td class="text-right"><?php echo number_format($row['shop_items_price']*$row['shop_items_quantity']) ?></td>
+                    <td class="text-right"><?php echo number_format($row['journal_sale_order_item_quantity']) ?></td>
+                    <td class="text-right"><?php echo number_format($row['journal_sale_order_item_price']) ?></td>
+                    <td class="text-right"><?php echo number_format($row['journal_sale_order_item_price']*$row['journal_sale_order_item_quantity']) ?></td>
                     <!-- <td class="text-right"><?php //echo $PurchaseOrder['material_po_quantity']; ?> <?php //echo $PurchaseOrder['material_unit']; ?></td> -->
 
                   </tr>
-                  <?php $item++; $amount += ($row['shop_items_price']*$row['shop_items_quantity']); endforeach; ?>
+                  <?php $item++; $amount += ($row['journal_sale_order_item_price']*$row['journal_sale_order_item_quantity']); endforeach; ?>
 
                         <?php if (count($SaleOrderDetail)<15): ?>
                           <?php

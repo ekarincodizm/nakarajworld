@@ -100,29 +100,38 @@ class Store extends CI_Controller{
 		$TempList =$this->ProductsModel->TempList($_SESSION['MEMBER_ID']);
 		$TempList = json_decode(json_encode($TempList), true);
 		$ShopCount = $this->ProductsModel->ShopDetailAll();
-		$ShopCode = "SO".sprintf("%04d",($ShopCount+1));
+		$ShopCode = "SO".sprintf("%05d",($ShopCount+1));
 		// Detail
 		$input = array(
-			'shop_detail_code' => $ShopCode,
-			'shop_detail_date' => Date('Y-m-d H:i:s'),
+			'journal_sale_order_detail_code' => $ShopCode,
+			'journal_sale_order_detail_date' => Date('Y-m-d H:i:s'),
 			'member_id' => $_SESSION['MEMBER_ID'],
-
 		);
-		$this->db->insert('mlm_shop_detail', $input);
+		$this->db->insert('mlm_journal_sale_order_detail', $input);
 		$DeatilID = $this->db->insert_id();
+
+		// Accounting
+		$input = array(
+			'accounting_source_id' => $DeatilID,
+			'accounting_date' => Date('Y-m-d'),
+			'journals_id' => 7,
+		);
+		$this->db->insert('mlm_accounting', $input);
+
 		// Items
 		foreach ($TempList as $row) {
 			$total = $row['products_price_narmal']-($row['products_price_narmal']*$row['products_price_discount']/100);
 			$input = array(
-				'shop_items_quantity' => $row['shop_temp_quantity'],
-				'shop_items_price' => $total,
-				'shop_items_pv' => $row['shop_temp_pv'],
-				'shop_detail_id' => $DeatilID,
+				'journal_sale_order_item_quantity' => $row['shop_temp_quantity'],
+				'journal_sale_order_item_price' => $total,
+				'journal_sale_order_item_pv' => $row['products_pv'],
+				'journal_sale_order_detail_id' => $DeatilID,
 				'products_id' => $row['products_id'],
 
 			);
-			$this->db->insert('mlm_shop_items', $input);
+			$this->db->insert('mlm_journal_sale_order_item', $input);
 			$this->db->where('shop_temp_id', $row['shop_temp_id'])->delete('mlm_shop_temp');
+
 		}
 		redirect('Store/InvoiceList');
 
@@ -161,15 +170,15 @@ class Store extends CI_Controller{
 	public function UploadFileSlip()
 	{
 		$InvoiceID = $this->uri->segment(3);
-		if ($_FILES["shop_detail_slip"]["name"]!='') {
-			$ext = pathinfo($_FILES["shop_detail_slip"]["name"],PATHINFO_EXTENSION);
-			$new_file = 'slip'.$_POST['shop_detail_code'].'.'.$ext;
-			copy($_FILES["shop_detail_slip"]["tmp_name"],"assets/image/slip/".$new_file);
+		if ($_FILES["journal_sale_detail_slip"]["name"]!='') {
+			$ext = pathinfo($_FILES["journal_sale_detail_slip"]["name"],PATHINFO_EXTENSION);
+			$new_file = 'slip'.$_POST['journal_sale_detail_code'].'.'.$ext;
+			copy($_FILES["journal_sale_detail_slip"]["tmp_name"],"assets/image/slip/".$new_file);
 
 			$input = array(
-				'shop_detail_slip' => $new_file,
+				'journal_sale_detail_slip' => $new_file,
 			);
-			$this->db->where('shop_detail_id', $InvoiceID)->update('mlm_shop_detail', $input);
+			$this->db->where('journal_sale_detail_id', $InvoiceID)->update('mlm_journal_sale_order_detail', $input);
 		}
 		redirect($this->agent->referrer(), 'refresh');
 

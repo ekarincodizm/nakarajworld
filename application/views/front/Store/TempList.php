@@ -39,12 +39,12 @@
 
                     </td>
                     <td><?php echo number_format($total*$row['shop_temp_quantity']) ?></td>
-                    <td><?php echo number_format($row['shop_temp_pv']*$row['shop_temp_quantity']) ?></td>
+                    <td><?php echo number_format($row['products_pv']*$row['shop_temp_quantity']) ?></td>
                     <td><a href="<?php echo site_url('Store/DelItemShopTemp/'.$row['shop_temp_id'])  ?>" class="btn btn-danger">หยิบออก</a>
                     </td>
                   </tr>
                   <?php echo form_close(); ?>
-                  <?php $i++; $amount += $total*$row['shop_temp_quantity']; $pv += $row['shop_temp_pv']*$row['shop_temp_quantity']; endforeach; ?>
+                  <?php $i++; $amount += $total*$row['shop_temp_quantity']; $pv += $row['products_pv']*$row['shop_temp_quantity']; endforeach; ?>
                 </tbody>
               </table>
             </div>

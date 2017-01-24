@@ -20,6 +20,7 @@
 		<?php
 		$this->debuger->load_back_plugins_css('bootstrap/css/bootstrap');
 		$this->debuger->front_load_css('bootstrap-datetimepicker.min');
+		// $this->debuger->load_back_plugins_css('assets/font/stylesheet');
 		$this->debuger->load_back_plugins_css('node-waves/waves.min');
 		$this->debuger->load_back_plugins_css('animate-css/animate.min');
 		$this->debuger->load_back_plugins_css('morrisjs/morris');
