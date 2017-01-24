@@ -163,13 +163,13 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						<div class="col-md-4">
 							<label for="name">Line ID</label>
 							<div class="form-group">
-								<input class="form-control" name="member_line_id" required type="text" placeholder="" autocomplete="off" ng-model="member_line_id"/>
+								<input class="form-control" name="member_line_id"  type="text" placeholder="" autocomplete="off" ng-model="member_line_id"/>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<label for="name">Skype</label>
 							<div class="form-group">
-								<input class="form-control" name="member_skype" required type="text" placeholder="" autocomplete="off" ng-model="member_skype"/>
+								<input class="form-control" name="member_skype"  type="text" placeholder="" autocomplete="off" ng-model="member_skype"/>
 							</div>
 						</div>
 					</div>
@@ -177,19 +177,19 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						<div class="col-md-4">
 							<label for="name">What App</label>
 							<div class="form-group">
-								<input class="form-control input-lg" name="member_whatapp" required type="text" placeholder="" autocomplete="off" ng-model="member_whatapp"/>
+								<input class="form-control input-lg" name="member_whatapp"  type="text" placeholder="" autocomplete="off" ng-model="member_whatapp"/>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<label for="name">ช่องทางการติดต่ออื่นๆ / etc.</label>
 							<div class="form-group">
-								<input class="form-control input-lg" name="member_contact_etc" required type="text" autocomplete="off"  ng-model="member_contact_etc"/>
+								<input class="form-control input-lg" name="member_contact_etc"  type="text" autocomplete="off"  ng-model="member_contact_etc"/>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<label for="name">รูปโปรไฟล์</label>
 							<div class="form-group">
-								<input type="file" class="filestyle" name="member_photo" required id="member_photo" OnChange="readIMG(this)"/>
+								<input type="file" class="filestyle" name="member_photo" id="member_photo" OnChange="readIMG(this)"/>
 							</div>
 						</div>
 					</div>

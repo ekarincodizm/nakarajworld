@@ -19,7 +19,7 @@
                 <div class="form-group">
                   <label for="">ชื่อสินค้า</label>
                   <div class="form-line">
-                    <input name="products_name" type="text" class="form-control input-lg">
+                    <input name="products_name" required type="text" class="form-control input-lg">
                   </div>
                 </div>
               </div>
@@ -27,7 +27,7 @@
                 <div class="form-group">
                   <label for="">ค่า PV</label>
                   <div class="form-line">
-                    <input name="products_pv" type="text" class="form-control input-lg">
+                    <input name="products_pv" required type="text" class="form-control input-lg">
                   </div>
                 </div>
               </div>
@@ -37,7 +37,7 @@
                 <div class="form-group">
                   <label for="">รายละเอียด</label>
                   <div class="form-line">
-                    <textarea name="products_detail" rows="8" cols="80" class="form-control input-lg"></textarea>
+                    <textarea name="products_detail" required rows="8" cols="80" class="form-control input-lg"></textarea>
                     <!-- <input name="products_detail" type="text" class="form-control input-lg"> -->
                   </div>
                 </div>
@@ -48,7 +48,7 @@
                 <div class="form-group">
                   <label for="">ราคาปกติ</label>
                   <div class="form-line">
-                    <input name="products_price_narmal" type="number" class="form-control input-lg">
+                    <input name="products_price_narmal" required type="number" class="form-control input-lg">
                   </div>
                 </div>
               </div>
@@ -74,7 +74,7 @@
                 <div class="form-group">
                   <label for="">สินค้าคงคลัง</label>
                   <div class="form-line">
-                    <input name="products_stock" type="number" class="form-control input-lg">
+                    <input name="products_stock" required type="number" class="form-control input-lg">
                   </div>
                 </div>
               </div>
@@ -82,7 +82,7 @@
                 <div class="form-group">
                   <label for="">หน่วยนับ</label>
                   <div class="form-line">
-                    <input name="products_unit" type="text" class="form-control input-lg">
+                    <input name="products_unit" required type="text" class="form-control input-lg">
                   </div>
                 </div>
               </div>
@@ -90,7 +90,7 @@
                 <div class="form-group">
                   <label for="">รูปสินค้า</label>
                   <div class="form-line">
-                    <input name="products_image" type="file" class="form-control input-lg">
+                    <input name="products_image" required type="file" class="form-control input-lg">
                   </div>
                 </div>
               </div>

@@ -28,9 +28,11 @@ class HomePage extends CI_Controller{
 
 	public function index() {
 		$ProductsList = $this->ProductsModel->ProductsList();
+		// print_r($ProductsList);
+		// exit();
 		$ProductsList = json_decode(json_encode($ProductsList), true);
 
-		  $Config = $this->ConfigModel->Config();
+		$Config = $this->ConfigModel->Config();
 
 
 //new function config

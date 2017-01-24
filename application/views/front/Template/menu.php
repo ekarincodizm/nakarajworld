@@ -17,7 +17,10 @@
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right text-center">
 								<li><a href="#top">หน้าแรก</a></li>
+								<?php if (count($ProductsList)!=0): ?>
+
 								<li><a href="#gallery">สินค้า</a></li>
+								<?php endif; ?>
 								<!-- <li><a href="#testimonials">คำยืนยัน</a></li>
 								<li><a href="#extra-features">ใบรับรอง</a></li> -->
 								<?php if (!isset($_SESSION['MEMBER_ID'])): ?>

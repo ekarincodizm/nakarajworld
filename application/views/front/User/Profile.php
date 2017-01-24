@@ -13,6 +13,8 @@
         </div>
 
         <h2><?php echo $Profile[0]['member_prefix'].$Profile[0]['member_firstname']." ".$Profile[0]['member_lastname'] ?></h2>
+        <h4><?php echo $Profile[0]['member_prefix_eng'].$Profile[0]['member_firstname_eng']." ".$Profile[0]['member_lastname_eng'] ?></h4>
+
         <!-- <h4>PV: <?php echo $PV ?></h4  > -->
         <p>
           <?php echo $Profile[0]['member_id_card_type_name']?> : <strong><?php echo $Profile[0]['member_citizen_id']?></strong>  <br>
