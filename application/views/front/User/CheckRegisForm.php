@@ -25,19 +25,10 @@
 								</div>
 								<div class="form-group">
 									<input class="form-control input-lg text-center" ng-model="member_citizen_id" name="member_citizen_id" id="member_citizen_id" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" autocomplete="off" required ng-model="member_citizen_id"/>
-									<span style="color:red;" ng-show="FindUser.member_citizen_id.$error.required" class="help-inline">กรุณากรอกหมายเลขประจำตัว</span>
+									<!-- <span style="color:red;" ng-show="FindUser.member_citizen_id.$error.required" class="help-inline">กรุณากรอกหมายเลขประจำตัว</span> -->
 								</div>
 							</div>
-							<div class="col-md-12 text-center" ng-show="duplicate" style="color:red;">
-								หมายเลขประจำตัว {{member_citizen_id}} มีการใช้งานแล้ว
-							</div>
-							<div class="col-md-12 text-center" ng-show="avariable">
-								ใช้งานได้
-							</div>
-							<div class="col-md-12 text-center" ng-show="find">
-								<div class="loading"><img src="<?php echo base_url('/assets/image/spin.gif'); ?>" style="height: 51px;">
-								</div>
-							</div>
+
 							<div class="col-md-12 text-center" ng-hide="find">
 								<div class="form-group">
 									<button type="submit" class="btn btn-lg btn-success" ng-disabled="FindUser.citizen_id.$error.required">ตรวจสอบ</button>
