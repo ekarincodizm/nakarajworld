@@ -21,11 +21,21 @@
 
               <div class="col-md-2"></div>
               <div class="col-md-3">
-                <select class="form-control selectpicker" name="account_team">
-                  <?php for ($i='A'; $i <= 'I'; $i++) { ?>
-                    <option value="<?php echo $i ?>">ทีม <?php echo $i ?></option>
-                  <?php } ?>
-                </select>
+                <?php if ($_SESSION['ADMIN_TYPE']==1): ?>
+
+                  <select class="form-control selectpicker" name="account_team">
+                    <?php for ($i='A'; $i <= 'I'; $i++) { ?>
+                      <option value="<?php echo $i ?>">ทีม <?php echo $i ?></option>
+                    <?php } ?>
+                  </select>
+
+                  <?php else: ?>
+
+                    <select class="form-control selectpicker" name="account_team">
+                        <option value="<?php echo $_SESSION['ADMIN_TEAM']?>">ทีม <?php echo $_SESSION['ADMIN_TEAM']?></option>
+                    </select>
+
+                    <?php endif; ?>
               </div>
               <div class="col-md-5">
                 <div class="input-group input-group-lg">

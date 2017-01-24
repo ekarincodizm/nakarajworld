@@ -41,4 +41,8 @@
 </style>
 	</head>
 	<body class="theme-cyan">
- <?php $this->load->view('back/template/menu'); ?>
+		<?php if ($_SESSION['ADMIN_TYPE']==1): ?>
+ 		<?php $this->load->view('back/template/menu'); ?>
+		<?php else: ?>
+		<?php $this->load->view('back/template/menuteam'); ?>
+  	<?php endif; ?>

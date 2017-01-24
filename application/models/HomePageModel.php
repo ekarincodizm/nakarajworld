@@ -108,5 +108,5 @@ class HomePageModel extends CI_Model {
 
     return $pv;
   }
-  
+
 }

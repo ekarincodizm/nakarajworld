@@ -7,14 +7,25 @@
 
   </div>
   <div class="body">
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs tab-nav-right" role="tablist">
-      <li role="presentation" class="active"><a href="#TeamA" data-toggle="tab">ทีม A</a></li>
-      <?php for ($i="B"; $i <= "I"; $i++): ?>
-        <li role="presentation"><a href="#Team<?php echo $i;?>" data-toggle="tab">ทีม <?php echo $i;?></a></li>
-      <?php endfor ?>
 
-    </ul>
+
+    <!-- Nav tabs -->
+    <?php if ($_SESSION['ADMIN_TYPE']==1): ?>
+
+      <ul class="nav nav-tabs tab-nav-right" role="tablist">
+        <li role="presentation" class="active"><a href="#TeamA" data-toggle="tab">ทีม A</a></li>
+        <?php for ($i="B"; $i <= "I"; $i++): ?>
+          <li role="presentation"><a href="#Team<?php echo $i;?>" data-toggle="tab">ทีม <?php echo $i;?></a></li>
+        <?php endfor ?>
+      </ul>
+
+      <?php else: ?>
+
+        <ul class="nav nav-tabs tab-nav-right" role="tablist">
+          <li role="presentation" class="active"><a href="#Team<?php echo $_SESSION['ADMIN_TEAM']?>" data-toggle="tab">ทีม <?php echo $_SESSION['ADMIN_TEAM']?></a></li>
+        </ul>
+
+        <?php endif; ?>
 
     <!-- Tab panes -->
     <div class="tab-content">
