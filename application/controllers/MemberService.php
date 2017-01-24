@@ -52,25 +52,30 @@ class MemberService extends REST_Controller
 	    $expired = strtotime($time);
 	    $expired = strtotime("+365 day", $expired);
 	    $expired =  Date('Y-m-d', $expired);
+			$query = $this->db->where('setting_id', 1)->get('mlm_fee_setting')->result_array();
+
+			$data = array(
+				'accounting_date' => $time,
+				'accounting_no' => 0,
+				'accounting_source_id' => $input['account_id'],
+				'accounting_tax' => 0,
+				'journals_id' => 2,
+			);
+			$this->AccountModel->AddAccounting($data);
+
+			$returnAccounting_id = $this->db->insert_id();
+			$maxJounalExtendId = $this->db->HistoryAccountAll();
+
 	    $NewAccountHistory = array(
 	      'account_id' => $input['account_id'],
-	      'account_history_register_date' => $time,
-	      'account_history_expired_date' => $expired,
+	      'journal_extend_start_date' => $time,
+	      'journal_extend_expired_date' => $expired,
+				'journal_extend_amount' => $query[0]['setting_extend_fee'],
+				'member_id' => $input['member_id'],
+				'journal_extend_code' => "EX".sprintf("%05d", $maxJounalExtendId);
 	    );
 			$this->AccountModel->SaveAccountHistory($NewAccountHistory);
 
-			$query = $this->db->where('setting_id', 1)->get('mlm_fee_setting')->result_array();
-			$data = array(
-				'journals_id' => 2,
-				'accounting_amount' => $query[0]['setting_extend_fee'],
-				'accounting_tax' => 0,
-				'member_id' => $input['member_id'],
-				'accounting_source_id' => $input['account_id'],
-				'accounting_date' => date('Y-m-d'),
-				'accounting_no' => 0,
-			);
-
-		  $this->AccountModel->AddAccounting($data);
 			$AccountDetailExtend = $this->AccountModel->HistoryAccount($input['account_id']);
 			$this->response($AccountDetailExtend);
 	  }

@@ -155,7 +155,7 @@ public function AddDetail($query)
 
   public function SaveAccountHistory($value)
   {
-    $this->db->insert('mlm_account_history', $value);
+    $this->db->insert('mlm_journal_extend', $value);
   }
   public function AddAccounting($value){
     $this->db->insert('mlm_accounting', $value);
@@ -164,11 +164,16 @@ public function AddDetail($query)
   {
     $query = $this->db
     ->where('account_id', $id)
-    ->get('mlm_account_history')->result();
+    ->join('mlm_accounting', 'mlm_accounting.accounting_source_id = mlm_journal_extend.account_id')
+    ->get('mlm_journal_extend')->result();
     // print_r($query);
-
     return $query;
-
+  }
+  public function HistoryAccountAll()
+  {
+    $query = $this->db
+    ->get('mlm_journal_extend')->num_rows();
+    return $query;
   }
   public function BookbankDetail($id)
   {
