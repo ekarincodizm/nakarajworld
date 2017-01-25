@@ -48,9 +48,16 @@ class SaleOrder extends CI_Controller{
     $InvoiceID = $this->uri->segment(3);
     $SaleOrderDetail = $this->ProductsModel->SaleOrderDetail($InvoiceID);
     // $this->debuger->prevalue($InvoiceDetail);
+
+    $NAVA = $this->db
+    ->where('member_id',1)
+    ->get('mlm_member')
+    ->result_array();
+
     $value = array(
       'Result' => array(
         'SaleOrderDetail' => $SaleOrderDetail,
+        'NAVA' => $NAVA,
       ),
       'View' => 'back/SaleOrder/SaleOrderDetail'
     );
@@ -58,7 +65,7 @@ class SaleOrder extends CI_Controller{
   }
   public function ConfirmPayment()
   {
-    $InvoiceID = $this->uri->segment(3);
+    $InvoiceID = $this->uri->segment(4);
     $this->ProductsModel->ConfirmPayment($InvoiceID);
     redirect($this->agent->referrer(), 'refresh');
 

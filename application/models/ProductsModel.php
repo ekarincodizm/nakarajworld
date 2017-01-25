@@ -87,7 +87,7 @@ class ProductsModel extends CI_Model {
   }
   public function CancelInvoice($id)
   {
-    $input['accounting_status'] = 0;
+    $input['accounting_status'] = 2;
     $query = $this->db
     ->where('accounting_source_id', $id)
     ->update('mlm_accounting', $input);
@@ -180,6 +180,7 @@ class ProductsModel extends CI_Model {
     ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
     ->join('mlm_products', 'mlm_journal_sale_order_item.products_id = mlm_products.products_id')
     ->join('mlm_accounting', 'mlm_accounting.accounting_source_id = mlm_journal_sale_order_item.journal_sale_order_detail_id')
+    ->join('mlm_journals', 'mlm_journals.journals_id = mlm_accounting.journals_id')
     ->get('mlm_journal_sale_order_item')
     ->result_array();
     return $query;
@@ -197,12 +198,25 @@ class ProductsModel extends CI_Model {
     return $query;
   }
 
-	public function ConfirmPayment($id)
-	{
-    $input['accounting_status'] = 1;
-		$this->db
-		->where('accounting_source_id', $id)
-		->update('mlm_accounting',$input);
-	}
+  public function ConfirmPayment($id)
+  {
+    $ShopCount = $this->db
+    ->where('accounting_status', 1)
+    ->where('journals_type', 4)
+    ->join('mlm_accounting.journals_id = mlm.journals.journals_id')
+    ->get('mlm_accounting')
+    ->num_rows();
+
+    $ShopCode = "IN".sprintf("%05d",($ShopCount+1));
+
+    $input = array(
+      'accounting_status' => 1,
+      'accounting_no' => $ShopCode,
+    );
+
+    $this->db
+    ->where('accounting_id', $id)
+    ->update('mlm_accounting',$input);
+  }
 
 }

@@ -110,12 +110,17 @@ class Store extends CI_Controller{
 		$this->db->insert('mlm_journal_sale_order_detail', $input);
 		$DeatilID = $this->db->insert_id();
 
+		$now = DateTime::createFromFormat('U.u', microtime(true));
+		$now = $now->format("Hisu");
+		$code = "DR".$now;
 		// Accounting
 		$input = array(
 			'accounting_source_id' => $DeatilID,
 			'accounting_date' => Date('Y-m-d'),
+			'accounting_no' => $code,
 			'journals_id' => 7,
 		);
+		
 		$this->db->insert('mlm_accounting', $input);
 
 		// Items

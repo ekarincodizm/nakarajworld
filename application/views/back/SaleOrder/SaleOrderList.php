@@ -39,9 +39,9 @@
                         <td>
                           <?php if ($row['accounting_status']==1): ?>
                             <span class="font-bold col-teal">ชำระเงินแล้ว</span>
-                          <?php elseif ($row['accounting_status']==2): ?>
-                            <span class="font-bold col-orange">ค้างชำระ</span>
                           <?php elseif ($row['accounting_status']==0): ?>
+                            <span class="font-bold col-orange">ค้างชำระ</span>
+                          <?php elseif ($row['accounting_status']==2): ?>
                             <span class="font-bold col-pink">ยกเลิก</span>
 
                           <?php endif; ?>
