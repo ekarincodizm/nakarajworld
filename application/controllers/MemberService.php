@@ -66,16 +66,11 @@ class MemberService extends REST_Controller
 	    $expired = strtotime($time);
 	    $expired = strtotime("+365 day", $expired);
 	    $expired =  Date('Y-m-d', $expired);
+			$now = DateTime::createFromFormat('U.u', microtime(true));
+			$now = $now->format("Hisu");
+			$code = "DR".$now;
+
 			$query = $this->db->where('setting_id', 1)->get('mlm_fee_setting')->result_array();
-
-			$data = array(
-				'accounting_date' => $time,
-				'accounting_no' => 0,
-				'accounting_source_id' => $input['account_id'],
-				'accounting_tax' => 0,
-				'journals_id' => 2,
-			);
-
 
 			$maxJounalExtendId = $this->AccountModel->JounalExtendAccountAll();
 			$maxJounalExtendId = $maxJounalExtendId+1;
@@ -93,10 +88,10 @@ class MemberService extends REST_Controller
 
 			$data = array(
 				'accounting_date' => $time,
-				'accounting_no' => 0,
+				'accounting_no' => $code,
 				'accounting_source_id' => $returnAccounting_id,
 				'accounting_tax' => 0,
-				'journals_id' => 2,
+				'journals_id' => 1,
 			);
 			$this->AccountModel->AddAccounting($data);
 

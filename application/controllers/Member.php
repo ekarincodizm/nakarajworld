@@ -197,6 +197,9 @@ class Member extends CI_Controller{
     $expired = strtotime($time);
     $expired = strtotime("+365 day", $expired);
     $expired =  Date('Y-m-d', $expired);
+    $now = DateTime::createFromFormat('U.u', microtime(true));
+		$now = $now->format("Hisu");
+		$code = "DR".$now;
     $AccountInput = array(
       'account_team' => $AccountUpline[0]['account_team'],
       'account_level' => $AccountUpline[0]['account_level']+=1,
@@ -214,7 +217,7 @@ class Member extends CI_Controller{
       'member_id' => $member_id,
       'journal_extend_start_date' => $time,
       'journal_extend_expired_date' => $expired,
-      'journal_extend_amount' => 0
+      'journal_extend_amount' => 0,
     );
     $ExtendNewID = $this->AccountModel->SaveJournalExtend($ExtendInput);
 
@@ -224,8 +227,9 @@ class Member extends CI_Controller{
       'accounting_tax' => 0,
       'accounting_status' => 1,
       'journals_id' => 2,
+      'accounting_no' => $code,
     );
-    $this->AccountModel->SaveAccountingExtend($AccountingInput);
+    $this->AccountModel->AddAccounting($AccountingInput);
     //Check Bussiness Code
     $arr = 0;
     // $id = $NewAccountID;
@@ -391,8 +395,8 @@ class Member extends CI_Controller{
     $member_id = $this->uri->segment(3);
     $setting = $this->db->order_by('setting_id', 'DESC')->get('mlm_fee_setting')->result_array();
 
-    $maxJounalFreeId = $this->AccountModel->JounalFreeAccountAll();
-    $maxJounalFreeId = $maxJounalFreeId+1;
+    // $maxJounalFreeId = $this->AccountModel->JounalFreeAccountAll();
+    // $maxJounalFreeId = $maxJounalFreeId+1;
 
     $input = array(
       'journal_fee_amount' => $setting[0]['setting_register_fee'],
@@ -414,14 +418,18 @@ class Member extends CI_Controller{
 	    $expired = strtotime($time);
 	    $expired = strtotime("+365 day", $expired);
 	    $expired =  Date('Y-m-d', $expired);
+      $now = DateTime::createFromFormat('U.u', microtime(true));
+			$now = $now->format("Hisu");
+			$code = "DR".$now;
+
 			$query = $this->db->where('setting_id', 1)->get('mlm_fee_setting')->result_array();
 
       $data = array(
 				'accounting_date' => $time,
-				'accounting_no' => 0,
+				'accounting_no' => $code,
 				'accounting_source_id' => $returnIdJounalFree,
 				'accounting_tax' => 0,
-				'journals_id' => 2,
+				'journals_id' => 1,
 			);
 			$this->AccountModel->AddAccounting($data);
 
