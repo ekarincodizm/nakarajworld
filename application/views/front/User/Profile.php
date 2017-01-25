@@ -8,7 +8,7 @@
             <h6>โปรไฟล์</h6><br>
           </div>
           <div class="col-md-4 text-center col-md-offset-1">
-            <img src="<?php echo base_url('/assets/image/profile/'.$Profile[0]['member_photo']); ?>" class="img-circle" style="height: 200px;width: 200px;">
+            <img src="<?php echo base_url('/assets/image/profile/'.$Profile[0]['member_photo']); ?>" class="img-circle" style="height: 200px;">
           </div>
         </div>
 
