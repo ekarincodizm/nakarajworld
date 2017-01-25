@@ -182,9 +182,8 @@
                   </span>
                 </td>
                 <td>
-
                     <button ng-if="row.bookbank_status == 0" ng-click="DisableBookBank(<?php echo $Profile[0]['member_id'] ?>,row.bookbank_id,1);" class="btn btn-xs bg-red waves-effect" style="font-size: 13px;">ปิดการใช้งาน</button>
-                  <span ng-if="<?php echo $BookbankDetail[0]['bookbank_id'] ?>!=row.bookbank_id">
+                  <span ng-if="<?php echo $BookbankDetail[0]['bookbank_id'] ?>!=row.bookbank_id && row.UseCount <= 0">
                     <button ng-if="row.bookbank_status == 1" ng-click="DisableBookBank(<?php echo $Profile[0]['member_id'] ?>,row.bookbank_id,0);" class="btn btn-xs bg-green waves-effect" style="font-size: 13px;">เปิดการใช้งาน</button>
                   </span>
                 </td>
