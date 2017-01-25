@@ -22,7 +22,7 @@ class AccountingModel extends CI_Model
     ->get('mlm_accounting')
     ->result_array();
     $query = $this->AccountingSourceDetail($query);
-    
+
     return $query;
 
   }
@@ -124,5 +124,18 @@ class AccountingModel extends CI_Model
     $query = $this->db
     ->where('mlm_account.account_id', $input['account_id'])
     ->update('mlm_account', $input);
+  }
+
+  public function InvoiceNo() {
+    $query =  $this->db
+    ->where('accounting_status', 1)
+    ->where('journals_type', 4)
+    ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
+    ->get('mlm_accounting')
+    ->num_rows();
+
+    $InvoiceNo = "IN".sprintf("%05d", ($query+1));
+
+    return $InvoiceNo;
   }
 }
