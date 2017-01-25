@@ -92,7 +92,7 @@
           <div class="col-md-4 text-center">
             <div class="row">
               <div class="col-md-12">
-                <h3><span class="label label-success">ชำระแล้ว</span></h3>
+                <h3><span class="text text-success">ชำระแล้ว</span></h3>
               </div>
             </div>
             <hr>

@@ -80,8 +80,8 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                       <td><?php echo $i; ?></td>
                       <td><?php echo $row['products_code'] ?></td>
                       <td><?php echo $row['products_name'] ?></td>
-                      <td><?php echo $row['shop_total_quantity']." ".$row['products_unit'] ?> </td>
-                      <td><?php echo $row['shop_total_price'] ?> บาท</td>
+                      <td><?php echo $row['temp_totalQuantity']." ".$row['products_unit'] ?> </td>
+                      <td><?php echo $row['temp_totalPrice'] ?> บาท</td>
 
                       <!-- <td>
                         <a href="<?php echo site_url('Products/EditProducts/'.$row['products_id']); ?>" class="btn btn-info">
@@ -92,7 +92,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
 
                       // $json[$j]['y'] = $row['products_code'];
                       // $json[$j]['a'] = $row['shop_total_price'];
-                      $json[0][$p] = $row['shop_total_price'];
+                      $json[0][$p] = $row['temp_totalPrice'];
 
                       $random_color = '#'.substr(md5(rand()), 0, 6);
                       array_push($color, $random_color);

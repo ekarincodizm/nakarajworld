@@ -119,105 +119,58 @@ class ProductsModel extends CI_Model {
   {
     $ProductsList = $this->ProductsList();
     $ProductsList = json_decode(json_encode($ProductsList), true);
-//
 
+    if ($for_date!='' && $to_date!='') {
+      $SaleOrder = $this->db
+      ->where('accounting_date >=', $for_date)
+      ->where('accounting_date <=', $to_date)
+      ->where('accounting_status', 1)
+      ->where('journals_id', 7)
+      ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_detail.journal_sale_order_detail_id = mlm_accounting.accounting_source_id')
+      ->join('mlm_journal_sale_order_item', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
+      ->get('mlm_accounting')
+      ->result_array();
+    } elseif ($for_date!='' && $to_date=='') {
+      $SaleOrder = $this->db
+      ->where('accounting_date >=', $for_date)
+      ->where('accounting_status', 1)
+      ->where('journals_id', 7)
+      ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_detail.journal_sale_order_detail_id = mlm_accounting.accounting_source_id')
+      ->join('mlm_journal_sale_order_item', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
+      ->get('mlm_accounting')
+      ->result_array();
+    }elseif ($for_date=='' && $to_date!='') {
+      $SaleOrder = $this->db
+      ->where('accounting_date >=', $to_date)
+      ->where('accounting_status', 1)
+      ->where('journals_id', 7)
+      ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_detail.journal_sale_order_detail_id = mlm_accounting.accounting_source_id')
+      ->join('mlm_journal_sale_order_item', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
+      ->get('mlm_accounting')
+      ->result_array();
+    }elseif ($for_date=='' && $to_date=='') {
+      $SaleOrder = $this->db
+      ->where('accounting_status', 1)
+      ->where('journals_id', 7)
+      ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_detail.journal_sale_order_detail_id = mlm_accounting.accounting_source_id')
+      ->join('mlm_journal_sale_order_item', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
+      ->get('mlm_accounting')
+      ->result_array();
+    }
 
-    // if ($for_date!='' && $to_date!='') {
-    //   $query = $this->db
-    //   ->where('receive_date >=', $for_date)
-    //   ->where('receive_date <=', $to_date)
-    //   ->where('mlm_shop_items.products_id', $row['products_id'])
-    //   ->where('shop_detail_status', 1)
-    //   ->join('mlm_products', 'mlm_shop_items.products_id = mlm_products.products_id')
-    //   ->join('mlm_shop_detail', 'mlm_shop_items.shop_detail_id = mlm_shop_detail.shop_detail_id')
-    //   ->get('mlm_shop_items')
-    //   ->result_array();
-    // }elseif ($for_date!='' && $to_date=='') {
-    //   $query = $this->db
-    //   ->where('receive_date >=', $for_date)
-    //   ->where('mlm_shop_items.products_id', $row['products_id'])
-    //   ->where('shop_detail_status', 1)
-    //   ->join('mlm_products', 'mlm_shop_items.products_id = mlm_products.products_id')
-    //   ->join('mlm_shop_detail', 'mlm_shop_items.shop_detail_id = mlm_shop_detail.shop_detail_id')
-    //   ->get('mlm_shop_items')
-    //   ->result_array();
-    // }elseif ($for_date=='' && $to_date!='') {
-    //   $query = $this->db
-    //   ->where('receive_date <=', $to_date)
-    //   ->where('mlm_shop_items.products_id', $row['products_id'])
-    //   ->where('shop_detail_status', 1)
-    //   ->join('mlm_products', 'mlm_shop_items.products_id = mlm_products.products_id')
-    //   ->join('mlm_shop_detail', 'mlm_shop_items.shop_detail_id = mlm_shop_detail.shop_detail_id')
-    //   ->get('mlm_shop_items')
-    //   ->result_array();
-    // }elseif ($for_date=='' && $to_date=='') {
-    //   $query = $this->db
-    //   ->where('mlm_shop_items.products_id', $row['products_id'])
-    //   ->where('shop_detail_status', 1)
-    //   ->join('mlm_products', 'mlm_shop_items.products_id = mlm_products.products_id')
-    //   ->join('mlm_shop_detail', 'mlm_shop_items.shop_detail_id = mlm_shop_detail.shop_detail_id')
-    //   ->get('mlm_shop_items')
-    //   ->result_array();
-    // }
-
-//
-    $i=0;
-    foreach ($ProductsList as $row) {
-      if ($for_date!='' && $to_date!='') {
-        $query = $this->db
-        ->where('journal_sale_order_detail_date >=', $for_date)
-        ->where('journal_sale_order_detail_date <=', $to_date)
-        ->where('mlm_journal_sale_order_item.products_id', $row['products_id'])
-        ->where('journal_sale_order_detail_status', 1)
-        ->join('mlm_products', 'mlm_journal_sale_order_item.products_id = mlm_products.products_id')
-        ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
-        ->get('mlm_journal_sale_order_items')
-        ->result_array();
-      }elseif ($for_date!='' && $to_date=='') {
-        $query = $this->db
-        ->where('journal_sale_order_detail_date >=', $for_date)
-        ->where('mlm_journal_sale_order_item.products_id', $row['products_id'])
-        ->where('journal_sale_order_detail_status', 1)
-        ->join('mlm_products', 'mlm_journal_sale_order_items.products_id = mlm_products.products_id')
-        ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
-        ->get('mlm_journal_sale_order_item')
-        ->result_array();
-      }elseif ($for_date=='' && $to_date!='') {
-        $query = $this->db
-        ->where('journal_sale_order_detail_date <=', $to_date)
-        ->where('mlm_journal_sale_order_item.products_id', $row['products_id'])
-        ->where('journal_sale_order_detail_status', 1)
-        ->join('mlm_products', 'mlm_journal_sale_order_item.products_id = mlm_products.products_id')
-        ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
-        ->get('mlm_journal_sale_order_item')
-        ->result_array();
-      }elseif ($for_date=='' && $to_date=='') {
-        $query = $this->db
-        ->where('mlm_journal_sale_order_item.products_id', $row['products_id'])
-        ->where('journal_sale_order_detail_status', 1)
-        ->join('mlm_products', 'mlm_journal_sale_order_item.products_id = mlm_products.products_id')
-        ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
-        ->get('mlm_journal_sale_order_item')
-        ->result_array();
+    $index = 0;
+    foreach ($ProductsList as $Products_row ) {
+    $ProductsList[$index]['temp_totalQuantity'] = 0;
+    $ProductsList[$index]['temp_totalPrice'] = 0;
+      foreach ($SaleOrder as $SaleOrder_row ) {
+        if ($Products_row['products_id'] == $SaleOrder_row['products_id']) {
+          $ProductsList[$index]['temp_totalQuantity'] += $SaleOrder_row['journal_sale_order_item_quantity'];
+          $ProductsList[$index]['temp_totalPrice'] += $SaleOrder_row['journal_sale_order_item_price'];
+        }
       }
-      // $query = $this->db
-      // ->where('mlm_shop_items.products_id', $row['products_id'])
-      // ->where('shop_detail_status', 1)
-      // ->join('mlm_products', 'mlm_shop_items.products_id = mlm_products.products_id')
-      // ->join('mlm_shop_detail', 'mlm_shop_items.shop_detail_id = mlm_shop_detail.shop_detail_id')
-      // ->get('mlm_shop_items')
-      // ->result_array();
-
-      $ProductsList[$i]['shop_total_price'] = 0;
-      $ProductsList[$i]['shop_total_quantity'] = 0;
-      foreach ($query as $sale_row) {
-        $ProductsList[$i]['shop_total_price'] += $sale_row['shop_items_price'];
-        $ProductsList[$i]['shop_total_quantity'] += $sale_row['shop_items_quantity'];
-      }
-      $i++;
+      $index++;
     }
     // $this->debuger->prevalue($ProductsList);
-
     return $ProductsList;
   }
   public function SaleOrderDetail($id)
