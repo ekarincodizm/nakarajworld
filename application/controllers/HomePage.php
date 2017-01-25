@@ -113,6 +113,53 @@ class HomePage extends CI_Controller{
 		$this->LoadUserPage($value);
 	}
 
+	public function SubmitEditProfile()
+		{
+			$RegisterForm = $this->input->post();
+			// $this->debuger->prevalue($RegisterForm);
+			if (!empty($RegisterForm['member_id'])) {
+
+				$UpdateUser['member_id'] = $RegisterForm['member_id'];
+				$UpdateUser['user_pass'] = base64_encode($RegisterForm['user_pass']);
+
+				if($RegisterForm['user_pass']!='' && $RegisterForm['user_pass_confirm']!=''){
+					$this->HomePageModel->UpdateUser( $UpdateUser );
+				}
+
+				unset($RegisterForm['user_pass'],$RegisterForm['user_pass_confirm']);
+
+				$Member = $this->HomePageModel->UpdateMember( $RegisterForm );
+				$member_id = $RegisterForm['member_id'];
+	
+			} else {
+				$Member = $this->HomePageModel->AddMember( $RegisterForm );
+				$Member = json_decode(json_encode($Member), true);
+				$value = array(
+					'user_name' => $Member[0]['member_citizen_id'],
+					'user_pass' => base64_encode($Member[0]['member_phone']),
+					'member_id' => $Member[0]['member_id'],
+				);
+				$User = $this->HomePageModel->AddUser( $value );
+				$member_id = $Member[0]['member_id'];
+			}
+
+			if ($_FILES["member_photo"]["name"]!='' && $Member[0]['member_photo']!=='no_profile.png') {
+					$ext = pathinfo($_FILES["member_photo"]["name"],PATHINFO_EXTENSION);
+					$new_file = 'photo_'.$member_id.'.'.$ext;
+					copy($_FILES["member_photo"]["tmp_name"],"assets/image/profile/".$new_file);
+					$addPhoto['member_id'] = $member_id;
+					$addPhoto['member_photo'] = $new_file;
+					$this->HomePageModel->addPhoto( $addPhoto );
+			}else{
+				$addPhoto['member_id'] = $member_id;
+				$addPhoto['member_photo'] = 'no_profile.png';
+				$this->HomePageModel->addPhoto( $addPhoto );
+			}
+
+			redirect('HomePage/Profile');
+
+		}
+
 	public function SubmitProfile()
 	{
 		$RegisterForm = $this->input->post();
