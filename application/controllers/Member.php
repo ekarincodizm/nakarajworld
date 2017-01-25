@@ -371,7 +371,7 @@ class Member extends CI_Controller{
     $bookbank_id = $this->uri->segment(4);
     $input = array(
       'bookbank_id' => $bookbank_id,
-      'account_id' =>$account_id,
+      // 'account_id' =>$account_id,
     );
     $this->db->where('account_id', $account_id)->update('mlm_account', $input);
     redirect($this->agent->referrer(), 'refresh');

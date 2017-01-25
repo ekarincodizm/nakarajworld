@@ -177,13 +177,16 @@
                 <td>{{row.bookbank_number}}</td>
                 <td>{{row.UseCount}}</td>
                 <td>
-                  <a ng-if="row.bookbank_status == 1" href="<?php echo site_url('/Member/SaveBookbankToAccount/'.$Account[0]['account_id']."/"."{{row.bookbank_id}}"); ?>" class="btn btn-xs btn-info" style="font-size: 15px;"><i class="material-icons"  style="font-size: 15px;">account_box</i> เลือก</a>
+                  <span ng-if="<?php echo $BookbankDetail[0]['bookbank_id'] ?>!=row.bookbank_id">
+                    <a ng-if="row.bookbank_status == 1" href="<?php echo site_url('/Member/SaveBookbankToAccount/'.$Account[0]['account_id']."/"."{{row.bookbank_id}}"); ?>" class="btn btn-xs btn-info" style="font-size: 15px;"><i class="material-icons"  style="font-size: 15px;">account_box</i> เลือก</a>
+                  </span>
                 </td>
                 <td>
 
                     <button ng-if="row.bookbank_status == 0" ng-click="DisableBookBank(<?php echo $Profile[0]['member_id'] ?>,row.bookbank_id,1);" class="btn btn-xs bg-red waves-effect" style="font-size: 13px;">ปิดการใช้งาน</button>
+                  <span ng-if="<?php echo $BookbankDetail[0]['bookbank_id'] ?>!=row.bookbank_id">
                     <button ng-if="row.bookbank_status == 1" ng-click="DisableBookBank(<?php echo $Profile[0]['member_id'] ?>,row.bookbank_id,0);" class="btn btn-xs bg-green waves-effect" style="font-size: 13px;">เปิดการใช้งาน</button>
-
+                  </span>
                 </td>
               </tr>
             </tbody>
