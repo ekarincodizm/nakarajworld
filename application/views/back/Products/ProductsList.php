@@ -35,12 +35,12 @@
                       <th>สินค้าคงเหลือ</th>
                       <th>แก้ไขล่าสุด</th>
                       <th>สถานะ</th>
-                      <th>ตัวเลือก</th>
+                      <!-- <th>ตัวเลือก</th> -->
                     </tr>
                   </thead>
                   <tbody>
                     <?php $i=1; foreach ($ProductsList as $row): ?>
-                    <tr>
+                    <tr onclick="document.location = '<?php echo site_url('Products/EditProducts/'.$row['products_id']); ?>';">
                       <td><?php echo $i; ?></td>
                       <td><?php echo $row['products_code'] ?></td>
                       <td><?php echo $row['products_name'] ?></td>
@@ -59,11 +59,11 @@
                         <?php endif; ?>
 
                       </td>
-                      <td>
-                        <a href="<?php echo site_url('Products/EditProducts/'.$row['products_id']); ?>" class="btn btn-info">
+                      <!-- <td>
+                        <a href="<?php //echo site_url('Products/EditProducts/'.$row['products_id']); ?>" class="btn btn-info">
                           รายละเอียด
                         </a>
-                      </td>
+                      </td> -->
                     </tr>
                   <?php $i++; endforeach; ?>
 
