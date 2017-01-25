@@ -38,8 +38,8 @@
             <font color="red">โอนกรรมสิทธิ์บัญชีนี้ </font> ให้แก่ <br>
             <?php echo form_open('/Account/AccountPermission'); ?>
             <input type="hidden" name="account_id" value="<?php echo $Account[0]['account_id']?>">
-              <select name="member_id">
-                <option value=" ">-เลือก-</option>
+              <select required name="member_id">
+                <option value="">-เลือก-</option>
                 <?php foreach ($member as $row): ?>
                   <option value="<?php echo $row['member_id'] ?>"><?php echo $row['member_prefix']."".$row['member_firstname']." ".$row['member_lastname'] ?></option>
                 <?php endforeach; ?>
@@ -64,6 +64,11 @@
           </div>
           <div class="body">
             <?php if ($BookbankDetail!='false'): ?>
+              ธนาคาร: ไม่ระบุ<br>
+              สาขา: ไม่ระบุ<br>
+              ชื่อบัญชี: ไม่ระบุ<br>
+              เลขที่บัญชี: ไม่ระบุ<br>
+            <?php else: ?>
               ธนาคาร: <?php echo $BookbankDetail[0]['bank_name'] ?><br>
               สาขา: <?php echo $BookbankDetail[0]['bookbank_bank_branch'] ?><br>
               ชื่อบัญชี: <?php echo $BookbankDetail[0]['bookbank_account'] ?><br>
