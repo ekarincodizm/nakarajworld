@@ -9,7 +9,21 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12 text-center">
-          <a class="btn btn-lg btn-success" href="<?php echo site_url('/Member/ApprovedMember/'.$this->uri->segment(3)); ?>">ยืนยันสมาชิก</a>
+          <!-- Basic Examples -->
+          <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 col-md-offset-3 col-lg-offset-3">
+              <div class="card">
+                  <div class="header">
+                      <h2>
+                          ยืนยันสมาชิก
+                      </h2>
+                  </div>
+                  <div class="body">
+                    <?php echo $Profile[0]['member_prefix'].$Profile[0]['member_firstname']." ".$Profile[0]['member_lastname'] ?><br style="margin: 30 0 30 0;">
+                    <a class="btn btn-lg btn-success" href="<?php echo site_url('/Member/ApprovedMember/'.$this->uri->segment(3)); ?>">ยืนยันสมาชิก</a>
+                  </div>
+              </div>
+          </div>
+          <!-- #END# Basic Examples -->
         </div>
       </div>
     </div>
