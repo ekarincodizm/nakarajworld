@@ -296,7 +296,13 @@ public function AddDetail($query)
     ->get('mlm_bookbank')->result();
     return $query;
   }
-
+  public function BookbankUseCount($id)
+  {
+    $query = $this->db
+    ->where('bookbank_id', $id)
+    ->get('mlm_account')->num_rows();
+    return $query;
+  }
   public function Deletebank($id)
   {
     $this->db
@@ -311,6 +317,16 @@ public function AddDetail($query)
     ->delete('mlm_bookbank');
   }
 
+  public function DisableBookbank($id)
+  {
+    $input = array(
+        'bookbank_status' => $id['bookbank_status'],
+      );
+    $this->db
+    ->where('bookbank_id', $id['bookbank_id'])
+    ->where('member_id', $id['member_id'])
+    ->update('mlm_bookbank',$input);
+  }
   public function UpdateAccount($id2)
   {
     $input = array(

@@ -26,9 +26,16 @@ class MemberService extends REST_Controller
 	function ListBookBank_post()
 		{
 			$id = $this->post('id');
-			// echo $id;
+
 			$ListBookBank = $this->AccountModel->BookbankList($id);
-			// print_r($GetMemberProfile);
+			$ListBookBank = json_decode(json_encode($ListBookBank),true);
+			$index = 0;
+			foreach ($ListBookBank as $row) {
+				$returnQuery = $this->AccountModel->BookbankUseCount($row['bookbank_id']);
+				$returnQuery = json_decode(json_encode($returnQuery),true);
+				$ListBookBank[$index]['UseCount'] = $returnQuery;
+				$index++;
+			}
 			$this->response($ListBookBank);
 		}
 
@@ -37,6 +44,13 @@ class MemberService extends REST_Controller
 			$input =  $this->post();
 			// print_r($input);
 			$this->AccountModel->DeleteBookbank($input);
+	  }
+
+		public function DisableBookBank_post()
+	  {
+			$input =  $this->post();
+			// print_r($input);
+			$this->AccountModel->DisableBookbank($input);
 	  }
 		public function AccountDetailExtend_post()
 	  {

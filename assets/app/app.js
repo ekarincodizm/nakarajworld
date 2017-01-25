@@ -24,15 +24,24 @@ HomePageApp.controller('AddBookBankCtrl', function ($scope, $http) {
 			});
 		} // end $scope.SubmitRegister
 
-	$scope.DeleteBookBank = function(member_id,bookbank_id){
-		$http.post(SITE_URL + '/MemberService/DeleteBookBank', {'member_id':member_id,'bookbank_id':bookbank_id}).then(function (){
-			$http.post(SITE_URL + '/MemberService/ListBookBank', {'id':member_id}).then(function (response){
-				console.log(response.data);
-				$scope.ListBookBank = response.data;
-			},function (error){
-			});
-		});
-	};
+	// $scope.DeleteBookBank = function(member_id,bookbank_id){
+	// 	$http.post(SITE_URL + '/MemberService/DeleteBookBank', {'member_id':member_id,'bookbank_id':bookbank_id}).then(function (){
+	// 		$http.post(SITE_URL + '/MemberService/ListBookBank', {'id':member_id}).then(function (response){
+	// 			console.log(response.data);
+	// 			$scope.ListBookBank = response.data;
+	// 		},function (error){
+	// 		});
+	// 	});
+	// };
+			$scope.DisableBookBank = function(member_id,bookbank_id,bookbank_status){
+				$http.post(SITE_URL + '/MemberService/DisableBookBank', {'member_id':member_id,'bookbank_id':bookbank_id,'bookbank_status':bookbank_status}).then(function (){
+					$http.post(SITE_URL + '/MemberService/ListBookBank', {'id':member_id}).then(function (response){
+						console.log(response.data);
+						$scope.ListBookBank = response.data;
+					},function (error){
+					});
+				});
+			};
 
 });
 
