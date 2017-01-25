@@ -9,6 +9,26 @@ class AccountingModel extends CI_Model
     ->order_by('accounting_id', 'DESC')
     ->get('mlm_accounting')
     ->result_array();
+    $query = $this->AccountingSourceDetail($query);
+
+    return $query;
+  }
+  public function AccountingDetail($accounting_id)
+  {
+    $query =  $this->db
+    ->where('accounting_id', $accounting_id)
+    ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
+    ->order_by('accounting_id', 'DESC')
+    ->get('mlm_accounting')
+    ->result_array();
+    $query = $this->AccountingSourceDetail($query);
+    
+    return $query;
+
+  }
+
+  public function AccountingSourceDetail($query)
+  {
     $index = 0;
     foreach ($query as $row) {
       $type = $row['journals_id'];
@@ -29,7 +49,6 @@ class AccountingModel extends CI_Model
       unset($query[$index]['source_detail']['amount']);
       $index++;
     }
-
     return $query;
   }
 

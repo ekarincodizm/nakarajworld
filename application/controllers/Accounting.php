@@ -25,6 +25,20 @@ class Accounting extends CI_Controller{
     );
     $this->LoadPage($value);
   }
+
+  public function AccountingDetail()
+  {
+    $accounting_id = $this->uri->segment(3);
+    $AccountingDetail = $this->AccountingModel->AccountingDetail($accounting_id);
+    // $this->debuger->prevalue($AccountingDetail);
+    $value = array(
+      'Result' => array(
+        'AccountingDetail' => $AccountingDetail,
+      ),
+      'View' => 'back/Accounting/AccountingDetail'
+    );
+    $this->LoadPage($value);
+  }
   public function Payment()
   {
     $accounting_id = $this->uri->segment(3);

@@ -19,7 +19,7 @@
             </ul>
           </div>
           <div class="body table-responsive">
-            <table class="table table-striped js-table">
+            <table class="table table-striped js-table table-hover">
               <thead>
                 <tr>
                   <th>#</th>
@@ -28,12 +28,12 @@
                   <th>ชื่อ-สกุล</th>
                   <!-- <th>PV</th> -->
                   <th>สถานะ</th>
-                  <th class="noExport">ตัวเลือก</th>
+                  <!-- <th class="noExport">ตัวเลือก</th> -->
                 </tr>
               </thead>
               <tbody>
                 <?php $i=1; foreach ($MemberList as $row): ?>
-                  <tr>
+                  <tr style="cursor: pointer;" onclick="document.location='<?php echo site_url('/Member/MemberProfile/'.$row['member_id']); ?>';">
                     <td><?php echo $i; ?></td>
                     <td>
                       <?php  if ($row['member_id_card_type']==1): ?>
@@ -56,12 +56,7 @@
                         <span class="font-bold col-pink">ปิดการใช้งาน</span>
                       <?php  endif  ?>
                     </td>
-                    <td>
-                      <a href="<?php echo site_url('/Member/MemberProfile/'.$row['member_id']); ?>" class="btn btn-xs btn-info" style="font-size: 15px;">
-                        <i class="material-icons"  style="font-size: 15px;">account_box</i>
-                        รายละเอียด
-                      </a>
-                    </td>
+
                   </tr>
                   <?php $i++; endforeach; ?>
 

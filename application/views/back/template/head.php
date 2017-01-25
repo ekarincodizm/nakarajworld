@@ -34,12 +34,7 @@
 <script type="text/javascript">
 	var SITE_URL = "<?php echo site_url(); ?>"
 </script>
-<style media="screen">
-	table{
-		font-family: 'tahoma';
-		font-size: 11px;
-	}
-</style>
+
 	</head>
 	<body class="theme-cyan">
 		<?php if ($_SESSION['ADMIN_TYPE']==1): ?>

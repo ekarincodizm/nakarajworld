@@ -1,7 +1,7 @@
 <section class="content">
   <div class="container-fluid">
     <div class="block-header">
-      <h1>เอกสารการเงินธุรกิจเครือข่าย</h1>
+      <h1>เอกสารการบัญชี</h1>
     </div>
     <div class="row clearfix">
       <div class="col-md-12">
@@ -10,7 +10,7 @@
             <h2>รายการเอกสารการเงิน</h2>
           </div>
           <div class="body table-responsive">
-            <table class="table js-table">
+            <table class="table js-table table-hover">
               <thead>
                 <tr>
                   <th>#</th>
@@ -29,21 +29,25 @@
                 <?php
                 // $this->debuger->prevalue($AccountingList);
                 $i=1; foreach ($AccountingList as $row): ?>
-                  <tr>
+                  <tr style="cursor: pointer;" onclick="document.location = '<?php echo site_url('/Accounting/AccountingDetail/'.$row['accounting_id']); ?>';">
                     <td><?php echo $i; ?></td>
-                    <td><?php echo "IN".sprintf("%05d", $row['accounting_id']); ?></td>
-                    <td><?php echo $this->thaidate->FullDate($row['accounting_date']); ?></td>
+                    <td>
+                      <?php echo "IN".sprintf("%05d", $row['accounting_id']); ?></td>
+                    <td>
+                        <?php echo $this->thaidate->ShortDate($row['accounting_date']); ?>
+                    </td>
                     <td>
                       <?php echo $row['journals_detail']; ?>
                     </td>
                     <td><?php echo $row['source_amount']; ?></td>
                     <td>
-                      <?php echo $row['member']['member_prefix'].$row['member']['member_firstname']." ".$row['member']['member_lastname']; ?>
+                      <?php echo $row['member']['member_firstname']; ?>
                     </td>
                     <td>
                       <?php echo $row['source_code']; ?>
                     </td>
                     <td>
+                      <h4>
                       <?php if ($row['accounting_status']==0): ?>
                         <span class="label bg-deep-orange">ค้างชำระ</span>
                       <?php elseif($row['accounting_status']==1): ?>
@@ -51,6 +55,7 @@
                       <?php else: ?>
                         <span class="label bg-blue-grey">รอดำเนินการ</span>
                       <?php endif; ?>
+                      </h4>
                     </td>
                   </tr>
                   <?php $i++; endforeach; ?>
