@@ -24,7 +24,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
             <div class="col-md-3">
 
               <div class="form-group">
-                <label for="name">ตั้งแต่วันที่</label>
+                  <label for="name">ตั้งแต่วันที่</label>
                 <div class='input-group date bootstrap-datepicker form-line' id='search_for_datepicker'>
                   <input name="for_date" type='datetime' class="form-control" value="<?php echo $for ?>">
 
