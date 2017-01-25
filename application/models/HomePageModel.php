@@ -101,7 +101,7 @@ class HomePageModel extends CI_Model {
 
     $pv=0;
     foreach ($shop_detail as $row){
-    $pv += $row['shop_items_pv']*$row['shop_items_quantity'];
+    $pv += $row['journal_sale_order_item_pv']*$row['journal_sale_order_item_quantity'];
     }
 
     //[ยังไม่ทำ]ต้องลบกับรายการใช้ PV ก่อน
