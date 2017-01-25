@@ -219,7 +219,8 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 				<div class="col-md-12 text-center" >
 					<p>สมาชิกใหม่ <br>
 					<?php echo @$Member[0]['member_firstname']." ".@$Member[0]['member_lastname'] ?><br>
-						รหัสผ่าน คือ เบอร์โทรศัพท์<br>
+						Username คือ <font color="red">เลขบัตรประชาชน</font><br>
+						รหัสผ่าน คือ <font color="red">เบอร์โทรศัพท์</font><br>
 						คุณสามารถเปลี่ยนรหัสผ่านได้ ที่เมนูแก้ไขข้อมูลส่วนตัว
 					</p>
 					<div class="form-group">
