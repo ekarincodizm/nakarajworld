@@ -181,6 +181,14 @@ public function AddDetail($query)
   public function AddAccounting($value){
     $this->db->insert('mlm_accounting', $value);
   }
+  public function ChangeMemberStatus($value){
+    $input = array(
+        'member_status' => $value['member_status'],
+      );
+    $this->db
+    ->where('member_id',$value['member_id'])
+    ->update('mlm_member',$input);
+  }
   public function JounalExtendAccount($id)
   {
     $query = $this->db
@@ -199,7 +207,7 @@ public function AddDetail($query)
   public function JounalFreeAccountAll()
   {
     $query = $this->db
-    ->get('mlm_journal_free')->num_rows();
+    ->get('mlm_journal_fee')->num_rows();
     return $query;
   }
   public function BookbankDetail($id)

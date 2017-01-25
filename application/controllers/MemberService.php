@@ -47,7 +47,7 @@ class MemberService extends REST_Controller
 	  }
 		public function AddAccountDetailExtend_post()
 	  {
-			$input = $this->post();
+			//$input = $this->post();
 			$time =  Date('Y-m-d');
 	    $expired = strtotime($time);
 	    $expired = strtotime("+365 day", $expired);

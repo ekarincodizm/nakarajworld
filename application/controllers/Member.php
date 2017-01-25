@@ -391,24 +391,47 @@ class Member extends CI_Controller{
     $member_id = $this->uri->segment(3);
     $setting = $this->db->order_by('setting_id', 'DESC')->get('mlm_fee_setting')->result_array();
 
-    $maxJounalFreeId = $this->db->AccountModel->JounalFreeAccountAll();
+    $maxJounalFreeId = $this->AccountModel->JounalFreeAccountAll();
+    $maxJounalFreeId = $maxJounalFreeId+1;
 
-  $input = array(
-    'journal_fee_amount' => $setting[0]['setting_register_fee'],
-    'journal_fee_type' => 1,
-    'member_id' => $member_id,
-    'journal_fee_code' => "FE".sprintf("%05d", $maxJounalFreeId),
-  );
+    $input = array(
+      'journal_fee_amount' => $setting[0]['setting_register_fee'],
+      'journal_fee_type' => 1,
+      'member_id' => $member_id,
+      'journal_fee_code' => "FE".sprintf("%05d", $maxJounalFreeId),
+    );
 
-  $check = $this->MemberModel->checkaccounting($member_id);
+    $check = $this->MemberModel->checkaccounting($member_id);
 
-  if (!empty($check)){
-    redirect('/Accounting/');
-  }
+    if (!empty($check)){
+      redirect('/Accounting/');
+    }
 
-  $this->db->insert('mlm_journal_fee', $input);
-  redirect('/Accounting/');
-  }
+      $this->db->insert('mlm_journal_fee', $input);
+      $returnIdJounalFree = $this->db->insert_id();
+
+			$time =  Date('Y-m-d');
+	    $expired = strtotime($time);
+	    $expired = strtotime("+365 day", $expired);
+	    $expired =  Date('Y-m-d', $expired);
+			$query = $this->db->where('setting_id', 1)->get('mlm_fee_setting')->result_array();
+
+      $data = array(
+				'accounting_date' => $time,
+				'accounting_no' => 0,
+				'accounting_source_id' => $returnIdJounalFree,
+				'accounting_tax' => 0,
+				'journals_id' => 2,
+			);
+			$this->AccountModel->AddAccounting($data);
+
+      $UpdateStatusAccounting = array(
+        'member_id' => $member_id,
+        'member_status' => 1,
+      );
+      $this->AccountModel->ChangeMemberStatus($UpdateStatusAccounting);
+      redirect('/Accounting/');
+    }
 
   public function NewMember()
   {
