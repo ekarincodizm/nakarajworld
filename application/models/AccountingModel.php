@@ -126,7 +126,7 @@ class AccountingModel extends CI_Model
     ->update('mlm_account', $input);
   }
 
-  public function InvoiceNo() {
+  public function ConfirmInvoice($accounting_id) {
     $query =  $this->db
     ->where('accounting_status', 1)
     ->where('journals_type', 4)
@@ -136,6 +136,34 @@ class AccountingModel extends CI_Model
 
     $InvoiceNo = "IN".sprintf("%05d", ($query+1));
 
-    return $InvoiceNo;
+    $input = array(
+      'accounting_status' => 1,
+      'accounting_no' => $InvoiceNo,
+    );
+
+    $this->db
+    ->where('accounting_id', $accounting_id)
+    ->update('mlm_accounting', $input);
+
+  }
+  public function ConfirmRecipt($accounting_id) {
+    $query =  $this->db
+    ->where('accounting_status', 1)
+    ->where('journals_type', 5)
+    ->or_where('journals_type', 3)
+    ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
+    ->get('mlm_accounting')
+    ->num_rows();
+
+    $ReciptNo = "RE".sprintf("%05d", ($query+1));
+
+    $input = array(
+      'accounting_status' => 1,
+      'accounting_no' => $ReciptNo,
+    );
+
+    $this->db
+    ->where('accounting_id', $accounting_id)
+    ->update('mlm_accounting', $input);
   }
 }

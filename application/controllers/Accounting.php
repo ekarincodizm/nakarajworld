@@ -55,4 +55,18 @@ class Accounting extends CI_Controller{
     $this->db->where('member_id', $member[0]['member_id'])->update('mlm_member', $input1);
     redirect('/Accounting');
   }
+
+  public function ConfirmInvoice()
+  {
+    $accounting_id = $this->uri->segment(3);
+    $this->AccountingModel->ConfirmInvoice($accounting_id);
+    redirect($this->agent->referrer(), 'refresh');
+  }
+
+  public function ConfirmRecipt()
+  {
+    $accounting_id = $this->uri->segment(3);
+    $this->AccountingModel->ConfirmRecipt($accounting_id);
+    redirect($this->agent->referrer(), 'refresh');
+  }
 }
