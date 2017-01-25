@@ -130,7 +130,7 @@ class HomePage extends CI_Controller{
 
 				$Member = $this->HomePageModel->UpdateMember( $RegisterForm );
 				$member_id = $RegisterForm['member_id'];
-	
+
 			} else {
 				$Member = $this->HomePageModel->AddMember( $RegisterForm );
 				$Member = json_decode(json_encode($Member), true);
@@ -244,7 +244,7 @@ class HomePage extends CI_Controller{
 		if (isset($_SESSION['MEMBER_ID'])) {
 			$Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
 			// $ProfileDateOfBirth = json_decode(json_encode($this->HomePageModel->LoadProfileDateOfBirth( $_SESSION['MEMBER_ID'] )), true);
-			// $pv = $this->HomePageModel->allpv($_SESSION['MEMBER_ID']);
+			$pv = $this->HomePageModel->allpv($_SESSION['MEMBER_ID']);
 			$today = getdate();
 			 $d1 = new DateTime($today["year"].'-'.$today["mon"].'-'.$today["mday"]);
 			 $d2 = new DateTime($Profile[0]['member_born']);
@@ -266,7 +266,7 @@ class HomePage extends CI_Controller{
 			'Result' => array(
 				'Profile' => $Profile,
 				'AccountList' => $AccountList,
-				// 'PV' => $pv,
+				'PV' => $pv,
 			),
 			'View' => 'front/User/Profile'
 		);

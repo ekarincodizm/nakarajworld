@@ -28,29 +28,22 @@
                       <th>#</th>
                       <th>รหัสสินค้า</th>
                       <th>ชื่อสินค้า</th>
-                      <th>ราคาปกติ</th>
-                      <th>ส่วนลด (%)</th>
                       <th>ราคาขาย</th>
                       <th>PV</th>
                       <th>สินค้าคงเหลือ</th>
-                      <th>แก้ไขล่าสุด</th>
                       <th>สถานะ</th>
                       <!-- <th>ตัวเลือก</th> -->
                     </tr>
                   </thead>
                   <tbody>
                     <?php $i=1; foreach ($ProductsList as $row): ?>
-                    <tr onclick="document.location = '<?php echo site_url('Products/EditProducts/'.$row['products_id']); ?>';">
+                    <tr style="cursor: pointer;" onclick="document.location = '<?php echo site_url('Products/EditProducts/'.$row['products_id']); ?>';">
                       <td><?php echo $i; ?></td>
                       <td><?php echo $row['products_code'] ?></td>
                       <td><?php echo $row['products_name'] ?></td>
-                      <td><?php echo $row['products_price_narmal'] ?></td>
-                      <td><?php echo $row['products_price_discount'] ?></td>
                       <td><?php echo $row['products_price_narmal']-($row['products_price_narmal']*$row['products_price_discount']/100) ?></td>
                       <td><?php echo $row['products_pv'] ?></td>
                       <td><?php echo $row['products_stock']." ".$row['products_unit'] ?></td>
-
-                      <td><?php echo $this->thaidate->FullDate($row['products_update_date']); ?></td>
                       <td>
                         <?php if ($row['products_status']==1): ?>
                           เปิดใช้งาน

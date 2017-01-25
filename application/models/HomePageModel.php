@@ -93,20 +93,18 @@ class HomePageModel extends CI_Model {
     ->result_array();
 
     $shop_detail = $this->db
-    ->where('member_id',$member_id[0]['member_id'])
-    // ->where('journal_sale_order_detail_status',1)
-    ->join('mlm_journal_sale_order_item', 'mlm_journal_sale_order_detail.journal_sale_order_detail_id = mlm_journal_sale_order_item.journal_sale_order_detail_id')
-    ->get('mlm_journal_sale_order_detail')
-    ->result_array();
+      ->where('member_id', $id)
+      ->where('accounting_status',1)
+      ->join('mlm_accounting', 'mlm_journal_sale_order_detail.journal_sale_order_detail_id = mlm_accounting.accounting_source_id')
+      ->join('mlm_journal_sale_order_item', 'mlm_journal_sale_order_detail.journal_sale_order_detail_id = mlm_journal_sale_order_item.journal_sale_order_detail_id')
+      ->get('mlm_journal_sale_order_detail')
+      ->result_array();
 
-    $pv=0;
-    foreach ($shop_detail as $row){
-    $pv += $row['journal_sale_order_item_pv']*$row['journal_sale_order_item_quantity'];
+      $pv=0;
+      foreach ($shop_detail as $row){
+      $pv += $row['journal_sale_order_item_pv']*$row['journal_sale_order_item_quantity'];
     }
-
-    //[ยังไม่ทำ]ต้องลบกับรายการใช้ PV ก่อน
-
-    return $pv;
+      return $pv;
+      //[ยังไม่ทำ]ต้องลบกับรายการใช้ PV ก่อน
   }
-
 }
