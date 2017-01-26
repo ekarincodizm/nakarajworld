@@ -47,7 +47,7 @@
           </div>
         </div>
       </div>
-      <?php if ($InvoiceDetail[0]['accounting_status']==2): ?>
+      <?php if ($InvoiceDetail[0]['accounting_status']==0): ?>
         <?php //$this->debuger->prevalue($InvoiceDetail); ?>
         <?php if (count($InvoiceDetail)>0): ?>
           <div class="col-md-4 text-center">
@@ -105,7 +105,7 @@
               </div>
             </div>
           </div>
-        <?php elseif($InvoiceDetail[0]['accounting_status']==0): ?>
+        <?php elseif($InvoiceDetail[0]['accounting_status']==2): ?>
           <div class="col-md-4 text-center">
             <div class="row">
               <div class="col-md-12">
