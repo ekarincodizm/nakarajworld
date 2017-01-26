@@ -47,7 +47,7 @@
                           <?php endif; ?>
                         </td>
                         <td>
-                          <a href="<?php echo site_url('SaleOrder/SaleOrderDetail/'.$row['journal_sale_order_detail_id'])  ?>" class="btn btn-info">รายละเอียด</a>
+                          <a href="<?php echo site_url('Accounting/AccountingDetail/'.$row['accounting_id'])  ?>" class="btn btn-info">รายละเอียด</a>
                         </td>
                       </tr>
                       <?php $i++; endforeach; ?>

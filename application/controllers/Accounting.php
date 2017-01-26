@@ -17,12 +17,16 @@ class Accounting extends CI_Controller{
   public function index() {
 
     $AccountingList = $this->AccountingModel->AccountingSelectAll();
+    // echo "<pre>";
+    // print_r($AccountingList);
+    // exit();
     $value = array(
       'Result' => array(
         'AccountingList' => $AccountingList,
       ),
       'View' => 'back/Accounting/AccountingList'
     );
+
     $this->LoadPage($value);
   }
 

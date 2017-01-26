@@ -54,7 +54,7 @@
             <div class="row">
               <div class="col-md-12">
                 <p>ราคารวม <?php echo number_format($amount) ?> บาท</p>
-                <p>ราคารวม <?php echo number_format($pv) ?> แต้ม</p>
+                <p>PV รวม <?php echo number_format($pv) ?> แต้ม</p>
                 <a href="<?php echo site_url('Store/CancelPurchase/'.$InvoiceDetail[0]['journal_sale_order_detail_id']);  ?>" class="btn btn-danger">
                   ยกเลิกการสั่งซื้อ
                 </a>
