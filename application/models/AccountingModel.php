@@ -81,6 +81,7 @@ class AccountingModel extends CI_Model
       $index_id = 'journal_sale_order_id';
       $source_detail = $this->SelectSourceDetail($source_id, $index_id, $source_table);
       $source_detail['source_code'] = $source_detail['journal_sale_order_detail_code'];
+      $source_detail['source_amount'] = $source_detail['temp_total_price'];
     }
     return $source_detail;
   }
@@ -122,6 +123,12 @@ class AccountingModel extends CI_Model
     ->join('mlm_accounting', 'mlm_accounting.accounting_source_id = mlm_journal_sale_order_item.journal_sale_order_detail_id')
     ->get('mlm_journal_sale_order_item')
     ->result_array();
+
+    $query['temp_total_price'] = 0;
+
+    foreach ($query as $row) {
+      $query['temp_total_price'] += ($row['journal_sale_order_item_price']*$row['journal_sale_order_item_quantity']);
+    }
     return $query;
   }
 
