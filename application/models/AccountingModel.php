@@ -60,26 +60,28 @@ class AccountingModel extends CI_Model
 
     if ($type==1) {
       $source_table = 'mlm_journal_fee';
-      $source_detail = $this->SelectSourceDetail($source_id, $source_table);
+      $index_id = 'journal_fee_id';
+      $source_detail = $this->SelectSourceDetail($source_id, $index_id, $source_table);
       $source_detail['source_code'] = $source_detail['journal_fee_code'];
       $source_detail['source_amount'] = $source_detail['journal_fee_amount'];
     } elseif ($type==2) {
       $source_table = 'mlm_journal_extend';
-      $source_detail = $this->SelectSourceDetail($source_id, $source_table);
+      $index_id = 'journal_extend_id';
+      $source_detail = $this->SelectSourceDetail($source_id, $index_id, $source_table);
       $source_detail['source_code'] = $source_detail['journal_extend_code'];
       $source_detail['source_amount'] = $source_detail['journal_extend_amount'];
     } elseif ($type==3 || $type==4 || $type==5 || $type==6) {
       $source_table = 'mlm_journal_dividend';
-      $source_detail = $this->SelectSourceDetail($source_id, $source_table);
+      $index_id = 'journal_dividend_id';
+      $source_detail = $this->SelectSourceDetail($source_id, $index_id, $source_table);
       $source_detail['source_code'] = $source_detail['journal_dividend_code'];
       $source_detail['source_amount'] = $source_detail['journal_dividend_amount'];
     } elseif ($type==7) {
       $source_table = 'mlm_journal_sale_order_detail';
-      $index_id = 'mlm_journal_sale_order_id';
+      $index_id = 'journal_sale_order_id';
       $source_detail = $this->SelectSourceDetail($source_id, $index_id, $source_table);
       $source_detail['source_code'] = $source_detail['journal_sale_order_detail_code'];
     }
-
     return $source_detail;
   }
 
@@ -122,7 +124,7 @@ class AccountingModel extends CI_Model
     ->result_array();
     return $query;
   }
-  
+
   public function Accounting($id)
   {
     $query = $this->db
