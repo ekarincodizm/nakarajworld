@@ -21,6 +21,7 @@ class AccountingModel extends CI_Model
     ->order_by('accounting_id', 'DESC')
     ->get('mlm_accounting')
     ->result_array();
+
     $query = $this->AccountingSourceDetail($query);
 
     return $query;
@@ -74,20 +75,24 @@ class AccountingModel extends CI_Model
       $source_detail['source_amount'] = $source_detail['journal_dividend_amount'];
     } elseif ($type==7) {
       $source_table = 'mlm_journal_sale_order_detail';
-      $source_detail = $this->SelectSourceDetail($source_id, $source_table);
+      $index_id = 'mlm_journal_sale_order_id';
+      $source_detail = $this->SelectSourceDetail($source_id, $index_id, $source_table);
       $source_detail['source_code'] = $source_detail['journal_sale_order_detail_code'];
     }
 
     return $source_detail;
   }
 
-  public function SelectSourceDetail($id, $source_table)
+  public function SelectSourceDetail($source_id, $index_id, $source_table)
   {
-    $query = $this->db->get($source_table)->result_array();
+    if ($source_table=='mlm_journal_sale_order_detail') {
+      $query = $this->SaleOrderDetail($source_id);
+    } else {
+      $query = $this->db->where($index_id, $source_id)->get($source_table)->result_array();
+    }
 
     if (count($query)!=0) {
       $query = $query[0];
-
       // account_detail
       if (!empty($query['account_id']) && $query['account_id']!="" && $query['account_id']!=0) {
         $account_detail  = $query['account_detail'] = $this->AccountModel->FindAccountByID($query['account_id']);
@@ -106,8 +111,18 @@ class AccountingModel extends CI_Model
     }
     return $query;
   }
-
-
+  public function SaleOrderDetail($source_id)
+  {
+    $query = $this->db
+    ->where('mlm_journal_sale_order_item.journal_sale_order_detail_id', $source_id)
+    ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
+    ->join('mlm_products', 'mlm_journal_sale_order_item.products_id = mlm_products.products_id')
+    ->join('mlm_accounting', 'mlm_accounting.accounting_source_id = mlm_journal_sale_order_item.journal_sale_order_detail_id')
+    ->get('mlm_journal_sale_order_item')
+    ->result_array();
+    return $query;
+  }
+  
   public function Accounting($id)
   {
     $query = $this->db

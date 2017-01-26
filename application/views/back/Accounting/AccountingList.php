@@ -39,7 +39,17 @@
                     <td>
                       <?php echo $row['journals_detail']; ?>
                     </td>
-                    <td><?php echo $row['source_amount']; ?></td>
+                    <td>
+                      <?php if ($row['source_amount']==0): ?>
+                        <strong class="text-muted"><?php echo $row['source_amount']; ?></strong>
+                        <?php else: ?>
+                          <?php if ($row['journals_type']==4): ?>
+                            <strong class="text-success"><?php echo $row['source_amount']; ?></strong>
+                          <?php elseif ($row['journals_type']==5): ?>
+                            <strong class="text-danger"><?php echo $row['source_amount']; ?></strong>
+                          <?php endif; ?>
+                      <?php endif; ?>
+                    </td>
                     <td>
                       <?php echo $row['member']['member_firstname']; ?>
                     </td>
