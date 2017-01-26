@@ -83,6 +83,7 @@ class AccountingModel extends CI_Model
 
       $source_detail['source_code'] = $source_detail[0]['journal_sale_order_detail_code'];
       $source_detail['source_amount'] = $source_detail['order_item']['temp_total_price'];
+      unset($source_detail['order_item']['temp_total_price']);
     }
     return $source_detail;
   }

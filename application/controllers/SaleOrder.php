@@ -45,19 +45,12 @@ class SaleOrder extends CI_Controller{
   }
   public function SaleOrderDetail()
   {
-    $InvoiceID = $this->uri->segment(3);
-    $SaleOrderDetail = $this->ProductsModel->SaleOrderDetail($InvoiceID);
-    // $this->debuger->prevalue($InvoiceDetail);
-
-    $NAVA = $this->db
-    ->where('member_id',1)
-    ->get('mlm_member')
-    ->result_array();
-
+    $accounting_id = $this->uri->segment(3);
+    $AccountingDetail = $this->AccountingModel->AccountingDetail($accounting_id);
+    // $this->debuger->prevalue($AccountingDetail);
     $value = array(
       'Result' => array(
-        'SaleOrderDetail' => $SaleOrderDetail,
-        'NAVA' => $NAVA,
+        'AccountingDetail' => $AccountingDetail,
       ),
       'View' => 'back/SaleOrder/SaleOrderDetail'
     );

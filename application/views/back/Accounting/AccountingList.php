@@ -32,7 +32,7 @@
                   <tr style="cursor: pointer;" onclick="document.location = '<?php echo site_url('/Accounting/AccountingDetail/'.$row['accounting_id']); ?>';">
                     <td><?php echo $i; ?></td>
                     <td>
-                      <?php echo "IN".sprintf("%05d", $row['accounting_id']); ?></td>
+                      <?php echo $row['accounting_no']; ?></td>
                     <td>
                         <?php echo $this->thaidate->ShortDate($row['accounting_date']); ?>
                     </td>

@@ -1,4 +1,5 @@
 <?php  $var = $AccountingDetail[0]; ?>
+<!-- <?php //echo "<pre>";print_r($AccountingDetail);exit(); ?> -->
 <section class="content">
   <div class="container-fluid">
     <div class="block-header">
@@ -30,9 +31,11 @@
               <div class="col-md-12">
                 <table class="table table-striped">
                   <thead>
+
                     <tr>
                       <th>#</th>
                       <th>รายการ</th>
+                      <th>ชื่อสินค้า</th>
                       <th class="text-right">จำนวน</th>
                       <th class="text-right">ราคาต่อหน่วย</th>
                       <th class="text-right">ยอดรวม</th>
@@ -40,14 +43,17 @@
                   </thead>
                   <tbody>
 
+                    <?php $i=1; foreach ($var['source_detail']['order_item'] as $row): ?>
                     <tr>
-                      <td>1</td>
+                      <td><?php echo $i;?></td>
                       <td><?php echo $var['journals_detail'] ?></td>
-                      <td class="text-right">1</td>
-                      <td class="text-right"><?php echo $var['source_amount'] ?></td>
-                      <td class="text-right"><?php echo $var['source_amount'] ?></td>
+                      <td><?php echo $row['products_name'] ?></td>
+                      <td class="text-right"><?php echo number_format($row['journal_sale_order_item_quantity']) ?></td>
+                      <td class="text-right"><?php echo number_format($row['journal_sale_order_item_price']) ?> </td>
+                      <td class="text-right"><?php echo number_format($row['journal_sale_order_item_quantity']*$row['journal_sale_order_item_price']) ?></td>
                     </tr>
 
+                    <?php $i++; endforeach; ?>
                   </tbody>
                 </table>
               </div>
@@ -62,7 +68,7 @@
                   <tbody>
                     <tr>
                       <td>ราคา</td>
-                      <td>300</td>
+                      <td><?php echo $var['source_amount']?></td>
                       <td>บาท</td>
                     </tr>
                     <tr>
@@ -72,7 +78,7 @@
                     </tr>
                     <tr>
                       <td>ราคาสุทธิ</td>
-                      <td>300</td>
+                      <td><?php echo $var['source_amount']?></td>
                       <td>บาท</td>
                     </tr>
                   </tbody>
@@ -110,7 +116,7 @@
                 ชำระเงิน
               </a>
               <?php endif; ?>
-              <a class="btn btn-lg btn-block bg-blue-grey waves-effect">
+              <a class="btn btn-lg btn-block bg-blue-grey waves-effect " target="_blank" href="<?php echo site_url('SaleOrder/resultSale/'.$var['source_detail'][0]['journal_sale_order_detail_id']); ?>">
                 พิมพ์
               </a>
             </div>
@@ -122,6 +128,9 @@
               หลักฐานการชำระเงิน
             </div>
             <div class="body">
+              <?php if ($var['source_detail'][0]['journal_sale_order_detail_slip']!=''): ?>
+                <img src="<?php echo base_url('assets/image/slip/'.$var['source_detail'][0]['journal_sale_order_detail_slip']); ?>" class="img-rounded img-responsive" >
+              <?php endif; ?>
             </div>
           </div>
         </div>

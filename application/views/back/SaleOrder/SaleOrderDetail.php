@@ -1,36 +1,30 @@
+<?php  $var = $AccountingDetail[0]; ?>
+<!-- <?php //echo "<pre>";print_r($AccountingDetail);exit(); ?> -->
 <section class="content">
   <div class="container-fluid">
     <div class="block-header">
-      <h1>เอกสารการบัญชี</h1>
+      <!-- <h1>เอกสารการบัญชี</h1> -->
+
     </div>
     <div class="row clearfix">
-      <div class="col-md-12">
+      <div class="col-md-9">
         <div class="card">
           <div class="header">
-            <h2><?php echo "เลขที่บัญชี ".$SaleOrderDetail[0]['journal_sale_order_detail_code']." ".$SaleOrderDetail[0]['journals_detail'] ?>
-              <a href="<?php echo site_url('SaleOrder/resultSale/'.$SaleOrderDetail[0]['journal_sale_order_detail_id']); ?>" target="_blank" class="btn btn-purple"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> พิมพ์เอกสาร</a>
-            </h2>
-
+            <h2><?php echo "เลขที่บิล ".$var['source_code'] ?> </h2>
           </div>
           <div class="body">
             <div class="row">
               <div class="col-md-6">
                 <h5>เกี่ยวกับเอกสาร</h5>
                 <p>
-                  วันที่ : <?php echo $this->thaidate->FullDate($SaleOrderDetail[0]['accounting_date']); ?><br>
-                  ต้นฉบับ : : <?php echo $SaleOrderDetail[0]['accounting_source_id']; ?><br>
-                  สถานะ : <?php if ($SaleOrderDetail[0]['accounting_status']==0): ?>
-                    <span class="label bg-deep-orange">ค้างชำระ</span>
-                  <?php elseif($SaleOrderDetail[0]['accounting_status']==1): ?>
-                    <span class="label bg-green">ชำระแล้ว</span>
-                  <?php else: ?>
-                    <span class="label bg-blue-grey">รอดำเนินการ</span>
-                  <?php endif; ?>
+                  วันที่ : <?php echo $this->thaidate->FullDate($var['accounting_date']); ?><br>
+                  เลขที่บัญชี : : <?php echo $var['accounting_no']; ?><br>
+                  บัญชี : <?php echo $var['journals_detail'] ?>
                 </p>
               </div>
               <div class="col-md-6">
                 <h5>ผู้เกี่ยวข้อง</h5>
-                <?php echo $NAVA[0]['member_prefix'].$NAVA[0]['member_firstname']." ".$NAVA[0]['member_lastname']; ?>
+                <?php echo $var['member']['member_prefix'].$var['member']['member_firstname']." ".$var['member']['member_lastname']; ?>
               </div>
             </div>
 
@@ -38,9 +32,10 @@
               <div class="col-md-12">
                 <table class="table table-striped">
                   <thead>
+
                     <tr>
                       <th>#</th>
-                      <th>รหัสสินค้า</th>
+                      <th>รายการ</th>
                       <th>ชื่อสินค้า</th>
                       <th class="text-right">จำนวน</th>
                       <th class="text-right">ราคาต่อหน่วย</th>
@@ -49,19 +44,17 @@
                   </thead>
                   <tbody>
 
-                    <?php $i=1; $amount=0; foreach ($SaleOrderDetail as $row): ?>
-                      <tr>
-                        <td><?php echo $i; ?></td>
-                        <td><?php echo $row['products_code'] ?></td>
-                        <td><?php echo $row['products_name'] ?></td>
-                        <td class="text-right"><?php echo number_format($row['journal_sale_order_item_quantity']) ?></td>
-                        <td class="text-right"><?php echo number_format($row['journal_sale_order_item_price']) ?></td>
-                        <td class="text-right"><?php echo number_format($row['journal_sale_order_item_price']*$row['journal_sale_order_item_quantity']) ?></td>
-                      </td>
+                    <?php $i=1; foreach ($var['source_detail']['order_item'] as $row): ?>
+                    <tr>
+                      <td><?php echo $i;?></td>
+                      <td><?php echo $var['journals_detail'] ?></td>
+                      <td><?php echo $row['products_name'] ?></td>
+                      <td class="text-right"><?php echo number_format($row['journal_sale_order_item_quantity']) ?></td>
+                      <td class="text-right"><?php echo number_format($row['journal_sale_order_item_price']) ?> </td>
+                      <td class="text-right"><?php echo number_format($row['journal_sale_order_item_quantity']*$row['journal_sale_order_item_price']) ?></td>
                     </tr>
 
-                    <?php $i++; $amount += $row['journal_sale_order_item_price']*$row['journal_sale_order_item_quantity']; endforeach; ?>
-
+                    <?php $i++; endforeach; ?>
                   </tbody>
                 </table>
               </div>
@@ -76,7 +69,7 @@
                   <tbody>
                     <tr>
                       <td>ราคา</td>
-                      <td><?php echo $amount;?></td>
+                      <td><?php echo $var['source_amount']?></td>
                       <td>บาท</td>
                     </tr>
                     <tr>
@@ -86,7 +79,7 @@
                     </tr>
                     <tr>
                       <td>ราคาสุทธิ</td>
-                      <td><?php echo $amount; ?></td>
+                      <td><?php echo $var['source_amount']?></td>
                       <td>บาท</td>
                     </tr>
                   </tbody>
@@ -97,111 +90,52 @@
           </div>
 
         </div>
-      </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<section class="content" ng-controller="">
-  <div class="container-fluid">
-    <div class="block-header">
-      <h1>สินค้า</h1>
-    </div>
-    <div class="row clearfix">
-      <div class="col-md-8">
-        <div class="card">
-          <div class="header">
-            <h2>
-              เลขที่ใบสั่งซื้อ <?php echo $SaleOrderDetail[0]['journal_sale_order_detail_code'] ?>
-          </div>
-          <div class="body">
-            <div class="row">
-              <div class="col-md-12">
-                <table class="table table-striped">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>รหัสสินค้า</th>
-                      <th>ชื่อสินค้า</th>
-                      <th>PV</th>
-                      <th>ราคา</th>
-                      <th style="width:10%">จำนวน</th>
-                      <th>ราคารวม</th>
-                      <th>PV รวม</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <?php $i=1; $amount=0; foreach ($SaleOrderDetail as $row): ?>
-                      <tr>
-                        <td><?php echo $i; ?></td>
-                        <td><?php echo $row['products_code'] ?></td>
-                        <td><?php echo $row['products_name'] ?></td>
-                        <td><?php echo $row['journal_sale_order_item_pv'] ?></td>
-                        <td><?php echo number_format($row['journal_sale_order_item_price']) ?></td>
-                        <td><?php echo number_format($row['journal_sale_order_item_quantity']) ?></td>
-                        <td><?php echo number_format($row['journal_sale_order_item_price']*$row['journal_sale_order_item_quantity']) ?></td>
-                        <td><?php echo number_format($row['journal_sale_order_item_pv']*$row['journal_sale_order_item_quantity']) ?></td>
-                      </td>
-                    </tr>
-
-                    <?php $i++; $amount += $row['journal_sale_order_item_price']*$row['journal_sale_order_item_quantity']; endforeach; ?>
-                  </tbody>
-                </table>
-                <a href="<?php echo site_url('SaleOrder/resultSale/'.$SaleOrderDetail[0]['journal_sale_order_detail_id']); ?>" target="_blank" class="btn btn-purple"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> พิมพ์เอกสาร</a>
-            </h2>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
-      <div class="col-md-4">
-        <div class="card">
-          <div class="body">
-            <div class="row">
-              <div class="col-md-12 text-center" style="font-size: 25px;margin-bottom:0px;">
-                <?php if ($SaleOrderDetail[0]['accounting_status']==1): ?>
-                  <span class="font-bold col-teal">สถานะ: ชำระเงินแล้ว</span>
-                <?php elseif ($SaleOrderDetail[0]['accounting_status']==0): ?>
-                  <span class="font-bold col-orange">สถานะ: ค้างชำระ</span>
-                  <div class="row">
-                    <div class="col-md-12">
-                      <a href="<?php echo site_url('/Accounting/ConfirmInvoice/'.$SaleOrderDetail[0]['journal_sale_order_detail_id']."/".$SaleOrderDetail[0]['accounting_id']); ?>" class="btn btn-block btn-lg bg-teal waves-effect" >ยืนยันการชำระเงิน</a>
-                    </div>
-                  </div>
-                <?php elseif ($SaleOrderDetail[0]['accounting_status']==2): ?>
-                  <span class="font-bold col-pink">สถานะ: ยกเลิก</span>
-                <?php endif; ?>
+      <div class="col-md-3">
+        <div class="row">
+          <div class="card">
+            <?php if ($var['accounting_status']==0): ?>
+              <div class="body bg-deep-orange">
+                <p class="text-center" style="font-size: 50px;">ค้างชำระ</p>
               </div>
+            <?php elseif($var['accounting_status']==1): ?>
+              <div class="body bg-light-green">
+                <p class="text-center" style="font-size: 50px;">ชำระแล้ว</p>
+              </div>
+            <?php else: ?>
+              <div class="body bg-blue-grey">
+                <p class="text-center" style="font-size: 50px;">ดำเนินการ</p>
+              </div>
+            <?php endif; ?>
+          </div>
+        </div>
+        <div class="row">
+          <div class="card">
+            <div class="body">
+              <?php if ($var['accounting_status']!=1): ?>
+              <a class="btn btn-lg btn-block bg-teal waves-effect" href="<?php echo site_url('/Accounting/ConfirmInvoice/'.$var['accounting_id']); ?>">
+                ชำระเงิน
+              </a>
+              <?php endif; ?>
+              <a class="btn btn-lg btn-block bg-blue-grey waves-effect " target="_blank" href="<?php echo site_url('SaleOrder/resultSale/'.$var['source_detail'][0]['journal_sale_order_detail_id']); ?>">
+                พิมพ์
+              </a>
             </div>
           </div>
         </div>
-        <div class="card">
-          <div class="header">
-            <h2>
-              หลักฐานการจ่ายเงิน
-            </h2>
-          </div>
-          <div class="body">
-            <div class="row">
-              <div class="col-md-12">
-                <?php if ($SaleOrderDetail[0]['journal_sale_order_detail_slip']!=''): ?>
-                  <img src="<?php echo base_url('assets/image/slip/'.$SaleOrderDetail[0]['journal_sale_order_detail_slip']); ?>" class="img-rounded img-responsive" >
-                <?php endif; ?>
-              </div>
+        <div class="row">
+          <div class="card">
+            <div class="header text-center">
+              หลักฐานการชำระเงิน
+            </div>
+            <div class="body">
+              <?php if ($var['source_detail'][0]['journal_sale_order_detail_slip']!=''): ?>
+                <img src="<?php echo base_url('assets/image/slip/'.$var['source_detail'][0]['journal_sale_order_detail_slip']); ?>" class="img-rounded img-responsive" >
+              <?php endif; ?>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+
+  </section>

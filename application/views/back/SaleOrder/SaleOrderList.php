@@ -16,7 +16,7 @@
 
             <div class="row">
               <div class="col-md-12">
-                <table class="table table-striped">
+                <table class="table table-hover">
                   <thead>
                     <tr>
                       <th>#</th>
@@ -25,12 +25,11 @@
                       <th>จำนวนรายการสินค้า</th>
                       <th>ราคารวม</th>
                       <th>สถานะ</th>
-                      <th>ตัวเลือก</th>
                     </tr>
                   </thead>
                   <tbody>
                     <?php $i=1; foreach ($SaleOrderList as $row): ?>
-                      <tr>
+                      <tr style="cursor: pointer;" onclick="document.location = '<?php echo site_url('SaleOrder/SaleOrderDetail/'.$row['accounting_id']); ?>';">
                         <td><?php echo $i; ?></td>
                         <td><?php echo $row['journal_sale_order_detail_code'] ?></td>
                         <td><?php echo $this->thaidate->ShortDateTime($row['journal_sale_order_detail_date']); ?></td>
@@ -45,9 +44,6 @@
                             <span class="font-bold col-pink">ยกเลิก</span>
 
                           <?php endif; ?>
-                        </td>
-                        <td>
-                          <a href="<?php echo site_url('Accounting/AccountingDetail/'.$row['accounting_id'])  ?>" class="btn btn-info">รายละเอียด</a>
                         </td>
                       </tr>
                       <?php $i++; endforeach; ?>

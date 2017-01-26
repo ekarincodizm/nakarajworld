@@ -99,6 +99,7 @@ class ProductsModel extends CI_Model {
     ->where('journals_id',7)
     ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_detail.journal_sale_order_detail_id = mlm_accounting.accounting_source_id')
     ->join('mlm_journal_sale_order_item', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_accounting.accounting_source_id')
+    ->order_by('accounting_id', 'DESC')
     ->get('mlm_accounting')
     ->result_array();
     $i=0;
