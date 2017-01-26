@@ -35,7 +35,6 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                     <div class="card">
                         <div class="body">
                             <div class="row">
-                              จำนวนผู้สมัคร
                               <canvas id="bar_chart" height="150"></canvas>
                             </div>
                         </div>

@@ -21,12 +21,11 @@ class DashBoardMain extends CI_Controller {
     $Group['Group4'] = $this->DashBoardModel->DashBoardGroup(4);
 
     $CodeTeam = $this->DashBoardModel->DashBoardTeam();
-
-    // $SumAccountPerTeam[0] = $this->DashBoardModel->DashBoardGroupChartPer30Day(5);
     $SumAccountPerTeam = array();
     for($i = 5 ; $i <= 13 ; $i++){
       $SumAccountPerTeam[$i-5] = $this->DashBoardModel->DashBoardGroupChartPer30Day($i);
     }
+    // print_r($SumAccountPerTeam);
     $value = array(
       'Result' => array(
         'CodeTeam' => $CodeTeam,
