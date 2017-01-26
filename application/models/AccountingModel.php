@@ -50,6 +50,9 @@ class AccountingModel extends CI_Model
       unset($query[$index]['source_detail']['amount']);
       $index++;
     }
+    // echo "<pre>";
+    // print_r($query);
+    // exit();
     return $query;
   }
 
@@ -57,34 +60,39 @@ class AccountingModel extends CI_Model
   {
     $source_id = $source_id;
     $source_detail = array();
-
     if ($type==1) {
       $source_table = 'mlm_journal_fee';
       $index_id = 'journal_fee_id';
       $source_detail = $this->SelectSourceDetail($source_id, $index_id, $source_table);
-      $source_detail['source_code'] = $source_detail['journal_fee_code'];
-      $source_detail['source_amount'] = $source_detail['journal_fee_amount'];
+      $source_detail['Template'] = 'TemplateFee';
+      $source_detail['source_code'] = $source_detail[0]['journal_fee_code'];
+      $source_detail['source_amount'] = $source_detail[0]['journal_fee_amount'];
     } elseif ($type==2) {
       $source_table = 'mlm_journal_extend';
       $index_id = 'journal_extend_id';
       $source_detail = $this->SelectSourceDetail($source_id, $index_id, $source_table);
-      $source_detail['source_code'] = $source_detail['journal_extend_code'];
-      $source_detail['source_amount'] = $source_detail['journal_extend_amount'];
+      $source_detail['Template'] = 'TemplateExtend';
+      $source_detail['source_code'] = $source_detail[0]['journal_extend_code'];
+      $source_detail['source_amount'] = $source_detail[0]['journal_extend_amount'];
     } elseif ($type==3 || $type==4 || $type==5 || $type==6) {
       $source_table = 'mlm_journal_dividend';
       $index_id = 'journal_dividend_id';
       $source_detail = $this->SelectSourceDetail($source_id, $index_id, $source_table);
-      $source_detail['source_code'] = $source_detail['journal_dividend_code'];
+      $source_detail['Template'] = 'TemplateDividend';
+      $source_detail['source_code'] = $source_detail[0]['journal_dividend_code'];
       $source_detail['source_amount'] = $source_detail['journal_dividend_amount'];
     } elseif ($type==7) {
       $source_table = 'mlm_journal_sale_order_detail';
       $index_id = 'journal_sale_order_detail_id';
       $source_detail = $this->SelectSourceDetail($source_id, $index_id, $source_table);
-
+      $source_detail['Template'] = 'TemplateSaleOrder';
       $source_detail['source_code'] = $source_detail[0]['journal_sale_order_detail_code'];
       $source_detail['source_amount'] = $source_detail['order_item']['temp_total_price'];
       unset($source_detail['order_item']['temp_total_price']);
     }
+    // echo "<pre>";
+    // print_r($source_detail);
+    // exit();
     return $source_detail;
   }
 
@@ -116,9 +124,7 @@ class AccountingModel extends CI_Model
         $query['member_detail'] = "";
       }
     }
-    // echo "<pre>";
-    // print_r($query);
-    // exit();
+
     return $query;
   }
   public function SaleOrderDetail($source_id)
