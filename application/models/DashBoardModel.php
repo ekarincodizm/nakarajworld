@@ -22,4 +22,18 @@ class DashBoardModel extends CI_Model {
     return $Group;
 
   }
+  public function DashBoardGroupChartPer30Day($id)
+  {
+    $today_date = date('Y-m-d');
+    $dateSearch = date('Y-m-d', strtotime("-30 days"));
+
+    $Group = $this->db
+    ->where('mlm_journal_extend.account_id', $id)
+    ->where('journal_extend_start_date >=', $dateSearch)
+    ->where('journal_extend_start_date <=', $today_date)
+    ->join('mlm_account','mlm_journal_extend.account_id = mlm_account.account_id')
+    ->get('mlm_journal_extend')->num_rows();
+    return $Group;
+
+  }
 }

@@ -35,8 +35,8 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                     <div class="card">
                         <div class="body">
                             <div class="row">
-                              <div id="line-network-summary"></div>
-
+                              จำนวนผู้สมัคร
+                              <canvas id="bar_chart" height="150"></canvas>
                             </div>
                         </div>
                     </div>
@@ -140,3 +140,39 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
     <!-- Morris Plugin Js -->
     <script src="<?php echo base_url('assets/theme/back-end/plugins/raphael/raphael.min.js')  ?>"></script>
     <script src="<?php echo base_url('assets/theme/back-end/plugins/morrisjs/morris.js') ?>"></script>
+    <script src="<?php echo base_url('assets/theme/back-end/plugins/chartjs/Chart.js') ?>"></script>
+
+    <script type="text/javascript">
+      $(function () {
+          new Chart(document.getElementById("bar_chart").getContext("2d"), getChartJs('bar'));
+      });
+      function getChartJs(type) {
+          var config = null;
+          if (type === 'bar') {
+              config = {
+                  type: 'bar',
+                  data: {
+                      labels: ["ทีม A", "ทีม B", "ทีม C", "ทีม D", "ทีม E", "ทีม F", "ทีม G", "ทีม H", "ทีม I"],
+                      datasets: [{
+                          label: "ผู้สมัคร",
+                          data: [<?php echo $SumAccountPerTeam[0] ?>,
+                                <?php echo $SumAccountPerTeam[1] ?>,
+                                <?php echo $SumAccountPerTeam[2] ?>,
+                                <?php echo $SumAccountPerTeam[3] ?>,
+                                <?php echo $SumAccountPerTeam[4] ?>,
+                                <?php echo $SumAccountPerTeam[5] ?>,
+                                <?php echo $SumAccountPerTeam[6] ?>,
+                                <?php echo $SumAccountPerTeam[7] ?>,
+                                <?php echo $SumAccountPerTeam[8] ?>],
+                          backgroundColor: 'rgba(0, 188, 212, 0.8)'
+                      }]
+                  },
+                  options: {
+                      responsive: true,
+                      legend: false
+                  }
+              }
+          }
+          return config;
+      }
+    </script>
