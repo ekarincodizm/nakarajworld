@@ -105,9 +105,11 @@
         <div class="row">
           <div class="card">
             <div class="body">
+              <?php if ($var['accounting_status']!=1): ?>
               <a class="btn btn-lg btn-block bg-teal waves-effect" href="<?php echo site_url('/Accounting/ConfirmInvoice/'.$var['accounting_id']); ?>">
                 ชำระเงิน
               </a>
+              <?php endif; ?>
               <a class="btn btn-lg btn-block bg-blue-grey waves-effect">
                 พิมพ์
               </a>
