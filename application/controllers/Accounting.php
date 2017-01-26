@@ -58,7 +58,7 @@ class Accounting extends CI_Controller{
 
   public function ConfirmInvoice()
   {
-    $accounting_id = $this->uri->segment(4);
+    $accounting_id = $this->uri->segment(3);
     $this->AccountingModel->ConfirmInvoice($accounting_id);
     redirect($this->agent->referrer(), 'refresh');
   }
