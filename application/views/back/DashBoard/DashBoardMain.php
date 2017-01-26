@@ -153,7 +153,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                   data: {
                       labels: ["ทีม A", "ทีม B", "ทีม C", "ทีม D", "ทีม E", "ทีม F", "ทีม G", "ทีม H", "ทีม I"],
                       datasets: [{
-                          label: "ผู้สมัคร",
+                          label: "สมาชิก",
                           data: [<?php echo $SumAccountPerTeam[0] ?>,
                                 <?php echo $SumAccountPerTeam[1] ?>,
                                 <?php echo $SumAccountPerTeam[2] ?>,
@@ -168,7 +168,14 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                   },
                   options: {
                       responsive: true,
-                      legend: false
+                      legend: false,
+                      scales: {
+                        yAxes: [{
+                          ticks: {
+                            stepSize: 1
+                          }
+                        }]
+                      }
                   }
               }
           }
