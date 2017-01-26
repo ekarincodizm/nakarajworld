@@ -395,8 +395,8 @@ class Member extends CI_Controller{
     $member_id = $this->uri->segment(3);
     $setting = $this->db->order_by('setting_id', 'DESC')->get('mlm_fee_setting')->result_array();
 
-    // $maxJounalFreeId = $this->AccountModel->JounalFreeAccountAll();
-    // $maxJounalFreeId = $maxJounalFreeId+1;
+     $maxJounalFreeId = $this->AccountModel->JounalFreeAccountAll();
+     $maxJounalFreeId = $maxJounalFreeId+1;
 
     $input = array(
       'journal_fee_amount' => $setting[0]['setting_register_fee'],
@@ -410,7 +410,6 @@ class Member extends CI_Controller{
     if (!empty($check)){
       redirect('/Accounting/');
     }
-
       $this->db->insert('mlm_journal_fee', $input);
       $returnIdJounalFree = $this->db->insert_id();
 
