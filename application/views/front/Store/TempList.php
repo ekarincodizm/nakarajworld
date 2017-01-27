@@ -57,6 +57,9 @@
             <a href="<?php echo site_url('Store/CheckOut/'.$_SESSION['MEMBER_ID']);  ?>" class="btn btn-success">
               ยืนยันการสั่งซื้อ
             </a>
+            <button href="<?php echo site_url('Store/CheckOut/'.$_SESSION['MEMBER_ID']); ?>" <?php if($MyPv<$pv){ echo 'disabled'; } ?> class="btn btn-success">
+              ยืนยันการสั่งซื้อ (PV : <?php echo $MyPv; ?>)
+            </button>
           </div>
         <?php endif; ?>
 

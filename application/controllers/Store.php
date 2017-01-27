@@ -85,10 +85,13 @@ class Store extends CI_Controller{
 	{
 		$TempList =$this->ProductsModel->TempList($_SESSION['MEMBER_ID']);
 		$TempList = json_decode(json_encode($TempList), true);
+		$MyPv = $this->HomePageModel->allpv($_SESSION['MEMBER_ID']);
+
 
 		$value = array(
 			'Result' => array(
 				'TempList' => $TempList,
+				'MyPv' => $MyPv,
 			),
 			'View' => 'front/Store/TempList'
 		);
@@ -120,7 +123,7 @@ class Store extends CI_Controller{
 			'accounting_no' => $code,
 			'journals_id' => 7,
 		);
-		
+
 		$this->db->insert('mlm_accounting', $input);
 
 		// Items
