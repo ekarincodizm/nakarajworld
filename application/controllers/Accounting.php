@@ -35,6 +35,7 @@ class Accounting extends CI_Controller{
     $accounting_id = $this->uri->segment(3);
     $AccountingDetail = $this->AccountingModel->AccountingDetail($accounting_id);
     // $this->debuger->prevalue($AccountingDetail);
+
     $value = array(
       'Result' => array(
         'AccountingDetail' => $AccountingDetail,

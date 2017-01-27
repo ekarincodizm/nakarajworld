@@ -1,3 +1,4 @@
+<?php  $var = $AccountingDetail[0]; ?>
 <div class="row">
   <div class="col-md-12">
     <table class="table table-striped">
@@ -39,7 +40,7 @@
       <tbody>
         <tr>
           <td>ราคา</td>
-          <td><?php echo $var['source_amount']?></td>
+          <td><?php echo number_format($var['source_amount']) ?></td>
           <td>บาท</td>
         </tr>
         <tr>
@@ -49,7 +50,7 @@
         </tr>
         <tr>
           <td>ราคาสุทธิ</td>
-          <td><?php echo $var['source_amount']?></td>
+          <td><?php echo number_format($var['source_amount']) ?></td>
           <td>บาท</td>
         </tr>
       </tbody>

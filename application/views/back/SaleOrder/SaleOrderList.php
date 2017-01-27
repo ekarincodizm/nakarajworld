@@ -29,7 +29,7 @@
                   </thead>
                   <tbody>
                     <?php $i=1; foreach ($SaleOrderList as $row): ?>
-                      <tr style="cursor: pointer;" onclick="document.location = '<?php echo site_url('SaleOrder/SaleOrderDetail/'.$row['accounting_id']); ?>';">
+                      <tr style="cursor: pointer;" onclick="document.location = '<?php echo site_url('Accounting/AccountingDetail/'.$row['accounting_id']); ?>';">
                         <td><?php echo $i; ?></td>
                         <td><?php echo $row['journal_sale_order_detail_code'] ?></td>
                         <td><?php echo $this->thaidate->ShortDateTime($row['journal_sale_order_detail_date']); ?></td>

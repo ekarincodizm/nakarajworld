@@ -41,8 +41,8 @@
                       <td><?php echo $i; ?></td>
                       <td><?php echo $row['products_code'] ?></td>
                       <td><?php echo $row['products_name'] ?></td>
-                      <td><?php echo $row['products_price_narmal']-($row['products_price_narmal']*$row['products_price_discount']/100) ?></td>
-                      <td><?php echo $row['products_pv'] ?></td>
+                      <td><?php echo number_format($row['products_price_narmal']-($row['products_price_narmal']*$row['products_price_discount']/100)) ?></td>
+                      <td><?php echo number_format($row['products_pv']) ?></td>
                       <td><?php echo $row['products_stock']." ".$row['products_unit'] ?></td>
                       <td>
                         <?php if ($row['products_status']==1): ?>

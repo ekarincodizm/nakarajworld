@@ -6,6 +6,7 @@ class AccountingModel extends CI_Model
   public function AccountingSelectAll() {
     $query =  $this->db
     ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
+    ->order_by('accounting_status', 'ASC')
     ->order_by('accounting_id', 'DESC')
     ->get('mlm_accounting')
     ->result_array();

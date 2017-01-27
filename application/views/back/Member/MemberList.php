@@ -45,7 +45,7 @@
                       <?php  endif  ?>
                     </td>
                     <td><?php echo $row['member_citizen_id'] ?></td>
-                    <td><?php echo $row['member_prefix'].$row['member_firstname']." ".$row['member_lastname']." <font color='blue'>(PV:".$row['total_pv'].")</font>" ?></td>
+                    <td><?php echo $row['member_prefix'].$row['member_firstname']." ".$row['member_lastname']." <font color='blue'>(PV:".number_format($row['total_pv']).")</font>" ?></td>
                     <!-- <td><?php echo $PV ?> </td> -->
                     <td>
                       <?php  if ($row['member_status']==1): ?>
