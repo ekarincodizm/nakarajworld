@@ -20,10 +20,10 @@ top: 0%;">
           <div class="row">
             <div class="col-sm-8">
               <div class="row">
-                <div class="col-sm-3">
-                  <img src="<?php echo base_url('assets/image/'.$Config[0]['mlm_config_logo'])?>" width="100" height="100" alt=""/>
+                <div class="col-sm-4">
+                  <img src="<?php echo base_url('assets/image/'.$Config[0]['mlm_config_logo'])?>" class="img-responsive" alt=""/>
                 </div>
-                <div class="col-sm-9" style="padding-top: 20px;">
+                <div class="col-sm-8" style="padding-top: 20px;">
                   <h3 class="text-center">บริษัท นว ดรากอน จำกัด</h3>
                 </p>
               </div>

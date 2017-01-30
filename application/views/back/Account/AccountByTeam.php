@@ -46,13 +46,13 @@
                     <th>ดาวน์ไลน์ติดตัว</th>
                     <th>แนะนำผู้อื่น</th>
                     <th>สถานะ</th>
-                    <th class="noExport">ตัวเลือก</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php $i=1; foreach ($AccountList as $row): ?>
                     <?php if ($row['account_team']==$t): ?>
-                      <tr>
+                      <tr style="cursor: pointer;" onclick="document.location = '<?php echo site_url('/Member/AccountDetail/'.$row['account_id']); ?>';">
+
                         <td><?php echo $i; ?></td>
                         <td><?php echo $row['account_team'].sprintf("%04d", $row['account_level']).sprintf("%04d", $row['account_code']); ?></td>
                         <!-- <td><?php //echo $row['adviser'][0]['account_team'].sprintf("%04d", $row['adviser'][0]['account_level']).sprintf("%04d", $row['adviser'][0]['account_code']); ?></td> -->
@@ -84,10 +84,6 @@
                               <?php elseif ($row['account_status']==3): ?>
                                 <span class="font-bold col-pink">ปิดการใช้งาน</span>
                               <?php endif; ?>
-                            </td>
-
-                            <td>
-                              <a href="<?php echo site_url('/Member/AccountDetail/'.$row['account_id']); ?>" class="btn btn-xs btn-info">รายละเอียด</a>
                             </td>
                           </tr>
                         <?php endif; ?>

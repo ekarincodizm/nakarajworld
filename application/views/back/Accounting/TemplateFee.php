@@ -7,6 +7,7 @@
         <tr>
           <th>#</th>
           <th>รายการ</th>
+          <th>รหัสบิล</th>
           <th class="text-right">จำนวน</th>
           <th class="text-right">ราคาต่อหน่วย</th>
           <th class="text-right">ยอดรวม</th>
@@ -17,9 +18,11 @@
         <tr>
           <td>1</td>
           <td><?php echo $var['journals_detail'] ?></td>
+          <td class="text-right"><?php echo ($var['journal_fee_code']) ?> </td>
           <td class="text-right">1</td>
+          <td class="text-right"><?php echo number_format($var['journal_fee_amount']) ?> </td>
           <td class="text-right"><?php echo number_format($var['source_amount']) ?> </td>
-          <td class="text-right"><?php echo number_format($var['source_amount']) ?> </td>
+
         </tr>
 
       </tbody>

@@ -14,12 +14,13 @@ top: 0%;">
   <div class="col-sm-12">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-offset-0 col-sm-2 col-md-2">
-          <h1 class="text-center"><img src="<?php echo base_url('assets/theme/front-end/images/logo.png')?>" width="100" height="100" alt=""/><br>
+        <div class="col-sm-offset-0 col-sm-3 col-md-3">
+          <h1 class="text-center"><img src="<?php echo base_url('assets/theme/front-end/images/logo.png')?>" class="img-responsive" alt=""/><br>
           </h1>
         </div>
         <div class="col-sm-offset-0 col-sm-8 col-md-8">
-          <h1 class="text-center">ใบสมัคร และ สัญญาการเข้าร่วมธุรกิจ นว ดรากอน </h1>
+          <h3 class="text-center"><b>ใบสมัคร และ สัญญาการเข้าร่วมธุรกิจ
+            <br>บริษัท นว ดรากอน จำกัด</b></h3>
         </div>
         <div class="col-sm-offset-0 col-sm-2 col-md-2">
           <!-- <p class="text-center">รหัสสมาชิก<span><br>
@@ -27,10 +28,11 @@ top: 0%;">
         </div>
       </div>
       <div class="row">
+        <div class="row">
         <div class="col-sm-offset-0 col-md-12 col-sm-12">
-          <p class="text-center"><strong>ข้อมูลผู้สมัคร</strong><br>
+          <p class="text-left"><strong>ข้อมูลผู้สมัคร</strong><br>
           </p>
-
+        </div>
         </div>
         <div class="row">
           <div class="col-sm-offset-0 col-md-12 col-sm-12">
@@ -99,10 +101,10 @@ top: 0%;">
                 <div class="row">
                   <div class="col-sm-offset-0 col-md-6 col-sm-6">
                     <p><strong><font size="2">เอกสารประกอบการสมัคร</strong><br>
-                      ( )สำเนาบัตรประชาชน <br>( )สำเนาหน้าสมุดบัญชีธนาคาร</font></p>
+                      ( ) สำเนาบัตรประชาชน <br>( ) สำเนาหน้าสมุดบัญชีธนาคาร</font></p>
                     </div>
                     <div class="col-sm-offset-0 col-md-6 col-sm-6">
-                      <p><strong><font size="2">เอกสารผู้รับมรดกตกทอด</strong> <br>( )สำเนาบัตรประชาชน และหรือสำเนาทะเบียนบ้าน<br> </font><br>
+                      <p><strong><font size="2">เอกสารผู้รับมรดกตกทอด</strong> <br>( ) สำเนาบัตรประชาชน และหรือสำเนาทะเบียนบ้าน<br> </font><br>
                       </p>
                     </div>
                     <div class="col-sm-offset-0 col-md-12 col-sm-12">
@@ -124,31 +126,34 @@ top: 0%;">
                 4. เมื่อผู้จำหน่ายอิสระใช้สิทธิคืนสินค้า วัสดุอุปกรณ์ส่งเสริมการขาย ชุดคู่มือ หรืออุปกรณ์ส่งเสริมธุรกิจที่ซื้อไปจากผู้ประกอบธุรกิจขายตรงให้ผู้ประกอบการซื้อคืนตามราคาที่ผู้จำหน่าย อิสระได้จ่ายไปภายใน 15 วัน นับแต่วันที่ผู้จำหน่ายอิสระใช้สิทธิคืน แต่ในการใช้สิทธิคืน กรณีที่สัญญาตามข้อ 3. สิ้นสุดลง ผู้ประกอบธุรกิจขายตรงมีสิทธิหักค่าดำเนินการต่างๆได้ และมีสิทธิหักกลบลบหนี้ใดๆ อันเกี่ยวกับสัญญาข้อ 1. ที่ผู้จำหน่ายอิสระต้องชำระ <br>
                 5. สถานภาพการเป็นผู้จำหน่ายอิสระมีอายุ 1 ปี นับจากเดือนที่สมัคร โดยสมาชิกที่ประสงค์จะรักษาสถานภาพการเป็นสมาชิก จะต้องต่อสถานภาพเป็นประจำทุกปี และบริษัทฯ เป็นผู้พิจารณาและอนุมัติการสมัครตามใบสมัครแต่เพียงผู้เดียว </p>
               </font></div>
-              <div class="col-sm-offset-0 col-md-0 col-sm-12"></div>
+              <div class="col-sm-offset-0 col-md-12 col-sm-12"></div>
               <div class="col-sm-offset-0 col-md-6 col-sm-12"><p><br></p></div>
               <div class="col-sm-12">
                 <div class="container-fluid">
                   <div class="row">
-                    <div class="col-sm-offset-0 col-md-8 col-sm-8"><font size="2">
-                      <p class="text-justify">ข้าพเจ้าขอรับรองว่า ข้อความต่างๆเป็นจริงทุกประการ และถือว่าใบสมัครฉบับนี้เป็นสัญญาที่ข้าพเจ้ามีต่อบริษัทข้าพเจ้าได้อ่านและทำความเข้าใจเงื่อนไขข้อตกลง รวมถึง กฎระเบียบต่างๆของผู้จำหน่ายอิสระของบริษัทอย่างครบถ้วนแล้ว และ หากมีเงื่อนไขข้อตกลงอื่นๆที่บริษัทประกาศตามมาภายหลัง ข้าพเจ้ายินดีปฏิบัติตามอย่างเคร่งครัดโดยปราศจากเงื่อนไขทุกประการ</p></font>
-                    </div>
-                    <div class="col-sm-offset-0 col-md-4 col-sm-4" id="border">
-                      <p class="text-center"><strong> ส่วนของเจ้าหน้าที่บริษัท</strong></p>
-                      <p class="text-center">&nbsp;</p>
-                      <p class="text-center">&nbsp;</p>
-                      <p class="text-center">&nbsp;</p>
+                    <div class="col-sm-offset-0 col-md-12 col-sm-12"><font size="2">
+                      <p class="text-justify">ข้าพเจ้าขอรับรองว่า ข้อความต่างๆเป็นจริงทุกประการและถือว่าใบสมัครฉบับนี้เป็นสัญญาที่ข้าพเจ้ามีต่อบริษัทข้าพเจ้าได้อ่านและทำความเข้าใจเงื่อนไขข้อตกลง รวมถึงกฎระเบียบต่างๆของผู้จำหน่ายอิสระของบริษัทอย่างครบถ้วนแล้ว และ หากมีเงื่อนไขข้อตกลงอื่นๆที่บริษัทประกาศตามมาภายหลัง ข้าพเจ้ายินดีปฏิบัติตามอย่างเคร่งครัดโดยปราศจากเงื่อนไขทุกประการ</p></font>
                     </div>
                   </div>
                   <div class="row"> </div>
                   <div class="row">
                     <div class="col-sm-offset-0 col-sm-4 col-md-4">
+                      <p class="text-center">&nbsp;</p>
+
                       <p class="text-center"><font size="2">.......................................<br>
                         ลายเซ็นผู้สมัคร <br>วันที่......./........../..........</font></p>
                       </div>
                       <div class="col-sm-offset-0 col-sm-4 col-md-4">
+                        <p class="text-center">&nbsp;</p>
                         <p class="text-center"><font>.......................................</font><br>
                           ลายเซ็นผู้ปกครอง<br>
                           วันที่......./........../..........</p>
+                        </div>
+                        <div class="col-sm-offset-0 col-md-4 col-sm-4" id="border">
+                          <p class="text-center"><strong> ส่วนของเจ้าหน้าที่บริษัท</strong></p>
+                          <p class="text-center">&nbsp;</p>
+                          <p class="text-center">&nbsp;</p>
+                          <p class="text-center">&nbsp;</p>
                         </div>
                       </div>
                     </div>

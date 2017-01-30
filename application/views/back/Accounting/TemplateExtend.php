@@ -7,7 +7,7 @@
         <tr>
           <th>#</th>
           <th>รายการ</th>
-          <th>ชื่อสินค้า</th>
+          <th>รหัสบิล</th>
           <th class="text-right">จำนวน</th>
           <th class="text-right">ราคาต่อหน่วย</th>
           <th class="text-right">ยอดรวม</th>
@@ -15,17 +15,15 @@
       </thead>
       <tbody>
 
-        <?php $i=1; foreach ($var['source_detail']['order_item'] as $row): ?>
         <tr>
           <td><?php echo $i;?></td>
           <td><?php echo $var['journals_detail'] ?></td>
-          <td><?php echo $row['products_name'] ?></td>
-          <td class="text-right"><?php echo number_format($row['journal_sale_order_item_quantity']) ?></td>
-          <td class="text-right"><?php echo number_format($row['journal_sale_order_item_price']) ?> </td>
-          <td class="text-right"><?php echo number_format($row['journal_sale_order_item_quantity']*$row['journal_sale_order_item_price']) ?></td>
+          <td><?php echo $var['source_code'] ?></td>
+          <td class="text-right">1</td>
+          <td class="text-right"><?php echo number_format($var['source_amount']) ?></td>
+          <td class="text-right"><?php echo number_format($var['source_amount']) ?></td>
         </tr>
 
-        <?php $i++; endforeach; ?>
       </tbody>
     </table>
   </div>
