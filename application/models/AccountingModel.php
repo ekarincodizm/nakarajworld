@@ -91,9 +91,7 @@ class AccountingModel extends CI_Model
       $source_detail['source_amount'] = $source_detail['order_item']['temp_total_price'];
       unset($source_detail['order_item']['temp_total_price']);
     }
-    // echo "<pre>";
-    // print_r($source_detail);
-    // exit();
+
     return $source_detail;
   }
 
@@ -126,7 +124,7 @@ class AccountingModel extends CI_Model
         $query['member_detail'] = "";
       }
     }
-
+    
     return $query;
   }
   public function SaleOrderDetail($source_id)
@@ -165,7 +163,7 @@ class AccountingModel extends CI_Model
     ->where('mlm_account.account_id', $input['account_id'])
     ->update('mlm_account', $input);
   }
-  
+
   public function ConfirmInvoice($accounting_id) {
     $query =  $this->db
     ->where('accounting_status', 1)

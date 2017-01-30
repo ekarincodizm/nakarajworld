@@ -18,9 +18,9 @@
         <tr>
           <td>1</td>
           <td><?php echo $var['journals_detail'] ?></td>
-          <td class="text-right"><?php echo ($var['journal_fee_code']) ?> </td>
+          <td class="text-right"><?php echo ($var['source_code']) ?> </td>
           <td class="text-right">1</td>
-          <td class="text-right"><?php echo number_format($var['journal_fee_amount']) ?> </td>
+          <td class="text-right"><?php echo number_format($var['source_amount']) ?> </td>
           <td class="text-right"><?php echo number_format($var['source_amount']) ?> </td>
 
         </tr>
