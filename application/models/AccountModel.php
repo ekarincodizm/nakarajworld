@@ -138,18 +138,18 @@ public function AddDetail($query)
     return $query;
   }
 
-  public function SaveAccount($value, $adviser_id) {
-    $this->db->insert('mlm_account', $value);
-    $NewID = $this->db->insert_id();
-    $NewID = $NewID+1;
-    // Insert Temp Count Downline
-    $Account = json_decode(json_encode($this->AccountByID($NewID)), true);
-    $this->debuger->prevalue($Account);
+  public function SaveAccount($AccountInput, $adviser_id)
+  {
+    $this->db->insert('mlm_account', $AccountInput);
+    $new_account_id = $this->db->insert_id();
+
+    $Account = json_decode(json_encode($this->AccountByID($new_account_id)), true);
     $upline_id = $Account[0]['account_upline_id'];
+
     do {
       $input = array(
         'downline_count_upline_id' => $upline_id,
-        'downline_count_downline_id' => $NewID,
+        'downline_count_downline_id' => $new_account_id,
       );
       $this->db->insert('mlm_downline_count', $input);
       $Account = json_decode(json_encode($this->AccountByID($upline_id)), true);
@@ -160,7 +160,8 @@ public function AddDetail($query)
         $upline_id = '';
       }
     } while ($upline_id!='' && $upline_id!=0);
-    return $NewID;
+
+    return $new_account_id;
   }
 
   public function SaveAccountHistory($value)

@@ -189,14 +189,7 @@ class Member extends CI_Controller{
     $AccountAdviser = json_decode(json_encode($this->AccountModel->AccountNonJoinByID($adviser_id)), true);
     $AccountListByTeam = json_decode(json_encode($this->AccountModel->AccountListByTeam($AccountUpline[0]['account_team'])), true);
 
-    //Insert New Account + Relation Downline
-    $time =  Date('Y-m-d');
-    $expired = strtotime($time);
-    $expired = strtotime("+365 day", $expired);
-    $expired =  Date('Y-m-d', $expired);
-    $now = DateTime::createFromFormat('U.u', microtime(true));
-		$now = $now->format("Hisu");
-		$code = "DR".$now;
+    //เพิ่ม Account ใหม่ และ เพิ่มการนับ downline
     $AccountInput = array(
       'account_team' => $AccountUpline[0]['account_team'],
       'account_level' => $AccountUpline[0]['account_level']+=1,
@@ -206,34 +199,39 @@ class Member extends CI_Controller{
       'member_id' => $member_id,
     );
 
-    $NewAccountID = $this->AccountModel->SaveAccount($AccountInput, $adviser_id);
-    // echo $NewAccountID;
-    //Insert New Account History
+    $new_account_id = $this->AccountModel->SaveAccount($AccountInput, $adviser_id);
+
+    // เพิ่มการลงทะเบียนต่ออายุ ฟรี
+    $expired =  Date('Y-m-d', strtotime("+365 day", strtotime(Date('Y-m-d'))));
     $ExtendInput = array(
-      'account_id' => $NewAccountID,
+      'account_id' => $new_account_id,
       'member_id' => $member_id,
-      'journal_extend_start_date' => $time,
+      'journal_extend_start_date' => Date('Y-m-d'),
       'journal_extend_expired_date' => $expired,
       'journal_extend_amount' => 0,
     );
-    $ExtendNewID = $this->AccountModel->SaveJournalExtend($ExtendInput);
+    $new_journal_extend_id = $this->AccountModel->SaveJournalExtend($ExtendInput);
+
+    // เพิ่มรายการบัญชี ฟรีค่าธรรมเนียม บัญชีนักธุระกิจใหม่
+    $code = "DR".DateTime::createFromFormat('U.u', microtime(true))->format("Hisu");
 
     $AccountingInput = array(
-      'accounting_date' => $time,
-      'accounting_source_id' => $ExtendNewID,
+      'accounting_date' =>  Date('Y-m-d'),
+      'accounting_source_id' => $new_journal_extend_id,
       'accounting_tax' => 0,
       'accounting_status' => 1,
       'journals_id' => 2,
       'accounting_no' => $code,
+      'accounting_note' => "ฟรีค่าธรรมเนียม บัญชีนักธุระกิจใหม่"
     );
     $this->AccountModel->AddAccounting($AccountingInput);
-    //Check Bussiness Code
-    $arr = 0;
-    // $id = $NewAccountID;
-    $goal = 3;
-    $lvlDown = 1;
-    $lvlUp = 1;
-    $GoalPerLevel = array();
+
+    // ตรวจ ค่าการตลาด
+    $arr = 0; // array
+    $goal = 3; // เป้าหมายการครบ
+    $lvlDown = 1; // นับ ระดับลง
+    $lvlUp = 1; // นับ ระดับขึ้น
+    $GoalPerLevel = array(); // ป้าหมายการครบ แต่ละ ระดับ
     for ($i=3; $i <=243; $i *= 3) {
       if ( $upline_id!=0 && $upline_id!='' ) {
         $GoalPerLevel[$arr] = $this->CountCodePerLevel($upline_id, $lvlDown, $goal, $lvlUp);
@@ -244,7 +242,6 @@ class Member extends CI_Controller{
         $arr++;
       }
     }
-    // $this->debuger->prevalue($GoalPerLevel);
 
     redirect('/Member/MemberProfile/'.$member_id);
   }
