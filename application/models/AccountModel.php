@@ -144,6 +144,7 @@ public function AddDetail($query)
     $NewID = $NewID+1;
     // Insert Temp Count Downline
     $Account = json_decode(json_encode($this->AccountByID($NewID)), true);
+    $this->debuger->prevalue($Account);
     $upline_id = $Account[0]['account_upline_id'];
     do {
       $input = array(

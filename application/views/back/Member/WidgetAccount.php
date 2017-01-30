@@ -34,7 +34,7 @@
             ดาวน์ไลน์ติดตัว: <?php echo count($ThreeDownline); ?> รหัส<br>
             แนะนำผู้อื่น: <?php echo count($AdviserList); ?> รหัส<br>
             <!-- สถานะบัญชีนักธุรกิจอิสระ: <br> -->
-			<hr><center>
+			<!-- <hr><center>
             <font color="red">โอนกรรมสิทธิ์บัญชีนี้ </font> ให้แก่ <br>
             <?php echo form_open('/Account/AccountPermission'); ?>
             <input type="hidden" name="account_id" value="<?php echo $Account[0]['account_id']?>">
@@ -48,7 +48,7 @@
               <hr>
               <p class="text-center"><button type="submit" class="btn btn-fill btn-xs btn-danger">ตกลง</button></p>
             <?php echo form_close(); ?>
-          </center>
+          </center> -->
           </div>
         </div>
       </div>

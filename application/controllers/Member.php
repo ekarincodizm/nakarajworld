@@ -46,11 +46,16 @@ class Member extends CI_Controller{
     // $this->debuger->prevalue($Profile);
     $pv = $this->HomePageModel->allpv($id);
     // $AccountList = json_decode(json_encode($this->AccountModel->AccountByMember($id)), true);
+    $check_acc_id = $this->AccountingModel->GetAccountingid($id);
+
+    //$this->debuger->prevalue($check_acc_id);
+
     $value = array(
       'Result' => array(
         'Profile' => $Profile,
         'AccountList' => $AccountList,
         'PV' => $pv,
+        'check_acc_id' => $check_acc_id,
       ),
       'View' => 'back/Member/MemberProfile'
     );
@@ -421,12 +426,6 @@ class Member extends CI_Controller{
 				'journals_id' => 1,
 			);
 			$this->AccountModel->AddAccounting($data);
-
-      $UpdateStatusAccounting = array(
-        'member_id' => $member_id,
-        // 'member_status' => 1,
-      );
-      $this->AccountModel->ChangeMemberStatus($UpdateStatusAccounting);
       redirect('/Accounting/');
     }
 

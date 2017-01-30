@@ -18,8 +18,13 @@
                       </h2>
                   </div>
                   <div class="body">
-                    <?php echo $Profile[0]['member_prefix'].$Profile[0]['member_firstname']." ".$Profile[0]['member_lastname'] ?><br style="margin: 30 0 30 0;">
-                    <a class="btn btn-lg btn-success" href="<?php echo site_url('/Member/ApprovedMember/'.$this->uri->segment(3)); ?>">ยืนยันสมาชิก</a>
+                    <?php if ($check_acc_id==0): ?>
+                      <?php echo $Profile[0]['member_prefix'].$Profile[0]['member_firstname']." ".$Profile[0]['member_lastname'] ?><br style="margin: 30 0 30 0;">
+                      <a class="btn btn-lg btn-success" href="<?php echo site_url('/Member/ApprovedMember/'.$this->uri->segment(3)); ?>">ยืนยันสมาชิก</a>
+                    <?php else: ?>
+                      <?php echo $Profile[0]['member_prefix'].$Profile[0]['member_firstname']." ".$Profile[0]['member_lastname'] ?><br style="margin: 30 0 30 0;">
+                      <a class="btn btn-lg btn-info" href="<?php echo site_url('/Accounting/AccountingDetail/'.$check_acc_id); ?>">ชำระค่าสมาชิก</a>
+                    <?php endif; ?>
                   </div>
               </div>
           </div>

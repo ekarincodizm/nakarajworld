@@ -28,6 +28,21 @@ class AccountingModel extends CI_Model
     return $query;
 
   }
+  public function GetAccountingid($memberid)
+  {
+      $query = $this->db
+      ->where('journals_id',1)
+      ->where('member_id', $memberid)
+      ->join('mlm_journal_fee',' mlm_accounting.accounting_source_id = mlm_journal_fee.member_id')
+      ->get('mlm_accounting')
+      ->result_array();
+      $acc = 0;
+      if (count($query)>0) {
+        $acc =  $query[0]['accounting_id'];
+      }
+      return $acc;
+
+  }
 
   public function AccountingSourceDetail($query)
   {
@@ -124,7 +139,7 @@ class AccountingModel extends CI_Model
         $query['member_detail'] = "";
       }
     }
-    
+
     return $query;
   }
   public function SaleOrderDetail($source_id)

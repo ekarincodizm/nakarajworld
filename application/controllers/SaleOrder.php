@@ -79,6 +79,58 @@ class SaleOrder extends CI_Controller{
   $this->LoadDoc($value);
 }
 
+public function resultFee()
+{
+$InvoiceID = $this->uri->segment(3);
+$AccountingDetail = $this->AccountingModel->AccountingDetail($InvoiceID);
+$Config = $this->ConfigModel->Config();
+//$this->debuger->prevalue($AccountingDetail);
+
+$value = array(
+  'Result' => array(
+    'AccountingDetail' => $AccountingDetail,
+    'Config' => $Config,
+  ),
+  'View' => 'back/Accounting/resultFee'
+);
+$this->LoadDoc($value);
+}
+
+public function resultExtend()
+{
+  $InvoiceID = $this->uri->segment(3);
+  $AccountingDetail = $this->AccountingModel->AccountingDetail($InvoiceID);
+  $Config = $this->ConfigModel->Config();
+  //$this->debuger->prevalue($AccountingDetail);
+
+  $value = array(
+    'Result' => array(
+      'AccountingDetail' => $AccountingDetail,
+      'Config' => $Config,
+    ),
+  'View' => 'back/Accounting/resultExtend'
+);
+$this->LoadDoc($value);
+}
+
+public function resultDividend()
+{
+  $InvoiceID = $this->uri->segment(3);
+  $AccountingDetail = $this->AccountingModel->AccountingDetail($InvoiceID);
+  $this->debuger->prevalue($AccountingDetail);
+  //$Config = $this->ConfigModel->Config();
+
+
+  $value = array(
+    'Result' => array(
+      'AccountingDetail' => $AccountingDetail,
+    'Config' => $Config,
+    ),
+  'View' => 'back/Accounting/resultDividend'
+);
+$this->LoadDoc($value);
+}
+
 public function Payment()
 {
   $InvoiceID = $this->uri->segment(3);

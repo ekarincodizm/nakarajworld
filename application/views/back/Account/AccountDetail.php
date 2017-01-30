@@ -37,9 +37,9 @@
               <li role="presentation" class=""><a href="#Adviser" data-toggle="tab" aria-expanded="false">แนะนำผู้อื่น</a></li>
               <li role="presentation" class=""><a href="#Upline" data-toggle="tab" aria-expanded="false">อัปไลน์</a></li>
               <!-- <li role="presentation" class=""><a href="#Bookbank" data-toggle="tab" aria-expanded="false">บัญชีธนาคาร</a></li> -->
-
               <li role="presentation" class=""><a href="#Extend" data-toggle="tab" aria-expanded="false">การต่ออายุ</a></li>
               <li role="presentation" class=""><a href="#Upclass" data-toggle="tab" aria-expanded="false">ระดับ</a></li>
+              <li role="presentation" class=""><a href="#takeid" data-toggle="tab" aria-expanded="false">โอนกรรมสิทธิ์</a></li>
             </ul>
 
             <!-- Tab panes -->
@@ -62,6 +62,11 @@
               <div role="tabpanel" class="tab-pane fade" id="Upclass">
                 <?php $this->load->view('back/Account/TabPanelUpclass'); ?>
               </div>
+
+              <div role="tabpanel" class="tab-pane fade" id="takeid">
+                <?php $this->load->view('back/Account/TabPanelTakeid'); ?>
+              </div>
+
             </div>
           </div>
         </div>
