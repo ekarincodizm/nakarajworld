@@ -106,6 +106,7 @@ class AccountingModel extends CI_Model
     if (count($query)!=0) {
       if ($source_table=='mlm_journal_sale_order_detail') {
         $query['order_item'] = $this->SaleOrderDetail($source_id);
+
       }
       $query['order_detail'] = $query[0];
 
@@ -158,12 +159,13 @@ class AccountingModel extends CI_Model
     ->result_array();
     return $query;
   }
+
   public function Account_Transfer($input){
     $query = $this->db
     ->where('mlm_account.account_id', $input['account_id'])
     ->update('mlm_account', $input);
   }
-
+  
   public function ConfirmInvoice($accounting_id) {
     $query =  $this->db
     ->where('accounting_status', 1)
@@ -171,18 +173,14 @@ class AccountingModel extends CI_Model
     ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
     ->get('mlm_accounting')
     ->num_rows();
-
     $InvoiceNo = "IN".sprintf("%05d", ($query+1));
-
     $input = array(
       'accounting_status' => 1,
       'accounting_no' => $InvoiceNo,
     );
-
     $this->db
     ->where('accounting_id', $accounting_id)
     ->update('mlm_accounting', $input);
-
   }
   public function ConfirmRecipt($accounting_id) {
     $query =  $this->db
@@ -192,14 +190,11 @@ class AccountingModel extends CI_Model
     ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
     ->get('mlm_accounting')
     ->num_rows();
-
     $ReciptNo = "RE".sprintf("%05d", ($query+1));
-
     $input = array(
       'accounting_status' => 1,
       'accounting_no' => $ReciptNo,
     );
-
     $this->db
     ->where('accounting_id', $accounting_id)
     ->update('mlm_accounting', $input);

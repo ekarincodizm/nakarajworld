@@ -85,13 +85,10 @@ class Store extends CI_Controller{
 	{
 		$TempList =$this->ProductsModel->TempList($_SESSION['MEMBER_ID']);
 		$TempList = json_decode(json_encode($TempList), true);
-		$MyPv = $this->HomePageModel->allpv($_SESSION['MEMBER_ID']);
-
 
 		$value = array(
 			'Result' => array(
 				'TempList' => $TempList,
-				'MyPv' => $MyPv,
 			),
 			'View' => 'front/Store/TempList'
 		);
@@ -144,6 +141,9 @@ class Store extends CI_Controller{
 		redirect('Store/InvoiceList');
 
 	}
+
+
+
 	public function InvoiceList()
 	{
 		$InvoiceList =$this->ProductsModel->InvoiceList($_SESSION['MEMBER_ID']);

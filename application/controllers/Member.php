@@ -66,6 +66,7 @@ class Member extends CI_Controller{
     $Adviser = json_decode(json_encode($this->AccountModel->AccountByID( $Account[0]['account_adviser_id'])), true);
     $AdviserList = json_decode(json_encode($this->AccountModel->AdviserList( $Account[0]['account_id'])), true);
     $Account2 = json_decode(json_encode($this->MemberModel->MemberList()), true);
+    $MyPv = json_decode(json_encode($this->HomePageModel->allpv( $Account[0]['member_id'])), true);
 
     // $this->debuger->prevalue($Account[0]['account_id']);
 
@@ -84,6 +85,8 @@ class Member extends CI_Controller{
     // $BookbankList = $this->AccountModel->BookbankList( $Account[0]['member_id'] );
     // $this->debuger->prevalue($this->AccountModel->BookbankList( $Account[0]['member_id']));
 
+
+
     $BankList = $this->db->get('mlm_bank')->result_array();
 
     $value = array(
@@ -95,14 +98,13 @@ class Member extends CI_Controller{
         'Upline' => $Upline,
         'Adviser' => $Adviser,
         'AdviserList' => $AdviserList,
-
         'JounalExtendAccount' => $JounalExtendAccount,
         'BookbankDetail' => $BookbankDetail,
         // 'BookbankList' => $BookbankList,
-
         'BankList' => $BankList,
-
         'member' => $Account2,
+
+        'MyPv' => $MyPv,
 
       ),
       'View' => 'back/Account/AccountDetail'
@@ -112,12 +114,8 @@ class Member extends CI_Controller{
 
   public function AccountDetailExtend() {
     $id = $this->uri->segment(3);
-
     $JounalExtendAccount = $this->AccountModel->JounalExtendAccount($id);
-
     $HistoryAccount = $this->AccountModel->JounalExtendAccount($id);
-
-
   }
   public function FindAccountByAdviser() {
     $id = $this->uri->segment(3);
@@ -148,14 +146,6 @@ class Member extends CI_Controller{
       redirect('/Member/SelectUpline/'.$member_id.'/'.$adviser_id.'/'.$adviser_id);
     } else {
       redirect('/Member/FindAccountByAdviser/'.$member_id);
-
-      // $value = array(
-      //   'Result' => array(
-      //     'UserFullCode' => $_POST['account_code'],
-      //     'Result' => 'null',
-      //   ),
-      //   'View' => 'back/Account/FindAccountByAdviser'
-      // );
     }
     $this->LoadPage($value);
   }
@@ -434,7 +424,7 @@ class Member extends CI_Controller{
 
       $UpdateStatusAccounting = array(
         'member_id' => $member_id,
-        'member_status' => 1,
+        // 'member_status' => 1,
       );
       $this->AccountModel->ChangeMemberStatus($UpdateStatusAccounting);
       redirect('/Accounting/');

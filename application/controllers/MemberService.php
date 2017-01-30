@@ -98,4 +98,30 @@ class MemberService extends REST_Controller
 			$AccountDetailExtend = $this->AccountModel->JounalExtendAccount($input['account_id']);
 			$this->response($AccountDetailExtend);
 	  }
+		public function AccountDetailUpclass_post()
+	  {
+			$input =  $this->post();
+			$AccountDetailUpclass = $this->AccountModel->AccountDetailUpclass($input['account_id']);
+			//print_r($AccountDetailUpclass);
+			$this->response($AccountDetailUpclass);
+		}
+		public function AddAccountDetailUpclass_post()
+	  {
+			$input =  $this->post();
+			$time =  Date('Y-m-d');
+			$value = array(
+				'point_value' => '4000',
+				'point_detail' => 'อัพเลเวล',
+				'point_date' => $time,
+				'point_type' => 1,
+				'member_id' => $input['member_id'],
+				'account_id' => $input['account_id'],
+			);
+
+			$this->AccountModel->AddAccountDetailUpclass($value);
+			//print_r($AccountDetailUpclass);
+			$AccountDetailUpclass = $this->AccountModel->AccountDetailUpclass($input['account_id']);
+			$this->response($AccountDetailUpclass);
+		}
+
 }
