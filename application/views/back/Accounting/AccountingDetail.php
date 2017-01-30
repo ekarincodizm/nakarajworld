@@ -84,10 +84,16 @@
               <?php $type = $var['journals_id'] ?>
               <?php $status = $var['accounting_status']?>
               <?php if ($status!=1): ?>
-
-                  <a class="btn btn-lg btn-block bg-teal waves-effect" href="<?php echo site_url('/Accounting/ConfirmInvoice/'.$var['accounting_id']); ?>">
+                <?php if ($type==1): ?>
+                  <a class="btn btn-lg btn-block bg-teal waves-effect" href="<?php echo site_url('/Accounting/ConfirmInvoiceAndEnableProfile/'.$var['accounting_id'].'/'.$var['member']['member_id']); ?>">
                     ชำระเงิน
                   </a>
+                  <?php else: ?>
+                    <a class="btn btn-lg btn-block bg-teal waves-effect" href="<?php echo site_url('/Accounting/ConfirmInvoice/'.$var['accounting_id']); ?>">
+                      ชำระเงิน
+                    </a>
+                <?php endif; ?>
+
 
               <?php endif; ?>
             </div>
