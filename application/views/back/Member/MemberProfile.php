@@ -1,3 +1,4 @@
+<?php //$this->debuger->prevalue($check_acc_id); ?>
 <div ng-controller="MemberProfileCtrl">
   <?php if ($Profile[0]['member_status']==1){
     $show = 'true';

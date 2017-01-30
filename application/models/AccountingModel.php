@@ -30,14 +30,16 @@ class AccountingModel extends CI_Model
     return $query;
 
   }
-  public function GetAccountingid($memberid)
+  public function GetAccountingID($member_id)
   {
       $query = $this->db
-      ->where('journals_id',1)
-      ->where('member_id', $memberid)
-      ->join('mlm_journal_fee',' mlm_accounting.accounting_source_id = mlm_journal_fee.member_id')
+      ->where('journals_id', 1)
+      ->where('member_id', $member_id)
+      ->join('mlm_journal_fee','mlm_accounting.accounting_source_id = mlm_journal_fee.journal_fee_id')
       ->get('mlm_accounting')
       ->result_array();
+      // $this->debuger->prevalue($query);
+
       $acc = 0;
       if (count($query)>0) {
         $acc =  $query[0]['accounting_id'];

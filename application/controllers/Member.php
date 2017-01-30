@@ -46,7 +46,9 @@ class Member extends CI_Controller{
     // $this->debuger->prevalue($Profile);
     $pv = $this->HomePageModel->allpv($id);
     // $AccountList = json_decode(json_encode($this->AccountModel->AccountByMember($id)), true);
-    $check_acc_id = $this->AccountingModel->GetAccountingid($id);
+    // $this->debuger->prevalue($id);
+
+    $check_acc_id = $this->AccountingModel->GetAccountingID($id);
 
     //$this->debuger->prevalue($check_acc_id);
 
