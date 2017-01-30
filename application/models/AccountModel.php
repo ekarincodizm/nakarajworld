@@ -182,6 +182,8 @@ public function AddDetail($query)
   }
   public function AddAccounting($value){
     $this->db->insert('mlm_accounting', $value);
+    $new_id = $this->db->insert_id();
+    return $new_id;
   }
   public function ChangeMemberStatus($value){
     $input = array(

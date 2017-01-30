@@ -224,7 +224,8 @@ class Member extends CI_Controller{
       'accounting_no' => $code,
       'accounting_note' => "ฟรีค่าธรรมเนียม บัญชีนักธุระกิจใหม่"
     );
-    $this->AccountModel->AddAccounting($AccountingInput);
+    $new_accounting_id = $this->AccountModel->AddAccounting($AccountingInput);
+    $this->AccountingModel->ConfirmInvoice($new_accounting_id);
 
     // ตรวจ ค่าการตลาด
     $arr = 0; // array
