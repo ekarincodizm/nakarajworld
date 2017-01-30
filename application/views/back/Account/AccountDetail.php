@@ -22,12 +22,7 @@
                 <div class="col-md-10">
 
                 </div>
-                <!-- <?php $id = $Result['AccountDetail'][0]['account_id']; ?> -->
-                <!-- <div class="col-md-2">
-                <?php if(count($Result['BookbankDetail'])==0): ?>
-                <a href="<?php echo site_url('/AccountController/bank_add'); ?>">เพิ่มบัญชีธนาคาร <?php echo $Result['AccountDetail']; ?> </a>
-              <?php endif; ?>
-            </div> -->
+                
           </div>
           <div class="body">
             <!-- Nav tabs -->

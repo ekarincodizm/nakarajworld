@@ -219,7 +219,6 @@ class Member extends CI_Controller{
       'accounting_date' =>  Date('Y-m-d'),
       'accounting_source_id' => $new_journal_extend_id,
       'accounting_tax' => 0,
-      'accounting_status' => 1,
       'journals_id' => 2,
       'accounting_no' => $code,
       'accounting_note' => "ฟรีค่าธรรมเนียม บัญชีนักธุระกิจใหม่"
@@ -426,7 +425,8 @@ class Member extends CI_Controller{
 				'journals_id' => 1,
 			);
 			$this->AccountModel->AddAccounting($data);
-      redirect('/Accounting/');
+      redirect($this->agent->referrer(), 'refresh');
+
     }
 
   public function NewMember()
