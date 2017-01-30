@@ -55,9 +55,16 @@
           <div class="card">
             <div class="body">
               <?php if ($var['accounting_status']!=1): ?>
-              <a class="btn btn-lg btn-block bg-teal waves-effect" href="<?php echo site_url('/Accounting/ConfirmInvoice/'.$var['accounting_id']); ?>">
-                ชำระเงิน
-              </a>
+                <?php if ($var['journals_id']==1): ?>
+                  <a class="btn btn-lg btn-block bg-teal waves-effect" href="<?php echo site_url('/Accounting/ConfirmMembrInvoice/'.$var['accounting_id'].'/'.$var['member']['member_id']); ?>">
+                    ชำระเงิน
+                  </a>
+                  <?php else: ?>
+                  <a class="btn btn-lg btn-block bg-teal waves-effect" href="<?php echo site_url('/Accounting/ConfirmInvoice/'.$var['accounting_id']); ?>">
+                    ชำระเงิน
+                  </a>
+                <?php endif; ?>
+
               <?php endif; ?>
               <a class="btn btn-lg btn-block bg-blue-grey waves-effect " target="_blank" href="<?php echo site_url('SaleOrder/resultSale/'.$var['source_detail'][0]['journal_sale_order_detail_id']); ?>">
                 พิมพ์
