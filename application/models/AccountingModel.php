@@ -219,12 +219,28 @@ class AccountingModel extends CI_Model
 
   public function ConfirmInvoiceAndEnableProfile($accounting_id, $member_id)
   {
+    $query =  $this->db
+    ->where('accounting_status', 1)
+    ->where('journals_type', 4)
+    ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
+    ->get('mlm_accounting')
+    ->num_rows();
+    $InvoiceNo = "IN".sprintf("%05d", ($query+1));
+    $input = array(
+      'accounting_status' => 1,
+      'accounting_no' => $InvoiceNo,
+    );
+
     $acc['accounting_status'] = 1;
     $member['member_status'] = 1;
 
     $this->db
     ->where('accounting_id', $accounting_id)
     ->update('mlm_accounting', $acc);
+
+    $this->db
+    ->where('accounting_id', $accounting_id)
+    ->update('mlm_accounting', $input);
 
     $this->db
     ->where('member_id', $member_id)
