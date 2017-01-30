@@ -3,7 +3,6 @@
     <div class="block-header">
       <h1>
         เกี่ยวกับบัญชีธุรกิจ รหัส <?php echo $Account[0]['account_team'].sprintf("%04d", $Account[0]['account_level']).sprintf("%04d", $Account[0]['account_code']); ?>
-
         <?php if ($JounalExtendAccount[0]['journal_extend_expired_date']<Date('Y-m-d')): ?>
           <span class="">(หมดอายุ)</span>
             <?php endif; ?>
@@ -40,6 +39,7 @@
               <!-- <li role="presentation" class=""><a href="#Bookbank" data-toggle="tab" aria-expanded="false">บัญชีธนาคาร</a></li> -->
 
               <li role="presentation" class=""><a href="#Extend" data-toggle="tab" aria-expanded="false">การต่ออายุ</a></li>
+              <li role="presentation" class=""><a href="#Upclass" data-toggle="tab" aria-expanded="false">ระดับ</a></li>
             </ul>
 
             <!-- Tab panes -->
@@ -57,6 +57,10 @@
 
               <div role="tabpanel" class="tab-pane fade" id="Extend">
                 <?php $this->load->view('back/Account/TabPanelExtend'); ?>
+              </div>
+
+              <div role="tabpanel" class="tab-pane fade" id="Upclass">
+                <?php $this->load->view('back/Account/TabPanelUpclass'); ?>
               </div>
             </div>
           </div>

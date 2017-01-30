@@ -342,5 +342,17 @@ public function AddDetail($query)
   //   $this->db->where('account_id', $id)->delete('mlm_account');
   //
   // }
+  public function AccountDetailUpclass($id){
+    $query = $this->db
+    ->where('account_id', $id)
+    ->join('mlm_member', 'mlm_member.member_id = mlm_point_value.member_id')
+    ->get('mlm_point_value')->result_array();
+    // print_r($query);
+    return $query;
+  }
+  public function AddAccountDetailUpclass($value){
+    $query = $this->db
+    ->insert('mlm_point_value',$value);
+  }
 
 }
