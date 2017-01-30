@@ -98,16 +98,16 @@ class Member extends CI_Controller{
         'Upline' => $Upline,
         'Adviser' => $Adviser,
         'AdviserList' => $AdviserList,
-
         'JounalExtendAccount' => $JounalExtendAccount,
         'BookbankDetail' => $BookbankDetail,
         // 'BookbankList' => $BookbankList,
-
         'BankList' => $BankList,
-
         'member' => $Account2,
+<<<<<<< HEAD
         'MyPv' => $MyPv,
 
+=======
+>>>>>>> origin/master
       ),
       'View' => 'back/Account/AccountDetail'
     );
@@ -116,12 +116,8 @@ class Member extends CI_Controller{
 
   public function AccountDetailExtend() {
     $id = $this->uri->segment(3);
-
     $JounalExtendAccount = $this->AccountModel->JounalExtendAccount($id);
-
     $HistoryAccount = $this->AccountModel->JounalExtendAccount($id);
-
-
   }
   public function FindAccountByAdviser() {
     $id = $this->uri->segment(3);
@@ -152,14 +148,6 @@ class Member extends CI_Controller{
       redirect('/Member/SelectUpline/'.$member_id.'/'.$adviser_id.'/'.$adviser_id);
     } else {
       redirect('/Member/FindAccountByAdviser/'.$member_id);
-
-      // $value = array(
-      //   'Result' => array(
-      //     'UserFullCode' => $_POST['account_code'],
-      //     'Result' => 'null',
-      //   ),
-      //   'View' => 'back/Account/FindAccountByAdviser'
-      // );
     }
     $this->LoadPage($value);
   }
@@ -438,7 +426,7 @@ class Member extends CI_Controller{
 
       $UpdateStatusAccounting = array(
         'member_id' => $member_id,
-        'member_status' => 1,
+        // 'member_status' => 1,
       );
       $this->AccountModel->ChangeMemberStatus($UpdateStatusAccounting);
       redirect('/Accounting/');
