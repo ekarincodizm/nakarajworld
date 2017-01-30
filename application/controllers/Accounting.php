@@ -44,6 +44,15 @@ class Accounting extends CI_Controller{
     );
     $this->LoadPage($value);
   }
+  public function ConfirmInvoiceAndEnableProfile()
+  {
+    $accounting_id = $this->uri->segment(3);
+    $member_id = $this->uri->segment(4);
+
+    $this->AccountingModel->ConfirmInvoiceAndEnableProfile($accounting_id, $member_id);
+
+    redirect($this->agent->referrer(), 'refresh');
+  }
   public function Payment()
   {
     $accounting_id = $this->uri->segment(3);

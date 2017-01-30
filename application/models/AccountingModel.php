@@ -14,6 +14,8 @@ class AccountingModel extends CI_Model
 
     return $query;
   }
+
+
   public function AccountingDetail($accounting_id)
   {
     $query =  $this->db
@@ -211,5 +213,20 @@ class AccountingModel extends CI_Model
     $this->db
     ->where('accounting_id', $accounting_id)
     ->update('mlm_accounting', $input);
+  }
+
+  public function ConfirmInvoiceAndEnableProfile($accounting_id, $member_id)
+  {
+    $acc['accounting_status'] = 1;
+    $member['member_status'] = 1;
+
+    $this->db
+    ->where('accounting_id', $accounting_id)
+    ->update('mlm_accounting', $acc);
+
+    $this->db
+    ->where('member_id', $member_id)
+    ->update('mlm_member', $member);
+
   }
 }
