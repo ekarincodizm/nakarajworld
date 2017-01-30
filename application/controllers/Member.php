@@ -103,11 +103,9 @@ class Member extends CI_Controller{
         // 'BookbankList' => $BookbankList,
         'BankList' => $BankList,
         'member' => $Account2,
-<<<<<<< HEAD
+
         'MyPv' => $MyPv,
 
-=======
->>>>>>> origin/master
       ),
       'View' => 'back/Account/AccountDetail'
     );
