@@ -64,7 +64,7 @@ class SaleOrder extends CI_Controller{
 
   }
 
-  public function resultSale()
+  public function resultTemplateSale()
 {
   $InvoiceID = $this->uri->segment(3);
   $SaleOrderDetail = $this->ProductsModel->SaleOrderResult($InvoiceID);
@@ -79,7 +79,7 @@ class SaleOrder extends CI_Controller{
   $this->LoadDoc($value);
 }
 
-public function resultFee()
+public function resultTemplateFee()
 {
 $InvoiceID = $this->uri->segment(3);
 $AccountingDetail = $this->AccountingModel->AccountingDetail($InvoiceID);
@@ -96,7 +96,7 @@ $value = array(
 $this->LoadDoc($value);
 }
 
-public function resultExtend()
+public function resultTemplateExtend()
 {
   $InvoiceID = $this->uri->segment(3);
   $AccountingDetail = $this->AccountingModel->AccountingDetail($InvoiceID);
@@ -113,7 +113,7 @@ public function resultExtend()
 $this->LoadDoc($value);
 }
 
-public function resultDividend()
+public function resultTemplateDividend()
 {
   $InvoiceID = $this->uri->segment(3);
   $AccountingDetail = $this->AccountingModel->AccountingDetail($InvoiceID);

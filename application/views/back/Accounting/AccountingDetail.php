@@ -60,20 +60,8 @@
               <?php $status = $var['accounting_status']?>
               <?php if ($status!=0): ?>
 
-                <?php if ($type==1): ?>
-                  <a class="btn btn-lg btn-block bg-blue-grey waves-effect" target="_blank" href="<?php echo site_url('SaleOrder/resultFee/'.$var['accounting_id']); ?>">
-                    พิมพ์
-                  </a>
-                <?php elseif ($type==2): ?>
-                  <a class="btn btn-lg btn-block bg-blue-grey waves-effect" target="_blank" href="<?php echo site_url('SaleOrder/resultExtend/'.$var['accounting_id']); ?>">
-                    พิมพ์
-                  </a>
-                <?php elseif ($type==3 || $type==4 || $type==5 || $type==6): ?>
-                  <a class="btn btn-lg btn-block bg-blue-grey waves-effect" target="_blank" href="<?php echo site_url('SaleOrder/resultDividend/'.$var['accounting_id']); ?>">
-                    พิมพ์
-                  </a>
-                <?php elseif ($type==7): ?>
-                  <a class="btn btn-lg btn-block bg-blue-grey waves-effect" target="_blank" href="<?php echo site_url('SaleOrder/resultSaleOrder/'.$var['accounting_id']); ?>">
+                <?php if ($type!=0): ?>
+                  <a class="btn btn-lg btn-block bg-blue-grey waves-effect" target="_blank" href="<?php echo site_url('SaleOrder/result'.$var['source_detail']['Template'].'/'.$var['accounting_id']); ?>">
                     พิมพ์
                   </a>
                 <?php endif; ?>
