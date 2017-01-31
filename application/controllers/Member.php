@@ -95,7 +95,7 @@ class Member extends CI_Controller{
     // $this->debuger->prevalue($this->AccountModel->BookbankList( $Account[0]['member_id']));
     $next_account_class_id = $Account[0]['account_class_id']+1;
     $NextClass = array();
-    if ($next_account_class_id!=7) {
+    if ($next_account_class_id!=8) {
       $NextClass = $this->AccountModel->NextClass($next_account_class_id);
     }
 
@@ -527,7 +527,7 @@ class Member extends CI_Controller{
      $d2 = new DateTime($Profile[0]['member_born']);
      $diff = $d2->diff($d1);
      $Profile[0]['member_age'] = $diff->y;
-     
+
     $value = array(
       'Result' => array(
         'Profile' => $Profile,

@@ -112,7 +112,7 @@ class MemberService extends REST_Controller
 
 			$next_account_class_id = $MyAccountClass[0]['account_class_id']+1;
 	    $NextClass = array();
-	    if ($next_account_class_id!=7) {
+	    if ($next_account_class_id!=8) {
 	      $NextClass = $this->AccountModel->NextClass($next_account_class_id);
 	    }
 
@@ -134,7 +134,7 @@ class MemberService extends REST_Controller
 				'account_class_id' => $next_account_class_id,
 			);
 			$this->AccountModel->UpdateAccountClass($updateValue);
-			
+
 			$this->response($AccountDetailUpclass);
 		}
 
