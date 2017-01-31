@@ -45,7 +45,7 @@ class Member extends CI_Controller{
       $Profile[0]['member_id_card_type_name'] = 'Work Permit';
     }
     // $this->debuger->prevalue($Profile);
-    $pv = $this->HomePageModel->allpv($id);
+    $pv = $this->HomePageModel->MemberPV($id);
     // $AccountList = json_decode(json_encode($this->AccountModel->AccountByMember($id)), true);
     // $this->debuger->prevalue($id);
 
