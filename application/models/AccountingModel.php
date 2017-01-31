@@ -108,7 +108,7 @@ class AccountingModel extends CI_Model
       $source_detail['Template'] = 'TemplateSaleOrder';
       $source_detail['source_code'] = $source_detail[0]['journal_sale_order_detail_code'];
       $source_detail['source_amount'] = $source_detail['order_item']['temp_total_price'];
-      unset($source_detail['order_item']['temp_total_price']);
+      unset($source_detail['order_item']['temp_total_price'],$source_detail['order_item']['temp_total_pv']);
     }
 
     return $source_detail;
@@ -146,6 +146,28 @@ class AccountingModel extends CI_Model
 
     return $query;
   }
+
+  public function ConfirmOrder($input){
+    //$this->debuger->prevalue($input);
+
+    $source_id = $input['accounting_source_id'];
+    $query['order_item'] = $this->SaleOrderDetail($source_id);
+
+    //$this->debuger->prevalue($query['order_item']);
+
+    $time =  Date('Y-m-d');
+      $value = array(
+        'point_value' => $query['order_item']['temp_total_pv'],
+        'point_detail' => 'ซื้อสินค้า',
+        'point_date' => $time,
+        'point_type' => 1,
+        'member_id' => $input['member_id'],
+        'account_id' => $input['accounting_id'],
+      );
+      $this->db->insert('mlm_point_value',$value);
+
+  }
+
   public function SaleOrderDetail($source_id)
   {
     $query = $this->db
@@ -157,9 +179,11 @@ class AccountingModel extends CI_Model
     ->result_array();
 
     $query['temp_total_price'] = 0;
+    $query['temp_total_pv'] = 0;
 
     foreach ($query as $row) {
       $query['temp_total_price'] += ($row['journal_sale_order_item_price']*$row['journal_sale_order_item_quantity']);
+      $query['temp_total_pv'] += ($row['journal_sale_order_item_pv']*$row['journal_sale_order_item_quantity']);
     }
     return $query;
   }
@@ -184,6 +208,7 @@ class AccountingModel extends CI_Model
   }
 
   public function ConfirmInvoice($accounting_id) {
+    // $this->debuger->prevalue($input);
     $query =  $this->db
     ->where('accounting_status', 1)
     ->where('journals_type', 4)
@@ -199,6 +224,7 @@ class AccountingModel extends CI_Model
     ->where('accounting_id', $accounting_id)
     ->update('mlm_accounting', $input);
   }
+
   public function ConfirmRecipt($accounting_id) {
     $query =  $this->db
     ->where('accounting_status', 1)
@@ -216,6 +242,8 @@ class AccountingModel extends CI_Model
     ->where('accounting_id', $accounting_id)
     ->update('mlm_accounting', $input);
   }
+
+
 
   public function ConfirmInvoiceAndEnableProfile($accounting_id, $member_id)
   {

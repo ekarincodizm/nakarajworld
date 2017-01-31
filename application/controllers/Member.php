@@ -17,6 +17,7 @@ class Member extends CI_Controller{
   public function index() {
     $MemberList = $this->MemberModel->MemberListWhithPV();
     $MemberList = json_decode(json_encode($MemberList), true);
+    // $this->debuger->prevalue($MemberList);
 
     $value = array(
       'Result' => array(

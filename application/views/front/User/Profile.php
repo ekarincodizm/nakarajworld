@@ -13,7 +13,7 @@
         </div>
 
         <h2><?php echo $Profile[0]['member_prefix'].$Profile[0]['member_firstname']." ".$Profile[0]['member_lastname'] ?></h2>
-        <h3><font color="blue">PV: <?php echo $PV ?></font></h3>
+        <h3><font color="blue">PV: <?php echo number_format($PV[0]['temp_total_pv']-$PV[0]['temp_total_used_pv']); ?></font></h3>
         <h4><?php echo $Profile[0]['member_prefix_eng'].$Profile[0]['member_firstname_eng']." ".$Profile[0]['member_lastname_eng'] ?></h4>
         <p>
           <?php echo $Profile[0]['member_id_card_type_name']?> : <strong><?php echo $Profile[0]['member_citizen_id']?></strong>  <br>

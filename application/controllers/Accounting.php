@@ -34,7 +34,7 @@ class Accounting extends CI_Controller{
   {
     $accounting_id = $this->uri->segment(3);
     $AccountingDetail = $this->AccountingModel->AccountingDetail($accounting_id);
-    // $this->debuger->prevalue($AccountingDetail);
+    //$this->debuger->prevalue($AccountingDetail);
 
     $value = array(
       'Result' => array(
@@ -73,6 +73,21 @@ class Accounting extends CI_Controller{
   public function ConfirmInvoice()
   {
     $accounting_id = $this->uri->segment(3);
+    $this->AccountingModel->ConfirmInvoice($accounting_id);
+    redirect($this->agent->referrer(), 'refresh');
+  }
+
+  public function ConfirmOrder()
+  {
+    $accounting_id = $this->uri->segment(3);
+
+    $input = array(
+      'accounting_id' => $this->uri->segment(3),
+      'member_id' => $this->uri->segment(4),
+      'accounting_source_id' => $this->uri->segment(5),
+    );
+
+    $this->AccountingModel->ConfirmOrder($input);
     $this->AccountingModel->ConfirmInvoice($accounting_id);
     redirect($this->agent->referrer(), 'refresh');
   }
