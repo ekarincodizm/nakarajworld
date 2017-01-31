@@ -75,7 +75,9 @@ class Member extends CI_Controller{
     $Account2 = json_decode(json_encode($this->MemberModel->MemberList()), true);
     $MyPv = json_decode(json_encode($this->HomePageModel->allpv( $Account[0]['member_id'])), true);
 
-    // $this->debuger->prevalue($Account[0]['account_id']);
+    $PlanOneDownline = $this->AccountModel->PlanOneDownline($id, $Account[0]['account_level']);
+    $PlanOneDirectAdviser = $this->AccountModel->PlanOneDirectAdviser($id, $Account[0]['account_level']);
+    // $this->debuger->prevalue($PlanOneDownline);
 
     $JounalExtendAccount = $this->AccountModel->JounalExtendAccount( $Account[0]['account_id']);
     // $this->debuger->prevalue($JounalExtendAccount);
@@ -91,8 +93,11 @@ class Member extends CI_Controller{
     }
     // $BookbankList = $this->AccountModel->BookbankList( $Account[0]['member_id'] );
     // $this->debuger->prevalue($this->AccountModel->BookbankList( $Account[0]['member_id']));
-
-
+    $next_account_class_id = $Account[0]['account_class_id']+1;
+    $NextClass = array();
+    if ($next_account_class_id!=7) {
+      $NextClass = $this->AccountModel->NextClass($next_account_class_id);
+    }
 
     $BankList = $this->db->get('mlm_bank')->result_array();
 
@@ -107,10 +112,11 @@ class Member extends CI_Controller{
         'AdviserList' => $AdviserList,
         'JounalExtendAccount' => $JounalExtendAccount,
         'BookbankDetail' => $BookbankDetail,
-        // 'BookbankList' => $BookbankList,
+        'NextClass' => $NextClass,
         'BankList' => $BankList,
         'member' => $Account2,
-
+        'PlanOneDownline' => $PlanOneDownline,
+        'PlanOneDirectAdviser' => $PlanOneDirectAdviser,
         'MyPv' => $MyPv,
 
       ),

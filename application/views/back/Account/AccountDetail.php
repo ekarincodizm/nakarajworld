@@ -3,26 +3,26 @@
     <div class="block-header">
       <h1>
         เกี่ยวกับบัญชีธุรกิจ รหัส <?php echo $Account[0]['account_team'].sprintf("%04d", $Account[0]['account_level']).sprintf("%04d", $Account[0]['account_code']); ?>
-        <?php if ($JounalExtendAccount[0]['journal_extend_expired_date']<Date('Y-m-d')): ?>
+        <?php if (count($JounalExtendAccount)>0 && $JounalExtendAccount[0]['journal_extend_expired_date']<Date('Y-m-d')): ?>
           <span class="">(หมดอายุ)</span>
-            <?php endif; ?>
-          </h1>
-        </div>
-        <?php $this->load->view('back/Member/WidgetAccount.php'); ?>
-        <div class="row">
-          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-            <div class="card">
-              <div class="header">
-                <h2>
-                  เกี่ยวกับบัญชีธุรกิจ รหัส <?php echo $Account[0]['account_team'].sprintf("%04d", $Account[0]['account_level']).sprintf("%04d", $Account[0]['account_code']); ?>
-                  <!-- <small>Add quick, dynamic tab functionality to transition through panes of local content</small> -->
-                </h2>
-              </div>
-              <div class="row">
-                <div class="col-md-10">
+        <?php endif; ?>
+      </h1>
+    </div>
+    <?php $this->load->view('back/Member/WidgetAccount.php'); ?>
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="header">
+            <h2>
+              เกี่ยวกับบัญชีธุรกิจ รหัส <?php echo $Account[0]['account_team'].sprintf("%04d", $Account[0]['account_level']).sprintf("%04d", $Account[0]['account_code']); ?>
+              <!-- <small>Add quick, dynamic tab functionality to transition through panes of local content</small> -->
+            </h2>
+          </div>
+          <div class="row">
+            <div class="col-md-10">
 
-                </div>
-                
+            </div>
+
           </div>
           <div class="body">
             <!-- Nav tabs -->

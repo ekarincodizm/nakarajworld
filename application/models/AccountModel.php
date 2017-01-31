@@ -2,51 +2,51 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AccountModel extends CI_Model {
-public function JoinAccountDetail()
-{
-   $this->db->join('mlm_member', 'mlm_account.member_id = mlm_member.member_id')->get('mlm_account')->result_array();
+  public function JoinAccountDetail()
+  {
+    $this->db->join('mlm_member', 'mlm_account.member_id = mlm_member.member_id')->get('mlm_account')->result_array();
 
-}
-public function AddDetail($query)
-{
-  $this->db->join('mlm_member', 'mlm_account.member_id = mlm_member.member_id')->get('mlm_account')->result_array();
-  $i=0;
-  foreach ($query as $row) {
+  }
+  public function AddDetail($query)
+  {
+    $this->db->join('mlm_member', 'mlm_account.member_id = mlm_member.member_id')->get('mlm_account')->result_array();
+    $i=0;
+    foreach ($query as $row) {
       $query[$i]['count_adviser'] = $this->db
-                                    ->where('mlm_account.account_adviser_id', $row['account_id'])
-                                    ->where('mlm_account.member_id !=', $row['member_id'])
-                                    ->get('mlm_account')->num_rows();
+      ->where('mlm_account.account_adviser_id', $row['account_id'])
+      ->where('mlm_account.member_id !=', $row['member_id'])
+      ->get('mlm_account')->num_rows();
       $query[$i]['count_downline'] = $this->db
-                                    ->where('downline_count_upline_id', $row['account_id'])
-                                    ->get('mlm_downline_count')->num_rows();
+      ->where('downline_count_upline_id', $row['account_id'])
+      ->get('mlm_downline_count')->num_rows();
       $query[$i]['count_three_downline'] = $this->db
-                                    ->where('account_upline_id', $row['account_id'])
-                                    ->get('mlm_account')->num_rows();
+      ->where('account_upline_id', $row['account_id'])
+      ->get('mlm_account')->num_rows();
       $query[$i]['adviser'] = $this->db->where('account_id', $row['account_adviser_id'])->get('mlm_account')->result_array();
       $query[$i]['upline'] = $this->db->where('account_id', $row['account_upline_id'])->get('mlm_account')->result_array();
       $i++;
       return $query;
+    }
   }
-}
   public function AllAccountList()
   {
     $query = $this->db->join('mlm_member', 'mlm_account.member_id = mlm_member.member_id')->get('mlm_account')->result_array();
     $i=0;
     foreach ($query as $row) {
-        $query[$i]['count_adviser'] = $this->db
-                                      ->where('mlm_account.account_adviser_id', $row['account_id'])
-                                      ->where('mlm_account.member_id !=', $row['member_id'])
-                                      ->get('mlm_account')->num_rows();
-        $query[$i]['count_downline'] = $this->db
-                                      ->where('downline_count_upline_id', $row['account_id'])
-                                      ->get('mlm_downline_count')->num_rows();
-        $query[$i]['count_three_downline'] = $this->db
-                                      ->where('account_upline_id', $row['account_id'])
-                                      ->get('mlm_account')->num_rows();
-        $query[$i]['adviser'] = $this->db->where('account_id', $row['account_adviser_id'])->get('mlm_account')->result_array();
-        $query[$i]['upline'] = $this->db->where('account_id', $row['account_upline_id'])->get('mlm_account')->result_array();
-        $i++;
-      }
+      $query[$i]['count_adviser'] = $this->db
+      ->where('mlm_account.account_adviser_id', $row['account_id'])
+      ->where('mlm_account.member_id !=', $row['member_id'])
+      ->get('mlm_account')->num_rows();
+      $query[$i]['count_downline'] = $this->db
+      ->where('downline_count_upline_id', $row['account_id'])
+      ->get('mlm_downline_count')->num_rows();
+      $query[$i]['count_three_downline'] = $this->db
+      ->where('account_upline_id', $row['account_id'])
+      ->get('mlm_account')->num_rows();
+      $query[$i]['adviser'] = $this->db->where('account_id', $row['account_adviser_id'])->get('mlm_account')->result_array();
+      $query[$i]['upline'] = $this->db->where('account_id', $row['account_upline_id'])->get('mlm_account')->result_array();
+      $i++;
+    }
     return $query;
   }
   public function AccountByID($id)
@@ -112,20 +112,20 @@ public function AddDetail($query)
     $query = $this->db ->where('mlm_account.member_id', $id)->join('mlm_member', 'mlm_account.member_id = mlm_member.member_id')->get('mlm_account')->result_array();
     $i=0;
     foreach ($query as $row) {
-        $query[$i]['count_adviser'] = $this->db
-                                      ->where('mlm_account.account_adviser_id', $row['account_id'])
-                                      ->where('mlm_account.member_id !=', $row['member_id'])
-                                      ->get('mlm_account')->num_rows();
-        $query[$i]['count_downline'] = $this->db
-                                      ->where('downline_count_upline_id', $row['account_id'])
-                                      ->get('mlm_downline_count')->num_rows();
-        $query[$i]['count_three_downline'] = $this->db
-                                      ->where('account_upline_id', $row['account_id'])
-                                      ->get('mlm_account')->num_rows();
-        $query[$i]['adviser'] = $this->db->where('account_id', $row['account_adviser_id'])->get('mlm_account')->result_array();
-        $query[$i]['upline'] = $this->db->where('account_id', $row['account_upline_id'])->get('mlm_account')->result_array();
-        $i++;
-      }
+      $query[$i]['count_adviser'] = $this->db
+      ->where('mlm_account.account_adviser_id', $row['account_id'])
+      ->where('mlm_account.member_id !=', $row['member_id'])
+      ->get('mlm_account')->num_rows();
+      $query[$i]['count_downline'] = $this->db
+      ->where('downline_count_upline_id', $row['account_id'])
+      ->get('mlm_downline_count')->num_rows();
+      $query[$i]['count_three_downline'] = $this->db
+      ->where('account_upline_id', $row['account_id'])
+      ->get('mlm_account')->num_rows();
+      $query[$i]['adviser'] = $this->db->where('account_id', $row['account_adviser_id'])->get('mlm_account')->result_array();
+      $query[$i]['upline'] = $this->db->where('account_id', $row['account_upline_id'])->get('mlm_account')->result_array();
+      $i++;
+    }
 
     return $query;
   }
@@ -187,8 +187,8 @@ public function AddDetail($query)
   }
   public function ChangeMemberStatus($value){
     $input = array(
-        'member_status' => $value['member_status'],
-      );
+      'member_status' => $value['member_status'],
+    );
     $this->db
     ->where('member_id',$value['member_id'])
     ->update('mlm_member',$input);
@@ -228,52 +228,110 @@ public function AddDetail($query)
     $query = $this->db
     ->where('downline_count_upline_id', $upline_id)
     ->get('mlm_downline_count')->result();
-
     return $query;
 
+  }
+  // นับ ดาวน์ไลน์ ในแผน 1 จะนับแค่ 5 ชั้น ที่ต่อจากตัวเอง
+  public function PlanOneDownline($upline_id, $upline_level)
+  {
+    $query = $this->db
+    ->where('account_level <=', $upline_level+5)
+    ->where('downline_count_upline_id', $upline_id)
+    ->join('mlm_account', 'mlm_downline_count.downline_count_upline_id = mlm_account.account_id')
+    ->get('mlm_downline_count')->result_array();
+
+    $i=0;
+    foreach ($query as $row) {
+      $query[$i]['count_adviser'] = $this->db
+      ->where('mlm_account.account_adviser_id', $row['account_id'])
+      ->where('mlm_account.member_id !=', $row['member_id'])
+      ->get('mlm_account')->num_rows();
+      $query[$i]['count_downline'] = $this->db
+      ->where('downline_count_upline_id', $row['account_id'])
+      ->get('mlm_downline_count')->num_rows();
+      $query[$i]['count_three_downline'] = $this->db
+      ->where('account_upline_id', $row['account_id'])
+      ->get('mlm_account')->num_rows();
+      $query[$i]['adviser'] = $this->db->where('account_id', $row['account_adviser_id'])->get('mlm_account')->result_array();
+      $query[$i]['upline'] = $this->db->where('account_id', $row['account_upline_id'])->get('mlm_account')->result_array();
+      $i++;
+    }
+
+    return $query;
+  }
+
+  // นับ ดาวน์ไลน์ ที่แนะนำเอง ในแผน 1 จะนับแค่ 5 ชั้น ที่ต่อจากตัวเอง
+  public function PlanOneDirectAdviser($account_id, $upline_level)
+  {
+    $query = $this->db
+    ->where('account_level <=', $upline_level+5)
+    ->where('account_adviser_id', $account_id)
+    ->get('mlm_account')->result_array();
+
+    $i=0;
+    foreach ($query as $row) {
+      $query[$i]['count_adviser'] = $this->db
+      ->where('mlm_account.account_adviser_id', $row['account_id'])
+      ->where('mlm_account.member_id !=', $row['member_id'])
+      ->get('mlm_account')->num_rows();
+      $query[$i]['count_downline'] = $this->db
+      ->where('downline_count_upline_id', $row['account_id'])
+      ->get('mlm_downline_count')->num_rows();
+      $query[$i]['count_three_downline'] = $this->db
+      ->where('account_upline_id', $row['account_id'])
+      ->get('mlm_account')->num_rows();
+      $query[$i]['adviser'] = $this->db->where('account_id', $row['account_adviser_id'])->get('mlm_account')->result_array();
+      $query[$i]['upline'] = $this->db->where('account_id', $row['account_upline_id'])->get('mlm_account')->result_array();
+      $i++;
+    }
+
+    return $query;
   }
   public function ThreeDownline($upline_id)
   {
     $query = $this->db->where('account_upline_id', $upline_id)->join('mlm_member', 'mlm_account.member_id = mlm_member.member_id')->get('mlm_account')->result_array();
     $i=0;
     foreach ($query as $row) {
-        $query[$i]['count_adviser'] = $this->db
-                                      ->where('mlm_account.account_adviser_id', $row['account_id'])
-                                      ->where('mlm_account.member_id !=', $row['member_id'])
-                                      ->get('mlm_account')->num_rows();
-        $query[$i]['count_downline'] = $this->db
-                                      ->where('downline_count_upline_id', $row['account_id'])
-                                      ->get('mlm_downline_count')->num_rows();
-        $query[$i]['count_three_downline'] = $this->db
-                                      ->where('account_upline_id', $row['account_id'])
-                                      ->get('mlm_account')->num_rows();
-        $query[$i]['adviser'] = $this->db->where('account_id', $row['account_adviser_id'])->get('mlm_account')->result_array();
-        $query[$i]['upline'] = $this->db->where('account_id', $row['account_upline_id'])->get('mlm_account')->result_array();
-        $i++;
-      }
+      $query[$i]['count_adviser'] = $this->db
+      ->where('mlm_account.account_adviser_id', $row['account_id'])
+      ->where('mlm_account.member_id !=', $row['member_id'])
+      ->get('mlm_account')->num_rows();
+      $query[$i]['count_downline'] = $this->db
+      ->where('downline_count_upline_id', $row['account_id'])
+      ->get('mlm_downline_count')->num_rows();
+      $query[$i]['count_three_downline'] = $this->db
+      ->where('account_upline_id', $row['account_id'])
+      ->get('mlm_account')->num_rows();
+      $query[$i]['adviser'] = $this->db->where('account_id', $row['account_adviser_id'])->get('mlm_account')->result_array();
+      $query[$i]['upline'] = $this->db->where('account_id', $row['account_upline_id'])->get('mlm_account')->result_array();
+      $i++;
+    }
 
     return $query;
   }
 
   public function AdviserList($adviser_id)
   {
-    $query = $this->db->where('account_adviser_id', $adviser_id)->join('mlm_member', 'mlm_account.member_id = mlm_member.member_id')->get('mlm_account')->result_array();
+    $query = $this->db
+    ->where('account_adviser_id', $adviser_id)
+    ->join('mlm_member', 'mlm_account.member_id = mlm_member.member_id')
+    ->get('mlm_account')->result_array();
     $i=0;
     foreach ($query as $row) {
-        $query[$i]['count_adviser'] = $this->db
-                                      ->where('mlm_account.account_adviser_id', $row['account_id'])
-                                      ->where('mlm_account.member_id !=', $row['member_id'])
-                                      ->get('mlm_account')->num_rows();
-        $query[$i]['count_downline'] = $this->db
-                                      ->where('downline_count_upline_id', $row['account_id'])
-                                      ->get('mlm_downline_count')->num_rows();
-        $query[$i]['count_three_downline'] = $this->db
-                                      ->where('account_upline_id', $row['account_id'])
-                                      ->get('mlm_account')->num_rows();
-        $query[$i]['adviser'] = $this->db->where('account_id', $row['account_adviser_id'])->get('mlm_account')->result_array();
-        $query[$i]['upline'] = $this->db->where('account_id', $row['account_upline_id'])->get('mlm_account')->result_array();
-        $i++;
-      }
+      $query[$i]['count_adviser'] = $this->db
+      ->where('mlm_account.account_adviser_id', $row['account_id'])
+      ->where('mlm_account.member_id !=', $row['member_id'])
+      ->get('mlm_account')->num_rows();
+      $query[$i]['count_downline'] = $this->db
+      ->where('downline_count_upline_id', $row['account_id'])
+      ->get('mlm_downline_count')->num_rows();
+      $query[$i]['count_three_downline'] = $this->db
+      ->where('account_upline_id', $row['account_id'])
+      ->get('mlm_account')->num_rows();
+      $query[$i]['adviser'] = $this->db->where('account_id', $row['account_adviser_id'])->get('mlm_account')->result_array();
+      $query[$i]['upline'] = $this->db->where('account_id', $row['account_upline_id'])->get('mlm_account')->result_array();
+      $i++;
+    }
 
     return $query;
   }
@@ -290,7 +348,7 @@ public function AddDetail($query)
 
     ->get('mlm_accounting')
     ->result();
-      return $query;
+    return $query;
   }
   public function BookbankList($id)
   {
@@ -324,8 +382,8 @@ public function AddDetail($query)
   public function DisableBookbank($id)
   {
     $input = array(
-        'bookbank_status' => $id['bookbank_status'],
-      );
+      'bookbank_status' => $id['bookbank_status'],
+    );
     $this->db
     ->where('bookbank_id', $id['bookbank_id'])
     ->where('member_id', $id['member_id'])
@@ -334,8 +392,8 @@ public function AddDetail($query)
   public function UpdateAccount($id2)
   {
     $input = array(
-        'bookbank_id' => 0,
-      );
+      'bookbank_id' => 0,
+    );
     $this->db
     ->where('account_id',$id2)
     ->update('mlm_account',$input);
@@ -346,9 +404,9 @@ public function AddDetail($query)
   //   $this->db->where('account_id', $id)->delete('mlm_account');
   //
   // }
-  public function AccountDetailUpclass($id){
+  public function AccountDetailUpclass($account_id){
     $query = $this->db
-    ->where('account_id', $id)
+    ->where('account_id', $account_id)
     ->join('mlm_member', 'mlm_member.member_id = mlm_point_value.member_id')
     ->get('mlm_point_value')->result_array();
     // print_r($query);
@@ -359,4 +417,12 @@ public function AddDetail($query)
     ->insert('mlm_point_value',$value);
   }
 
+  public function NextClass($next_account_class_id)
+  {
+    $query = $this->db
+    ->where('account_class_id', $next_account_class_id)
+    ->get('mlm_account_class')->result_array();
+    // print_r($query);
+    return $query;
+  }
 }

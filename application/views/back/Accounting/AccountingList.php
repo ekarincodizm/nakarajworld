@@ -31,25 +31,25 @@
                 <?php
                 // $this->debuger->prevalue($AccountingList);
                 $i=1; foreach ($AccountingList as $row): ?>
-                  <tr style="cursor: pointer;" onclick="document.location = '<?php echo site_url('/Accounting/AccountingDetail/'.$row['accounting_id']); ?>';">
-                    <td><?php echo $i; ?></td>
+                <tr style="cursor: pointer;" onclick="document.location = '<?php echo site_url('/Accounting/AccountingDetail/'.$row['accounting_id']); ?>';">
+                  <td><?php echo $i; ?></td>
+                  <td>
+                    <?php echo $row['accounting_no']; ?></td>
                     <td>
-                      <?php echo $row['accounting_no']; ?></td>
-                    <td>
-                        <?php echo $this->thaidate->ShortDate($row['accounting_date']); ?>
+                      <?php echo $this->thaidate->ShortDate($row['accounting_date']); ?>
                     </td>
                     <td>
                       <?php echo $row['journals_detail']; ?>
                     </td>
-                    <td>
+                    <td class="text-right">
                       <?php if ($row['source_amount']==0): ?>
                         <strong class="text-muted"><?php echo number_format($row['source_amount']); ?></strong>
-                        <?php else: ?>
-                          <?php if ($row['journals_type']==4): ?>
-                            <strong class="text-success"><?php echo number_format($row['source_amount']); ?></strong>
-                          <?php elseif ($row['journals_type']==5): ?>
-                            <strong class="text-danger"><?php echo number_format($row['source_amount']); ?></strong>
-                          <?php endif; ?>
+                      <?php else: ?>
+                        <?php if ($row['journals_type']==4): ?>
+                          <strong class="text-success"><?php echo number_format($row['source_amount']); ?></strong>
+                        <?php elseif ($row['journals_type']==5): ?>
+                          <strong class="text-danger"><?php echo number_format($row['source_amount']); ?></strong>
+                        <?php endif; ?>
                       <?php endif; ?>
                     </td>
                     <td>
@@ -60,13 +60,13 @@
                     </td>
                     <td>
                       <h4>
-                      <?php if ($row['accounting_status']==0): ?>
-                        <span class="label bg-deep-orange">ค้างชำระ</span>
-                      <?php elseif($row['accounting_status']==1): ?>
-                        <span class="label bg-green">ชำระแล้ว</span>
-                      <?php else: ?>
-                        <span class="label bg-blue-grey">รอดำเนินการ</span>
-                      <?php endif; ?>
+                        <?php if ($row['accounting_status']==0): ?>
+                          <span class="label bg-deep-orange">ค้างชำระ</span>
+                        <?php elseif($row['accounting_status']==1): ?>
+                          <span class="label bg-green">ชำระแล้ว</span>
+                        <?php else: ?>
+                          <span class="label bg-blue-grey">รอดำเนินการ</span>
+                        <?php endif; ?>
                       </h4>
                     </td>
                   </tr>

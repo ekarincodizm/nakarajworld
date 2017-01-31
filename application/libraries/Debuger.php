@@ -55,4 +55,24 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		$this->load->view($value['View']);
 		$this->load->view('front/Template/footer');
 	}
+
+  public function GenerateClass($account_class_id)
+  {
+    $mlm_class = array(
+      1 => 'NORMAL',
+      2 => 'GENERAL',
+      3 => 'BRONZ',
+      4 => 'SILVER',
+      5 => 'GOLD',
+      6 => 'DIAMOND',
+      7 => 'STAR',
+    );
+
+    $AccCls['Current'] = $mlm_class[$account_class_id];
+    $AccCls['Next'] = $mlm_class[$account_class_id+1];
+
+    $AccDetial = '<h4>ระดับปัจจุบัน '.$AccCls['Current'].'</h4> <h4>ระดับถัดไป '.$AccCls['Next'].'</h4>';
+    return $AccDetial;
+
+  }
 } /* End of file Someclass.php */

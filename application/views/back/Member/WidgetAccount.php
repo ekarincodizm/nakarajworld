@@ -70,10 +70,13 @@
               ชื่อบัญชี: ไม่ระบุ<br>
               เลขที่บัญชี: ไม่ระบุ<br>
             <?php else: ?>
-              ธนาคาร: <?php echo $BookbankDetail[0]['bank_name'] ?><br>
-              สาขา: <?php echo $BookbankDetail[0]['bookbank_bank_branch'] ?><br>
-              ชื่อบัญชี: <?php echo $BookbankDetail[0]['bookbank_account'] ?><br>
-              เลขที่บัญชี: <?php echo $BookbankDetail[0]['bookbank_number'] ?><br>
+              <?php if (count($BookbankDetail)>0): ?>
+                ธนาคาร: <?php echo $BookbankDetail[0]['bank_name'] ?><br>
+                สาขา: <?php echo $BookbankDetail[0]['bookbank_bank_branch'] ?><br>
+                ชื่อบัญชี: <?php echo $BookbankDetail[0]['bookbank_account'] ?><br>
+                เลขที่บัญชี: <?php echo $BookbankDetail[0]['bookbank_number'] ?><br>
+              <?php endif; ?>
+
             <?php endif; ?>
 
             <div class="row">

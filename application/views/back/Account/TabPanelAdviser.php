@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <?php $i=1; foreach ($AdviserList as $row): ?>
+        <?php $i=1; foreach ($PlanOneDirectAdviser as $row): ?>
           <tr>
             <td><?php echo $i; ?></td>
             <td><?php echo $row['account_team'].sprintf("%04d", $row['account_level']).sprintf("%04d", $row['account_code']); ?></td>

@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <?php $i=1; foreach ($AllDownline as $row): ?>
+        <?php $i=1; foreach ($PlanOneDownline as $row): ?>
           <tr>
             <td><?php echo $i; ?></td>
             <td><?php echo $row['account_team'].sprintf("%04d", $row['account_level']).sprintf("%04d", $row['account_code']); ?></td>

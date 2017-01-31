@@ -111,9 +111,9 @@ class MemberService extends REST_Controller
 			$time =  Date('Y-m-d');
 			$value = array(
 				'point_value' => '4000',
-				'point_detail' => 'อัพเลเวล',
+				'point_detail' => 'ยกระดับ',
 				'point_date' => $time,
-				'point_type' => 1,
+				'point_type' => 0,
 				'member_id' => $input['member_id'],
 				'account_id' => $input['account_id'],
 			);
