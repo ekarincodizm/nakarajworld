@@ -103,7 +103,8 @@ class AccountModel extends CI_Model {
     ->result();
     return $query;
   }
-  public function AccountListByUpline($id) {
+  public function AccountListByUpline($id)
+  {
     $query = $this->db
     ->where('account_upline_id', $id)
     ->join('mlm_member', 'mlm_account.member_id = mlm_member.member_id')
@@ -112,7 +113,8 @@ class AccountModel extends CI_Model {
     return $query;
   }
 
-  public function FindAccountByCode($value) {
+  public function FindAccountByCode($value)
+  {
     $query =  $this->db
     ->where('account_team', $value['account_team'])
     ->where('account_level', $value['account_level'])
@@ -170,8 +172,9 @@ class AccountModel extends CI_Model {
     $this->db->insert('mlm_account', $AccountInput);
     $new_account_id = $this->db->insert_id();
 
-    $Account = json_decode(json_encode($this->AccountByID($new_account_id)), true);
+    $Account = $this->AccountModel->FindAccountByID($new_account_id);
     $upline_id = $Account[0]['account_upline_id'];
+    // $this->debuger->prevalue($Account);
 
     do {
       $input = array(
@@ -179,7 +182,7 @@ class AccountModel extends CI_Model {
         'downline_count_downline_id' => $new_account_id,
       );
       $this->db->insert('mlm_downline_count', $input);
-      $Account = json_decode(json_encode($this->AccountByID($upline_id)), true);
+      $Account = $this->AccountModel->FindAccountByID($upline_id);
       $upline_id ='';
       if (count($Account)>0) {
         $upline_id = $Account[0]['account_upline_id'];

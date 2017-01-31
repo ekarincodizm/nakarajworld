@@ -191,7 +191,7 @@
                                           </div>
                                           <div class='row '>
                                               <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-                                                  <a href="<?php echo site_url('Member/SaveAccount/'.$Member[0]['member_id']."/".$AccountAdviser[0]['account_id']."/".$AccountUpline[0]['account_id']); ?>" class="btn bg-pink waves-effect">เลือกตำแหน่งนี้</a>
+                                                  <a href="<?php echo site_url('Account/SaveAccount/'.$Member[0]['member_id']."/".$AccountAdviser[0]['account_id']."/".$AccountUpline[0]['account_id']); ?>" class="btn bg-pink waves-effect">เลือกตำแหน่งนี้</a>
                                               </div>
                                           </div>
                                       </div>
