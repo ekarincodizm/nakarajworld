@@ -23,10 +23,11 @@
       </script>
       <p>ต้องใช้ <?php echo $NextClass[0]['account_class_pv'] ?> PV เพื่อเลื่อนระดับ</p>
       <p>PV ที่ใช้ได้ <?php echo $MyPv ?> PV</p>
-      <?php if (($MyPv-$NextClass[0]['account_class_pv'])<0): ?>
-        <p class="text-danger">ขาด <?php echo $MyPv-$NextClass[0]['account_class_pv'] ?> PV</p>
+      <?php $pv = $MyPv[0]['temp_total_pv']-$MyPv[0]['temp_total_used_pv'];?>
+      <?php if (($pv-$NextClass[0]['account_class_pv'])<0): ?>
+        <p class="text-danger">ขาด <?php echo $pv-$NextClass[0]['account_class_pv'] ?> PV</p>
         <?php else: ?>
-          <p>คงเหลือ <?php echo $MyPv-$NextClass[0]['account_class_pv'] ?> PV</p>
+          <p>คงเหลือ <?php echo $pv-$NextClass[0]['account_class_pv'] ?> PV</p>
           <button type="button" class="btn bg-deep-orange" ng-click="AccountUpclass(<?php echo $Profile[0]['member_id'] ?>);">
             เพิ่มระดับ
           </button>
