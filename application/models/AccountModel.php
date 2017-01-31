@@ -425,4 +425,13 @@ class AccountModel extends CI_Model {
     // print_r($query);
     return $query;
   }
+  public function UpdateAccountClass($value)
+  {
+    $account_id = $value['account_id'];
+    unset($value['account_id']);
+    $this->db
+    ->where('account_id',$account_id)
+    ->update('mlm_account',$value);
+  }
+
 }

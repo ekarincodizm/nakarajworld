@@ -108,19 +108,33 @@ class MemberService extends REST_Controller
 		public function AddAccountDetailUpclass_post()
 	  {
 			$input =  $this->post();
+			$MyAccountClass = json_decode(json_encode($this->AccountModel->AccountByID( $input['account_id'] )), true);
+
+			$next_account_class_id = $MyAccountClass[0]['account_class_id']+1;
+	    $NextClass = array();
+	    if ($next_account_class_id!=7) {
+	      $NextClass = $this->AccountModel->NextClass($next_account_class_id);
+	    }
+
 			$time =  Date('Y-m-d');
 			$value = array(
-				'point_value' => '4000',
+				'point_value' => $NextClass[0]['account_class_pv'],
 				'point_detail' => 'ยกระดับ',
 				'point_date' => $time,
 				'point_type' => 0,
 				'member_id' => $input['member_id'],
 				'account_id' => $input['account_id'],
 			);
-
 			$this->AccountModel->AddAccountDetailUpclass($value);
 			//print_r($AccountDetailUpclass);
 			$AccountDetailUpclass = $this->AccountModel->AccountDetailUpclass($input['account_id']);
+
+			$updateValue = array(
+				'account_id' => $input['account_id'],
+				'account_class_id' => $next_account_class_id,
+			);
+			$this->AccountModel->UpdateAccountClass($updateValue);
+			
 			$this->response($AccountDetailUpclass);
 		}
 
