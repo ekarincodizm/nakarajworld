@@ -64,7 +64,34 @@ class AccountModel extends CI_Model {
   {
     $query =  $this->db
     ->where('account_id', $id)
+    ->join('mlm_account_class', 'mlm_account.account_class_id = mlm_account_class.account_class_id')
     ->get('mlm_account')
+    ->result_array();
+    return $query;
+  }
+  public function DownlinePerLVL($Account, $RowLvl)
+  {
+    $account_upline_id = $Account[0]['account_id'];
+    $account_level = $Account[0]['account_level']+$RowLvl;
+    $account_class_id = $Account[0]['account_class_id'];
+
+    $query =  $this->db
+    ->where('account_upline_id', $account_upline_id)
+    ->where('account_class_id', $account_class_id)
+    ->join('mlm_account', 'mlm_downline_count.downline_count_downline_id = mlm_account.account_id')
+    // ->join('mlm_account_class', 'mlm_account.account_class_id = mlm_account_class.account_class_id')
+    ->get('mlm_downline_count')
+    ->result_array();
+
+    return $query;
+  }
+
+  public function GetMVByClassLvl($class, $lvl)
+  {
+    $query = $this->db
+    ->where('income_percent_level', $lvl)
+    ->where('income_percent_class', $class)
+    ->get('mlm_income_percent_setting')
     ->result_array();
     return $query;
   }
@@ -424,5 +451,12 @@ class AccountModel extends CI_Model {
     ->get('mlm_account_class')->result_array();
     // print_r($query);
     return $query;
+  }
+
+  public function SaveDividend($input)
+  {
+    $this->db->insert('mlm_journal_dividend', $input);
+    $new_journal_dividend_id = $this->db->insert_id();
+    return $new_journal_dividend_id;
   }
 }

@@ -124,7 +124,6 @@ class Member extends CI_Controller{
     );
     $this->LoadPage($value);
   }
-
   public function AccountDetailExtend() {
     $id = $this->uri->segment(3);
     $JounalExtendAccount = $this->AccountModel->JounalExtendAccount($id);
@@ -184,177 +183,6 @@ class Member extends CI_Controller{
     );
     $this->LoadPage($value);
   }
-  public function SaveAccount(){
-    date_default_timezone_set("Asia/Bangkok");
-    $member_id = $this->uri->segment(3);
-    $adviser_id = $this->uri->segment(4);
-    $upline_id = $this->uri->segment(5);
-
-    $Member = json_decode(json_encode($this->HomePageModel->LoadProfile($member_id)), true);
-    $AccountUpline = json_decode(json_encode($this->AccountModel->AccountNonJoinByID($upline_id)), true);
-    $AccountAdviser = json_decode(json_encode($this->AccountModel->AccountNonJoinByID($adviser_id)), true);
-    $AccountListByTeam = json_decode(json_encode($this->AccountModel->AccountListByTeam($AccountUpline[0]['account_team'])), true);
-
-    //เพิ่ม Account ใหม่ และ เพิ่มการนับ downline
-    $AccountInput = array(
-      'account_team' => $AccountUpline[0]['account_team'],
-      'account_level' => $AccountUpline[0]['account_level']+=1,
-      'account_code' => $AccountListByTeam[0]['account_code']+=1,
-      'account_upline_id' => $upline_id,
-      'account_adviser_id' => $adviser_id,
-      'member_id' => $member_id,
-    );
-
-    $new_account_id = $this->AccountModel->SaveAccount($AccountInput, $adviser_id);
-
-    // เพิ่มการลงทะเบียนต่ออายุ ฟรี
-    $expired =  Date('Y-m-d', strtotime("+365 day", strtotime(Date('Y-m-d'))));
-    $ExtendInput = array(
-      'account_id' => $new_account_id,
-      'member_id' => $member_id,
-      'journal_extend_start_date' => Date('Y-m-d'),
-      'journal_extend_expired_date' => $expired,
-      'journal_extend_amount' => 0,
-    );
-    $new_journal_extend_id = $this->AccountModel->SaveJournalExtend($ExtendInput);
-
-    // เพิ่มรายการบัญชี ฟรีค่าธรรมเนียม บัญชีนักธุระกิจใหม่
-    $code = "DR".DateTime::createFromFormat('U.u', microtime(true))->format("Hisu");
-
-    $AccountingInput = array(
-      'accounting_date' =>  Date('Y-m-d'),
-      'accounting_source_id' => $new_journal_extend_id,
-      'accounting_tax' => 0,
-      'journals_id' => 2,
-      'accounting_no' => $code,
-      'accounting_note' => "ฟรีค่าธรรมเนียม บัญชีนักธุระกิจใหม่"
-    );
-    $new_accounting_id = $this->AccountModel->AddAccounting($AccountingInput);
-    $this->AccountingModel->ConfirmInvoice($new_accounting_id);
-
-    // ตรวจ ค่าการตลาด
-    $arr = 0; // array
-    $goal = 3; // เป้าหมายการครบ
-    $lvlDown = 1; // นับ ระดับลง
-    $lvlUp = 1; // นับ ระดับขึ้น
-    $GoalPerLevel = array(); // ป้าหมายการครบ แต่ละ ระดับ
-    for ($i=3; $i <=243; $i *= 3) {
-      if ( $upline_id!=0 && $upline_id!='' ) {
-        $GoalPerLevel[$arr] = $this->CountCodePerLevel($upline_id, $lvlDown, $goal, $lvlUp);
-        $upline_id = $GoalPerLevel[$arr]['NextAccID'];
-        $goal *= 3;
-        $lvlDown++;
-        $lvlUp+=1;
-        $arr++;
-      }
-    }
-
-    redirect('/Member/MemberProfile/'.$member_id);
-  }
-
-  public function CountCodePerLevel($upline_id, $lvlDown, $goal, $lvlUp)
-  {
-    $GoalCheck = array();
-    // $Downline["Level".$lvlUp] = $lvlUp; // ชั้นที่ต้องนับขึ้น
-    $GoalCheck["Goal"] = $goal;//จำนวนเช็คครบ 3, 9, 27, 81, 243 // N*3
-    $GoalCheck["GoalStatus"] = 'false';
-    $GoalCheck["Count"] = 0;
-    $GoalCheck["Level".$lvlUp] = array(); //ชั้นที่จะต้องนับลง
-    $GoalCheck["MemberID"] = "";
-    $GoalCheck["ThisAccID"] = "";
-    $GoalCheck["NextAccID"] = "";
-
-
-    $ThisAccount = json_decode(json_encode($this->AccountModel->AccountNonJoinByID($upline_id)), true);
-    if (count($ThisAccount)>0) {
-      $AllDownline = json_decode(json_encode($this->AccountModel->AllDownlineByAccount($ThisAccount[0]['account_id'])), true);
-      // print_r($AllDownline);
-      // $DownlineLit = json_decode(json_encode($this->AccountModel->AccountListByUpline($Upline[0]['account_upline_id'])), true);
-      $GoalCheck["MemberID"] = $ThisAccount[0]['member_id'];
-      $GoalCheck["ThisAccID"] = $ThisAccount[0]['account_id'];
-      $GoalCheck["NextAccID"] = $ThisAccount[0]['account_upline_id'];
-
-      foreach ($AllDownline as $row) {
-        $AccountDetail = json_decode(json_encode($this->AccountModel->AccountNonJoinByID($row['downline_count_downline_id'])), true);
-        // $this->debuger->prevalue($AccountDetail);
-
-        // print_r($Result);
-        $CurrectLvl = $AccountDetail[0]['account_level'];
-        $ThisLvl = $ThisAccount[0]['account_level']+$lvlDown;
-
-        // echo "ชั้นที่ ".$lvlUp." เป้าหมาย ".$goal." lvl ของคนนี้ ".$ThisAccount[0]['account_level']." + ".$lvlDown." lvl ที่ต้องการ ".$ThisLvl.' เทียบกับ '.$CurrectLvl;
-        // echo "<br>";
-        if ($CurrectLvl==$ThisLvl) {
-          // print_r($row);
-
-          $GoalCheck["Count"] ++;
-          array_push($GoalCheck["Level".$lvlUp], $AccountDetail[0]);
-        }
-      }
-      if ($GoalCheck["Count"]==$goal) {
-        $GoalCheck["GoalStatus"] = 'true';
-        $Plan = 1;
-        $income_percent = $this->db
-        ->where('income_percent_level', $lvlUp)
-        ->where('income_percent_plan', $Plan)
-        ->get('mlm_income_percent_setting')
-        ->result_array();
-        $income_adviser = $this->db
-        ->get('mlm_fee_setting')
-        ->result_array();
-
-        $accounting_amount = $income_percent[0]['income_percent_point']*$income_percent[0]['income_percent_amount']/100;
-        $income_adviser_total = 0;
-        // $this->debuger->prevalue($GoalCheck["Level".$lvlUp]);
-
-        if ($lvlUp==1) {
-          $text_note = '';
-          foreach ($GoalCheck["Level".$lvlUp] as $row) {
-            if ($row['account_upline_id']!=$row['account_adviser_id']) {
-              // หักเงิน
-              $accounting_amount -= $income_adviser[0]['setting_adviser_income'];
-              $income_adviser_total += $income_adviser[0]['setting_adviser_income'];
-              $text_note = 'หักผู้แนะนำ '.$income_adviser_total;
-
-              // ลงบัญชี
-              $Account = json_decode(json_encode($this->AccountModel->AccountNonJoinByID($row['account_adviser_id'])), true);
-              $input = array(
-                'accounting_date' => Date('Y-m-d'),
-                'accounting_source_id' => $Account[0]['account_id'],
-                'accounting_amount' => $income_adviser[0]['setting_adviser_income'],
-                'journals_id' => 3,
-                'member_id' => $Account[0]['member_id'],
-              );
-              $this->db->insert('mlm_accounting', $input);
-            }
-          }
-          // ลงบัญชีเงินได้ ของ Upline
-          $input = array(
-            'accounting_date' => Date('Y-m-d'),
-            'accounting_source_id' => $ThisAccount[0]['account_id'],
-            'accounting_amount' => $accounting_amount,
-            'journals_id' => 4,
-            'member_id' => $ThisAccount[0]['member_id'],
-            'accounting_system_note' => 'ค่าการตลาด ครบ '.$goal." รหัส ".$text_note,
-          );
-          $this->db->insert('mlm_accounting', $input);
-        }else {
-          $input = array(
-            'accounting_date' => Date('Y-m-d'),
-            'accounting_source_id' => $ThisAccount[0]['account_id'],
-            'accounting_amount' => $accounting_amount,
-            'journals_id' => 4,
-            'member_id' => $ThisAccount[0]['member_id'],
-            'accounting_system_note' => 'ค่าการตลาด ครบ '.$goal." รหัส ",
-          );
-          $this->db->insert('mlm_accounting', $input);
-        }
-
-      }
-    }
-    return $GoalCheck;
-  }
-
   public function AddBookbank()
   {
     $member_id = $this->uri->segment(3);
@@ -527,7 +355,7 @@ class Member extends CI_Controller{
      $d2 = new DateTime($Profile[0]['member_born']);
      $diff = $d2->diff($d1);
      $Profile[0]['member_age'] = $diff->y;
-     
+
     $value = array(
       'Result' => array(
         'Profile' => $Profile,

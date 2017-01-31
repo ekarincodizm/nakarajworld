@@ -13,7 +13,6 @@ class MemberModel extends CI_Model {
     return $query;
 
   }
-
   public function MemberByID($id)
   {
     $query = $this->db
@@ -62,7 +61,6 @@ class MemberModel extends CI_Model {
     ->result_array();
     return $check;
   }
-
   public function MemberCreckAccept($id)
   {
     $query = $this->db

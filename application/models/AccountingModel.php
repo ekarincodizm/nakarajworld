@@ -247,4 +247,10 @@ class AccountingModel extends CI_Model
     ->update('mlm_member', $member);
 
   }
+
+  public function SaveAccounting($input)
+  {
+    $this->db->insert('mlm_accounting', $input);
+  }
+
 }
