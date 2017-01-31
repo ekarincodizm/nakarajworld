@@ -76,13 +76,15 @@
                   <a class="btn btn-lg btn-block bg-teal waves-effect" href="<?php echo site_url('/Accounting/ConfirmInvoiceAndEnableProfile/'.$var['accounting_id'].'/'.$var['member']['member_id']); ?>">
                     ชำระเงิน
                   </a>
-                  <?php else: ?>
+                <?php elseif ($type==7): ?>
+                  <a class="btn btn-lg btn-block bg-teal waves-effect" href="<?php echo site_url('/Accounting/ConfirmOrder/'.$var['accounting_id'].'/'.$var['member']['member_id'].'/'.$var['accounting_source_id']); ?>">
+                    ชำระเงิน
+                  </a>
+                <?php else: ?>
                     <a class="btn btn-lg btn-block bg-teal waves-effect" href="<?php echo site_url('/Accounting/ConfirmInvoice/'.$var['accounting_id']); ?>">
                       ชำระเงิน
                     </a>
                 <?php endif; ?>
-
-
               <?php endif; ?>
             </div>
           </div>

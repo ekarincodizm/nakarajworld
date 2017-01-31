@@ -66,7 +66,7 @@
       <div class="col-md-12">
         <div class="card">
           <div class="body bg-pink">
-            ยอด PV ปัจจุบัน <span class="pull-right"><b><?php echo $PV; ?> PV</b> </span>
+            ยอด PV ปัจจุบัน <span class="pull-right"><b><?php echo number_format($PV[0]['temp_total_pv']-$PV[0]['temp_total_used_pv']); ?> PV</b> </span>
           </div>
         </div>
       </div>

@@ -32,23 +32,36 @@ class MemberModel extends CI_Model {
 
     $i = 0;
     foreach ($member as $member_row) {
-      $shop_detail = $this->db
+      $Getpv = $this->db
       ->where('member_id', $member_row['member_id'])
-      ->where('accounting_status',1)
-      ->join('mlm_accounting', 'mlm_journal_sale_order_detail.journal_sale_order_detail_id = mlm_accounting.accounting_source_id')
-      ->join('mlm_journal_sale_order_item', 'mlm_journal_sale_order_detail.journal_sale_order_detail_id = mlm_journal_sale_order_item.journal_sale_order_detail_id')
-      ->get('mlm_journal_sale_order_detail')
+      ->where('point_type',1)
+      ->get('mlm_point_value')
       ->result_array();
 
       $pv=0;
-      foreach ($shop_detail as $row){
-      $pv += $row['journal_sale_order_item_pv']*$row['journal_sale_order_item_quantity'];
+      foreach ($Getpv as $row){
+      $pv += $row['point_value'];
       }
       $member[$i]['total_pv'] = $pv;
       $i++;
     }
-    //[ยังไม่ทำ]ต้องลบกับรายการใช้ PV ก่อน
 
+    $i = 0;
+    foreach ($member as $member_row) {
+      $Getpv = $this->db
+      ->where('member_id', $member_row['member_id'])
+      ->where('point_type',0)
+      ->get('mlm_point_value')
+      ->result_array();
+
+      $pv=0;
+      foreach ($Getpv as $row){
+      $pv += $row['point_value'];
+      }
+      $member[$i]['total_used_pv'] = $pv;
+      $i++;
+    }
+    //[ยังไม่ทำ]ต้องลบกับรายการใช้ PV ก่อน
     return $member;
   }
   Public function checkaccounting($member_id)

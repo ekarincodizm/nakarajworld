@@ -17,6 +17,7 @@ class Member extends CI_Controller{
   public function index() {
     $MemberList = $this->MemberModel->MemberListWhithPV();
     $MemberList = json_decode(json_encode($MemberList), true);
+    // $this->debuger->prevalue($MemberList);
 
     $value = array(
       'Result' => array(
@@ -44,7 +45,7 @@ class Member extends CI_Controller{
       $Profile[0]['member_id_card_type_name'] = 'Work Permit';
     }
     // $this->debuger->prevalue($Profile);
-    $pv = $this->HomePageModel->allpv($id);
+    $pv = $this->HomePageModel->MemberPV($id);
     // $AccountList = json_decode(json_encode($this->AccountModel->AccountByMember($id)), true);
     // $this->debuger->prevalue($id);
 
@@ -95,7 +96,7 @@ class Member extends CI_Controller{
     // $this->debuger->prevalue($this->AccountModel->BookbankList( $Account[0]['member_id']));
     $next_account_class_id = $Account[0]['account_class_id']+1;
     $NextClass = array();
-    if ($next_account_class_id!=7) {
+    if ($next_account_class_id!=8) {
       $NextClass = $this->AccountModel->NextClass($next_account_class_id);
     }
 
