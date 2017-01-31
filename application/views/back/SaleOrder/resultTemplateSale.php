@@ -1,3 +1,4 @@
+<?php $var = $AccountingDetail[0]; ?>
 <div class="row" style="    position: fixed;
 right: 5%;
 top: 0%;">
@@ -40,7 +41,7 @@ top: 0%;">
                   </div>
                   <div class="col-md-3 col-sm-3"><strong>ชื่อผู้สั่งซื้อ</strong><br>
                   </div>
-                  <div class="col-md-6 col-sm-6"><?php echo $SaleOrderDetail[0]['member_prefix'].$SaleOrderDetail[0]['member_firstname']." &nbsp;".$SaleOrderDetail[0]['member_lastname'] ?><br>
+                  <div class="col-md-6 col-sm-6"><?php echo $var['member']['member_prefix'].$var['member']['member_firstname']." ".$var['member']['member_lastname']; ?><br>
                   </div>
                 </div>
               </div>
@@ -51,9 +52,8 @@ top: 0%;">
             <p class="text-center" id="border"><strong style="font-size:32px"><br>
               ใบสั่งซื้อ</strong></br>
               <strong><br>
-                เลขที่ <?php echo $SaleOrderDetail[0]['journal_sale_order_detail_code'] ?></strong><br>
-                <strong>วันที่สั่งซื้อ</strong> <?php echo $this->thaidate->FullDate($SaleOrderDetail[0]['journal_sale_order_detail_date']) ?> </p>
-              </div>
+                เลขที่ <?php echo $var['accounting_no'] ?></strong><br>
+                <strong>วันที่สั่งซื้อ</strong> <?php echo $this->thaidate->FullDate($var['accounting_date']); ?> </p>              </div>
             </div>
           </div>
 
@@ -74,7 +74,7 @@ top: 0%;">
                 </tr>
               </thead>
               <tbody>
-                <?php $item=1; $amount=0; foreach ($SaleOrderDetail as $row): ?>
+                <?php $item=1; $amount=0; foreach ($AccountingDetail[0]['source_detail']['order_item'] as $row): ?>
                   <tr >
                     <td class="text-center" scope="row"><?php echo $item; ?></td>
                     <td><?php echo $row['products_code']; ?></td>
@@ -87,9 +87,9 @@ top: 0%;">
                   </tr>
                   <?php $item++; $amount += ($row['journal_sale_order_item_price']*$row['journal_sale_order_item_quantity']); endforeach; ?>
 
-                        <?php if (count($SaleOrderDetail)<15): ?>
+                        <?php if (count($AccountingDetail)<15): ?>
                           <?php
-                          $row = 15 - count($SaleOrderDetail);
+                          $row = 15 - count($AccountingDetail);
                           for ($i=0; $i < $row; $i++) { ?>
                             <tr>
                               <td><span class="empty"></span></td>
@@ -106,7 +106,7 @@ top: 0%;">
               </table>
             </div>
             <div class="col-md-2 col-sm-offset-8 col-sm-2"><b>ราคาสุทธิ</div>
-                <div class="col-md-2 col-sm-2"><?php echo $amount; ?> บาท</b></div>
+                <div class="col-md-2 col-sm-2"><?php echo $var['source_amount']; ?> บาท</b></div>
             </div>
           </div>
 

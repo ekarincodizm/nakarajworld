@@ -516,6 +516,12 @@ class Member extends CI_Controller{
         $Profile[0]['member_id_card_type_name'] = 'Work Permit';
       }
     }
+    $today = getdate();
+     $d1 = new DateTime($today["year"].'-'.$today["mon"].'-'.$today["mday"]);
+     $d2 = new DateTime($Profile[0]['member_born']);
+     $diff = $d2->diff($d1);
+     $Profile[0]['member_age'] = $diff->y;
+     
     $value = array(
       'Result' => array(
         'Profile' => $Profile,

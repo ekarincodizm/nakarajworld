@@ -15,7 +15,7 @@
       <tbody>
 
         <tr>
-          <td><?php echo $i;?></td>
+          <td>1</td>
           <td><?php echo $var['journals_detail'] ?></td>
           <td class="text-right">1</td>
           <td class="text-right"><?php echo number_format($var['source_amount']) ?></td>

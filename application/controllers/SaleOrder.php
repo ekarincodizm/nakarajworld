@@ -64,17 +64,18 @@ class SaleOrder extends CI_Controller{
 
   }
 
-  public function resultTemplateSale()
+  public function resultTemplateSaleOrder()
 {
   $InvoiceID = $this->uri->segment(3);
-  $SaleOrderDetail = $this->ProductsModel->SaleOrderResult($InvoiceID);
+  $AccountingDetail = $this->AccountingModel->AccountingDetail($InvoiceID);
   $Config = $this->ConfigModel->Config();
+  //$this->debuger->prevalue($AccountingDetail);
   $value = array(
     'Result' => array(
-      'SaleOrderDetail' => $SaleOrderDetail,
+      'AccountingDetail' => $AccountingDetail,
       'Config' => $Config,
     ),
-    'View' => 'back/SaleOrder/resultSale'
+    'View' => 'back/SaleOrder/resultTemplateSale'
   );
   $this->LoadDoc($value);
 }
