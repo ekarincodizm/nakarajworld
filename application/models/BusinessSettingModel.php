@@ -12,7 +12,7 @@ class BusinessSettingModel extends CI_Model {
   {
     $query = $this->db
     // ->where('income_percent_level', 1)
-    ->where('income_percent_plan', 1)
+    ->where('account_class_id', 1)
     ->get('mlm_income_percent_setting')
     ->result();
     return $query;
