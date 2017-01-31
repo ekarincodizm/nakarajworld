@@ -453,10 +453,21 @@ class AccountModel extends CI_Model {
     return $query;
   }
 
+
   public function SaveDividend($input)
   {
     $this->db->insert('mlm_journal_dividend', $input);
     $new_journal_dividend_id = $this->db->insert_id();
     return $new_journal_dividend_id;
   }
+
+  public function UpdateAccountClass($value)
+  {
+    $account_id = $value['account_id'];
+    unset($value['account_id']);
+    $this->db
+    ->where('account_id',$account_id)
+    ->update('mlm_account',$value);
+  }
+
 }
