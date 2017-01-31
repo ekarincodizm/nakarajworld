@@ -56,6 +56,7 @@ class Account extends CI_Controller
     );
 
     $new_account_id = $this->AccountModel->SaveAccount($AccountInput, $adviser_id);
+
     $this->FreeExtend($new_account_id, $member_id);
     // จบการบันทึก บัญชีใหม่ และ ลงบัญชีเงินได้ เรียบร้อย (ฟรีค่าธรรมเนียม)
     // ตรวจ ค่าการตลาด
@@ -66,6 +67,7 @@ class Account extends CI_Controller
   public function CheckMarketingValue($Upline)
   {
     $Account = $Upline;
+
     // $account_id = $Upline[0]['account_id']; // $account_id ที่ต้องการจัดตรวจสอบ การครบแผน
     $account_class_id = $Upline[0]['account_class_id']; // คลาสที่ต้องทำการเช็ค ให้เหมือนกัน หรือมากกว่า
     $max_row = $Upline[0]['account_class_max_row']; // การสิ้นสุดของแต่ละ แถว ในแต่ละ class
@@ -144,7 +146,7 @@ class Account extends CI_Controller
           $AdviserMVAmount = 100;
         }
         //หักค่า Adviser
-        $UplineMVAmount = $UplineMVAmount-$AdviserMVAmount
+        $UplineMVAmount = $UplineMVAmount-$AdviserMVAmount;
 
         // ลงค่าการตลาด
         $input = array(
