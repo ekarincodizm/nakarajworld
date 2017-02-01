@@ -112,21 +112,30 @@ class Account extends CI_Controller
     // $this->debuger->prevalue($UplineMVAmount);
     $journal_dividend_amount = $UplineMVAmount[0]['income_percent_point']*$UplineMVAmount[0]['income_percent_amount'];
     // ลงค่าการตลาด ให้ Upline
+
+    $FindDICode = $this->AccountModel->FindDividend();
+    $DIcode = "DI".sprintf("%05d",($FindDICode+1));
+    $this->debuger->prevalue($DIcode);
     $input = array(
       'journal_dividend_amount' => $journal_dividend_amount,
       'journal_dividend_type' => 2,
       'account_id' => $Upline[0]['account_id'],
       'member_id' => $Upline[0]['member_id'],
+      'journal_dividend_code' => $DIcode,
      );
     $new_journal_dividend_id = $this->AccountModel->SaveDividend($input);
     // ลงบัญชี
-    $input = array(
-      'accounting_date' => Date('Y-m-d'),
-      'accounting_source_id' => $new_journal_dividend_id,
-      'journals_id' => 4,
-    );
+    $code = "DR".DateTime::createFromFormat('U.u', microtime(true))->format("Hisu");
 
-    $this->AccountingModel->SaveAccounting($input);
+    $AccountingInput = array(
+      'accounting_date' =>  Date('Y-m-d'),
+      'accounting_source_id' => $new_journal_dividend_id,
+      'accounting_tax' => 0,
+      'journals_id' => 5,
+      'accounting_no' => $code,
+      'accounting_note' => "ค่าการตลาด บริษัท่"
+    );
+    $new_accounting_id = $this->AccountModel->AddAccounting($AccountingInput);
   }
   public function AdviserDividend($Downline, $Upline, $lvl)
   {
@@ -188,12 +197,15 @@ class Account extends CI_Controller
   {
     // เพิ่มการลงทะเบียนต่ออายุ ฟรี
     $expired =  Date('Y-m-d', strtotime("+365 day", strtotime(Date('Y-m-d'))));
+    $FindEXCode = $this->AccountModel->JounalExtendAccountAll();
+    $EXcode = "EX".sprintf("%05d",($FindEXCode+1));
     $ExtendInput = array(
       'account_id' => $new_account_id,
       'member_id' => $member_id,
       'journal_extend_start_date' => Date('Y-m-d'),
       'journal_extend_expired_date' => $expired,
       'journal_extend_amount' => 0,
+      'journal_extend_code' => $EXcode,
     );
     $new_journal_extend_id = $this->AccountModel->SaveJournalExtend($ExtendInput);
 

@@ -67,6 +67,7 @@ class AccountModel extends CI_Model {
     ->join('mlm_account_class', 'mlm_account.account_class_id = mlm_account_class.account_class_id')
     ->get('mlm_account')
     ->result_array();
+    // $this->debuger->prevalue($query);
     return $query;
   }
   public function DownlinePerLVL($Account, $RowLvl)
@@ -185,8 +186,8 @@ class AccountModel extends CI_Model {
     $new_account_id = $this->db->insert_id();
 
     $Account = $this->AccountModel->FindAccountByID($new_account_id);
+    //$this->debuger->prevalue($Account);
     $upline_id = $Account[0]['account_upline_id'];
-    // $this->debuger->prevalue($Account);
 
     do {
       $input = array(
@@ -472,6 +473,14 @@ class AccountModel extends CI_Model {
   {
     $this->db->insert('mlm_journal_dividend', $input);
     $new_journal_dividend_id = $this->db->insert_id();
+    return $new_journal_dividend_id;
+  }
+
+  public function FindDividend($input)
+  {
+    $this->db
+    ->get('mlm_journal_dividend')
+    ->num_rows();
     return $new_journal_dividend_id;
   }
 

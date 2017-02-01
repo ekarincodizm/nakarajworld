@@ -215,6 +215,7 @@ class AccountingModel extends CI_Model
     ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
     ->get('mlm_accounting')
     ->num_rows();
+
     $InvoiceNo = "IN".sprintf("%05d", ($query+1));
     $input = array(
       'accounting_status' => 1,
