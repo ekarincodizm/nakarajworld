@@ -123,6 +123,18 @@ class HomePageModel extends CI_Model {
       $member[$i]['temp_total_used_pv'] = $pv;
       $i++;
     }
+    // $this->debuger->prevalue($memeber);
       return $member;
+  }
+  public function CheckFreePV($account_id){
+      $check = 'FreePV';
+      $query = $this->db
+      ->where('account_id',$account_id)
+      ->where('point_detail',$check)
+      ->get('mlm_point_value')
+      ->num_rows();
+
+      //$this->debuger->prevalue($query);
+      return $query;
   }
 }

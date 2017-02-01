@@ -1,15 +1,18 @@
 <!-- <div class="row" ng-app="HomePageApp"> -->
 <div class="row" ng-controller="PanelUpclassCtrl">
-  <?php if (count($PlanOneDirectAdviser)>=3 && count($PlanOneDownline)>=243): ?>
+  <?php //if (count($PlanOneDirectAdviser)>=3 && count($PlanOneDownline)>=0): ?>
+    <?php if ($CheckFreePV!='1'): ?>
+
     <div class="row">
       <div class="col-md-12 text-center">
         <div class="alert bg-teal">
           <h4>โบนัสฟรี <span class="label bg-pink">4,000 PV</span> เมื่อมีสมาชิกครบ 243 บัญชี และแนะนำด้วยตัวเอง 3 บัญชี</h4>
-          <a href="#" class="btn bg-pink">รับทันที</a>
+          <a href="<?php echo site_url('/Member/AddFreePV/'.$Account[0]['account_id']."/".$MyPv[0]['member_id'])?>" class="btn bg-pink">รับทันที</a>
         </div>
       </div>
     </div>
-  <?php endif; ?>
+        <?php endif; ?>
+  <?php  //endif; ?>
 
 
   <div class="row">
@@ -22,8 +25,8 @@
       var account_id = <?php echo $this->uri->segment(3); ?>;
       </script>
       <p>ต้องใช้ <?php echo $NextClass[0]['account_class_pv'] ?> PV เพื่อเลื่อนระดับ</p>
-      <p>PV ที่ใช้ได้ <?php echo $MyPv ?> PV</p>
       <?php $pv = $MyPv[0]['temp_total_pv']-$MyPv[0]['temp_total_used_pv'];?>
+      <p>PV รวมปัจจุบัน <font color="blue"><?php echo $pv ?> </font>PV</p>
       <?php if (($pv-$NextClass[0]['account_class_pv'])<0): ?>
         <p class="text-danger">ขาด <?php echo $pv-$NextClass[0]['account_class_pv'] ?> PV</p>
         <?php else: ?>

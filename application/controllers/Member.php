@@ -75,6 +75,8 @@ class Member extends CI_Controller{
     $AdviserList = json_decode(json_encode($this->AccountModel->AdviserList( $Account[0]['account_id'])), true);
     $Account2 = json_decode(json_encode($this->MemberModel->MemberList()), true);
     $MyPv = json_decode(json_encode($this->HomePageModel->MemberPV( $Account[0]['member_id'])), true);
+    $CheckFreePV = $this->HomePageModel->CheckFreePV($Account[0]['account_id']);
+
 
     //$this->debuger->prevalue($MyPv);
 
@@ -104,6 +106,8 @@ class Member extends CI_Controller{
 
     $BankList = $this->db->get('mlm_bank')->result_array();
 
+
+
     $value = array(
       'Result' => array(
         'Profile' => $Profile,
@@ -121,10 +125,11 @@ class Member extends CI_Controller{
         'PlanOneDownline' => $PlanOneDownline,
         'PlanOneDirectAdviser' => $PlanOneDirectAdviser,
         'MyPv' => $MyPv,
-
+        'CheckFreePV' => $CheckFreePV,
       ),
       'View' => 'back/Account/AccountDetail'
     );
+    // $this->debuger->prevalue($value);
     $this->LoadPage($value);
   }
 
@@ -547,5 +552,23 @@ class Member extends CI_Controller{
     $this->load->view('back/document/doc_header', $data);
     $this->load->view($value['View']);
     $this->load->view('back/document/doc_footer');
+  }
+  public function AddFreePV()
+  {
+    $account_id = $this->uri->segment(3);
+    $member_id = $this->uri->segment(4);
+    // $MyAccountClass = json_decode(json_encode($this->AccountModel->AccountByID( $input,$id )), true);
+    $time =  Date('Y-m-d');
+    $value = array(
+      'point_value' => 4000,
+      'point_detail' => 'FreePV',
+      'point_date' => $time,
+      'point_type' => 1,
+      'member_id' => $member_id,
+      'account_id' => $account_id,
+    );
+    // $this->debuger->prevalue($value);
+    $this->AccountModel->AddAccountDetailUpclass($value);
+    redirect($this->agent->referrer(), 'refresh');
   }
 }

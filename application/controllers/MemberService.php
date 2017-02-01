@@ -137,5 +137,4 @@ class MemberService extends REST_Controller
 
 			$this->response($AccountDetailUpclass);
 		}
-
 }
