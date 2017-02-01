@@ -44,12 +44,12 @@ class Account extends CI_Controller
 
     // ดึงรายละเอียดของ อัปไลน์
     $Upline = $this->AccountModel->FindAccountByID($upline_id);
-
+    $AccountListByTeam = $this->AccountModel->CountAccountTeam($Upline[0]['account_team']);
     //เพิ่ม Account ใหม่ และ เพิ่มการนับ downline
     $AccountInput = array(
       'account_team' => $Upline[0]['account_team'],
       'account_level' => $Upline[0]['account_level']+=1,
-      'account_code' => $Upline[0]['account_code']+=1,
+      'account_code' => $AccountListByTeam+=1,
       'account_upline_id' => $upline_id,
       'account_adviser_id' => $adviser_id,
       'member_id' => $member_id,
@@ -68,7 +68,7 @@ class Account extends CI_Controller
   {
     $Account = $Upline;
 
-    // $account_id = $Upline[0]['account_id']; // $account_id ที่ต้องการจัดตรวจสอบ การครบแผน
+    $account_id = $Account[0]['account_id']; // $account_id ที่ต้องการจัดตรวจสอบ การครบแผน
     $account_class_id = $Upline[0]['account_class_id']; // คลาสที่ต้องทำการเช็ค ให้เหมือนกัน หรือมากกว่า
     $max_row = $Upline[0]['account_class_max_row']; // การสิ้นสุดของแต่ละ แถว ในแต่ละ class
 
@@ -85,7 +85,6 @@ class Account extends CI_Controller
         $Account = $NextAccount;
         $lvlDown++;
         $goal *= 3; // เพื่อให้ เลื่อนเป็นจำนวน การสิ้นสุดของแต่ละ แถว ในแต่ละ class ถัดไป
-
       }
     }
   }
@@ -110,10 +109,11 @@ class Account extends CI_Controller
   {
     // เงินที่ อัปไลน์ จะได้
     $UplineMVAmount = $this->AccountModel->GetMVByClassLvl($Upline[0]['account_class_id'] , $lvl);
-
+    // $this->debuger->prevalue($UplineMVAmount);
+    $journal_dividend_amount = $UplineMVAmount[0]['income_percent_point']*$UplineMVAmount[0]['income_percent_amount'];
     // ลงค่าการตลาด ให้ Upline
     $input = array(
-      'journal_dividend_amount' => $UplineMVAmount,
+      'journal_dividend_amount' => $journal_dividend_amount,
       'journal_dividend_type' => 2,
       'account_id' => $Upline[0]['account_id'],
       'member_id' => $Upline[0]['member_id'],

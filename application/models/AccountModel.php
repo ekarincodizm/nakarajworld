@@ -71,18 +71,23 @@ class AccountModel extends CI_Model {
   }
   public function DownlinePerLVL($Account, $RowLvl)
   {
+
     $account_upline_id = $Account[0]['account_id'];
-    $account_level = $Account[0]['account_level']+$RowLvl;
+    $account_team = $Account[0]['account_team'];
+    $account_level = $Account[0]['account_level']+=$RowLvl;
     $account_class_id = $Account[0]['account_class_id'];
+    // $this->debuger->prevalue($account_upline_id);
 
     $query =  $this->db
     ->where('account_upline_id', $account_upline_id)
-    ->where('account_class_id', $account_class_id)
+    ->where('account_team', $account_team)
+    ->where('account_level', $account_level)
+    ->where('account_class_id >=', $account_class_id)
     ->join('mlm_account', 'mlm_downline_count.downline_count_downline_id = mlm_account.account_id')
-    // ->join('mlm_account_class', 'mlm_account.account_class_id = mlm_account_class.account_class_id')
     ->get('mlm_downline_count')
     ->result_array();
 
+    // $this->debuger->prevalue($query);
     return $query;
   }
 
@@ -90,7 +95,7 @@ class AccountModel extends CI_Model {
   {
     $query = $this->db
     ->where('income_percent_level', $lvl)
-    ->where('income_percent_class', $class)
+    ->where('account_class_id', $class)
     ->get('mlm_income_percent_setting')
     ->result_array();
     return $query;
@@ -166,7 +171,14 @@ class AccountModel extends CI_Model {
     ->get('mlm_account')->result();
     return $query;
   }
-
+  public function CountAccountTeam($value)
+  {
+    $query = $this->db
+    ->where('account_team', $value)
+    ->order_by('account_code', 'DESC')
+    ->get('mlm_account')->num_rows();
+    return $query;
+  }
   public function SaveAccount($AccountInput, $adviser_id)
   {
     $this->db->insert('mlm_account', $AccountInput);
@@ -289,7 +301,6 @@ class AccountModel extends CI_Model {
 
     return $query;
   }
-
   // นับ ดาวน์ไลน์ ที่แนะนำเอง ในแผน 1 จะนับแค่ 5 ชั้น ที่ต่อจากตัวเอง
   public function PlanOneDirectAdviser($account_id, $upline_level)
   {
