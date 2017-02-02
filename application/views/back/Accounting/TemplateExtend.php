@@ -18,8 +18,13 @@
           <td>1</td>
           <td><?php echo $var['journals_detail'] ?></td>
           <td class="text-right">1</td>
-          <td class="text-right"><?php echo number_format($var['source_amount']) ?></td>
-          <td class="text-right"><?php echo number_format($var['source_amount']) ?></td>
+          <?php if ($var['source_amount']==0): ?>
+            <td><strong class="text-muted right">-</strong></td>
+            <td><strong class="text-muted right">-</strong></td>
+          <?php else: ?>
+            <td class="text-right"><?php echo number_format($var['source_amount']) ?></td>
+            <td class="text-right"><?php echo number_format($var['source_amount']) ?></td>
+          <?php endif; ?>
         </tr>
 
       </tbody>
@@ -36,7 +41,11 @@
       <tbody>
         <tr>
           <td>ราคา</td>
-          <td><?php echo $var['source_amount']?></td>
+          <?php if ($var['source_amount']==0): ?>
+            <td><strong class="text-muted center">-</strong></td>
+          <?php else: ?>
+            <td><?php echo $var['source_amount']?></td>
+          <?php endif; ?>
           <td>บาท</td>
         </tr>
         <tr>
@@ -46,7 +55,11 @@
         </tr>
         <tr>
           <td>ราคาสุทธิ</td>
-          <td><?php echo $var['source_amount']?></td>
+          <?php if ($var['source_amount']==0): ?>
+            <td><strong class="text-muted center">-</strong></td>
+          <?php else: ?>
+            <td><?php echo $var['source_amount']?></td>
+          <?php endif; ?>
           <td>บาท</td>
         </tr>
       </tbody>

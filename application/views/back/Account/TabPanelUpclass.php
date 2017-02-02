@@ -1,6 +1,6 @@
 <!-- <div class="row" ng-app="HomePageApp"> -->
 <div class="row" ng-controller="PanelUpclassCtrl">
-  <?php //if (count($PlanOneDirectAdviser)>=3 && count($PlanOneDownline)>=0): ?>
+  <?php if (count($PlanOneDirectAdviser)>=3 && count($PlanOneDownline)>=0): ?>
     <?php if ($CheckFreePV!='1'): ?>
 
     <div class="row">
@@ -12,7 +12,7 @@
       </div>
     </div>
         <?php endif; ?>
-  <?php  //endif; ?>
+  <?php  endif; ?>
 
 
   <div class="row">

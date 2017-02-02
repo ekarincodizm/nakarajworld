@@ -118,8 +118,8 @@ public function resultTemplateDividend()
 {
   $InvoiceID = $this->uri->segment(3);
   $AccountingDetail = $this->AccountingModel->AccountingDetail($InvoiceID);
-  $this->debuger->prevalue($AccountingDetail);
-  //$Config = $this->ConfigModel->Config();
+  //$this->debuger->prevalue($AccountingDetail);
+  $Config = $this->ConfigModel->Config();
 
 
   $value = array(

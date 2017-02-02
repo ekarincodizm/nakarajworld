@@ -172,18 +172,24 @@ class Account extends CI_Controller
         $UplineMVAmount = $UplineMVAmount - $AdviserMVAmount;
 
         // ลงค่าการตลาด
+        $FindDICode = $this->AccountModel->FindDividend();
+        $DIcode = "DI".sprintf("%05d",($FindDICode+1));
         $input = array(
           'journal_dividend_amount' => $AdviserMVAmount,
           'journal_dividend_type' => 1,
           'account_id' => $Adviser[0]['account_id'],
           'member_id' => $Adviser[0]['member_id'],
+          'journal_dividend_code' => $DIcode,
          );
         $new_journal_dividend_id = $this->AccountModel->SaveDividend($input);
         // ลงบัญชี
+        $code = "DR".DateTime::createFromFormat('U.u', microtime(true))->format("Hisu");
         $input = array(
           'accounting_date' => Date('Y-m-d'),
           'accounting_source_id' => $new_journal_dividend_id,
+          'accounting_no' => $code,
           'journals_id' => 3,
+          'accounting_note' => "ค่าการตลาด ผู้แนะนำ",
         );
 
         $this->AccountingModel->SaveAccounting($input);
@@ -191,18 +197,24 @@ class Account extends CI_Controller
     } // End foreach
 
     // ลงค่าการตลาด ให้ Upline
+    $FindDICode = $this->AccountModel->FindDividend();
+    $DIcode = "DI".sprintf("%05d",($FindDICode+1));
     $input = array(
       'journal_dividend_amount' => $UplineMVAmount,
       'journal_dividend_type' => 2,
       'account_id' => $Upline[0]['account_id'],
       'member_id' => $Upline[0]['member_id'],
+      'journal_dividend_code' => $DIcode,
      );
     $new_journal_dividend_id = $this->AccountModel->SaveDividend($input);
     // ลงบัญชี
+    $code = "DR".DateTime::createFromFormat('U.u', microtime(true))->format("Hisu");
     $input = array(
       'accounting_date' => Date('Y-m-d'),
       'accounting_source_id' => $new_journal_dividend_id,
       'journals_id' => 4,
+      'accounting_note' => "ค่าการตลาด ตามแผน",
+      'accounting_no' => $code,
     );
 
     $this->AccountingModel->SaveAccounting($input);
@@ -225,14 +237,13 @@ class Account extends CI_Controller
 
     // เพิ่มรายการบัญชี ฟรีค่าธรรมเนียม บัญชีนักธุระกิจใหม่
     $code = "DR".DateTime::createFromFormat('U.u', microtime(true))->format("Hisu");
-
     $AccountingInput = array(
       'accounting_date' =>  Date('Y-m-d'),
       'accounting_source_id' => $new_journal_extend_id,
       'accounting_tax' => 0,
       'journals_id' => 2,
       'accounting_no' => $code,
-      'accounting_note' => "ฟรีค่าธรรมเนียม บัญชีนักธุระกิจใหม่"
+      'accounting_note' => "ฟรีค่าธรรมเนียม บัญชีนักธุระกิจใหม่",
     );
     $new_accounting_id = $this->AccountModel->AddAccounting($AccountingInput);
     $this->AccountingModel->ConfirmInvoice($new_accounting_id);
