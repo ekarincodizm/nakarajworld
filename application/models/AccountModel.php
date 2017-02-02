@@ -70,20 +70,21 @@ class AccountModel extends CI_Model {
     // $this->debuger->prevalue($query);
     return $query;
   }
-  public function DownlinePerLVL($Account, $RowLvl)
+  public function DownlinePerLVL($Account, $RowLvl, $DownlineClass)
   {
 
-    $account_upline_id = $Account[0]['account_id'];
-    $account_team = $Account[0]['account_team'];
-    $account_level = $Account[0]['account_level']+=$RowLvl;
-    $account_class_id = $Account[0]['account_class_id'];
-    // $this->debuger->prevalue($account_upline_id);
+    $data['downline_count_upline_id'] = $Account[0]['account_id'];
+    $data['account_team'] = $Account[0]['account_team'];
+    $data['account_level'] = $Account[0]['account_level']+$RowLvl;
+    // print_r($data);
+    // $this->debuger->prevalue($data);
+    // $this->debuger->prevalue($DownlineClass);
 
     $query =  $this->db
-    ->where('account_upline_id', $account_upline_id)
-    ->where('account_team', $account_team)
-    ->where('account_level', $account_level)
-    ->where('account_class_id >=', $account_class_id)
+    ->where('downline_count_upline_id', $data['downline_count_upline_id'])
+    ->where('account_team', $data['account_team'])
+    ->where('account_level', $data['account_level'])
+    ->where('account_class_id >=', $DownlineClass)
     ->join('mlm_account', 'mlm_downline_count.downline_count_downline_id = mlm_account.account_id')
     ->get('mlm_downline_count')
     ->result_array();
@@ -99,7 +100,8 @@ class AccountModel extends CI_Model {
     ->where('account_class_id', $class)
     ->get('mlm_income_percent_setting')
     ->result_array();
-    return $query;
+    $UplineMVAmount = ($query[0]['income_percent_point']*$query[0]['income_percent_amount'])/100;
+    return $UplineMVAmount;
   }
   public function AccountNonJoinByID($id)
   {
@@ -476,12 +478,13 @@ class AccountModel extends CI_Model {
     return $new_journal_dividend_id;
   }
 
-  public function FindDividend($input)
+  public function FindDividend()
   {
-    $this->db
+    $query = $this->db
     ->get('mlm_journal_dividend')
     ->num_rows();
-    return $new_journal_dividend_id;
+
+    return $query;
   }
 
   public function UpdateAccountClass($value)

@@ -100,7 +100,7 @@ class AccountingModel extends CI_Model
       $source_detail = $this->SelectSourceDetail($source_id, $index_id, $source_table);
       $source_detail['Template'] = 'TemplateDividend';
       $source_detail['source_code'] = $source_detail[0]['journal_dividend_code'];
-      $source_detail['source_amount'] = $source_detail['journal_dividend_amount'];
+      $source_detail['source_amount'] = $source_detail[0]['journal_dividend_amount'];
     } elseif ($type==7) {
       $source_table = 'mlm_journal_sale_order_detail';
       $index_id = 'journal_sale_order_detail_id';
@@ -129,8 +129,8 @@ class AccountingModel extends CI_Model
 
       // account_detail
       if (!empty($query[0]['account_id']) && $query[0]['account_id']!="" && $query[0]['account_id']!=0) {
-        $account_detail  = $query[0]['account_detail'] = $this->AccountModel->FindAccountByID($query[0]['account_id']);
-        $query['account_detail'] = $account_detail[0];
+        $account_detail  = $this->AccountModel->FindAccountByID($query[0]['account_id']);
+        $query['account_detail'] = $account_detail;
       } else {
         $query['account_detail'] = "";
       }

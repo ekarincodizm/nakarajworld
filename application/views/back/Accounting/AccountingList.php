@@ -34,47 +34,48 @@
                 <tr style="cursor: pointer;" onclick="document.location = '<?php echo site_url('/Accounting/AccountingDetail/'.$row['accounting_id']); ?>';">
                   <td><?php echo $i; ?></td>
                   <td>
-                    <?php echo $row['accounting_no']; ?></td>
-                    <td>
-                      <?php echo $this->thaidate->ShortDate($row['accounting_date']); ?>
-                    </td>
-                    <td>
-                      <?php echo $row['journals_detail']; ?>
-                    </td>
-                    <td class="text-right">
-                      <?php if ($row['source_amount']==0): ?>
-                        <strong class="text-muted"><?php echo number_format($row['source_amount']); ?></strong>
-                      <?php else: ?>
-                        <?php if ($row['journals_type']==4): ?>
-                          <strong class="text-success"><?php echo number_format($row['source_amount']); ?></strong>
-                        <?php elseif ($row['journals_type']==5): ?>
-                          <strong class="text-danger"><?php echo number_format($row['source_amount']); ?></strong>
-                        <?php endif; ?>
+                    <?php echo ellipsize($row['accounting_no'], 7); ?>
+                  </td>
+                  <td>
+                    <?php echo $this->thaidate->ShortDate($row['accounting_date']); ?>
+                  </td>
+                  <td>
+                    <?php echo $row['journals_detail']; ?>
+                  </td>
+                  <td class="text-right">
+                    <?php if ($row['source_amount']==0): ?>
+                      <strong class="text-muted"><?php echo number_format($row['source_amount']); ?></strong>
+                    <?php else: ?>
+                      <?php if ($row['journals_type']==4 || $row['member']['member_id']==1): ?>
+                        <strong class="text-success"><?php echo number_format($row['source_amount']); ?></strong>
+                      <?php elseif ($row['journals_type']==5): ?>
+                        <strong class="text-danger"><?php echo number_format($row['source_amount']); ?></strong>
                       <?php endif; ?>
-                    </td>
-                    <td>
-                      <?php echo $row['member']['member_firstname']; ?>
-                    </td>
-                    <td>
-                      <?php echo $row['source_code']; ?>
-                    </td>
-                    <td>
-                      <h4>
-                        <?php if ($row['accounting_status']==0): ?>
-                          <span class="label bg-deep-orange">ค้างชำระ</span>
-                        <?php elseif($row['accounting_status']==1): ?>
-                          <span class="label bg-green">ชำระแล้ว</span>
-                        <?php else: ?>
-                          <span class="label bg-blue-grey">รอดำเนินการ</span>
-                        <?php endif; ?>
-                      </h4>
-                    </td>
-                  </tr>
-                  <?php $i++; endforeach; ?>
-                </tbody>
-              </table>
-            </div>
+                    <?php endif; ?>
+                  </td>
+                  <td>
+                    <?php echo $row['member']['member_firstname']; ?>
+                  </td>
+                  <td>
+                    <?php echo $row['source_code']; ?>
+                  </td>
+                  <td>
+                    <h4>
+                      <?php if ($row['accounting_status']==0): ?>
+                        <span class="label bg-deep-orange">ค้างชำระ</span>
+                      <?php elseif($row['accounting_status']==1): ?>
+                        <span class="label bg-green">ชำระแล้ว</span>
+                      <?php else: ?>
+                        <span class="label bg-blue-grey">รอดำเนินการ</span>
+                      <?php endif; ?>
+                    </h4>
+                  </td>
+                </tr>
+                <?php $i++; endforeach; ?>
+              </tbody>
+            </table>
           </div>
-
         </div>
-      </section>
+
+      </div>
+    </section>

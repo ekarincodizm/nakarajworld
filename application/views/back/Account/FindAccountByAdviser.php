@@ -24,6 +24,7 @@
                 <?php if ($_SESSION['ADMIN_TYPE']==1): ?>
 
                   <select class="form-control selectpicker" name="account_team">
+                    <option value="N">ทีม N</option>
                     <?php for ($i='A'; $i <= 'I'; $i++) { ?>
                       <option value="<?php echo $i ?>">ทีม <?php echo $i ?></option>
                     <?php } ?>

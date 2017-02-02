@@ -46,10 +46,11 @@ class Account extends CI_Controller
     $Upline = $this->AccountModel->FindAccountByID($upline_id);
     $AccountListByTeam = $this->AccountModel->CountAccountTeam($Upline[0]['account_team']);
     //เพิ่ม Account ใหม่ และ เพิ่มการนับ downline
+    $account_level = $Upline[0]['account_level']+1;
     $AccountInput = array(
       'account_team' => $Upline[0]['account_team'],
-      'account_level' => $Upline[0]['account_level']+=1,
-      'account_code' => $AccountListByTeam+=1,
+      'account_level' => $account_level,
+      'account_code' => $AccountListByTeam+1,
       'account_upline_id' => $upline_id,
       'account_adviser_id' => $adviser_id,
       'member_id' => $member_id,
@@ -60,40 +61,52 @@ class Account extends CI_Controller
     $this->FreeExtend($new_account_id, $member_id);
     // จบการบันทึก บัญชีใหม่ และ ลงบัญชีเงินได้ เรียบร้อย (ฟรีค่าธรรมเนียม)
     // ตรวจ ค่าการตลาด
-    $this->CheckMarketingValue($Upline);
+    $DownlineClass = 1; // account_class_id = 1 หรือ NORMAL
+    $this->CheckMarketingValue($Upline, $DownlineClass);
 
     redirect('/Member/MemberProfile/'.$member_id);
   }
-  public function CheckMarketingValue($Upline)
+  public function CheckMarketingValue($Upline, $DownlineClass)
   {
-    $Account = $Upline;
+    // $this->debuger->prevalue(count($Upline));
+    if (count($Upline)>0) {
+      $Account = $Upline;
+      // $account_id = $Account[0]['account_id']; // $account_id ที่ต้องการจัดตรวจสอบ การครบแผน
+      // $account_class_id = $Account[0]['account_class_id']; // คลาสที่ต้องทำการเช็ค ให้เหมือนกัน หรือมากกว่า
+      $max_row = $Account[0]['account_class_max_row']; // การสิ้นสุดของแต่ละ แถว ในแต่ละ class
+      // $this->debuger->prevalue($max_row);
 
-    $account_id = $Account[0]['account_id']; // $account_id ที่ต้องการจัดตรวจสอบ การครบแผน
-    $account_class_id = $Upline[0]['account_class_id']; // คลาสที่ต้องทำการเช็ค ให้เหมือนกัน หรือมากกว่า
-    $max_row = $Upline[0]['account_class_max_row']; // การสิ้นสุดของแต่ละ แถว ในแต่ละ class
+      $goal = 3; // เป้าหมายการครบ เริ่มจาก 3
+      $lvlDown = 1; // นับ ระดับลง
 
-    $goal = 3; // เป้าหมายการครบ เริ่มจาก 3
-    $lvlDown = 1; // นับ ระดับลง
-
-    $GoalPerLevel = array(); // array เป้าหมายการครบ แต่ละ ระดับ
-    // $i เริ่มที่ 3 เพราะ เป้าหมายการครบ เริ่มจาก 3 และ *3 เพื่อให้ได้จำนวน ที่จะหยุด ตามจำนวนชั้น ที่ account_class_id นั้นๆ กินได้
-    for ($i=3; $i <=$max_row; $i *= 3) {
-      if ( $account_id!=0 && $account_id!='' ) { // ในกรณีที่ถึง รหัสของบริษัท แล้วจะไม่มีเกินขึ้นไปอีก
-        // MV = MarketingValue // นับ จำนวน รหัสที่ class ตรงกัน ใน
-        $NextAccount = $this->CheckMVPerLevel($Account, $lvlDown, $goal);
-
-        $Account = $NextAccount;
-        $lvlDown++;
-        $goal *= 3; // เพื่อให้ เลื่อนเป็นจำนวน การสิ้นสุดของแต่ละ แถว ในแต่ละ class ถัดไป
+      // $GoalPerLevel = array(); // array เป้าหมายการครบ แต่ละ ระดับ
+      // $i เริ่มที่ 3 เพราะ เป้าหมายการครบ เริ่มจาก 3 และ *3 เพื่อให้ได้จำนวน ที่จะหยุด ตามจำนวนชั้น ที่ account_class_id นั้นๆ กินได้
+      for ($i=3; $i <=$max_row; $i *= 3) {
+        if ( count($Account)>0 ) { // ในกรณีที่ถึง รหัสของบริษัท แล้วจะไม่มีเกินขึ้นไปอีก
+          // MV = MarketingValue // นับ จำนวน รหัสที่ class ตรงกัน ใน
+          $NextAccount = $this->CheckMVPerLevel($Account, $lvlDown, $goal, $DownlineClass);
+          $Account = $NextAccount;
+          $lvlDown++;
+          $goal *= 3; // เพื่อให้ เลื่อนเป็นจำนวน การสิ้นสุดของแต่ละ แถว ในแต่ละ class ถัดไป
+        }
       }
     }
+    // exit();
   }
-  public function CheckMVPerLevel($Account, $lvlDown, $goal)
+  public function CheckMVPerLevel($Account, $lvlDown, $goal, $DownlineClass)
   {
+    // echo "<pre>";
+
     // Account นี้ ที่กำลังยึดเป็นหลัก
     $ThisAccount = $Account;
     // นับ Downline
-    $Downline = $this->AccountModel->DownlinePerLVL($ThisAccount, $lvlDown);
+    $Downline = $this->AccountModel->DownlinePerLVL($ThisAccount, $lvlDown, $DownlineClass);
+    // echo "<script>";
+    // echo "console.log(".count($Downline).")";
+    // print_r(count($Downline));
+    // echo "</script>";
+
+    // exit();
     $AmountDownline = count($Downline);
     if ($AmountDownline == $goal) {
       if ($goal==3) {
@@ -110,17 +123,18 @@ class Account extends CI_Controller
     // เงินที่ อัปไลน์ จะได้
     $UplineMVAmount = $this->AccountModel->GetMVByClassLvl($Upline[0]['account_class_id'] , $lvl);
     // $this->debuger->prevalue($UplineMVAmount);
-    $journal_dividend_amount = $UplineMVAmount[0]['income_percent_point']*$UplineMVAmount[0]['income_percent_amount'];
+    $journal_dividend_amount = $UplineMVAmount;
     // ลงค่าการตลาด ให้ Upline
 
     $FindDICode = $this->AccountModel->FindDividend();
     $DIcode = "DI".sprintf("%05d",($FindDICode+1));
-    $this->debuger->prevalue($DIcode);
+    // $this->debuger->prevalue($DIcode);
     $input = array(
       'journal_dividend_amount' => $journal_dividend_amount,
       'journal_dividend_type' => 2,
       'account_id' => $Upline[0]['account_id'],
       'member_id' => $Upline[0]['member_id'],
+      'journal_dividend_class' => $DownlineClass,
       'journal_dividend_code' => $DIcode,
      );
     $new_journal_dividend_id = $this->AccountModel->SaveDividend($input);
@@ -133,7 +147,7 @@ class Account extends CI_Controller
       'accounting_tax' => 0,
       'journals_id' => 5,
       'accounting_no' => $code,
-      'accounting_note' => "ค่าการตลาด บริษัท่"
+      'accounting_note' => "ค่าการตลาด บริษัท"
     );
     $new_accounting_id = $this->AccountModel->AddAccounting($AccountingInput);
   }
@@ -155,7 +169,7 @@ class Account extends CI_Controller
           $AdviserMVAmount = 100;
         }
         //หักค่า Adviser
-        $UplineMVAmount = $UplineMVAmount-$AdviserMVAmount;
+        $UplineMVAmount = $UplineMVAmount - $AdviserMVAmount;
 
         // ลงค่าการตลาด
         $input = array(
