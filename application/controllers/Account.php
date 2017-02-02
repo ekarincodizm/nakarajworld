@@ -70,12 +70,13 @@ class Account extends CI_Controller
     }
 
   }
-  public function SaveAccount($member_id, $adviser_id, $upline_id)
+  // public function SaveAccount($member_id, $adviser_id, $upline_id)
+  public function SaveAccount()
   {
     date_default_timezone_set("Asia/Bangkok");
-    // $member_id = $this->uri->segment(3);
-    // $adviser_id = $this->uri->segment(4);
-    // $upline_id = $this->uri->segment(5);
+    $member_id = $this->uri->segment(3);
+    $adviser_id = $this->uri->segment(4);
+    $upline_id = $this->uri->segment(5);
 
     // ดึงรายละเอียดของ อัปไลน์
     $Upline = $this->AccountModel->FindAccountByID($upline_id);
@@ -100,8 +101,31 @@ class Account extends CI_Controller
     $DownlineClass = 1; // account_class_id = 1 หรือ NORMAL
     $this->CheckMarketingValue($Upline, $DownlineClass);
 
-    // redirect('/Member/MemberProfile/'.$member_id);
+    redirect('/Member/MemberProfile/'.$member_id);
   }
+
+  public function UpgradeAccount()
+  {
+    // UpgradeAccount
+    $account_id = $this->uri->segment(3);
+    $this->AccountModel->UpgradeAccount($account_id);
+    $ThisAccount = $this->AccountModel->FindAccountByID($account_id);
+    $Upline = $this->AccountModel->FindAccountByID($ThisAccount[0]['account_upline_id']);
+    $this->CheckMarketingValue($Upline, $ThisAccount[0]['account_class_id']);
+    redirect($this->agent->referrer(), 'refresh');
+  }
+
+  public function UpgradeStar()
+  {
+    // UpgradeStar
+    $account_id = $this->uri->segment(3);
+    $this->AccountModel->UpgradeStar($account_id);
+    $ThisAccount = $this->AccountModel->FindAccountByID($account_id);
+    $Upline = $this->AccountModel->FindAccountByID($ThisAccount[0]['account_upline_id']);
+    $this->CheckMarketingValue($Upline, $ThisAccount[0]['account_class_id']);
+    redirect($this->agent->referrer(), 'refresh');
+  }
+
   public function CheckMarketingValue($Upline, $DownlineClass)
   {
     // $this->debuger->prevalue(count($Upline));

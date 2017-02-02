@@ -76,6 +76,7 @@ class AccountModel extends CI_Model {
     $data['downline_count_upline_id'] = $Account[0]['account_id'];
     $data['account_team'] = $Account[0]['account_team'];
     $data['account_level'] = $Account[0]['account_level']+$RowLvl;
+    $data['account_class_round'] = $Account[0]['account_class_round'];
     // print_r($data);
     // $this->debuger->prevalue($data);
     // $this->debuger->prevalue($DownlineClass);
@@ -85,6 +86,7 @@ class AccountModel extends CI_Model {
     ->where('account_team', $data['account_team'])
     ->where('account_level', $data['account_level'])
     ->where('account_class_id >=', $DownlineClass)
+    ->where('account_class_round >=', $data['account_class_round'])
     ->join('mlm_account', 'mlm_downline_count.downline_count_downline_id = mlm_account.account_id')
     ->get('mlm_downline_count')
     ->result_array();
@@ -504,4 +506,17 @@ class AccountModel extends CI_Model {
     ->update('mlm_account',$value);
   }
 
+  public function UpgradeAccount($account_id)
+  {
+    $this->db->set('account_class_id', 'account_class_id+1', FALSE);
+    $this->db->where('account_id', $account_id);
+    $this->db->update('mlm_account');
+  }
+
+  public function UpgradeStar($account_id)
+  {
+    $this->db->set('account_class_round', 'account_class_round+1', FALSE);
+    $this->db->where('account_id', $account_id);
+    $this->db->update('mlm_account');
+  }
 }
