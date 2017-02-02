@@ -18,7 +18,7 @@
                                         <th>ค่าการตลาด (%)</th>
                                         <th class="text-right">ค่าการตลาด (บาท)</th>
                                         <th>วันที่แก้ไข</th>
-                                        <th>ตัวเลือก</th>
+                                        <!-- <th>ตัวเลือก</th> -->
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -29,21 +29,25 @@
                                             <td class="text-right"><?php echo $c; ?></td>
                                             <td>
                                                 <div class="form-line">
-                                                    <input name="income_percent_point" type="number" class="form-control text-center" value="<?php echo $row['income_percent_point']; ?>"/>
+                                                    <!-- <input name="income_percent_point" type="number" class="form-control text-center" value=" -->
+                                                    <?php echo $row['income_percent_point']; ?>
+                                                    <!-- "/> -->
                                                 </div>
                                             </td>
                                             <td>
                                                 <div class="form-line">
-                                                    <input name="income_percent_amount" step="any" type="number" class="form-control text-center" value="<?php echo $row['income_percent_amount']; ?>"/>
+                                                    <!-- <input name="income_percent_amount" step="any" type="number" class="form-control text-center" value=" -->
+                                                    <?php echo $row['income_percent_amount']; ?>
+                                                    <!-- "/> -->
                                                 </div>
                                             </td>
                                             <td class="text-right"><?php echo number_format($row['income_percent_point']*$row['income_percent_amount']/100); ?></td>
                                             <td><?php echo $this->thaidate->FullDate($row['income_percent_date']); ?></td>
-                                            <td>
+                                            <!-- <td>
                                                 <button type="submit" class="btn btn-success">
                                                     บันทึก
                                                 </button>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                         <?php echo form_close(); ?>
                                         <?php $i++; $c*=3; endforeach; ?>

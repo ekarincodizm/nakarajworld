@@ -40,11 +40,11 @@
                     <?php echo $this->thaidate->ShortDate($row['accounting_date']); ?>
                   </td>
                   <td>
-                    <?php echo ellipsize($row['journals_detail'], 73); ?>
+                    <?php echo $row['journals_detail']; ?>
                   </td>
                   <td class="text-right">
                     <?php if ($row['source_amount']==0): ?>
-                      <strong class="text-muted">ไม่มีค่าใช้จ่าย</strong>
+                      <strong class="text-muted">-</strong>
                     <?php else: ?>
                       <?php if ($row['journals_type']==4 || $row['member']['member_id']==1): ?>
                         <strong class="text-success"><?php echo number_format($row['source_amount']); ?></strong>
