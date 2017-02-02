@@ -1,14 +1,3 @@
-<!-- <section class="content">
-<div class="container-fluid">
-<div class="row clearfix">
-<div class="col-md-12">
-<button type="button" class="btn bg-blue-grey waves-effect">ค้นหาใหม่</button>
-</div>
-</div>
-</div>
-</div>
-</section> -->
-
 <section class="content">
     <div class="container-fluid">
 

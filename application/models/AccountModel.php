@@ -92,7 +92,15 @@ class AccountModel extends CI_Model {
     // $this->debuger->prevalue($query);
     return $query;
   }
-
+  public function GetGoalClassLvl($class, $lvl)
+  {
+    $query = $this->db
+    ->where('income_percent_level', $lvl)
+    ->where('account_class_id', $class)
+    ->get('mlm_income_percent_setting')
+    ->result_array();
+    return $query;
+  }
   public function GetMVByClassLvl($class, $lvl)
   {
     $query = $this->db
