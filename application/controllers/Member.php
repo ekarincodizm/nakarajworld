@@ -107,7 +107,8 @@ class Member extends CI_Controller{
     $BankList = $this->db->get('mlm_bank')->result_array();
 
 
-
+    $DividendID = $this->AccountingModel->DividendByID($id);
+    $this->debuger->prevalue($DividendID);
     $value = array(
       'Result' => array(
         'Profile' => $Profile,
@@ -126,6 +127,7 @@ class Member extends CI_Controller{
         'PlanOneDirectAdviser' => $PlanOneDirectAdviser,
         'MyPv' => $MyPv,
         'CheckFreePV' => $CheckFreePV,
+        'DividendID' => $DividendID,
       ),
       'View' => 'back/Account/AccountDetail'
     );
