@@ -19,7 +19,6 @@ class AccountingModel extends CI_Model
   public function DividendByID($account_id)
   {
     $query =  $this->db
-
     ->where('mlm_accounting.journals_id >=', 3)
     ->where('mlm_accounting.journals_id <=', 6)
     ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
@@ -137,7 +136,10 @@ class AccountingModel extends CI_Model
      if ($account_id==0) {
       $query = $this->db->where($index_id, $source_id)->get($source_table)->result_array();
      } else {
-       $query = $this->db->where($account_id, $source_id)->get($source_table)->result_array();
+       $query = $this->db
+       ->where($index_id, $source_id)
+       ->where('account_id', $account_id)
+       ->get($source_table)->result_array();
      }
 
 

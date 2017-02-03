@@ -110,6 +110,9 @@ class Account extends CI_Controller
     $account_id = $this->uri->segment(3);
     $this->AccountModel->UpgradeAccount($account_id);
     $ThisAccount = $this->AccountModel->FindAccountByID($account_id);
+    if ($ThisAccount[0]['account_class_id']==7) {
+      $this->AccountModel->UpgradeStar($account_id);
+    }
     $Upline = $this->AccountModel->FindAccountByID($ThisAccount[0]['account_upline_id']);
     $this->CheckMarketingValue($Upline, $ThisAccount[0]['account_class_id']);
     redirect($this->agent->referrer(), 'refresh');
@@ -219,6 +222,7 @@ class Account extends CI_Controller
       'accounting_tax' => 0,
       'journals_id' => 5,
       'accounting_no' => $code,
+      'accounting_status' => 2,
       'accounting_note' => "ค่าการตลาด บริษัท"
     );
     $new_accounting_id = $this->AccountModel->AddAccounting($AccountingInput);
@@ -261,6 +265,7 @@ class Account extends CI_Controller
           'accounting_source_id' => $new_journal_dividend_id,
           'accounting_no' => $code,
           'journals_id' => 3,
+          'accounting_status' => 2,
           'accounting_note' => "ค่าการตลาด ผู้แนะนำ",
         );
 
@@ -286,6 +291,7 @@ class Account extends CI_Controller
       'accounting_date' => Date('Y-m-d'),
       'accounting_source_id' => $new_journal_dividend_id,
       'journals_id' => 4,
+      'accounting_status' => 2,
       'accounting_note' => "ค่าการตลาด ตามแผน",
       'accounting_no' => $code,
     );
