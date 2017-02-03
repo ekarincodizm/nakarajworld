@@ -26,9 +26,20 @@ class AccountingModel extends CI_Model
     ->get('mlm_accounting')
     ->result_array();
 
+
     $query = $this->AccountingSourceDetail($query, $account_id);
 
-    return $query;
+    $index = 0;
+    $new_query = array();
+    foreach ($query as $row) {
+      if ($row['source_detail'][0]['account_id'] == $account_id) {
+        $new_query[$index] =$row;
+        $index++;
+      }
+    }
+    //$this->debuger->prevalue($new_query);
+
+    return $new_query;
 
   }
 
@@ -133,16 +144,16 @@ class AccountingModel extends CI_Model
 
   public function SelectSourceDetail($source_id, $index_id, $source_table, $account_id)
   {
-     if ($account_id==0) {
+    //  if ($account_id==0) {
       $query = $this->db->where($index_id, $source_id)->get($source_table)->result_array();
-     } else {
-       $query = $this->db
-       ->where($index_id, $source_id)
-       ->where('account_id', $account_id)
-       ->get($source_table)->result_array();
-     }
-
-
+    //  } else {
+    //    $query = $this->db
+    //    ->where($index_id, $source_id)
+    //   //  ->where('account_id', $account_id)
+    //    ->get($source_table)
+    //    ->result_array();
+    //  }
+    //  $this->debuger->prevalue($query);
 
     if (count($query)!=0) {
       if ($source_table=='mlm_journal_sale_order_detail') {

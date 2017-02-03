@@ -108,7 +108,7 @@ class Member extends CI_Controller{
 
 
     $DividendID = $this->AccountingModel->DividendByID($id);
-    $this->debuger->prevalue($DividendID);
+    //$this->debuger->prevalue($DividendID);
     $value = array(
       'Result' => array(
         'Profile' => $Profile,
