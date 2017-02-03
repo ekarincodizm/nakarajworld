@@ -35,7 +35,7 @@
           </td>
 
           <!-- แปลงระดับ -->
-          <?php if ($row['source_detail'][0]['journal_dividend_class']==1): ?>
+          <?php if ($row['source_detail'][0]['journal_dividend_class']==1 || $row['source_detail'][0]['journal_dividend_class']==0): ?>
             <td class="text-center">
               ทั่วไป
             </td>
@@ -63,21 +63,28 @@
             <td class="text-center">
               Star
             </td>
+
           <?php endif; ?>
 
 
           <td>
             <h4 class="text-center">
-              <?php if ($row['source_detail'][0]['journal_dividend_class'] >= $row['account'][0]['account_class_id']): ?>
+              <?php if ($row['source_detail'][0]['journal_dividend_class'] <= $row['account'][0]['account_class_id']): ?>
 
-                <?php if ($row['accounting_status']==0): ?>
+                <?php if ($row['accounting_status']==2): ?>
+                  <a class="btn btn-success" href="<?php echo site_url('/Accounting/ConfirmDividend/'.$row['accounting_id']); ?>">
+                    ออกใบเสร็จ
+                  </a>
+                <?php elseif ($row['accounting_status']==1): ?>
                   <span class="label bg-green ">ชำระแล้ว</span>
-                <?php else: ?>
-                <span class="label bg-deep-orange ">ลงบัญชีรับเงิน</span>
+                <?php elseif ($row['accounting_status']==0): ?>
+                  <a class="btn btn-warning" href="<?php echo site_url('/Accounting/AccountingDetail/'.$row['accounting_id']); ?>">
+                    ชำระเงิน
+                  </a>
                 <?php endif; ?>
 
               <?php else: ?>
-              <span class="label bg-blue-grey">ระดับต่อกว่ากำหนด</span>
+              <span class="label bg-blue-grey">ไม่ตรงเงื่อนไข</span>
             <?php endif; ?>
             </h4>
           </td>

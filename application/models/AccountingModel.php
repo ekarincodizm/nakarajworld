@@ -48,6 +48,7 @@ class AccountingModel extends CI_Model
     $account_id = 0;
     $query =  $this->db
     ->where('accounting_id', $accounting_id)
+    ->where('accounting_status !=', 2)
     ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
     ->order_by('accounting_id', 'DESC')
     ->get('mlm_accounting')
@@ -317,4 +318,11 @@ class AccountingModel extends CI_Model
     $this->db->insert('mlm_accounting', $input);
   }
 
+  public function ConfirmDividend($accounting_id)
+  {
+    $this->db
+    ->set('accounting_status', 'accounting_status=0', FALSE)
+    ->where('accounting_id', $accounting_id)
+    ->update('mlm_accounting');
+  }
 }

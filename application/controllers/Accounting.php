@@ -98,4 +98,11 @@ class Accounting extends CI_Controller{
     $this->AccountingModel->ConfirmRecipt($accounting_id);
     redirect($this->agent->referrer(), 'refresh');
   }
+
+  public function ConfirmDividend()
+  {
+    $accounting_id = $this->uri->segment(3);
+    $this->AccountingModel->ConfirmDividend($accounting_id);
+    redirect($this->agent->referrer(), 'refresh');
+  }
 }
