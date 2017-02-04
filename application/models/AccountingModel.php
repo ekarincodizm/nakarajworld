@@ -46,34 +46,6 @@ class AccountingModel extends CI_Model
 
   }
 
-  public function IncomeAccountingByID($account_id)
-  {
-    $query =  $this->db
-    ->where('mlm_accounting.journals_id >=', 3)
-    ->where('mlm_accounting.journals_id <=', 6)
-    ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
-    ->order_by('accounting_status', 'ASC')
-    ->order_by('accounting_id', 'DESC')
-    ->get('mlm_accounting')
-    ->result_array();
-
-
-    $query = $this->AccountingSourceDetail($query, $account_id);
-
-    $index = 0;
-    $new_query = array();
-    foreach ($query as $row) {
-      if ($row['source_detail'][0]['account_id'] == $account_id) {
-        $new_query[$index] =$row;
-        $index++;
-      }
-    }
-      //$this->debuger->prevalue($new_query);
-
-    return $new_query;
-
-  }
-
   public function DividendByID($account_id)
   {
     $query =  $this->db

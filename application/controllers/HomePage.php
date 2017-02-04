@@ -310,24 +310,83 @@ class HomePage extends CI_Controller{
 		$this->LoadUserPage($value);
 	}
 
-	public function IncomeListByID() {
-		$Profile = array();
-		$IncomeAccounting = array();
-		$account_id = $this->uri->segment(3);
-		if (isset($_SESSION['MEMBER_ID'])) {
-			$Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
-			$IncomeAccounting = json_decode(json_encode($this->AccountingModel->IncomeAccountingByID($account_id)), true);
-			//$this->debuger->prevalue($IncomeAccounting);
+		public function IncomeListByID() {
+			$Profile = array();
+			$AccountList = array();
+			if (isset($_SESSION['MEMBER_ID'])) {
+				$Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
+			}
+			$id = $this->uri->segment(3);
+			$Account = json_decode(json_encode($this->AccountModel->AccountByID( $id )), true);
+			$Profile2 = json_decode(json_encode($this->HomePageModel->LoadProfile( $Account[0]['member_id'] )), true);
+			$AllDownline = json_decode(json_encode($this->AccountModel->AllDownlineByAccount( $id )), true);
+			$ThreeDownline = json_decode(json_encode($this->AccountModel->ThreeDownline( $id )), true);
+			$Upline = json_decode(json_encode($this->AccountModel->AccountByID( $Account[0]['account_upline_id'])), true);
+			$Adviser = json_decode(json_encode($this->AccountModel->AccountByID( $Account[0]['account_adviser_id'])), true);
+			$AdviserList = json_decode(json_encode($this->AccountModel->AdviserList( $Account[0]['account_id'])), true);
+			$Account2 = json_decode(json_encode($this->MemberModel->MemberList()), true);
+			$MyPv = json_decode(json_encode($this->HomePageModel->MemberPV( $Account[0]['member_id'])), true);
+			$CheckFreePV = $this->HomePageModel->CheckFreePV($Account[0]['account_id']);
+
+
+			//$this->debuger->prevalue($MyPv);
+
+			$PlanOneDownline = $this->AccountModel->PlanOneDownline($id, $Account[0]['account_level']);
+			$PlanOneDirectAdviser = $this->AccountModel->PlanOneDirectAdviser($id, $Account[0]['account_level']);
+			// $this->debuger->prevalue($PlanOneDownline);
+
+			$JounalExtendAccount = $this->AccountModel->JounalExtendAccount( $Account[0]['account_id']);
+			// $this->debuger->prevalue($JounalExtendAccount);
+
+
+			// $HistoryAccount = json_decode(json_encode($this->AccountModel->JounalExtendAccount( $Account[0]['account_id'])), true);
+
+			if ($Account[0]['bookbank_id']!=0) {
+				$BookbankDetail = json_decode(json_encode($this->AccountModel->BookbankDetail( $Account[0]['bookbank_id'])), true);
+				// $this->debuger->prevalue($BookbankDetail);
+			} else {
+				$BookbankDetail = 'false';
+			}
+			// $BookbankList = $this->AccountModel->BookbankList( $Account[0]['member_id'] );
+			// $this->debuger->prevalue($this->AccountModel->BookbankList( $Account[0]['member_id']));
+			$next_account_class_id = $Account[0]['account_class_id']+1;
+			$NextClass = array();
+			if ($next_account_class_id!=8) {
+				$NextClass = $this->AccountModel->NextClass($next_account_class_id);
+			}
+
+			$BankList = $this->db->get('mlm_bank')->result_array();
+
+
+			$DividendID = $this->AccountingModel->DividendByID($id);
+			//$this->debuger->prevalue($JounalExtendAccount);
+			$value = array(
+				'Result' => array(
+					'Profile' => $Profile,
+					'Profile2' => $Profile2,
+					'Account' => $Account,
+					'AllDownline' => $AllDownline,
+					'ThreeDownline' => $ThreeDownline,
+					'Upline' => $Upline,
+					'Adviser' => $Adviser,
+					'AdviserList' => $AdviserList,
+					'JounalExtendAccount' => $JounalExtendAccount,
+					'BookbankDetail' => $BookbankDetail,
+					'NextClass' => $NextClass,
+					'BankList' => $BankList,
+					'member' => $Account2,
+					'PlanOneDownline' => $PlanOneDownline,
+					'PlanOneDirectAdviser' => $PlanOneDirectAdviser,
+					'MyPv' => $MyPv,
+					'CheckFreePV' => $CheckFreePV,
+					'DividendID' => $DividendID,
+				),
+				'View' => 'front/User/IncomeListPageID'
+			);
+			// $this->debuger->prevalue($value);
+			$this->LoadUserPage($value);
 		}
-		$value = array(
-			'Result' => array(
-				'Profile' => $Profile,
-				'IncomeAccounting' => $IncomeAccounting,
-			),
-			'View' => 'front/User/IncomeListPage'
-		);
-		$this->LoadUserPage($value);
-	}
+
 	public function EditProfile() {
 		$Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
 		if ($Profile[0]['member_id_card_type']==1) {
