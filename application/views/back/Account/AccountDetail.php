@@ -28,8 +28,8 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs tab-nav-right" role="tablist">
               <!-- <li role="presentation" class="active"><a href="#AllDownline" data-toggle="tab" aria-expanded="true">ดาวน์ไลน์ทั้งหมด</a></li> -->
-              <li role="presentation" class="active"><a href="#ThreeDownline" data-toggle="tab" aria-expanded="false">ดาวน์ไลน์ติดตัว</a></li>
-              <li role="presentation" class=""><a href="#Income" data-toggle="tab" aria-expanded="false">ยอดเงิน</a></li>
+              <li role="presentation" class="active"><a href="#Income" data-toggle="tab" aria-expanded="false">ค่าการตลาด</a></li>
+              <li role="presentation" class=""><a href="#ThreeDownline" data-toggle="tab" aria-expanded="false">ดาวน์ไลน์ติดตัว</a></li>
               <li role="presentation" class=""><a href="#Adviser" data-toggle="tab" aria-expanded="false">แนะนำผู้อื่น</a></li>
               <li role="presentation" class=""><a href="#Upline" data-toggle="tab" aria-expanded="false">อัปไลน์</a></li>
               <!-- <li role="presentation" class=""><a href="#Bookbank" data-toggle="tab" aria-expanded="false">บัญชีธนาคาร</a></li> -->
@@ -41,11 +41,11 @@
             <!-- Tab panes -->
             <div class="tab-content">
 
-              <div role="tabpanel" class="tab-pane fade active in" id="ThreeDownline">
-                <?php $this->load->view('back/Account/TabPanelThreeDownline'); ?>
-              </div>
-              <div role="tabpanel" class="tab-pane fade" id="Income">
+              <div role="tabpanel" class="tab-pane fade active in" id="Income">
                 <?php $this->load->view('back/Account/TabPanelIncome'); ?>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="ThreeDownline">
+                <?php $this->load->view('back/Account/TabPanelThreeDownline'); ?>
               </div>
               <div role="tabpanel" class="tab-pane fade" id="Adviser">
                 <?php $this->load->view('back/Account/TabPanelAdviser'); ?>

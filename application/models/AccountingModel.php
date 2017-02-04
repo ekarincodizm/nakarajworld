@@ -7,6 +7,7 @@ class AccountingModel extends CI_Model
     $account_id = 0;
     $query =  $this->db
     ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
+    ->where('accounting_status !=', 2)
     ->order_by('accounting_status', 'ASC')
     ->order_by('accounting_id', 'DESC')
     ->get('mlm_accounting')
@@ -48,7 +49,6 @@ class AccountingModel extends CI_Model
     $account_id = 0;
     $query =  $this->db
     ->where('accounting_id', $accounting_id)
-    ->where('accounting_status !=', 2)
     ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
     ->order_by('accounting_id', 'DESC')
     ->get('mlm_accounting')

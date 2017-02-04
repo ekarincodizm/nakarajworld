@@ -1,6 +1,7 @@
 <!-- <div class="row" ng-app="HomePageApp"> -->
 <div class="row" ng-controller="PanelUpclassCtrl">
-  <?php if (count($PlanOneDirectAdviser)>=3 && count($PlanOneDownline)>=0): ?>
+  <!-- <?php echo count($PlanOneDownline);?> -->
+  <?php if (count($PlanOneDirectAdviser)>=3 && count($PlanOneDownline)>=243): ?>
     <?php if ($CheckFreePV!='1'): ?>
 
     <div class="row">
@@ -40,14 +41,13 @@
   </div>
   <div class="row">
     <div class="col-md-12">
-
       <table class="table table-hover">
         <thead>
           <tr>
             <th>#</th>
-            <th>PV</th>
             <th>วันที่</th>
             <th>ประเภท</th>
+            <th>PV</th>
             <th>ผู้ทำรายการ</th>
             <th>รายละเอียด</th>
           </tr>
@@ -55,9 +55,10 @@
         <tbody>
           <tr ng-repeat="row in ListUpclass">
             <td>{{$index+1}}</td>
-            <td>{{row.point_value}}</td>
             <td>{{row.point_date}}</td>
-            <td>{{row.point_type}}</td>
+            <td ng-if="row.point_type == 1">รับ</td>
+            <td ng-if="row.point_type == 0">ใช้</td>
+            <td>{{row.point_value}}</td>
             <td>{{row.member_prefix}}{{row.member_firstname}} {{row.member_lastname}}</td>
             <td>{{row.point_detail}}</td>
           </tr>
