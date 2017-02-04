@@ -1,5 +1,5 @@
 
-<footer id="footer" style="position:fixed; left:0; bottom:0; z-index:999;">
+<footer id="footer" style=" left:0; bottom:0; z-index:999;">
 <!-- <footer id="footer" > -->
 
   <div class="container">

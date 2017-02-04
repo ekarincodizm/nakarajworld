@@ -83,7 +83,7 @@
                                       <?php endif; ?>
                                     </td>
                                     <td>
-                                      <a href="<?php echo site_url('/AccountController/AccountDetailPage/'.$row['account_id']); ?>" class="btn btn-info"> รายละเอียด</a>
+                                      <a href="<?php echo site_url('/HomePage/IncomeListByID/'.$row['account_id']); ?>" class="btn btn-info"> รายละเอียด</a>
                                     </td>
                                   </tr>
                                 <?php endif; ?>

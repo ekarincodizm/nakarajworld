@@ -19,40 +19,92 @@
               <thead>
                 <tr>
                   <th>#</th>
-                  <th>เลขเอกสาร</th>
                   <th>วันที่</th>
+                  <th>เลขที่เอกสาร</th>
                   <th>รายการ</th>
-                  <th>ยอดเงิน</th>
-                  <!-- <th>ผู้เกี่ยวข้อง</th> -->
-                  <th>เกี่ยวข้อง</th>
-                  <th>สถานะ</th>
+                  <th class="text-right">ยอดเงิน</th>
+                  <th class="text-center">ระดับ</th>
+                  <th class="text-center">สถานะ</th>
 
                 </tr>
               </thead>
               <tbody>
+                <?php //echo "55555".$IncomeAccounting[0]['source_detail'][0]['journal_dividend_code'] ?>
+                <?php
+                // $this->debuger->prevalue($AccountingList);
+                $i=1; foreach ($IncomeAccounting as $row): ?>
+                <!-- <tr style="cursor: pointer;" onclick="document.location = '<?php echo site_url('/Accounting/AccountingDetail/'.$row['accounting_id']); ?>';"> -->
+                  <td><?php echo $i; ?></td>
+                  <td>
+                    <?php echo $this->thaidate->Shortdate($row['accounting_date']); ?>
+                  </td>
+                  <td>
+                    <?php echo $row['source_code']; ?>
+                  </td>
+                  <td>
+                    <?php echo $row['journals_detail']; ?>
+                  </td>
+                  <td class="text-right">
+                    <?php if ($row['source_amount']==0): ?>
+                      <strong class="text-muted">-</strong>
+                    <?php else: ?>
+                      <strong class="text-success"><?php echo number_format($row['source_amount']); ?></strong>
+                    <?php endif; ?>
+                  </td>
 
-                <?php $i=1; foreach ($IncomeAccounting as $Accounting): ?>
-                  <tr>
-                    <td><?php echo $i; ?></td>
-                    <td><?php echo "IN".sprintf("%05d", $Accounting['accounting_id']); ?></td>
-                    <td><?php echo $this->thaidate->FullDate($Accounting['accounting_date']); ?></td>
-                    <td><?php echo $Accounting['journals_name']; ?></td>
-                    <td><?php echo $Accounting['accounting_amount']; ?></td>
-                    <!-- <td><?php echo $Accounting['member_prefix'].$Accounting['member_firstname']." ".$Accounting['member_lastname']; ?></td> -->
-                    <td><?php echo $Accounting['account_team'].sprintf("%04d", $Accounting['account_level']).sprintf("%04d", $Accounting['account_code']); ?></td>
-                    <td>
-                      <?php if ($Accounting['accounting_status']==0): ?>
-                        <span class="label label-warning">ค้างชำระ</span>
-                      <?php elseif($Accounting['accounting_status']==1): ?>
-                        <span class="label label-success">ชำระแล้ว</span>
-                      <?php else: ?>
-                        <span class="label label-default">รอดำเนินการ</span>
-                      <?php endif; ?>
+                  <!-- แปลงระดับ -->
+                  <?php if ($row['source_detail'][0]['journal_dividend_class']==1): ?>
+                    <td class="text-center">
+                      ทั่วไป
+                    </td>
+                  <?php elseif ($row['source_detail'][0]['journal_dividend_class']==2): ?>
+                    <td class="text-center">
+                      General
+                    </td>
+                  <?php elseif ($row['source_detail'][0]['journal_dividend_class']==3): ?>
+                    <td class="text-center">
+                      Bronz
+                    </td>
+                  <?php elseif ($row['source_detail'][0]['journal_dividend_class']==4): ?>
+                    <td class="text-center">
+                      Silver
+                    </td>
+                  <?php elseif ($row['source_detail'][0]['journal_dividend_class']==5): ?>
+                    <td class="text-center">
+                      Gold
+                    </td>
+                  <?php elseif ($row['source_detail'][0]['journal_dividend_class']==6): ?>
+                    <td class="text-center">
+                      Diamond
+                    </td>
+                  <?php elseif ($row['source_detail'][0]['journal_dividend_class']==7): ?>
+                    <td class="text-center">
+                      Star
                     </td>
 
-                  </tr>
-                  <?php $i++; endforeach; ?>
-                </tbody>
+                  <?php endif; ?>
+
+
+                  <td>
+                    <h4 class="text-center">
+                      <?php if ($row['source_detail'][0]['journal_dividend_class'] <= $row['account'][0]['account_class_id']): ?>
+
+                        <?php if ($row['accounting_status']==2): ?>
+                            สามารถรับเงินได้
+                        <?php elseif ($row['accounting_status']==1): ?>
+                          <span class="label bg-green ">รับเงินแล้ว</span>
+                        <?php elseif ($row['accounting_status']==0): ?>
+                            ยังไม่ได้รับเงิน
+                        <?php endif; ?>
+
+                      <?php else: ?>
+                      <span class="label bg-blue-grey">ไม่ตรงเงื่อนไข</span>
+                    <?php endif; ?>
+                    </h4>
+                  </td>
+                </tr>
+                <?php $i++; endforeach; ?>
+              </tbody>
               </table>
           </div>
         </div>

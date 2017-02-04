@@ -4,8 +4,8 @@
       <thead>
         <tr>
           <th>#</th>
+          <th>วันที่</th>
           <th>เลขที่เอกสาร</th>
-          <!-- <th>วันที่</th> -->
           <th>รายการ</th>
           <th class="text-right">ยอดเงิน</th>
           <th class="text-center">ระดับ</th>
@@ -20,6 +20,9 @@
         $i=1; foreach ($DividendID as $row): ?>
         <!-- <tr style="cursor: pointer;" onclick="document.location = '<?php echo site_url('/Accounting/AccountingDetail/'.$row['accounting_id']); ?>';"> -->
           <td><?php echo $i; ?></td>
+          <td>
+            <?php echo $this->thaidate->Shortdate($row['accounting_date']); ?>
+          </td>
           <td>
             <?php echo $row['source_detail'][0]['journal_dividend_code']; ?>
           </td>

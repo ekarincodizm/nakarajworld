@@ -297,7 +297,27 @@ class HomePage extends CI_Controller{
 		$IncomeAccounting = array();
 		if (isset($_SESSION['MEMBER_ID'])) {
 			$Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
-			$IncomeAccounting = json_decode(json_encode($this->AccountModel->IncomeAccounting( $_SESSION['MEMBER_ID'])), true);
+			$IncomeAccounting = json_decode(json_encode($this->AccountingModel->IncomeAccounting( $_SESSION['MEMBER_ID'])), true);
+			//$this->debuger->prevalue($IncomeAccounting);
+		}
+		$value = array(
+			'Result' => array(
+				'Profile' => $Profile,
+				'IncomeAccounting' => $IncomeAccounting,
+			),
+			'View' => 'front/User/IncomeListPage'
+		);
+		$this->LoadUserPage($value);
+	}
+
+	public function IncomeListByID() {
+		$Profile = array();
+		$IncomeAccounting = array();
+		$account_id = $this->uri->segment(3);
+		if (isset($_SESSION['MEMBER_ID'])) {
+			$Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
+			$IncomeAccounting = json_decode(json_encode($this->AccountingModel->IncomeAccountingByID($account_id)), true);
+			//$this->debuger->prevalue($IncomeAccounting);
 		}
 		$value = array(
 			'Result' => array(
