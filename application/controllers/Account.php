@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Account extends CI_Controller
+class account extends CI_Controller
 {
   public function __construct()
   {
@@ -36,40 +36,28 @@ class Account extends CI_Controller
     redirect($this->agent->referrer(), 'refresh');
   }
 
-  public function LoopNor()
-  {
-    $member_id = 37;
-    $adviser_id = 1;
-    // $upline_id = 94;
-
-    $upline_id = array(
-      0 => 94,
-      1 => 95,
-      2 => 105,
-      3 => 106,
-      4 => 107,
-      5 => 108,
-      6 => 109,
-      7 => 110,
-      8 => 121,
-    );
-    $arr=0;
-    $index = 0;
-    for ($i=1; $i <=27 ; $i++) {
-      echo "<pre>";
-      echo $upline_id[$arr];
-      echo "<br>";
-      $this->SaveAccount($member_id, $adviser_id, $upline_id[$arr]);
-
-      $index++;
-
-      if ($index==3) {
-        $arr++;
-        $index=0;
-      }
-    }
-
-  }
+  // public function LoopNor()
+  // {
+  //   $member_id = 2;
+  //   $adviser_id = 1;
+  //   $upline_id = 5;
+  //
+  //   $index = 0;
+  //   for ($i=1; $i <=27 ; $i++) {
+  //     // echo "<pre>";
+  //     // echo $upline_id;
+  //     // echo "<br>";
+  //     $this->SaveAccount($member_id, $adviser_id, $upline_id);
+  //
+  //     $index++;
+  //
+  //     if ($index==3) {
+  //       $upline_id++;
+  //       $index=0;
+  //     }
+  //   }
+  //
+  // }
   // public function SaveAccount($member_id, $adviser_id, $upline_id)
   public function SaveAccount()
   {
@@ -80,7 +68,6 @@ class Account extends CI_Controller
 
     // ดึงรายละเอียดของ อัปไลน์
     $Upline = $this->AccountModel->FindAccountByID($upline_id);
-    print_r($Upline);
     $AccountListByTeam = $this->AccountModel->CountAccountTeam($Upline[0]['account_team']);
     //เพิ่ม Account ใหม่ และ เพิ่มการนับ downline
     $account_level = $Upline[0]['account_level']+1;
@@ -99,23 +86,66 @@ class Account extends CI_Controller
     // จบการบันทึก บัญชีใหม่ และ ลงบัญชีเงินได้ เรียบร้อย (ฟรีค่าธรรมเนียม)
     // ตรวจ ค่าการตลาด
     $DownlineClass = 1; // account_class_id = 1 หรือ NORMAL
+    echo "<pre>";
+    print_r($Upline);
     $this->CheckMarketingValue($Upline, $DownlineClass);
 
     redirect('/Member/MemberProfile/'.$member_id);
   }
+  public function LoopUp()
+  {
+    $account_id = 5;
 
+    $index = 0;
+    for ($i=1; $i <=1 ; $i++) {
+      // echo "<pre>";
+      // echo $upline_id;
+      // echo "<br>";
+      $this->UpgradeAccount($account_id);
+
+      $index++;
+
+      if ($index==3) {
+        $account_id++;
+        $index=0;
+      }
+    }
+  }
   public function UpgradeAccount()
   {
-    // UpgradeAccount
     $account_id = $this->uri->segment(3);
+    $member_id = $this->uri->segment(4);
+    //Use PV
+    $MyAccountClass = json_decode(json_encode($this->AccountModel->AccountByID( $account_id )), true);
+
+    $next_account_class_id = $MyAccountClass[0]['account_class_id']+1;
+    $NextClass = array();
+    if ($next_account_class_id!=8) {
+      $NextClass = $this->AccountModel->NextClass($next_account_class_id);
+    }
+    //$this->debuger->prevalue($NextClass);
+    $time =  Date('Y-m-d');
+    $value = array(
+      'point_value' => $NextClass[0]['account_class_pv'],
+      'point_detail' => 'ยกระดับ',
+      'point_date' => $time,
+      'point_type' => 0,
+      'member_id' => $member_id,
+      'account_id' => $account_id,
+    );
+
+    $this->AccountModel->AddAccountDetailUpclass($value);
+
+    // UpgradeAccount
     $this->AccountModel->UpgradeAccount($account_id);
     $ThisAccount = $this->AccountModel->FindAccountByID($account_id);
     if ($ThisAccount[0]['account_class_id']==7) {
       $this->AccountModel->UpgradeStar($account_id);
     }
     $Upline = $this->AccountModel->FindAccountByID($ThisAccount[0]['account_upline_id']);
+
     $this->CheckMarketingValue($Upline, $ThisAccount[0]['account_class_id']);
-    redirect($this->agent->referrer(), 'refresh');
+    //redirect($this->agent->referrer(), 'refresh');
   }
 
   public function UpgradeStar()
@@ -137,8 +167,18 @@ class Account extends CI_Controller
       // $account_id = $Account[0]['account_id']; // $account_id ที่ต้องการจัดตรวจสอบ การครบแผน
       // $account_class_id = $Account[0]['account_class_id']; // คลาสที่ต้องทำการเช็ค ให้เหมือนกัน หรือมากกว่า
       $max_row = $Account[0]['account_class_max_row']; // การสิ้นสุดของแต่ละ แถว ในแต่ละ class
-      // $this->debuger->prevalue($max_row);
-      $lvlDown = 1; // นับ ระดับลง
+      //$this->debuger->prevalue($max_row);
+      if ($DownlineClass==1 || $DownlineClass==2) {
+        $lvlDown = 1;
+        $i=3;
+      } else {
+        $lvlDown = $DownlineClass+3;
+        $i=$max_row;
+      }
+      // echo $DownlineClass;
+      // echo "<br>";
+      // echo $lvlDown;
+      // echo "<br>";
 
       // $FindGoal = $this->AccountModel->GetGoalClassLvl($Account[0]['account_class_id'] , $lvlDown);
       //
@@ -147,10 +187,13 @@ class Account extends CI_Controller
 
       // $GoalPerLevel = array(); // array เป้าหมายการครบ แต่ละ ระดับ
       // $i เริ่มที่ 3 เพราะ เป้าหมายการครบ เริ่มจาก 3 และ *3 เพื่อให้ได้จำนวน ที่จะหยุด ตามจำนวนชั้น ที่ account_class_id นั้นๆ กินได้
-      for ($i=3; $i <=$max_row; $i *= 3) {
+
+
+      for ($i; $i <=$max_row; $i *= 3) {
         if ( count($Account)>0 ) { // ในกรณีที่ถึง รหัสของบริษัท แล้วจะไม่มีเกินขึ้นไปอีก
           // MV = MarketingValue // นับ จำนวน รหัสที่ class ตรงกัน ใน
-          $FindGoal = $this->AccountModel->GetGoalClassLvl($Account[0]['account_class_id'] , $lvlDown);
+          $FindGoal = $this->AccountModel->GetGoalClassLvl($DownlineClass , $lvlDown);
+          // print_r($FindGoal);
           $goal = $FindGoal[0]['income_percent_goal'];
           $NextAccount = $this->CheckMVPerLevel($Account, $lvlDown, $goal, $DownlineClass, $i);
           $Account = $NextAccount;
@@ -195,7 +238,7 @@ class Account extends CI_Controller
   public function UplineDividend($Upline, $lvl, $DownlineClass, $i, $goal)
   {
     // เงินที่ อัปไลน์ จะได้
-    $UplineMVAmount = $this->AccountModel->GetMVByClassLvl($Upline[0]['account_class_id'] , $lvl);
+    $UplineMVAmount = $this->AccountModel->GetMVByClassLvl($DownlineClass , $lvl);
     $lot = $i/$goal;
     // $this->debuger->prevalue($UplineMVAmount);
     $journal_dividend_amount = $UplineMVAmount/$lot;;
@@ -230,7 +273,7 @@ class Account extends CI_Controller
   public function AdviserDividend($Downline, $Upline, $lvl, $DownlineClass)
   {
     // เงินที่ อัปไลน์ จะได้
-    $UplineMVAmount = $this->AccountModel->GetMVByClassLvl($Upline[0]['account_class_id'] , $lvl);
+    $UplineMVAmount = $this->AccountModel->GetMVByClassLvl($DownlineClass , $lvl);
 
     foreach ($Downline as $row) {
       if ($row['account_upline_id'] != $row['account_adviser_id']) { // เช็คว่า ผู้ที่แนะนำ กับผู้ที่เป็น อัปไลน์ เป็นคนเดียวกันไหม

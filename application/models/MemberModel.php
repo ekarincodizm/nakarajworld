@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class MemberModel extends CI_Model {
+class membermodel extends CI_Model {
 
   public function MemberList()
   {

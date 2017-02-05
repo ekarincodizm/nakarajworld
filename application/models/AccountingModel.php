@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class AccountingModel extends CI_Model
+class accountingmodel extends CI_Model
 {
   public function AccountingSelectAll() {
     $account_id = 0;
@@ -71,6 +71,28 @@ class AccountingModel extends CI_Model
     //$this->debuger->prevalue($new_query);
 
     return $new_query;
+
+  }
+
+  public function DetailSaleOrder($accounting_id)
+  {
+    $query =  $this->db
+    ->where('mlm_accounting.accounting_id', $accounting_id)
+
+    // ->where('mlm_accounting.journals_id', 7)
+    ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
+    ->order_by('accounting_status', 'ASC')
+    ->order_by('accounting_id', 'DESC')
+    ->get('mlm_accounting')
+    ->result_array();
+    // echo "<pre>";
+    // print_r($query);
+    // exit();
+    $query = $this->AccountingSourceDetail($query, $accounting_id);
+    // echo "<pre>";
+    // print_r($query);
+    // exit();
+    return $query;
 
   }
 
@@ -153,7 +175,7 @@ class AccountingModel extends CI_Model
       $source_detail['Template'] = 'TemplateExtend';
       $source_detail['source_code'] = $source_detail[0]['journal_extend_code'];
       $source_detail['source_amount'] = $source_detail[0]['journal_extend_amount'];
-    } elseif ($type==3 || $type==4 || $type==5 || $type==6) {
+    } elseif ($type==3 || $type==4 || $type==5 || $type==6 || $type==8) {
       $source_table = 'mlm_journal_dividend';
       $index_id = 'journal_dividend_id';
       $source_detail = $this->SelectSourceDetail($source_id, $index_id, $source_table, $account_id);
@@ -240,7 +262,7 @@ class AccountingModel extends CI_Model
     ->where('mlm_journal_sale_order_item.journal_sale_order_detail_id', $source_id)
     // ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
     ->join('mlm_products', 'mlm_journal_sale_order_item.products_id = mlm_products.products_id')
-    ->join('mlm_accounting', 'mlm_accounting.accounting_source_id = mlm_journal_sale_order_item.journal_sale_order_detail_id')
+    // ->join('mlm_accounting', 'mlm_accounting.accounting_source_id = mlm_journal_sale_order_item.journal_sale_order_detail_id')
     ->get('mlm_journal_sale_order_item')
     ->result_array();
 

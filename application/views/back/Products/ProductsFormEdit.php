@@ -73,14 +73,14 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-4">
+              <!-- <div class="col-sm-4">
                 <div class="form-group">
                   <label for="">สินค้าคงคลัง</label>
                   <div class="form-line">
                     <input name="products_stock" type="number" class="form-control input-lg" value="<?php echo $ProductsDetail[0]['products_stock'] ?>">
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="col-sm-4">
                 <div class="form-group">
                   <label for="">หน่วยนับ</label>

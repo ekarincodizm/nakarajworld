@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class BusinessSettingModel extends CI_Model {
+class businesssettingmodel extends CI_Model {
 
   public function LoadBusinessSetting()
   {

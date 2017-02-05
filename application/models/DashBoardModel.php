@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class DashBoardModel extends CI_Model {
+class dashboardmodel extends CI_Model {
 
   public function DashBoardTeam()
   {

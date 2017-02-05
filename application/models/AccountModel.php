@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class AccountModel extends CI_Model {
+class accountmodel extends CI_Model {
   public function JoinAccountDetail()
   {
     $this->db->join('mlm_member', 'mlm_account.member_id = mlm_member.member_id')->get('mlm_account')->result_array();

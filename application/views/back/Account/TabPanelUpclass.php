@@ -32,9 +32,9 @@
         <p class="text-danger">ขาด <?php echo $pv-$NextClass[0]['account_class_pv'] ?> PV</p>
         <?php else: ?>
           <p>คงเหลือ <?php echo $pv-$NextClass[0]['account_class_pv'] ?> PV</p>
-          <button type="button" class="btn bg-deep-orange" ng-click="AccountUpclass(<?php echo $Profile[0]['member_id'] ?>);">
-            เพิ่มระดับ
-          </button>
+          <!-- <button type="button" class="btn bg-deep-orange" ng-click="AccountUpclass(<?php //echo $Profile[0]['member_id'] ?>);"> -->
+          <a href="<?php echo site_url('/Account/UpgradeAccount/'.$Account[0]['account_id']."/".$MyPv[0]['member_id'])?>" class="btn bg-orange">เพิ่มระดับ</a>
+
       <?php endif; ?>
 
     </div>

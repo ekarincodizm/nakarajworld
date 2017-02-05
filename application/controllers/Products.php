@@ -68,7 +68,6 @@ class Products extends CI_Controller{
         'products_pv' => $_POST['products_pv'],
         'products_price_narmal' => $_POST['products_price_narmal'],
         'products_price_discount' => $_POST['products_price_discount'],
-        'products_stock' => $_POST['products_stock'],
         'products_unit' => $_POST['products_unit'],
 
         'products_image' => $new_file,
@@ -77,7 +76,6 @@ class Products extends CI_Controller{
         'products_code' => "P".$ProductsCode,
       );
       $this->ProductsModel->AddProducts($input);
-
     } else {
 
       if ($_FILES["products_image"]["name"]!='') {
@@ -102,7 +100,6 @@ class Products extends CI_Controller{
         'products_pv' => $_POST['products_pv'],
         'products_price_narmal' => $_POST['products_price_narmal'],
         'products_price_discount' => $_POST['products_price_discount'],
-        'products_stock' => $_POST['products_stock'],
         'products_unit' => $_POST['products_unit'],
 
         'products_image' => $new_file,

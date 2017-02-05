@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class PermissionModel extends CI_Model {
+class permissionmodel extends CI_Model {
 
   public function SuperAdmin()
   {

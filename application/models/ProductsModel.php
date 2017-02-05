@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class ProductsModel extends CI_Model {
+class productsmodel extends CI_Model {
 
   public function ProductsList()
   {
@@ -77,11 +77,13 @@ class ProductsModel extends CI_Model {
   {
     $query = $this->db
     ->where('mlm_journal_sale_order_item.journal_sale_order_detail_id', $id)
+    ->where('mlm_accounting.journals_id',7)
     ->join('mlm_journal_sale_order_detail', 'mlm_journal_sale_order_item.journal_sale_order_detail_id = mlm_journal_sale_order_detail.journal_sale_order_detail_id')
     ->join('mlm_products', 'mlm_journal_sale_order_item.products_id = mlm_products.products_id')
     ->join('mlm_accounting', 'mlm_accounting.accounting_source_id = mlm_journal_sale_order_item.journal_sale_order_detail_id')
     ->get('mlm_journal_sale_order_item')
     ->result_array();
+    //$this->debuger->prevalue($query);
     return $query;
 
   }

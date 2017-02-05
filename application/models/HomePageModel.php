@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class HomePageModel extends CI_Model {
+class homepagemodel extends CI_Model {
 
   public function LoadSetting()
   {

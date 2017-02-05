@@ -30,6 +30,21 @@ class Accounting extends CI_Controller{
     $this->LoadPage($value);
   }
 
+  public function DetailSaleOrder()
+  {
+    $accounting_id = $this->uri->segment(3);
+    $AccountingDetail = $this->AccountingModel->DetailSaleOrder($accounting_id);
+    //$this->debuger->prevalue($AccountingDetail);
+
+    $value = array(
+      'Result' => array(
+        'AccountingDetail' => $AccountingDetail,
+      ),
+      'View' => 'back/Accounting/AccountingDetail'
+    );
+    $this->LoadPage($value);
+  }
+
   public function AccountingDetail()
   {
     $accounting_id = $this->uri->segment(3);
@@ -44,6 +59,7 @@ class Accounting extends CI_Controller{
     );
     $this->LoadPage($value);
   }
+
   public function ConfirmInvoiceAndEnableProfile()
   {
     $accounting_id = $this->uri->segment(3);
