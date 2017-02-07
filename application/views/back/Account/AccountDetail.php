@@ -1,3 +1,4 @@
+
 <section class="content">
   <div class="container-fluid">
     <div class="block-header">
@@ -35,7 +36,8 @@
               <!-- <li role="presentation" class=""><a href="#Bookbank" data-toggle="tab" aria-expanded="false">บัญชีธนาคาร</a></li> -->
               <li role="presentation" class=""><a href="#Extend" data-toggle="tab" aria-expanded="false">การต่ออายุ</a></li>
               <li role="presentation" class=""><a href="#Upclass" data-toggle="tab" aria-expanded="false">ระดับ</a></li>
-              <li role="presentation" class=""><a href="#takeid" data-toggle="tab" aria-expanded="false">โอนกรรมสิทธิ์</a></li>
+              <li role="presentation" class=""><a href="#Repeat" data-toggle="tab" aria-expanded="false">การวนรอบ</a></li>
+              <li role="presentation" class=""><a href="#takeid" data-toggle="tab" aria-expanded="false"><font color="red">โอนกรรมสิทธิ์</font></a></li>
             </ul>
 
             <!-- Tab panes -->
@@ -60,6 +62,10 @@
 
               <div role="tabpanel" class="tab-pane fade" id="Upclass">
                 <?php $this->load->view('back/Account/TabPanelUpclass'); ?>
+              </div>
+
+              <div role="tabpanel" class="tab-pane fade" id="Repeat">
+                <?php $this->load->view('back/Account/TabPanelRepeat'); ?>
               </div>
 
               <div role="tabpanel" class="tab-pane fade" id="takeid">

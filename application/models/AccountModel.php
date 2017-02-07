@@ -76,7 +76,6 @@ class accountmodel extends CI_Model {
     $data['downline_count_upline_id'] = $Account[0]['account_id'];
     $data['account_team'] = $Account[0]['account_team'];
     $data['account_level'] = $Account[0]['account_level']+$RowLvl;
-    $data['account_class_round'] = $Account[0]['account_class_round'];
     // print_r($data);
     // $this->debuger->prevalue($data);
     // $this->debuger->prevalue($DownlineClass);
@@ -86,7 +85,6 @@ class accountmodel extends CI_Model {
     ->where('account_team', $data['account_team'])
     ->where('account_level', $data['account_level'])
     ->where('account_class_id >=', $DownlineClass)
-    ->where('account_class_round >=', $data['account_class_round'])
     ->join('mlm_account', 'mlm_downline_count.downline_count_downline_id = mlm_account.account_id')
     ->get('mlm_downline_count')
     ->result_array();
@@ -94,6 +92,31 @@ class accountmodel extends CI_Model {
     // $this->debuger->prevalue($query);
     return $query;
   }
+
+  public function RepeatPerLVL($Account, $RowLvl, $DownlineClass,$RepeatClass)
+  {
+
+    $data['downline_count_upline_id'] = $Account[0]['account_id'];
+    $data['account_team'] = $Account[0]['account_team'];
+    $data['account_level'] = $Account[0]['account_level']+$RowLvl;
+    // print_r($data);
+    // $this->debuger->prevalue($data);
+    // $this->debuger->prevalue($DownlineClass);
+
+    $query =  $this->db
+    ->where('downline_count_upline_id', $data['downline_count_upline_id'])
+    ->where('mlm_account.account_team', $data['account_team'])
+    ->where('mlm_account.account_level', $data['account_level'])
+    ->where('mlm_account_repeat.account_repeat_class ', 2)
+    ->where('mlm_account_repeat.account_repeat_round ', 1)
+    ->join('mlm_account', 'mlm_downline_count.downline_count_downline_id = mlm_account.account_id')
+    ->join('mlm_account_repeat', 'mlm_account.account_id = mlm_account_repeat.account_id')
+    ->get('mlm_downline_count')
+    ->result_array();
+
+    return $query;
+  }
+
   public function GetGoalClassLvl($class, $lvl)
   {
     $query = $this->db
@@ -110,8 +133,8 @@ class accountmodel extends CI_Model {
     ->where('account_class_id', $class)
     ->get('mlm_income_percent_setting')
     ->result_array();
-    $UplineMVAmount = ($query[0]['income_percent_point']*$query[0]['income_percent_amount'])/100;
-    return $UplineMVAmount;
+    // $UplineMVAmount = ($query[0]['income_percent_point']*$query[0]['income_percent_amount'])/100;
+    return $query;
   }
   public function AccountNonJoinByID($id)
   {
@@ -466,6 +489,13 @@ class accountmodel extends CI_Model {
     return $query;
   }
 
+  public function ClassResult()
+  {
+    $query = $this->db
+    ->get('mlm_account_class')
+    ->result_array();
+    return $query;
+  }
 
   public function SaveDividend($input)
   {
@@ -497,12 +527,26 @@ class accountmodel extends CI_Model {
     $this->db->set('account_class_id', 'account_class_id+1', FALSE);
     $this->db->where('account_id', $account_id);
     $this->db->update('mlm_account');
-  }
 
-  public function UpgradeStar($account_id)
+    $query = $this->FindAccountByID($account_id);
+    $Upline = array();
+
+    if ($query[0]['account_class_id']==2) {
+      $Upline = $this->AccountModel->FindAccountByID($query[0]['account_upline_id']);
+    } else {
+      $Upline = $this->db
+      ->where('account_level',$query[0]['account_level']-($query[0]['account_class_id']+3))
+      ->join('mlm_downline_count','mlm_downline_count.downline_count_upline_id = mlm_account.account_id')
+      ->join('mlm_account_class', 'mlm_account.account_class_id = mlm_account_class.account_class_id')
+      ->get('mlm_account')
+      ->result_array();
+    }
+
+    return $Upline;
+  }
+  public function AddRepeat($input)
   {
-    $this->db->set('account_class_round', 'account_class_round+1', FALSE);
-    $this->db->where('account_id', $account_id);
-    $this->db->update('mlm_account');
+    $query = $this->db->insert('mlm_account_repeat', $input);
+    return $query;
   }
 }

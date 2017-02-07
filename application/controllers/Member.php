@@ -76,9 +76,8 @@ class Member extends CI_Controller{
     $Account2 = json_decode(json_encode($this->MemberModel->MemberList()), true);
     $MyPv = json_decode(json_encode($this->HomePageModel->MemberPV( $Account[0]['member_id'])), true);
     $CheckFreePV = $this->HomePageModel->CheckFreePV($Account[0]['account_id']);
-
-
-    //$this->debuger->prevalue($MyPv);
+    $AccountRepeat = $this->HomePageModel->Repeat($Account[0]['account_id']);
+    // $this->debuger->prevalue($AccountRepeat);
 
     $PlanOneDownline = $this->AccountModel->PlanOneDownline($id, $Account[0]['account_level']);
     $PlanOneDirectAdviser = $this->AccountModel->PlanOneDirectAdviser($id, $Account[0]['account_level']);
@@ -108,7 +107,10 @@ class Member extends CI_Controller{
 
 
     $DividendID = $this->AccountingModel->DividendByID($id);
-    //$this->debuger->prevalue($DividendID);
+    // $this->debuger->prevalue($DividendID);
+    $Class = $this->AccountModel->ClassResult();
+    //$this->debuger->prevalue($Class);
+
     $value = array(
       'Result' => array(
         'Profile' => $Profile,
@@ -126,8 +128,10 @@ class Member extends CI_Controller{
         'PlanOneDownline' => $PlanOneDownline,
         'PlanOneDirectAdviser' => $PlanOneDirectAdviser,
         'MyPv' => $MyPv,
+        'AccountRepeat' => $AccountRepeat,
         'CheckFreePV' => $CheckFreePV,
         'DividendID' => $DividendID,
+        'Class' => $Class,
       ),
       'View' => 'back/Account/AccountDetail'
     );

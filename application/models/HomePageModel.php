@@ -137,4 +137,26 @@ class homepagemodel extends CI_Model {
       //$this->debuger->prevalue($query);
       return $query;
   }
+  public function Repeat($account_id){
+
+    $Repeat = $this->db
+    ->where('account_id',$account_id)
+    ->get('mlm_account_repeat')
+    ->result_array();
+
+    // $this->debuger->prevalue($Repeat);
+    return $Repeat;
+    }
+
+    public function AccountRepeat($account_id, $class_id){
+
+      $AccountRepeat = $this->db
+      ->where('account_id',$account_id)
+      ->where('account_repeat_class',$class_id)
+      ->get('mlm_account_repeat')
+      ->num_rows();
+
+      // $this->debuger->prevalue($Repeat);
+      return $AccountRepeat;
+      }
 }
