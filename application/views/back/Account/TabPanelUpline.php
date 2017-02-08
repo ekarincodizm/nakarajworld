@@ -1,5 +1,8 @@
 <div class="row">
   <div class="col-md-12" style="padding:20px">
+    <?php if ($Account[0]['account_id']==1): ?>
+        <h1>ไม่มี Upline</h1>
+    <?php else: ?>
     <?php if ($Upline[0]['member_id']==1) {?>
       <h4 class=""><?php echo $Upline[0]['member_firstname']." ".$Upline[0]['member_lastname']; ?></h4>
       รหัส <?php echo $Upline[0]['account_team'].sprintf("%04d", $Upline[0]['account_level']).sprintf("%04d", $Upline[0]['account_code']); ?>
@@ -7,5 +10,7 @@
       <h4 class=""><?php echo "คุณ".$Upline[0]['member_firstname']." ".$Upline[0]['member_lastname']; ?></h4>
       รหัส <?php echo $Upline[0]['account_team'].sprintf("%04d", $Upline[0]['account_level']).sprintf("%04d", $Upline[0]['account_code']); ?>
     <?php } ?>
+    <?php endif; ?>
+
 </div>
 </div>

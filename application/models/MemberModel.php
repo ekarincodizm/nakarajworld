@@ -26,6 +26,7 @@ class membermodel extends CI_Model {
     $member = $this->db
     ->where('user_group', 'Member')
     ->join('mlm_user', 'mlm_member.member_id = mlm_user.member_id')
+    ->order_by('mlm_member.member_id', 'DESC')
     ->get('mlm_member')
     ->result_array();
     // return $query;

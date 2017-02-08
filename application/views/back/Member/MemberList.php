@@ -22,7 +22,6 @@
             <table class="table table-striped js-table table-hover">
               <thead>
                 <tr>
-                  <th>#</th>
                   <th>ประเภทบัตร</th>
                   <th>เลขบัตรประจำตัว</th>
                   <th>ชื่อ-สกุล</th>
@@ -34,7 +33,6 @@
               <tbody>
                 <?php $i=1; foreach ($MemberList as $row): ?>
                   <tr style="cursor: pointer;" onclick="document.location='<?php echo site_url('/Member/MemberProfile/'.$row['member_id']); ?>';">
-                    <td><?php echo $i; ?></td>
                     <td>
                       <?php  if ($row['member_id_card_type']==1): ?>
                         <span >บัตรประชาชน</span>

@@ -292,12 +292,12 @@
                 <span>เครือข่าย</span>
             </a>
             <ul class="ml-menu">
-                <!-- <li>
+                <li>
                     <a href="<?php echo site_url('Member');?>" class=" waves-effect waves-block">
                         <i class="material-icons">account_box</i>
                         <span>สมาชิก</span>
                     </a>
-                </li> -->
+                </li>
                 <li>
                     <a href="<?php echo site_url('Account');?>" class=" waves-effect waves-block">
                         <i class="material-icons">share</i>
