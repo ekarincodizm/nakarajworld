@@ -18,12 +18,13 @@
               <div class="col-md-12">
                 <table class="table table-hover">
                   <thead>
+                      <!-- รวมยอด -->
                     <tr>
                       <th>#</th>
                       <th>รหัสสั่งซื้อ</th>
                       <th>วันที่สั่งซื้อ</th>
                       <th>จำนวนรายการสินค้า</th>
-                      <th>ราคารวม</th>
+                      <!-- <th>ราคารวม</th> -->
                       <th>สถานะ</th>
                     </tr>
                   </thead>
@@ -34,7 +35,7 @@
                         <td><?php echo $row['journal_sale_order_detail_code'] ?></td>
                         <td><?php echo $this->thaidate->ShortDateTime($row['journal_sale_order_detail_date']); ?></td>
                         <td><?php echo number_format($row['shop_detail_total_quantity']) ?></td>
-                        <td><?php echo number_format($row['shop_detail_total_price']) ?></td>
+                        <!-- <td><?php //echo number_format($row['shop_detail_total_price']) ?></td> -->
                         <td>
                           <?php if ($row['accounting_status']==1): ?>
                             <span class="font-bold col-teal">ชำระเงินแล้ว</span>

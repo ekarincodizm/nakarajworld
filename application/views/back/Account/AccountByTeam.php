@@ -41,6 +41,7 @@
                   <tr>
                     <th>#</th>
                     <th>บัญชีนักธุรกิจอิสระ</th>
+                    <th>ระดับ</th>
                     <th>เจ้าของบัญชี</th>
                     <th>ดาวน์ไลน์ทั้งหมด</th>
                     <th>ดาวน์ไลน์ติดตัว</th>
@@ -55,8 +56,37 @@
 
                         <td><?php echo $i; ?></td>
                         <td><?php echo $row['account_team'].sprintf("%04d", $row['account_level']).sprintf("%04d", $row['account_code']); ?></td>
-                        <!-- <td><?php //echo $row['adviser'][0]['account_team'].sprintf("%04d", $row['adviser'][0]['account_level']).sprintf("%04d", $row['adviser'][0]['account_code']); ?></td> -->
-                        <!-- <td><?php //echo $row['upline'][0]['account_team'].sprintf("%04d", $row['upline'][0]['account_level']).sprintf("%04d", $row['upline'][0]['account_code']); ?></td> -->
+
+                        <?php if ($row['account_class_id']==1): ?>
+                          <td class="text-center">
+                            ทั่วไป
+                          </td>
+                        <?php elseif ($row['account_class_id']==2): ?>
+                          <td class="text-center">
+                            General
+                          </td>
+                        <?php elseif ($row['account_class_id']==3): ?>
+                          <td class="text-center">
+                            Bronz
+                          </td>
+                        <?php elseif ($row['account_class_id']==4): ?>
+                          <td class="text-center">
+                            Silver
+                          </td>
+                        <?php elseif ($row['account_class_id']==5): ?>
+                          <td class="text-center">
+                            Gold
+                          </td>
+                        <?php elseif ($row['account_class_id']==6): ?>
+                          <td class="text-center">
+                            Diamond
+                          </td>
+                        <?php elseif ($row['account_class_id']==7): ?>
+                          <td class="text-center">
+                            Star
+                          </td>
+                        <?php endif; ?>
+
                         <td><?php echo $row['member_prefix'].$row['member_firstname']." ".$row['member_lastname']?></td>
                         <td><?php echo $row['count_downline'] ?> รหัส</td>
                         <td>

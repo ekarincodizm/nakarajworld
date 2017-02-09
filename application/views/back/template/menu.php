@@ -35,7 +35,7 @@
         <div class="navbar-header">
             <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
             <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" href="#">ADMINBSB - MATERIAL DESIGN</a>
+            <a class="navbar-brand" href="#">ADMIN - NAVA DRAGON WEALTH NETWORK CO.,LTD.</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
@@ -370,7 +370,7 @@
                 <li>
                     <a href="<?php echo site_url('/Config');?>" class=" waves-effect waves-block">
                         <i class="material-icons">settings_applications</i>
-                        <span>ตั้งค่า</span>
+                        <span>ตั้งค่าทั่วไป</span>
                     </a>
                 </li>
             </ul>
