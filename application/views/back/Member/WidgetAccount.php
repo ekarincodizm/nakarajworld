@@ -172,6 +172,7 @@
               </tr>
             </thead>
             <tbody>
+              <!-- {{ListBookBank}} -->
               <tr ng-repeat="row in ListBookBank">
                 <input type="hidden" name="bookbank_id" value="{{row.bookbank_id}}">
                 <td>{{$index+1}}</td>

@@ -40,10 +40,10 @@ class account extends CI_Controller
   // {
   //   $member_id = 1;
   //   $adviser_id = 1;
-  //   $upline_id = 756;
+  //   $upline_id = 263;
   //
   //   $index = 0;
-  //   for ($i=1; $i <=300 ; $i++) {
+  //   for ($i=1; $i <=345 ; $i++) {
   //     echo "<pre>";
   //     echo $upline_id;
   //     echo "<br>";
@@ -88,30 +88,24 @@ class account extends CI_Controller
     $DownlineClass = 1; // account_class_id = 1 หรือ NORMAL
     // echo "<pre>";
     // print_r($Upline);
-    $RepeatClass = 0;
-    $this->CheckMarketingValue($Upline, $DownlineClass, $RepeatClass);
+    $RoundClass = 0;
+    $this->CheckMarketingValue($Upline, $DownlineClass, $RoundClass);
 
     redirect('/Member/MemberProfile/'.$member_id);
   }
   // public function LoopUp()
   // {
-  //   $account_id = 5;
+  //   $account_id = 1106;
   //
-  //   $index = 0;
-  //   for ($i=1; $i <=1 ; $i++) {
-  //     // echo "<pre>";
-  //     // echo $upline_id;
-  //     // echo "<br>";
+  //   for ($i=1; $i <=3; $i++) {
+  //     echo "<pre>";
+  //     echo $account_id;
+  //     echo "<br>";
   //     $this->UpgradeAccount($account_id);
-  //
-  //     $index++;
-  //
-  //     if ($index==3) {
-  //       $account_id++;
-  //       $index=0;
-  //     }
+  //     $account_id++;
   //   }
   // }
+  // public function UpgradeAccount($account_id)
   public function UpgradeAccount()
   {
     $account_id = $this->uri->segment(3);
@@ -138,11 +132,26 @@ class account extends CI_Controller
     // UpgradeAccount
     $Upline = $this->AccountModel->UpgradeAccount($account_id);
     $ThisAccount = $this->AccountModel->FindAccountByID($account_id);
-    $RepeatClass = 0;
-    $this->CheckMarketingValue($Upline, $ThisAccount[0]['account_class_id'] ,$RepeatClass);
+    $RoundClass = 0;
+    $this->CheckMarketingValue($Upline, $ThisAccount[0]['account_class_id'] ,$RoundClass);
     redirect($this->agent->referrer(), 'refresh');
   }
 
+  // public function LoopRe()
+  // {
+  //   $class_id = 2;
+  //   $account_id = 14;
+  //
+  //   for ($i=1; $i <=3; $i++) {
+  //     echo "<pre>";
+  //     echo $account_id;
+  //     echo "<br>";
+  //     $this->RepeatAccount($account_id,$class_id);
+  //     $account_id++;
+  //   }
+  // }
+
+  // public function RepeatAccount($account_id,$class_id)
   public function RepeatAccount()
   {
     $account_id = $this->uri->segment(3);
@@ -151,18 +160,19 @@ class account extends CI_Controller
 
     // Add Repeat
     $AccountRound = $this->HomePageModel->AccountRepeat($account_id,$class_id);
-    $RepeatClass = $AccountRound+1;
+    $RoundClass = $AccountRound+1;
     $NextClass = $this->AccountModel->NextClass($class_id);
 
     $time =  Date('Y-m-d');
     $value = array(
       'account_repeat_date' => $time,
       'account_repeat_class' => $class_id,
-      'account_repeat_round' => $RepeatClass,
+      'account_repeat_round' => $RoundClass,
       'account_id' => $account_id,
     );
     $this->AccountModel->AddRepeat($value);
-    //Used PV
+
+    Used PV
     $value = array(
       'point_value' => $NextClass[0]['account_class_pv'],
       'point_detail' => 'ซื้อซ้ำ',
@@ -176,11 +186,11 @@ class account extends CI_Controller
     //UpgradeAccount
     $ThisAccount = $this->AccountModel->FindAccountByID($account_id);
     $Upline = $this->AccountModel->FindAccountByID($ThisAccount[0]['account_upline_id']);
-    $this->CheckMarketingValue($Upline, $ThisAccount[0]['account_class_id'],$RepeatClass);
+    $this->CheckMarketingValue($Upline, $class_id,$RoundClass);
     redirect($this->agent->referrer(), 'refresh');
   }
 
-  public function CheckMarketingValue($Upline, $DownlineClass, $RepeatClass)
+  public function CheckMarketingValue($Upline, $DownlineClass, $RoundClass)
   {
     // $this->debuger->prevalue(count($Upline));
     if (count($Upline)>0) {
@@ -210,15 +220,17 @@ class account extends CI_Controller
 
       // $GoalPerLevel = array(); // array เป้าหมายการครบ แต่ละ ระดับ
       // $i เริ่มที่ 3 เพราะ เป้าหมายการครบ เริ่มจาก 3 และ *3 เพื่อให้ได้จำนวน ที่จะหยุด ตามจำนวนชั้น ที่ account_class_id นั้นๆ กินได้
-
+        // print_r($DownlineClass);
+        // echo "a";
+        // print_r($lvlDown);
 
       for ($i; $i <=$max_row; $i *= 3) {
         if ( count($Account)>0 ) { // ในกรณีที่ถึง รหัสของบริษัท แล้วจะไม่มีเกินขึ้นไปอีก
           // MV = MarketingValue // นับ จำนวน รหัสที่ class ตรงกัน ใน
+          // print_r($Account);
           $FindGoal = $this->AccountModel->GetGoalClassLvl($DownlineClass , $lvlDown);
-          // print_r($FindGoal);
           $goal = $FindGoal[0]['income_percent_goal'];
-          $NextAccount = $this->CheckMVPerLevel($Account, $lvlDown, $goal, $DownlineClass, $i,$RepeatClass);
+          $NextAccount = $this->CheckMVPerLevel($Account, $lvlDown, $goal, $DownlineClass, $i,$RoundClass);
           // $this->debuger->prevalue($NextAccount);
           $Account = $NextAccount;
           $lvlDown++;
@@ -228,15 +240,15 @@ class account extends CI_Controller
     }
     // exit();
   }
-  public function CheckMVPerLevel($Account, $lvlDown, $goal, $DownlineClass, $i,$RepeatClass)
+  public function CheckMVPerLevel($Account, $lvlDown, $goal, $DownlineClass, $i,$RoundClass)
   {
     // echo "<pre>";
 
     // Account นี้ ที่กำลังยึดเป็นหลัก
     $ThisAccount = $Account;
     // นับ Downline
-    if ($RepeatClass!='' && $RepeatClass!=0) {
-      $Downline = $this->AccountModel->RepeatPerLVL($ThisAccount, $lvlDown, $DownlineClass, $RepeatClass);
+    if ($RoundClass!='' && $RoundClass!=0) {
+      $Downline = $this->AccountModel->RepeatPerLVL($ThisAccount, $lvlDown, $DownlineClass, $RoundClass);
     } else {
       $Downline = $this->AccountModel->DownlinePerLVL($ThisAccount, $lvlDown, $DownlineClass);
     }
@@ -256,15 +268,15 @@ class account extends CI_Controller
 
     if ($ModDownline == 0) {
       if ($lvlDown==1) {
-        $this->AdviserDividend($Downline, $ThisAccount, $lvlDown, $DownlineClass,$RepeatClass);
+        $this->AdviserDividend($Downline, $ThisAccount, $lvlDown, $DownlineClass,$RoundClass);
       } else {
-        $this->UplineDividend($ThisAccount, $lvlDown, $DownlineClass, $i, $goal,$RepeatClass);
+        $this->UplineDividend($ThisAccount, $lvlDown, $DownlineClass, $i, $goal,$RoundClass);
       }
     }
     $NextAccount = $this->AccountModel->FindAccountByID($ThisAccount[0]['account_upline_id']);
     return $NextAccount;
   }
-  public function UplineDividend($Upline, $lvl, $DownlineClass, $i, $goal,$RepeatClass)
+  public function UplineDividend($Upline, $lvl, $DownlineClass, $i, $goal,$RoundClass)
   {
     // เงินที่ อัปไลน์ จะได้
     $UplineMV = $this->AccountModel->GetMVByClassLvl($DownlineClass , $lvl);
@@ -285,7 +297,7 @@ class account extends CI_Controller
       'member_id' => $Upline[0]['member_id'],
       'journal_dividend_class' => $DownlineClass,
       'journal_dividend_code' => $DIcode,
-      'journal_dividend_round' => $RepeatClass,
+      'journal_dividend_round' => $RoundClass,
      );
     $new_journal_dividend_id = $this->AccountModel->SaveDividend($input);
     // ลงบัญชี
@@ -302,7 +314,7 @@ class account extends CI_Controller
     );
     $new_accounting_id = $this->AccountModel->AddAccounting($AccountingInput);
   }
-  public function AdviserDividend($Downline, $Upline, $lvl, $DownlineClass,$RepeatClass)
+  public function AdviserDividend($Downline, $Upline, $lvl, $DownlineClass,$RoundClass)
   {
     // เงินที่ อัปไลน์ จะได้
     $UplineMV = $this->AccountModel->GetMVByClassLvl($DownlineClass , $lvl);
@@ -332,7 +344,7 @@ class account extends CI_Controller
           'account_id' => $Adviser[0]['account_id'],
           'member_id' => $Adviser[0]['member_id'],
           'journal_dividend_code' => $DIcode,
-          'journal_dividend_round' => $RepeatClass,
+          'journal_dividend_round' => $RoundClass,
          );
         $new_journal_dividend_id = $this->AccountModel->SaveDividend($input);
         // ลงบัญชี
@@ -360,7 +372,7 @@ class account extends CI_Controller
       'member_id' => $Upline[0]['member_id'],
       'journal_dividend_class' => $DownlineClass,
       'journal_dividend_code' => $DIcode,
-      'journal_dividend_round' => $RepeatClass,
+      'journal_dividend_round' => $RoundClass,
 
      );
     $new_journal_dividend_id = $this->AccountModel->SaveDividend($input);

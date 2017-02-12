@@ -30,7 +30,7 @@ class accountmodel extends CI_Model {
   }
   public function AllAccountList()
   {
-    $query = $this->db->join('mlm_member', 'mlm_account.member_id = mlm_member.member_id')->get('mlm_account')->result_array();
+    $query = $this->db->join('mlm_member', 'mlm_account.member_id = mlm_member.member_id')->get('mlm_account',200,0)->result_array();
     $i=0;
     foreach ($query as $row) {
       $query[$i]['count_adviser'] = $this->db
@@ -117,13 +117,14 @@ class accountmodel extends CI_Model {
     return $query;
   }
 
-  public function GetGoalClassLvl($class, $lvl)
+  public function GetGoalClassLvl($DownlineClass, $lvlDown)
   {
     $query = $this->db
-    ->where('income_percent_level', $lvl)
-    ->where('account_class_id', $class)
+    ->where('income_percent_level', $lvlDown)
+    ->where('account_class_id', $DownlineClass)
     ->get('mlm_income_percent_setting')
     ->result_array();
+    // $this->debuger->prevalue($query);
     return $query;
   }
   public function GetMVByClassLvl($class, $lvl)
@@ -313,11 +314,12 @@ class accountmodel extends CI_Model {
   public function PlanOneDownline($upline_id, $upline_level)
   {
     $query = $this->db
-    ->where('account_level <=', $upline_level+5)
+    ->where('account_level', $upline_level+5)
     ->where('downline_count_upline_id', $upline_id)
-    ->join('mlm_account', 'mlm_downline_count.downline_count_upline_id = mlm_account.account_id')
-    ->get('mlm_downline_count')->result_array();
-
+    ->join('mlm_account', 'mlm_downline_count.downline_count_downline_id = mlm_account.account_id')
+    ->get('mlm_downline_count')
+    ->result_array();
+    // $this->debuger->prevalue(count($query));
     $i=0;
     foreach ($query as $row) {
       $query[$i]['count_adviser'] = $this->db

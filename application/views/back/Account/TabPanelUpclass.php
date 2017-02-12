@@ -1,12 +1,13 @@
 <!-- <div class="row" ng-app="HomePageApp"> -->
 <div class="row" ng-controller="PanelUpclassCtrl">
+  <?php //echo count($PlanOneDownline); ?>
   <?php if (count($PlanOneDirectAdviser)>=3 && count($PlanOneDownline)>=243): ?>
     <?php if ($CheckFreePV!='1'): ?>
 
     <div class="row">
       <div class="col-md-12 text-center">
         <div class="alert bg-teal">
-          <h4>โบนัสฟรี <span class="label bg-pink">4,000 PV</span> เมื่อมีสมาชิกครบ 243 บัญชี และแนะนำด้วยตัวเอง 3 บัญชี</h4>
+          <h4>บัญชีผ่านเงื่อนไขแล้ว สามารถรับโบนัสฟรี <span class="label bg-pink">4,000 PV</span></h4>
           <a href="<?php echo site_url('/Member/AddFreePV/'.$Account[0]['account_id']."/".$MyPv[0]['member_id'])?>" class="btn bg-pink">รับทันที</a>
         </div>
       </div>
