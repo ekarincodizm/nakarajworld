@@ -172,7 +172,7 @@ class account extends CI_Controller
     );
     $this->AccountModel->AddRepeat($value);
 
-    Used PV
+    //Used PV
     $value = array(
       'point_value' => $NextClass[0]['account_class_pv'],
       'point_detail' => 'ซื้อซ้ำ',

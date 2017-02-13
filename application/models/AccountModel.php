@@ -30,7 +30,7 @@ class accountmodel extends CI_Model {
   }
   public function AllAccountList()
   {
-    $query = $this->db->join('mlm_member', 'mlm_account.member_id = mlm_member.member_id')->get('mlm_account',200,0)->result_array();
+    $query = $this->db->join('mlm_member', 'mlm_account.member_id = mlm_member.member_id')->get('mlm_account',400,0)->result_array();
     $i=0;
     foreach ($query as $row) {
       $query[$i]['count_adviser'] = $this->db

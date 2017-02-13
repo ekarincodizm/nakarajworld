@@ -53,7 +53,7 @@
                     </td>
 
                     <!-- แปลงระดับ -->
-                    <?php if ($row['source_detail'][0]['journal_dividend_class']==1): ?>
+                    <?php if ($row['source_detail'][0]['journal_dividend_class']==1 || $row['source_detail'][0]['journal_dividend_class']==0): ?>
                       <td class="text-center">
                         ทั่วไป
                       </td>
