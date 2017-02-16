@@ -17,7 +17,8 @@
 	$this->debuger->front_load_css('owl.carousel');
 	$this->debuger->front_load_css('style');
 	$this->debuger->front_load_css('thsarabunnew');
-	$this->debuger->front_load_css('bootstrap-datetimepicker.min');
+	// $this->debuger->front_load_css('bootstrap-datetimepicker.min');
+	$this->debuger->front_load_css('datepicker');
 
 	$this->debuger->front_load_js('angular.min');
 	$this->debuger->front_load_js('angular-locale_th');
@@ -30,7 +31,10 @@
 	$this->debuger->front_load_js('transition');
 	$this->debuger->front_load_js('collapse');
 	$this->debuger->front_load_js('bootstrap.min');
-	$this->debuger->front_load_js('bootstrap-datetimepicker');
+	$this->debuger->front_load_js('bootstrap-datepicker');
+	$this->debuger->front_load_js('bootstrap-datepicker-thai');
+	$this->debuger->front_load_js('locale/bootstrap-datepicker.th');
+	// $this->debuger->front_load_js('locale/th');
 
 	// <!-- Jquery DataTable Plugin Js -->
 	$this->debuger->load_back_plugins('jquery-datatable/jquery.dataTables');

@@ -40,6 +40,24 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 </script>
 
 <section id="register" class="separator top" data-ng-controller="RegisterCtrl">
+	<div id="example_html">
+              <label>default(en)</label>
+              <input class="input-medium" type="text" data-provide="datepicker">
+
+              <label>th</label>
+              <input class="input-medium" type="text" data-provide="datepicker" data-date-language="th">
+
+              <label>th-th</label>
+              <input class="input-medium" type="text" data-provide="datepicker" data-date-language="th-th">
+
+              <label>inline en-th</label>
+              <div class="datepicker" data-date-language="en-th"></div>
+          </div>
+					<script type="text/javascript">
+					function demo() {
+			$('.datepicker').datepicker();
+		}
+					</script>
 	<div class="container" style="min-height: 460px;">
 		<div class="row text-center">
 			<div class="col-lg-12" style="padding-top:20px">
@@ -119,15 +137,8 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						<div class="col-md-3">
 							<label for="name">วันเกิด</label>
 							<div class="form-group">
-								<div class='input-group date bootstrap-datepicker' id='member_born_datepicker'>
-									<input name="member_born" required type='datetime' class="form-control"  value="{{member_born}}">
-
-									<span class="input-group-addon">
-										<span class="glyphicon glyphicon-calendar"></span>
-									</span>
-								</div>
-
-							</div>
+							<input class="input-medium" type="text" data-provide="datepicker" data-date-language="th-th">
+						</div>
 						</div>
 
 						<div class="col-md-6">
