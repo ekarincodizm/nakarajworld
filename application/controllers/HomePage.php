@@ -159,40 +159,26 @@ class HomePage extends CI_Controller{
 			redirect('HomePage/Profile');
 
 		}
+		public function SubmitEditPassword()
+			{
+				$PasswordForm = $this->input->post();
+				$UpdateUser['member_id'] = $PasswordForm['member_id'];
+				$UpdateUser['user_pass'] = base64_encode($PasswordForm['new_pass']);
+				$this->HomePageModel->UpdateUser( $UpdateUser );
 
+				redirect('HomePage/Profile');
+			}
 	public function SubmitProfile()
 	{
 		$RegisterForm = $this->input->post();
-		// $this->debuger->prevalue($RegisterForm);
-		if (!empty($RegisterForm['member_id'])) {
-			$UpdateUser['member_id'] = $RegisterForm['member_id'];
-			$UpdateUser['user_pass'] = base64_encode($RegisterForm['user_pass']);
-			unset($RegisterForm['user_pass'],$RegisterForm['user_pass_confirm']);
+		$AddUser['user_pass'] = base64_encode($RegisterForm['user_pass']);
+		unset($RegisterForm['user_pass']);
 
-			$Member = $this->HomePageModel->UpdateMember( $RegisterForm );
-
-			// $member_id = $RegisterForm['user_id'];
-			if($RegisterForm['user_pass']=='' && $RegisterForm['user_pass_confirm']==''){
-				$this->HomePageModel->UpdateUser( $UpdateUser );
-			}
-
-			if ($_FILES["member_photo"]["name"]!='') {
-	        $ext = pathinfo($_FILES["member_photo"]["name"],PATHINFO_EXTENSION);
-	        $new_file = 'photo_'.$member_id.'.'.$ext;
-					unlink("base_url(/assets/image/profile/".$new_file.")");
-	        move_uploaded_file($_FILES["member_photo"]["tmp_name"],"assets/image/profile/".$new_file);
-	        $addPhoto['member_id'] = $member_id;
-	        $addPhoto['member_photo'] = $new_file;
-	        $this->HomePageModel->addPhoto( $addPhoto );
-	    }
-
-			redirect('HomePage/Profile');
-		} else {
 			$Member = $this->HomePageModel->AddMember( $RegisterForm );
 			$Member = json_decode(json_encode($Member), true);
 			$value = array(
 				'user_name' => $Member[0]['member_citizen_id'],
-				'user_pass' => base64_encode($Member[0]['member_phone']),
+				'user_pass' => $AddUser['user_pass'],
 				'member_id' => $Member[0]['member_id'],
 			);
 			$User = $this->HomePageModel->AddUser( $value );
@@ -234,8 +220,6 @@ class HomePage extends CI_Controller{
 	      $addPhoto['member_photo'] = 'no_profile.png';
 	      $this->HomePageModel->addPhoto( $addPhoto );
 	    }
-		}
-
 	}
 	public function Profile() {
 		$Profile = array();
@@ -405,6 +389,27 @@ class HomePage extends CI_Controller{
 		);
 		$this->LoadUserPage($value);
 	}
+
+	public function EditPassword() {
+		$UserPass = $this->HomePageModel->LoadUser( $_SESSION['MEMBER_ID'] );
+		$Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
+		if ($Profile[0]['member_id_card_type']==1) {
+			$Profile[0]['member_id_card_type_name'] = 'บัตรประชาชน';
+		} elseif ($Profile[0]['member_id_card_type']==2) {
+			$Profile[0]['member_id_card_type_name'] = 'Passport';
+		} elseif ($Profile[0]['member_id_card_type']==3) {
+			$Profile[0]['member_id_card_type_name'] = 'Work Permit';
+		}
+		$value = array(
+			'Result' => array(
+				'Profile' => $Profile,
+				'User' => $UserPass,
+			),
+			'View' => 'front/User/EditPassword'
+		);
+		$this->LoadUserPage($value);
+	}
+
 	public function Logout() {
 		session_destroy();
 		redirect('/HomePage');

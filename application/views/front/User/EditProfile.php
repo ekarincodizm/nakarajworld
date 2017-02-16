@@ -154,7 +154,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
               <div class="col-md-8">
                 <label for="name">ที่อยู่สำรอง กรณีติดต่อไม่ได้่</label>
                 <div class="form-group">
-                    <textarea class="form-control" name="member_address2" required style="height:60px;"><?php echo $Profile[0]['member_address2'] ?></textarea>
+                    <textarea class="form-control" name="member_address2"  style="height:60px;"><?php echo $Profile[0]['member_address2'] ?></textarea>
                 </div>
               </div>
             </div>
@@ -162,19 +162,19 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						<div class="col-md-4">
 							<label for="name">เบอร์โทรศัพท์</label>
 							<div class="form-group">
-								<input class="form-control" name="member_phone" required type="text" max="10" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" autocomplete="off" value="<?php echo $Profile[0]['member_phone']?>"/>
+								<input class="form-control" name="member_phone" type="text" max="10" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" autocomplete="off" value="<?php echo $Profile[0]['member_phone']?>"/>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<label for="name">Line ID</label>
 							<div class="form-group">
-								<input class="form-control" name="member_line_id"  type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_line_id']?>"/>
+								<input class="form-control" name="member_line_id" type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_line_id']?>"/>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<label for="name">Skype</label>
 							<div class="form-group">
-								<input class="form-control" name="member_skype"  type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_skype']?>"/>
+								<input class="form-control" name="member_skype" type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_skype']?>"/>
 							</div>
 						</div>
 					</div>
@@ -182,7 +182,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						<div class="col-md-4">
 							<label for="name">What App</label>
 							<div class="form-group">
-								<input class="form-control" name="member_whatapp"  type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_whatapp']?>"/>
+								<input class="form-control" name="member_whatapp" type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_whatapp']?>"/>
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -201,18 +201,18 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 
 					<!-- <div class="row text-center">
 						<div class="col-lg-12" style="padding-top:20px">
-							<h6>แก้ไขรหัสผ่าน</h6>
+							<h6>รหัสผ่าน</h6>
 							<span class="title-separator"></span>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-md-4">
-							<label for="name">รหัสผ่านใหม่**</label>
+							<label for="name">รหัสผ่าน</label>
 							<div class="form-group">
 								<div class="input-group form-line">
 
-									<input class="form-control input-lg" name="user_pass" type="password" autocomplete="off"/>
+									<input required class="form-control input-lg" name="user_pass" type="password" autocomplete="off"/>
 								</div>
 							</div>
 						</div>

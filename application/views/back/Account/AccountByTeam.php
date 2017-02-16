@@ -43,9 +43,9 @@
                     <th>บัญชีนักธุรกิจอิสระ</th>
                     <th>ระดับ</th>
                     <th>เจ้าของบัญชี</th>
-                    <th>ดาวน์ไลน์ทั้งหมด</th>
-                    <th>ดาวน์ไลน์ติดตัว</th>
-                    <th>แนะนำผู้อื่น</th>
+                    <th>ใต้สายงานทั้งหมด</th>
+                    <th>ใต้สายงาน</th>
+                    <th>แนะนำตรง</th>
                     <th>สถานะ</th>
                   </tr>
                 </thead>
@@ -59,7 +59,7 @@
 
                         <?php if ($row['account_class_id']==1): ?>
                           <td class="text-center">
-                            ทั่วไป
+                            สมาชิก
                           </td>
                         <?php elseif ($row['account_class_id']==2): ?>
                           <td class="text-center">

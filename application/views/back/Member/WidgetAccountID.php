@@ -29,9 +29,9 @@
             </h3>
           </div>
           <div class="body">
-            ระดับบัญชีนักธุรกิจอิสระ: <br>
-            ดาวน์ไลน์ทั้งหมด: <?php echo count($AllDownline); ?> รหัส<br>
-            ดาวน์ไลน์ติดตัว: <?php echo count($ThreeDownline); ?> รหัส<br>
+            <!-- ระดับบัญชีนักธุรกิจอิสระ: <br> -->
+            ใต้สายงานทั้งหมด: <?php echo count($AllDownline); ?> รหัส<br>
+            ใต้สายงานติดตัว: <?php echo count($ThreeDownline); ?> รหัส<br>
             แนะนำผู้อื่น: <?php echo count($AdviserList); ?> รหัส<br>
             <!-- สถานะบัญชีนักธุรกิจอิสระ: <br> -->
             <!-- <hr><center>

@@ -31,8 +31,8 @@
             <?php if ($_SESSION['ADMIN_TYPE']==1): ?>
             <ul class="nav nav-tabs tab-nav-right" role="tablist">
               <li role="presentation" class="active"><a href="#Income" data-toggle="tab" aria-expanded="false">ค่าการตลาด</a></li>
-              <li role="presentation" class=""><a href="#ThreeDownline" data-toggle="tab" aria-expanded="false">ดาวน์ไลน์ติดตัว</a></li>
-              <li role="presentation" class=""><a href="#Adviser" data-toggle="tab" aria-expanded="false">แนะนำผู้อื่น</a></li>
+              <li role="presentation" class=""><a href="#ThreeDownline" data-toggle="tab" aria-expanded="false">ใต้สายงาน</a></li>
+              <li role="presentation" class=""><a href="#Adviser" data-toggle="tab" aria-expanded="false">แนะนำตรง</a></li>
               <li role="presentation" class=""><a href="#Upline" data-toggle="tab" aria-expanded="false">อัปไลน์</a></li>
               <li role="presentation" class=""><a href="#Extend" data-toggle="tab" aria-expanded="false">การต่ออายุ</a></li>
               <li role="presentation" class=""><a href="#Upclass" data-toggle="tab" aria-expanded="false">ระดับ</a></li>
@@ -42,8 +42,8 @@
             <?php else: ?>
               <ul class="nav nav-tabs tab-nav-right" role="tablist">
                 <li role="presentation" class="active"><a href="#Income" data-toggle="tab" aria-expanded="false">ค่าการตลาด</a></li>
-                <li role="presentation" class=""><a href="#ThreeDownline" data-toggle="tab" aria-expanded="false">ดาวน์ไลน์ติดตัว</a></li>
-                <li role="presentation" class=""><a href="#Adviser" data-toggle="tab" aria-expanded="false">แนะนำผู้อื่น</a></li>
+                <li role="presentation" class=""><a href="#ThreeDownline" data-toggle="tab" aria-expanded="false">ใต้สายงาน</a></li>
+                <li role="presentation" class=""><a href="#Adviser" data-toggle="tab" aria-expanded="false">แนะนำตรง</a></li>
                 <li role="presentation" class=""><a href="#Upline" data-toggle="tab" aria-expanded="false">อัปไลน์</a></li>
                 <li role="presentation" class=""><a href="#Extend" data-toggle="tab" aria-expanded="false">การต่ออายุ</a></li>
                 <li role="presentation" class=""><a href="#Upclass" data-toggle="tab" aria-expanded="false">ระดับ</a></li>

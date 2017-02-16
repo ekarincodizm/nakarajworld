@@ -55,7 +55,7 @@
                     <!-- แปลงระดับ -->
                     <?php if ($row['source_detail'][0]['journal_dividend_class']==1 || $row['source_detail'][0]['journal_dividend_class']==0): ?>
                       <td class="text-center">
-                        ทั่วไป
+                        สมาชิก
                       </td>
                     <?php elseif ($row['source_detail'][0]['journal_dividend_class']==2): ?>
                       <td class="text-center">

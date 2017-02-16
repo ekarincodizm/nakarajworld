@@ -22,7 +22,7 @@
     $(function () {
         $('.bootstrap-datepicker').datetimepicker({
           locale: 'th',
-          format: 'YYYY-MM-DD',
+          format: 'DD-MM-YYYY',
         });
     });
 </script>

@@ -18,7 +18,7 @@
 
         <?php
         // $this->debuger->prevalue($AccountingList);
-        $i=1; foreach ($DividendID as $row): ?>
+        $amount = 0; $i=1; foreach ($DividendID as $row): ?>
         <!-- <tr style="cursor: pointer;" onclick="document.location = '<?php echo site_url('/Accounting/AccountingDetail/'.$row['accounting_id']); ?>';"> -->
         <td><?php echo $i; ?></td>
         <td>
@@ -41,7 +41,7 @@
         <!-- แปลงระดับ -->
         <?php if ($row['source_detail'][0]['journal_dividend_class']==1 || $row['source_detail'][0]['journal_dividend_class']==0): ?>
           <td class="text-center">
-            ทั่วไป
+            สมาชิก
           </td>
         <?php elseif ($row['source_detail'][0]['journal_dividend_class']==2): ?>
           <td class="text-center">
@@ -107,7 +107,7 @@
                       <?php endif; ?>
 
                     <?php else: ?>
-                      <span class="label bg-blue-grey">ไม่ตรงเงื่อนไข</span>
+                      <span class="label bg-blue-grey">รอยกระดับ</span>
                     <?php endif; ?>
 
                   <?php endforeach; ?> <!-- $AccountRepeat -->
@@ -121,8 +121,10 @@
           </h4>
         </td>
       </tr>
-      <?php $i++; endforeach; ?>
+      <?php $i++; $amount =+ number_format($row['source_detail'][0]['journal_dividend_amount']); endforeach; ?>
     </tbody>
   </table>
+  <b><?php echo "<b>รวมยอดทั้งหมด = <font color='green'>".number_format($amount);?></b></font>
+
 </div>
 </div>

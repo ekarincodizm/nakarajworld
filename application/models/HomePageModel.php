@@ -79,6 +79,15 @@ class homepagemodel extends CI_Model {
     return $query;
   }
 
+  public function LoadUser($id)
+  {
+    $query = $this->db
+    ->where('member_id', $id)
+    ->get('mlm_user')
+    ->result_array();
+    return $query;
+  }
+
   public function addPhoto($data){
     $query = $this->db
     ->where('member_id', $data['member_id'])

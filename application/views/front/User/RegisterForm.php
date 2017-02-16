@@ -149,7 +149,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						<div class="col-md-8">
 							<label for="name">ที่อยู่สำรอง กรณีติดต่อไม่ได้</label>
 							<div class="form-group">
-								<textarea class="form-control" name="member_address2" required style="height:60px;" ng-model="member_address2"></textarea>
+								<textarea class="form-control" name="member_address2"  style="height:60px;" ng-model="member_address2"></textarea>
 							</div>
 						</div>
 					</div>
@@ -157,7 +157,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						<div class="col-md-4">
 							<label for="name">เบอร์โทรศัพท์</label>
 							<div class="form-group">
-								<input class="form-control" name="member_phone" required type="text" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" autocomplete="off" ng-model="member_phone"/>
+								<input class="form-control" name="member_phone" type="text" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" autocomplete="off" ng-model="member_phone"/>
 							</div>
 						</div>
 						<div class="col-md-4">
@@ -193,6 +193,24 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 							</div>
 						</div>
 					</div>
+
+					<div class="row text-center">
+						<div class="col-lg-12" style="padding-top:20px">
+							<h6>รหัสผ่าน</h6>
+							<span class="title-separator"></span>
+						</div>
+					</div>
+					<div class="row text-center">
+						<div class="col-md-offset-4 col-md-4">
+							<label for="name">รหัสผ่าน</label>
+							<div class="form-group">
+								<div class="input-group form-line">
+									<input required class="form-control input-lg" name="user_pass" type="password" autocomplete="off"/>
+								</div>
+							</div>
+						</div>
+					</div>
+
 					<div class="row">
 						<div class="col-md-4 col-md-offset-4 text-center">
 							<div class="form-group">
@@ -220,8 +238,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 					<p>สมาชิกใหม่ <br>
 					<?php echo @$Member[0]['member_firstname']." ".@$Member[0]['member_lastname'] ?><br>
 						Username คือ <font color="red">เลขบัตรประชาชน</font><br>
-						รหัสผ่าน คือ <font color="red">เบอร์โทรศัพท์</font><br>
-						คุณสามารถเปลี่ยนรหัสผ่านได้ ที่เมนูแก้ไขข้อมูลส่วนตัว
+						คุณสามารถเปลี่ยนรหัสผ่านได้ ที่เมนูแก้ไขรหัสผ่าน
 					</p>
 					<div class="form-group">
 						<a href="<?php echo site_url('/HomePage/Profile'); ?>" class="button green rounded">ดูโปรไฟล์</a>
