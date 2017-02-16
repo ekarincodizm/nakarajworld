@@ -14,6 +14,7 @@
 	$this->debuger->front_load_css('bootstrap.min');
 	$this->debuger->front_load_css('jquery-ui-1.10.4.custom.min');
 	$this->debuger->front_load_css('font-awesome.min');
+	$this->debuger->front_load_css('fontawesome321/css/font-awesome.min');
 	$this->debuger->front_load_css('owl.carousel');
 	$this->debuger->front_load_css('style');
 	$this->debuger->front_load_css('thsarabunnew');

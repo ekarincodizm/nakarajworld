@@ -119,7 +119,25 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						<div class="col-md-3">
 							<label for="name">วันเกิด</label>
 							<div class="form-group">
-							<input name="member_born" class="form-control input-medium" type="text" data-provide="datepicker" data-date-language="th-th">
+
+							<input id="inputWithDatePicer"  class="form-control input-medium" type="text"  data-provide="datepicker" data-date-language="th-th">
+							<input id="getDatePicer" type="text" name="member_born" style="display:none">
+							<script type="text/javascript">
+								$("#inputWithDatePicer").change(function() {
+									var born = $('#inputWithDatePicer').data('datepicker').date;
+									var born_date = ( born.getDate() < 10 ? "0" : "" ) + born.getDate();
+									var born_month =  born.getMonth()+1;
+											born_month =  ( born_month < 10 ? "0" : "" ) + born_month;
+									var born_year = born.getFullYear();
+									var db_born = born_year+"-"+born_month+"-"+born_date;
+									console.log(db_born);
+
+									$("#getDatePicer").val(db_born);
+								});
+
+								
+
+							</script>
 						</div>
 						</div>
 
