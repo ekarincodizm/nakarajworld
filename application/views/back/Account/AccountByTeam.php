@@ -92,7 +92,7 @@
                         <td>
                           <?php if ($row['count_three_downline']==3): ?>
                             <span class="font-bold col-teal">
-                              <?php echo $row['count_three_downline'] ?>  รหัส</span>
+                              <?php echo $row['count_three_downline'] ?> รหัส</span>
                             <?php else: ?>
                               <?php echo $row['count_three_downline'] ?> รหัส
                             <?php endif; ?>

@@ -165,12 +165,12 @@ class HomePage extends CI_Controller{
 				$UpdateUser['member_id'] = $PasswordForm['member_id'];
 				$UpdateUser['user_pass'] = base64_encode($PasswordForm['new_pass']);
 				$this->HomePageModel->UpdateUser( $UpdateUser );
-
-				redirect('HomePage/Profile');
+				$this->Logout();
 			}
 	public function SubmitProfile()
 	{
 		$RegisterForm = $this->input->post();
+		// $this->debuger->prevalue($RegisterForm);
 		$AddUser['user_pass'] = base64_encode($RegisterForm['user_pass']);
 		unset($RegisterForm['user_pass']);
 
