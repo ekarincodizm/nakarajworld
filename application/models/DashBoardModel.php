@@ -22,6 +22,7 @@ class dashboardmodel extends CI_Model {
     return $Group;
 
   }
+
   public function DashBoardGroupChartPer30Day($id)
   {
     $today_date = date('Y-m-d');
