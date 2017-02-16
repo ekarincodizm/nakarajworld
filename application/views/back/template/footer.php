@@ -31,10 +31,12 @@ $this->debuger->load_back_js('demo');
 $this->debuger->load_back_js('admin');
 
 
+
 ?>
 <!-- <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script> -->
 <script type="text/javascript" src="<?php echo base_url('assets/theme/back-end/js/angular.min.js') ?>"></script>
 
+<?php $this->debuger->load_back_js('angular-locale_th-th');  ?>
 <script type="text/javascript" src="<?php echo base_url('assets/theme/back-end/js/angular-animate.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/theme/back-end/js/angular-sanitize.min.js') ?>"></script>
 <script type="text/javascript" src="<?php echo base_url('assets/app/app.js') ?>"></script>

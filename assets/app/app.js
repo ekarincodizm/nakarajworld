@@ -1,4 +1,4 @@
-var HomePageApp = angular.module('HomePageApp', ['ngAnimate', 'ngSanitize']);
+var HomePageApp = angular.module('HomePageApp', ['ngAnimate', 'ngSanitize', 'ngLocale']);
 
 HomePageApp.controller('AddBookBankCtrl', function ($scope, $http) {
 
