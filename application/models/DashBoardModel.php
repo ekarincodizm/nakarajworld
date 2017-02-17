@@ -131,18 +131,25 @@ class dashboardmodel extends CI_Model {
     $query =  $this->db
     ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
     ->where('mlm_accounting.journals_id',3)
-    ->where('mlm_accounting.accounting_status', 1)
     ->get('mlm_accounting')
     ->result_array();
     $query = $this->AccountingModel->AccountingSourceDetail($query, $account_id);
-    // $this->debuger->prevalue($query);
+
+    $company = array();
+    $i=0;
+    foreach ($query as $row) {
+      if ($row['member']['member_id']==1) {
+        $company[$i]=$row;
+        $i++;
+      }
+    }
+    // $this->debuger->prevalue($company);
 
     $amount = 0;
-    foreach ($query as $row) {
+    foreach ($company as $row) {
       $amount += $row['source_amount'];
     }
     // $this->debuger->prevalue($amount);
-
     return $amount;
   }
 
@@ -152,18 +159,26 @@ class dashboardmodel extends CI_Model {
     $query =  $this->db
     ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
     ->where('mlm_accounting.journals_id',3)
-    ->where('mlm_accounting.accounting_status', 1)
     ->get('mlm_accounting')
     ->result_array();
     $query = $this->AccountingModel->AccountingSourceDetail($query, $account_id);
     // $this->debuger->prevalue($query);
 
-    $amount = 0;
+    $company = array();
+    $i=0;
     foreach ($query as $row) {
+      if ($row['member']['member_id']!=1) {
+        $company[$i]=$row;
+        $i++;
+      }
+    }
+    // $this->debuger->prevalue($company);
+
+    $amount = 0;
+    foreach ($company as $row) {
       $amount += $row['source_amount'];
     }
     // $this->debuger->prevalue($amount);
-
     return $amount;
   }
 }

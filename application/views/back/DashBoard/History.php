@@ -32,7 +32,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
     </div>
 
     <div class="row">
-      <div class="col-md-offset-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+      <div class="col-md-offset-1 col-lg-5 col-md-5 col-sm-5 col-xs-12">
         <div class="card">
           <div class="body bg-blue">
             <div class="row">
@@ -41,7 +41,22 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
 
               </div>
               <div class="col-md-12 text-center">
-                <h4><?php echo $AllCompany ?> บาท</h4>
+                <h4><?php echo number_format($AllCompany+$AdviserCompany); ?> บาท</h4>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-offset-0 col-lg-5 col-md-5 col-sm-5 col-xs-12">
+        <div class="card">
+          <div class="body bg-red">
+            <div class="row">
+              <div class="col-md-12 text-center">
+                <h3>สรุปค่าใช้จ่ายบริษัททั้งหมด</h3>
+
+              </div>
+              <div class="col-md-12 text-center">
+                <h4><?php echo number_format($Expenses+$Adviser); ?> บาท</h4>
               </div>
             </div>
           </div>
@@ -80,7 +95,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
 
               </div>
               <div class="col-md-12 text-center">
-                <h4><?php //echo $AviserCompany; ?> บาท</h4>
+                <h4><?php echo $AdviserCompany; ?> บาท</h4>
               </div>
             </div>
           </div>
@@ -136,7 +151,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
 
               </div>
               <div class="col-md-12 text-center">
-                <h4><?php //echo $Adviser ?> บาท</h4>
+                <h4><?php echo $Adviser ?> บาท</h4>
               </div>
             </div>
           </div>
