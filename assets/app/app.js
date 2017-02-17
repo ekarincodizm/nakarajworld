@@ -46,25 +46,24 @@ HomePageApp.controller('AddBookBankCtrl', function ($scope, $http) {
 });
 
 
-HomePageApp.controller('PanelExtendCtrl', function ($scope, $http) {
+HomePageApp.controller('PanelExtendCtrl', function ($scope, $http, $window) {
 	$http.post(SITE_URL + '/MemberService/AccountDetailExtend', {'account_id':account_id}).then(function (response){
 		// console.log("History");
 		// console.log(response.data);
 		$scope.date_now = moment().format('YYYY-MM-DD');
 		$scope.ListExtend = response.data;
-		$scope.LastListExtend = $scope.ListExtend[$scope.ListExtend.length - 1]
-		console.log($scope.LastListExtend);
+		$scope.LastListExtend = $scope.ListExtend[0];
+		$scope.accounting_id = $scope.LastListExtend.accounting_id;
+
 	},function (error){});
 
 	$scope.MemberExtend = function(member_id){
-		$http.post(SITE_URL + '/MemberService/AddAccountDetailExtend', {'member_id':member_id,'account_id':account_id}).then(function (){
-			$http.post(SITE_URL + '/MemberService/AccountDetailExtend', {'account_id':account_id}).then(function (response){
-				$scope.date_now = moment().format('YYY-MM-DD');
-				$scope.ListExtend = response.data;
-				$scope.LastListExtend = $scope.ListExtend[$scope.ListExtend.length - 1]
-				console.log($scope.LastListExtend);
-			},function (error){
-			});
+		$http.post(SITE_URL + '/MemberService/AddAccountDetailExtend', {'member_id':member_id,'account_id':account_id}).then(function (response){
+			$scope.date_now = moment().format('YYY-MM-DD');
+				$scope.ListExtend = response.data.AccountDetailExtend;
+				$scope.LastListExtend = $scope.ListExtend[0];
+				$scope.accounting_id = response.data.accounting_id;
+
 		});
 	};
 

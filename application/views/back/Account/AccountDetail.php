@@ -5,7 +5,7 @@
       <h1>
         เกี่ยวกับบัญชีธุรกิจ รหัส <?php echo $Account[0]['account_team'].sprintf("%04d", $Account[0]['account_level']).sprintf("%04d", $Account[0]['account_code']); ?>
         <?php if (count($JounalExtendAccount)>0 && $JounalExtendAccount[0]['journal_extend_expired_date']<Date('Y-m-d')): ?>
-          <span class="">(หมดอายุ)</span>
+          <span class="col-pink">(หมดอายุ)</span>
         <?php endif; ?>
       </h1>
     </div>

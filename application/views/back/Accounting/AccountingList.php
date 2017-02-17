@@ -9,6 +9,58 @@
       <div class="col-md-12">
         <div class="card">
           <div class="header">
+            <h2>ค้นหารายการบัญชี</h2>
+          </div>
+          <div class="body">
+            <div class="row clearfix">
+              <?php echo form_open('/Accounting/SearchAccountingList'); ?>
+              <div class="col-md-2 col-md-offset-3">
+                <div class="form-group">
+                  <div class="form-line">
+                    <label>จากวันที่ </label>
+                    <input id="dateFrom"  class="form-control input-medium" type="text"  data-provide="datepicker" data-date-language="th-th" required>
+      							<input id="setDateFrom" type="text" name="fromDate" style="display:none">
+
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                  <div class="form-line">
+                    <label>ถึงวันที่ </label>
+
+                    <input id="dateTo"  class="form-control input-medium" type="text"  data-provide="datepicker" data-date-language="th-th" required>
+      							<input id="setDateTo" type="text" name="toDate" style="display:none">
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-1">
+                <div class="form-group">
+                  <div class="form-line">
+                    <button type="submit" class="btn btn-block btn-lg btn-info">ค้นหา</button>
+                  </div>
+                </div>
+              </div>
+              <?php echo form_close(); ?>
+
+            </div>
+            <div class="row">
+            <?php if ($fromDate != "" && $toDate != ""): ?>
+              <div class="col-md-12 text-center">
+                <p class="col-pink font-bold">ผลการค้นหา จากวันที่ <?php echo $this->thaidate->FullDate($fromDate); ?> ถึงวันที่ <?php echo $this->thaidate->FullDate($toDate); ?></p>
+                <p class="col-pink font-bold">ข้อมูลที่พบ <?php echo count($AccountingList); ?> รายการ</p>
+              </div>
+            <?php endif; ?>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="row clearfix">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="header">
             <h2>รายการเอกสารการเงิน</h2>
           </div>
           <div class="body table-responsive">
@@ -78,4 +130,5 @@
         </div>
 
       </div>
-    </section>
+    </div>
+  </section>

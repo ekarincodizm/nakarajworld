@@ -16,6 +16,22 @@ class accountingmodel extends CI_Model
 
     return $query;
   }
+  public function AccountingByDuration($fromDate, $toDate) {
+    $account_id = 0;
+    $query =  $this->db
+    ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
+    ->where('accounting_date <=', $toDate)
+    ->where('accounting_date >=', $fromDate)
+
+    ->where('accounting_status !=', 2)
+    ->order_by('accounting_status', 'ASC')
+    ->order_by('accounting_id', 'DESC')
+    ->get('mlm_accounting')
+    ->result_array();
+    $query = $this->AccountingSourceDetail($query, $account_id);
+
+    return $query;
+  }
 
   public function IncomeAccounting($member_id)
   {
@@ -107,9 +123,7 @@ class accountingmodel extends CI_Model
     ->result_array();
 
     $query = $this->AccountingSourceDetail($query, $account_id);
-
     return $query;
-
   }
   public function GetAccountingID($member_id)
   {
@@ -165,6 +179,7 @@ class accountingmodel extends CI_Model
       $source_table = 'mlm_journal_fee';
       $index_id = 'journal_fee_id';
       $source_detail = $this->SelectSourceDetail($source_id, $index_id, $source_table, $account_id);
+      // $this->debuger->prevalue($source_detail);
       $source_detail['Template'] = 'TemplateFee';
       $source_detail['source_code'] = $source_detail[0]['journal_fee_code'];
       $source_detail['source_amount'] = $source_detail[0]['journal_fee_amount'];
@@ -199,6 +214,9 @@ class accountingmodel extends CI_Model
   {
     //  if ($account_id==0) {
       $query = $this->db->where($index_id, $source_id)->get($source_table)->result_array();
+      // print_r($query);
+
+
     //  } else {
     //    $query = $this->db
     //    ->where($index_id, $source_id)

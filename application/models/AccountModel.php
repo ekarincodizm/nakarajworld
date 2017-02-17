@@ -276,14 +276,28 @@ class accountmodel extends CI_Model {
   {
     $query = $this->db
     ->where('account_id', $id)
+    ->order_by('journal_extend_expired_date', 'DESC')
     // ->join('mlm_accounting', 'mlm_accounting.accounting_source_id = mlm_journal_extend.journal_extend_id')
     ->get('mlm_journal_extend')->result_array();
+    // print_r($query);
+    return $query;
+  }
+  public function JounalExtend($id)
+  {
+    $query = $this->db
+    ->where('account_id', $id)
+    ->where('journals_id', 2)
+
+    ->order_by('journal_extend_expired_date', 'DESC')
+    ->join('mlm_accounting', 'mlm_accounting.accounting_source_id = mlm_journal_extend.journal_extend_id')
+    ->get('mlm_journal_extend')->result();
     // print_r($query);
     return $query;
   }
   public function JounalExtendAccountAll()
   {
     $query = $this->db
+    ->order_by('journal_extend_expired_date', 'DESC')
     ->get('mlm_journal_extend')->num_rows();
     return $query;
   }

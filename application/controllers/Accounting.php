@@ -14,15 +14,18 @@ class Accounting extends CI_Controller{
     $this->load->view($value['View']);
     $this->load->view('back/template/footer');
   }
-  public function index() {
 
-    $AccountingList = $this->AccountingModel->AccountingSelectAll();
-    // echo "<pre>";
-    // print_r($AccountingList);
-    // exit();
+  public function index($fromDate="", $toDate ="") {
+    $AccountingList = array();
+    if ($fromDate != "" && $toDate != "") {
+      $AccountingList = $this->AccountingModel->AccountingByDuration($fromDate, $toDate);
+    }
+
     $value = array(
       'Result' => array(
         'AccountingList' => $AccountingList,
+        'fromDate' => $fromDate,
+        'toDate' => $toDate
       ),
       'View' => 'back/Accounting/AccountingList'
     );
@@ -30,6 +33,14 @@ class Accounting extends CI_Controller{
     $this->LoadPage($value);
   }
 
+  public function SearchAccountingList()
+  {
+    $input = $this->input->post();
+    // echo "<pre>";
+    // print_r($input);
+    // exit();
+    $this->index($input['fromDate'], $input['toDate']);
+  }
   public function DetailSaleOrder()
   {
     $accounting_id = $this->uri->segment(3);
