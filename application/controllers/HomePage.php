@@ -60,6 +60,7 @@ class HomePage extends CI_Controller{
 
 		$value = array(
 			'Result' => array(
+				'Duplicate' => 'false'
 			),
 			'View' => 'front/User/CheckRegisForm'
 		);
@@ -80,7 +81,7 @@ class HomePage extends CI_Controller{
 			$IDCard['member_id_card_type_name'] = 'Work Permit';
 		}
 
-		if (count($duplicate)>0) {
+		if (count($duplicate)>0 || $IDCard=="") {
 			$value = array(
 				'Result' => array(
 					'Registered'=> 'false',
@@ -89,12 +90,11 @@ class HomePage extends CI_Controller{
 				'View' => 'front/User/CheckRegisForm'
 			);
 			$this->LoadUserPage($value);
-		} else {
+		} elseif (count($duplicate)==0 && $IDCard!="") {
 
 			$value = array(
 				'Result' => array(
 					'Registered'=> 'false',
-
 					'IDCard' => $IDCard
 				),
 				'View' => 'front/User/RegisterForm'
@@ -112,7 +112,6 @@ class HomePage extends CI_Controller{
 		);
 		$this->LoadUserPage($value);
 	}
-
 	public function SubmitEditProfile()
 		{
 			$RegisterForm = $this->input->post();
@@ -167,8 +166,7 @@ class HomePage extends CI_Controller{
 				$this->HomePageModel->UpdateUser( $UpdateUser );
 				$this->Logout();
 			}
-	public function SubmitProfile()
-	{
+	public function SubmitProfile(){
 		$RegisterForm = $this->input->post();
 		// $this->debuger->prevalue($RegisterForm);
 		$AddUser['user_pass'] = base64_encode($RegisterForm['user_pass']);
@@ -293,8 +291,7 @@ class HomePage extends CI_Controller{
 		);
 		$this->LoadUserPage($value);
 	}
-
-		public function IncomeListByID() {
+	public function IncomeListByID() {
 			$Profile = array();
 			$AccountList = array();
 			if (isset($_SESSION['MEMBER_ID'])) {
@@ -370,7 +367,6 @@ class HomePage extends CI_Controller{
 			// $this->debuger->prevalue($value);
 			$this->LoadUserPage($value);
 		}
-
 	public function EditProfile() {
 		$Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
 		if ($Profile[0]['member_id_card_type']==1) {
@@ -389,7 +385,6 @@ class HomePage extends CI_Controller{
 		);
 		$this->LoadUserPage($value);
 	}
-
 	public function EditPassword() {
 		$UserPass = $this->HomePageModel->LoadUser( $_SESSION['MEMBER_ID'] );
 		$Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
@@ -409,7 +404,6 @@ class HomePage extends CI_Controller{
 		);
 		$this->LoadUserPage($value);
 	}
-
 	public function Logout() {
 		session_destroy();
 		redirect('/HomePage');

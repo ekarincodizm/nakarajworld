@@ -30,6 +30,9 @@
 		$this->debuger->load_back_plugins_css('jquery-datatable/skin/bootstrap/css/dataTables.bootstrap');
 		$this->debuger->load_back_css('style');
 		$this->debuger->load_back_css('themes/theme-cyan.min');
+		$this->debuger->front_load_css('fontawesome321/css/font-awesome.min');
+		$this->debuger->front_load_css('datepicker');
+		
 		?>
 <script type="text/javascript">
 	var SITE_URL = "<?php echo site_url(); ?>"

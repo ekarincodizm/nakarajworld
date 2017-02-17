@@ -153,7 +153,7 @@ function getChartJs(type) {
       data: {
         labels: ["ทีม A", "ทีม B", "ทีม C", "ทีม D", "ทีม E", "ทีม F", "ทีม G", "ทีม H", "ทีม I"],
         datasets: [{
-          label: "สมาชิก",
+          label: "สมาชิก ",
           data: [
             <?php
             for($i = 'A' ; $i <= 'I' ; $i++){
@@ -165,12 +165,11 @@ function getChartJs(type) {
       },
       options: {
         responsive: true,
-
-        legend: false,
+        legend: true,
         scales: {
           yAxes: [{
             ticks: {
-              stepSize: 1,
+              stepSize: 10,
               beginAtZero: true
             }
           }]

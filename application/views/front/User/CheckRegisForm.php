@@ -28,6 +28,11 @@
 									<!-- <span style="color:red;" ng-show="FindUser.member_citizen_id.$error.required" class="help-inline">กรุณากรอกหมายเลขประจำตัว</span> -->
 								</div>
 							</div>
+							<?php if ($Duplicate=='true'): ?>
+								<div class="col-md-12">
+								  <p class="text-danger">เลขบัตรไม่ถูกต้อง หรือมีการใช้งานแล้ว</p>
+								</div>
+							<?php endif; ?>
 
 							<div class="col-md-12 text-center" ng-hide="find">
 								<div class="form-group">
