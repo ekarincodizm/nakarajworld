@@ -30,9 +30,12 @@
           </div>
           <div class="body">
             <!-- ระดับบัญชีนักธุรกิจอิสระ: <br> -->
-            ใต้สายงานทั้งหมด: <?php echo count($AllDownline); ?> รหัส<br>
-            ใต้สายงานติดตัว: <?php echo count($ThreeDownline); ?> รหัส<br>
-            แนะนำผู้อื่น: <?php echo count($AdviserList); ?> รหัส<br>
+            ใต้สายงานทั้งหมด: <?php echo count($AllDownline); ?> รหัส (363)<br>
+            ใต้สายงาน: <?php echo count($ThreeDownline); ?> รหัส (3)<br>
+            แนะนำตรง: <?php echo count($AdviserList); ?> รหัส <br>
+            <?php if (count($AdviserList)<3): ?>
+            <font color="red">แนะนำตรงต้องครบ 3 จึงจะยกระดับได้</font>
+            <?php endif; ?>
             <!-- สถานะบัญชีนักธุรกิจอิสระ: <br> -->
             <!-- <hr><center>
             <font color="red">โอนกรรมสิทธิ์บัญชีนี้ </font> ให้แก่ <br>

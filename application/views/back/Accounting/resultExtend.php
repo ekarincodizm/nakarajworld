@@ -80,9 +80,9 @@ top: 0%;">
                     <td class="text-right"><?php echo number_format($var['source_amount']) ?> </td>
                     <td class="text-right"><?php echo number_format($var['source_amount']) ?> </td>
                   </tr>
-                        <?php if (count($AccountingDetail)<15): ?>
+                        <?php if (count($AccountingDetail)<10): ?>
                           <?php
-                          $row = 15 - count($AccountingDetail);
+                          $row = 10 - count($AccountingDetail);
                           for ($i=0; $i < $row; $i++) { ?>
                             <tr>
                               <td><span class="empty"></span></td>
@@ -115,6 +115,12 @@ top: 0%;">
                 <div class="col-sm-12">ลงชื่อ..................................................................ผู้สั่งซื้อ</div>
                 <div class="col-sm-12">(.....................................................................)</div>
                 <div class="col-sm-12">วันที่…...…เดือน……………..พ.ศ…………</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-12" style="margin-top:50px">
+            <div class="row">
+              <div class="col-md-12 col-sm-12" style="overflow-wrap:break-word;"><?php echo $Config[0]['shop_config'] ?>
               </div>
             </div>
           </div>

@@ -34,6 +34,136 @@ class dashboardmodel extends CI_Model {
     ->join('mlm_account','mlm_journal_extend.account_id = mlm_account.account_id')
     ->get('mlm_journal_extend')->num_rows();
     return $Group;
+  }
 
+  public function HistoryAllCompany()
+  {
+    $account_id = 0;
+    $query =  $this->db
+    ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
+    ->where('mlm_accounting.journals_id',5)
+    ->or_where('mlm_accounting.journals_id',1)
+    ->or_where('mlm_accounting.journals_id',2)
+    ->or_where('mlm_accounting.journals_id',7)
+    ->where('mlm_accounting.accounting_status', 1)
+    ->get('mlm_accounting')
+    ->result_array();
+    $query = $this->AccountingModel->AccountingSourceDetail($query, $account_id);
+    // $this->debuger->prevalue($query);
+
+    $amount = 0;
+    foreach ($query as $row) {
+      $amount += $row['source_amount'];
+    }
+    // $this->debuger->prevalue($amount);
+
+    return $amount;
+  }
+
+  public function HistorySale()
+  {
+    $account_id = 0;
+    $query =  $this->db
+    ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
+    ->where('mlm_accounting.journals_id',7)
+    ->where('mlm_accounting.accounting_status', 1)
+    ->get('mlm_accounting')
+    ->result_array();
+    $query = $this->AccountingModel->AccountingSourceDetail($query, $account_id);
+    // $this->debuger->prevalue($query);
+
+    $amount = 0;
+    foreach ($query as $row) {
+      $amount += $row['source_amount'];
+    }
+    // $this->debuger->prevalue($amount);
+
+    return $amount;
+  }
+
+  public function HistoryExpenses()
+  {
+    $account_id = 0;
+    $query =  $this->db
+    ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
+    ->where('mlm_accounting.journals_id',4)
+    ->where('mlm_accounting.accounting_status', 1)
+    ->get('mlm_accounting')
+    ->result_array();
+    $query = $this->AccountingModel->AccountingSourceDetail($query, $account_id);
+    // $this->debuger->prevalue($query);
+
+    $amount = 0;
+    foreach ($query as $row) {
+      $amount += $row['source_amount'];
+    }
+    // $this->debuger->prevalue($amount);
+
+    return $amount;
+  }
+
+  public function HistoryCompany()
+  {
+    $account_id = 0;
+    $query =  $this->db
+    ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
+    ->where('mlm_accounting.journals_id',5)
+    ->or_where('mlm_accounting.journals_id',1)
+    ->or_where('mlm_accounting.journals_id',2)
+    ->where('mlm_accounting.accounting_status', 1)
+    ->get('mlm_accounting')
+    ->result_array();
+    $query = $this->AccountingModel->AccountingSourceDetail($query, $account_id);
+    // $this->debuger->prevalue($query);
+
+    $amount = 0;
+    foreach ($query as $row) {
+      $amount += $row['source_amount'];
+    }
+    // $this->debuger->prevalue($amount);
+
+    return $amount;
+  }
+
+  public function HistoryAdviserCompany()
+  {
+    $account_id = 0;
+    $query =  $this->db
+    ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
+    ->where('mlm_accounting.journals_id',3)
+    ->where('mlm_accounting.accounting_status', 1)
+    ->get('mlm_accounting')
+    ->result_array();
+    $query = $this->AccountingModel->AccountingSourceDetail($query, $account_id);
+    // $this->debuger->prevalue($query);
+
+    $amount = 0;
+    foreach ($query as $row) {
+      $amount += $row['source_amount'];
+    }
+    // $this->debuger->prevalue($amount);
+
+    return $amount;
+  }
+
+  public function HistoryAdviser()
+  {
+    $account_id = 0;
+    $query =  $this->db
+    ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
+    ->where('mlm_accounting.journals_id',3)
+    ->where('mlm_accounting.accounting_status', 1)
+    ->get('mlm_accounting')
+    ->result_array();
+    $query = $this->AccountingModel->AccountingSourceDetail($query, $account_id);
+    // $this->debuger->prevalue($query);
+
+    $amount = 0;
+    foreach ($query as $row) {
+      $amount += $row['source_amount'];
+    }
+    // $this->debuger->prevalue($amount);
+
+    return $amount;
   }
 }

@@ -44,7 +44,7 @@
 
 <section>
     <aside id="leftsidebar" class="sidebar">
-        
+
 <!-- #User Info -->
 <div class="menu">
     <ul class="list">
@@ -59,6 +59,12 @@
                     <a href="<?php echo site_url('/DashBoardMain');?>" class=" waves-effect waves-block">
                         <i class="material-icons">timeline</i>
                         <span>ระบบธุรกิจเครือข่าย</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo site_url('/History');?>" class=" waves-effect waves-block">
+                      <i class="material-icons">assignment</i>
+                        <span>สรุปยอดบริษัท</span>
                     </a>
                 </li>
                 <li>
@@ -128,6 +134,13 @@
                     <a href="<?php echo site_url('/SaleOrder');?>" class=" waves-effect waves-block">
                         <i class="material-icons">receipt</i>
                         <span>ใบสั่งซื้อ</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="<?php echo site_url('/Config/ShopConfig');?>" class=" waves-effect waves-block">
+                        <i class="material-icons">settings_applications</i>
+                        <span>ตั้งค่า</span>
                     </a>
                 </li>
             </ul>

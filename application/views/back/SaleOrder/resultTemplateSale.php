@@ -53,7 +53,8 @@ top: 0%;">
               ใบสั่งซื้อ</strong></br>
               <strong><br>
                 เลขที่ <?php echo $var['accounting_no'] ?></strong><br>
-                <strong>วันที่สั่งซื้อ</strong> <?php echo $this->thaidate->FullDate($var['accounting_date']); ?> </p>              </div>
+                <strong>วันที่สั่งซื้อ</strong> <?php echo $this->thaidate->FullDate($var['accounting_date']); ?> </p>
+              </div>
             </div>
           </div>
 
@@ -87,9 +88,9 @@ top: 0%;">
                   </tr>
                   <?php $item++; $amount += ($row['journal_sale_order_item_price']*$row['journal_sale_order_item_quantity']); endforeach; ?>
 
-                        <?php if (count($AccountingDetail)<15): ?>
+                        <?php if (count($AccountingDetail)<10): ?>
                           <?php
-                          $row = 15 - count($AccountingDetail);
+                          $row = 10 - count($AccountingDetail);
                           for ($i=0; $i < $row; $i++) { ?>
                             <tr>
                               <td><span class="empty"></span></td>
@@ -125,6 +126,15 @@ top: 0%;">
                 <div class="col-sm-12">วันที่…...…เดือน……………..พ.ศ…………</div>
               </div>
             </div>
+          </div>
+
+          <div class="col-sm-12" style="margin-top:50px">
+            <div class="row">
+              <div class="col-md-12 col-sm-12" style="overflow-wrap:break-word;"><?php echo $Config[0]['shop_config'] ?>
+              </div>
+            </div>
+          </div>
+
           </div>
         </div>
       </page>

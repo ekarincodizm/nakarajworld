@@ -63,6 +63,31 @@ class Config extends CI_Controller{
 
   }
 
+  public function ShopConfigFooter()
+  {
+    $Config = $this->db->get('mlm_config');
+    $input = array(
+      'mlm_config_id' => $_POST['mlm_config_id'],
+      'shop_config' => $_POST['shop_config'],
+    );
+    $this->ConfigModel->UpdateConfig($input);
+    redirect('/Config/ShopConfig');
+  }
+
+  public function ShopConfig() {
+    $Config_id = $this->uri->segment(3);
+    $ConfigDetail =$this->ConfigModel->Config($Config_id);
+    $ConfigDetail = json_decode(json_encode($ConfigDetail), true);
+
+    $value = array(
+      'Result' => array(
+        'ConfigDetail' => $ConfigDetail,
+      ),
+      'View' => 'back/SaleOrder/EditShopConfig'
+    );
+    $this->LoadPage($value);
+  }
+
   public function SaveConfig()
   {
     // $ProductsCode = $this->db->get('mlm_config')->num_rows();
