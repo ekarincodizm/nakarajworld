@@ -43,36 +43,90 @@
 		</div>
 	</section>
 
-	<section id="gallery" class="separator top" style="margin-bottom:100px">
-		<span class="arrow-separator"></span>
-		<div class="container-fluid">
-			<div class="row no-padding">
+	<?php if (count($ProductsList)>0): ?>
+		<section id="gallery" class="separator top" style="margin-bottom:100px">
+			<span class="arrow-separator"></span>
+			<div class="container-fluid">
+				<div class="row no-padding">
+					<div class="col-lg-12">
+						<div id="owl-demo" class="owl-carousel">
+							<?php foreach ($ProductsList as $row): ?>
+								<figure>
+									<div class="overlay">
+										<div class="content">
+											<a class="category" href="<?php echo site_url('/Store/ProductsDetail/'.$row['products_id']); ?>">
+												<?php if ($row['products_price_discount']>0): ?>
+													ราคาปกติ <strike><?php echo $row['products_price_narmal'] ?></strike> .- <br>ลดเหลือ
+													<?php else: ?>
+														ราคา
+												<?php endif; ?>
+												 <?php echo $row['products_price_narmal']-($row['products_price_narmal']*$row['products_price_discount']/100) ?>.- <br>PV : <?php echo $row['products_pv']?></a>
+											<h3><a href="<?php echo site_url('/Store/ProductsDetail/'.$row['products_id']); ?>" class="white"><?php echo $row['products_name'] ?></a></h3>
+										</div>
+									</div>
+									<img class="img-responsive" src="<?php echo base_url('assets/image/products/'.$row['products_image'])?>" alt="<?php echo $row['products_name'] ?>">
+								</figure>
+							<?php endforeach; ?>
+
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	<?php endif; ?>
+
+	<section id="contact" class="separator top">
+		<div class="container">
+			<div class="row text-center">
 				<div class="col-lg-12">
-					<div id="owl-demo" class="owl-carousel">
-						<?php foreach ($ProductsList as $row): ?>
-							<figure>
-								<div class="overlay">
-									<div class="content">
-										<a class="category" href="<?php echo site_url('/Store/ProductsDetail/'.$row['products_id']); ?>">
-											<?php if ($row['products_price_discount']>0): ?>
-												ราคาปกติ <strike><?php echo $row['products_price_narmal'] ?></strike> .- <br>ลดเหลือ
-												<?php else: ?>
-													ราคา
-											<?php endif; ?>
-											 <?php echo $row['products_price_narmal']-($row['products_price_narmal']*$row['products_price_discount']/100) ?>.- <br>PV : <?php echo $row['products_pv']?></a>
-										<h3><a href="<?php echo site_url('/Store/ProductsDetail/'.$row['products_id']); ?>" class="white"><?php echo $row['products_name'] ?></a></h3>
+					<h6>ติดต่อเรา</h6>
+					<h2>สอบถาม หรือแสดงความคิดเห็น</h2>
+					<span class="title-separator"></span>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="contactform form">
+						<!-- <form method="post" action="contact-form.php" name="contactform" id="contactform"> -->
+						<?php echo form_open('/HomePage/SendMailTo'); ?>
+							<div class="row">
+								<div class="col-md-4">
+									<label for="name">ชื่อ-สกุล</label>
+									<div class="form-group">
+										<input class="form-control" name="mailName" type="text" id="name" placeholder="" autocomplete="off"/>
 									</div>
 								</div>
-								<img class="img-responsive" src="<?php echo base_url('assets/image/products/'.$row['products_image'])?>" alt="<?php echo $row['products_name'] ?>">
-							</figure>
-						<?php endforeach; ?>
-
-
+								<div class="col-md-4">
+									<label for="email">อีเมล</label>
+									<div class="form-group">
+										<input class="form-control" name="mailFrom" type="text" id="email" placeholder="" autocomplete="off"/>
+									</div>
+								</div>
+								<div class="col-md-4">
+									<label for="subject">เรื่อง</label>
+									<div class="form-group">
+										<input class="form-control" name="mailSubject" type="text" id="subject" placeholder="" autocomplete="off"/>
+									</div>
+								</div>
+								<div class="col-md-12">
+									<label for="comments">ข้อความ</label>
+									<div class="form-group">
+										<textarea class="form-control" name="mailContent" cols="40" rows="3" id="comments" placeholder=""></textarea>
+									</div>
+									<div id="message"></div>
+									<div>
+										<input type="submit" class="button green rounded" id="submit" value="Send Message" />
+									</div>
+								</div>
+							</div>
+						<!-- </form> -->
+						<?php echo form_close(); ?>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-
 
 </div>
