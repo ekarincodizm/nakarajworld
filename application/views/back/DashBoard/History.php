@@ -40,7 +40,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                 <h3>สรุปรายได้บริษัททั้งหมด</h3>
               </div>
               <div class="col-md-12 text-center">
-                <h4><?php echo number_format($AllCompany+$AdviserCompany); ?> บาท</h4>
+                <h4><?php echo number_format($AdviserCompany+$Company+$Sale+$Register); ?> บาท</h4>
               </div>
             </div>
           </div>
@@ -69,7 +69,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
       <h3>รายได้บริษัท</h3><hr>
     </div>
     <div class="row">
-      <div class="col-md-offset-0 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+      <div class="col-md-offset-2 col-lg-4 col-md-4 col-sm-6 col-xs-12">
         <div class="card">
           <div class="body bg-green">
             <div class="row">
@@ -100,8 +100,10 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
           </div>
         </div>
       </div>
+    </div>
 
-    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+    <div class="row">
+    <div class="col-md-offset-2 col-lg-4 col-md-4 col-sm-6 col-xs-12">
       <div class="card">
         <div class="body bg-green">
           <div class="row">
@@ -117,6 +119,23 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
       </div>
     </div>
 
+
+        <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="card">
+            <div class="body bg-green">
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <h4>สรุปยอดขายสินค้า บริษัท</h4>
+
+                </div>
+                <div class="col-md-12 text-center">
+                  <h4><?php echo number_format($Register); ?> บาท</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
   </div>
 </div>
 

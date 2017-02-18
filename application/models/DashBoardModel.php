@@ -36,23 +36,31 @@ class dashboardmodel extends CI_Model {
     return $Group;
   }
 
-  public function HistoryAllCompany()
+  public function HistoryRegister()
   {
     $account_id = 0;
     $query =  $this->db
     ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
-    ->where('mlm_accounting.journals_id',5)
-    ->or_where('mlm_accounting.journals_id',1)
+    ->where('mlm_accounting.journals_id',1)
     ->or_where('mlm_accounting.journals_id',2)
-    ->or_where('mlm_accounting.journals_id',7)
     ->where('mlm_accounting.accounting_status', 1)
     ->get('mlm_accounting')
     ->result_array();
     $query = $this->AccountingModel->AccountingSourceDetail($query, $account_id);
     // $this->debuger->prevalue($query);
 
-    $amount = 0;
+    $company = array();
+    $i=0;
     foreach ($query as $row) {
+      if ($row['member']['member_id']!=1) {
+        $company[$i]=$row;
+        $i++;
+      }
+    }
+    // $this->debuger->prevalue($company);
+
+    $amount = 0;
+    foreach ($company as $row) {
       $amount += $row['source_amount'];
     }
     // $this->debuger->prevalue($amount);
@@ -147,7 +155,7 @@ class dashboardmodel extends CI_Model {
     $account_id = 0;
     $query =  $this->db
     ->join('mlm_journals', 'mlm_accounting.journals_id = mlm_journals.journals_id')
-    ->where('mlm_accounting.journals_id',5)
+    ->where('mlm_accounting.journals_id',4)
     ->or_where('mlm_accounting.journals_id',1)
     ->or_where('mlm_accounting.journals_id',2)
     ->where('mlm_accounting.accounting_status', 1)
@@ -156,8 +164,18 @@ class dashboardmodel extends CI_Model {
     $query = $this->AccountingModel->AccountingSourceDetail($query, $account_id);
     // $this->debuger->prevalue($query);
 
-    $amount = 0;
+    $company = array();
+    $i=0;
     foreach ($query as $row) {
+      if ($row['member']['member_id']==1) {
+        $company[$i]=$row;
+        $i++;
+      }
+    }
+    // $this->debuger->prevalue($company);
+
+    $amount = 0;
+    foreach ($company as $row) {
       $amount += $row['source_amount'];
     }
     // $this->debuger->prevalue($amount);
