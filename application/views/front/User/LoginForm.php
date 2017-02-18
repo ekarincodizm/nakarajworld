@@ -11,18 +11,18 @@
 				<div class="col-lg-4 col-lg-offset-4" ng-hide="SendForm">
 					<div class="contactform form">
 							<?php echo form_open('/HomePage/SubmitLogin/'); ?>
-							<form class="form-horizontal form" novalidate ng-submit="SubmitLogin()">
+							<form class="form-horizontal form" ng-submit="SubmitLogin()">
 							<div class="row">
 								<div class="col-md-12">
 									<label for="name">หมายเลขประจำตัว</label>
 									<div class="form-group">
-										<input class="form-control input-lg" name="user_name" type="text"  ng-model="user_name"/>
+										<input required class="form-control input-lg" name="user_name" type="text"  />
 									</div>
 								</div>
 								<div class="col-md-12">
 									<label for="password">รหัสผ่าน</label>
 									<div class="form-group">
-										<input class="form-control input-lg" name="user_pass" type="password" ng-model="user_pass"/>
+										<input required class="form-control input-lg" name="user_pass" type="password" />
 									</div>
 								</div>
 								<div class="col-md-12 text-center">

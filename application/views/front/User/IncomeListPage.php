@@ -92,13 +92,13 @@
                           <?php if ($row['accounting_status']==2): ?>
                               ติดต่อเพื่อรับเงินได้
                           <?php elseif ($row['accounting_status']==1): ?>
-                            <span class="label bg-green ">รับเงินแล้ว</span>
+                              รับเงินแล้ว
                           <?php elseif ($row['accounting_status']==0): ?>
                               ยืนยันการรับเงิน
                           <?php endif; ?>
 
                         <?php else: ?>
-                        <span class="label bg-blue-grey">ไม่ตรงเงื่อนไข</span>
+                        รอยกระดับ
                       <?php endif; ?>
                       </h4>
                     </td>

@@ -340,7 +340,18 @@ class HomePage extends CI_Controller{
 
 
 		$DividendID = $this->AccountingModel->DividendByID($id);
-		//$this->debuger->prevalue($JounalExtendAccount);
+		// $this->debuger->prevalue($DividendID);
+
+		$DivID = array();
+		$i=0;
+		foreach ($DividendID as $row) {
+			if ($row['member']['member_id']==$_SESSION['MEMBER_ID']) {
+				$DivID[$i]=$row;
+				$i++;
+			}
+		}
+		// $this->debuger->prevalue($DivID);
+
 		$value = array(
 			'Result' => array(
 				'Profile' => $Profile,
@@ -360,7 +371,7 @@ class HomePage extends CI_Controller{
 				'PlanOneDirectAdviser' => $PlanOneDirectAdviser,
 				'MyPv' => $MyPv,
 				'CheckFreePV' => $CheckFreePV,
-				'DividendID' => $DividendID,
+				'DividendID' => $DivID,
 			),
 			'View' => 'front/User/IncomeListPageID'
 		);

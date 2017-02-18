@@ -111,6 +111,16 @@ class Member extends CI_Controller{
     $Class = $this->AccountModel->ClassResult();
     //$this->debuger->prevalue($Class);
 
+    $DivID = array();
+    $i=0;
+    foreach ($DividendID as $row) {
+      if ($row['member']['member_id']==$Account[0]['member_id']) {
+        $DivID[$i]=$row;
+        $i++;
+      }
+    }
+    // $this->debuger->prevalue($DividendID);
+
     $value = array(
       'Result' => array(
         'Profile' => $Profile,
@@ -130,7 +140,7 @@ class Member extends CI_Controller{
         'MyPv' => $MyPv,
         'AccountRepeat' => $AccountRepeat,
         'CheckFreePV' => $CheckFreePV,
-        'DividendID' => $DividendID,
+        'DividendID' => $DivID,
         'Class' => $Class,
       ),
       'View' => 'back/Account/AccountDetail'
