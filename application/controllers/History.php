@@ -16,6 +16,7 @@ class history extends CI_Controller {
   }
   public function index() {
     $AllCompany = $this->DashBoardModel->HistoryAllCompany();
+    $AllExpenses = $this->DashBoardModel->HistoryAllExpenses();
     $Sale = $this->DashBoardModel->HistorySale();
     $Expenses = $this->DashBoardModel->HistoryExpenses();
     $Adviser = $this->DashBoardModel->HistoryAdviser();
@@ -27,6 +28,7 @@ class history extends CI_Controller {
         'AllCompany' => $AllCompany,
         'Sale' => $Sale,
         'Expenses' => $Expenses,
+        'AllExpenses' => $AllExpenses,
         'Adviser' => $Adviser,
         'Company' => $Company,
         'AdviserCompany' => $AdviserCompany,

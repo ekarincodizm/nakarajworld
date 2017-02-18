@@ -121,7 +121,7 @@
           </h4>
         </td>
       </tr>
-      <?php $i++; $amount =+ number_format($row['source_detail'][0]['journal_dividend_amount']); endforeach; ?>
+      <?php $i++; $amount += number_format($row['source_detail']['source_amount']); endforeach; ?>
     </tbody>
   </table>
   <p><b><?php echo "รวมยอดทั้งหมด = <font color='green'>".number_format($amount);?></b></font></p>

@@ -307,10 +307,10 @@ class account extends CI_Controller
       'accounting_date' =>  Date('Y-m-d'),
       'accounting_source_id' => $new_journal_dividend_id,
       'accounting_tax' => 0,
-      'journals_id' => 5,
+      'journals_id' => 4,
       'accounting_no' => $code,
       'accounting_status' => 2,
-      'accounting_note' => "ค่าการตลาด บริษัท"
+      // 'accounting_note' => "ค่าการตลาด บริษัท"
     );
     $new_accounting_id = $this->AccountModel->AddAccounting($AccountingInput);
   }
