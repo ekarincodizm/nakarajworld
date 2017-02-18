@@ -17,4 +17,14 @@ class businesssettingmodel extends CI_Model {
     ->result();
     return $query;
   }
+
+  public function LoadPlanOneSetting2()
+  {
+    $query = $this->db
+    // ->where('income_percent_level', 1)
+    ->where('account_class_id !=', 1)
+    ->get('mlm_income_percent_setting')
+    ->result();
+    return $query;
+  }
 }

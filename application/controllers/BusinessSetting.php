@@ -18,11 +18,15 @@ class BusinessSetting extends CI_Controller{
 	public function index() {
 		$BusinessSetting = json_decode(json_encode($this->BusinessSettingModel->LoadBusinessSetting()), true);
 		$PlanOneSetting = json_decode(json_encode($this->BusinessSettingModel->LoadPlanOneSetting()), true);
+		$PlanOneSetting2 = json_decode(json_encode($this->BusinessSettingModel->LoadPlanOneSetting2()), true);
+
 		// $this->debuger->prevalue($PlanOneSetting);
 		$value = array(
 			'Result' => array(
 				'BusinessSetting' => $BusinessSetting,
 				'PlanOneSetting' => $PlanOneSetting,
+				'PlanOneSetting2' => $PlanOneSetting2,
+
 				// 'BusinessSetting' => $BusinessSetting,
 
 			),
