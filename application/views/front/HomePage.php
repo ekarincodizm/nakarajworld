@@ -8,7 +8,6 @@
 					<h6>ยินดีต้อนรับ</h6>
 					<div class="col-md-12">
 						<img src="<?php echo base_url('assets/image/'.$Config[0]['mlm_config_logo'])?>" class="shadow" alt="Shadow">
-
 					</div>
 					<h1>นว ดรากอน</h1>
 					<!-- <h2>Great <strong>template</strong> for offering a rural <strong>products</strong> and <strong>services</strong>!</h2> -->

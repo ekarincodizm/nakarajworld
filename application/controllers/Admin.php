@@ -10,7 +10,12 @@ class Admin extends CI_Controller {
   }
 
   public function index() {
-    $this->load->view('back/Login');
+    $Config = $this->ConfigModel->Config();
+    $Result = array(
+      'Config' => $Config,
+    );
+
+    $this->load->view('back/Login',$Result);
   }
   public function AuthenAdmin()
   {

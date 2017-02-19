@@ -116,7 +116,7 @@
                 <?php endif; ?>
               <?php endif; ?>
             <?php else: ?>
-              <span class="label bg-blue-grey">ไม่ตรงเงื่อนไข</span>
+              <span class="label bg-blue-grey">รอยกระดับ</span>
             <?php endif; ?>
           </h4>
         </td>

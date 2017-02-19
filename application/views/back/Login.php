@@ -29,10 +29,11 @@
         <div class="logo">
             <h1 class="text-center">นว ดรากอน</h1>
             <!-- <small>Admin BootStrap Based - Material Design</small> -->
+            <center><img src="<?php echo base_url('assets/image/'.$Config[0]['mlm_config_logo'])?>" width="200" class="shadow" alt="Shadow"></center>
         </div>
         <div class="card">
             <div class="body">
-          
+
                 <?php echo form_open('/Admin/AuthenAdmin'); ?>
                     <!-- <div class="msg">Register a new membership</div> -->
                     <div class="input-group">
@@ -40,7 +41,7 @@
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="admin_username"  required="" autofocus="" aria-required="true">
+                            <input type="text" class="form-control" name="admin_username"  required placeholder="กรอกรหัสผู้ดูแล" autofocus="" aria-required="true">
                         </div>
                     </div>
                     <div class="input-group">
@@ -48,7 +49,7 @@
                             <i class="material-icons">lock</i>
                         </span>
                         <div class="form-line">
-                            <input type="password" class="form-control" name="admin_password"  required="" aria-required="true">
+                            <input type="password" class="form-control" name="admin_password"  required placeholder="กรอกรหัสผ่าน" aria-required="true">
                         </div>
                     </div>
                     <button class="btn btn-block btn-lg bg-pink waves-effect" type="submit">เข้าสู่ระบบ</button>

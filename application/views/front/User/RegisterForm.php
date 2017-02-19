@@ -68,13 +68,13 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						<div class="col-md-4">
 							<label for="name">ชื่อ (ภาษาไทย)</label>
 							<div class="form-group">
-								<input class="form-control" name="member_firstname" required type="text" placeholder="" autocomplete="off" ng-model="member_firstname"/>
+								<input class="form-control" name="member_firstname" required type="text" placeholder="กรุณากรอกชื่อ" autocomplete="off" ng-model="member_firstname"/>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<label for="name">นามสกุล (ภาษาไทย)</label>
 							<div class="form-group">
-								<input class="form-control" name="member_lastname" required type="text" placeholder="" autocomplete="off" ng-model="member_lastname"/>
+								<input class="form-control" name="member_lastname" required type="text" placeholder="กรุณากรอกนามสกุล" autocomplete="off" ng-model="member_lastname"/>
 							</div>
 						</div>
 					</div>
@@ -94,13 +94,13 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						<div class="col-md-4">
 							<label for="name">ชื่อ (ภาษาอังกฤษ)</label>
 							<div class="form-group">
-								<input class="form-control" name="member_firstname_eng" required type="text" placeholder="" autocomplete="off" ng-model="member_firstname_eng"/>
+								<input class="form-control" name="member_firstname_eng" required type="text" placeholder="Incomplete" autocomplete="off" ng-model="member_firstname_eng"/>
 							</div>
 						</div>
 						<div class="col-md-6">
 							<label for="name">นามสกุล (ภาษาอังกฤษ)</label>
 							<div class="form-group">
-								<input class="form-control" name="member_lastname_eng" required type="text" placeholder="" autocomplete="off" ng-model="member_lastname_eng"/>
+								<input class="form-control" name="member_lastname_eng" required type="text" placeholder="Incomplete" autocomplete="off" ng-model="member_lastname_eng"/>
 							</div>
 						</div>
 					</div>
@@ -120,8 +120,8 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 							<label for="name">วันเกิด</label>
 							<div class="form-group">
 
-							<input id="inputWithDatePicer"  class="form-control input-medium" type="text"  data-provide="datepicker" data-date-language="th-th">
-							<input id="getDatePicer" type="text" name="member_born" style="display:none">
+							<input required id="inputWithDatePicer"  class="form-control input-medium" type="text"  data-provide="datepicker" data-date-language="th-th" placeholder="กรุณาเลือกวันเดือนปีเกิด">
+							<input required id="getDatePicer" type="text" name="member_born" style="display:none">
 							<script type="text/javascript">
 								$("#inputWithDatePicer").change(function() {
 									var born = $('#inputWithDatePicer').data('datepicker').date;
@@ -135,7 +135,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 									$("#getDatePicer").val(db_born);
 								});
 
-								
+
 
 							</script>
 						</div>
@@ -144,7 +144,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						<div class="col-md-6">
 							<label for="name">อีเมล</label>
 							<div class="form-group">
-								<input class="form-control" name="member_email" required type="text" placeholder="" autocomplete="off" ng-model="member_email"/>
+								<input class="form-control" name="member_email" required type="text" placeholder="กรุณากรอก E-mail" autocomplete="off" ng-model="member_email"/>
 							</div>
 						</div>
 					</div>
@@ -152,7 +152,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						<div class="col-md-8">
 							<label for="name">ที่อยู่</label>
 							<div class="form-group">
-								<textarea class="form-control" name="member_address" required style="height:60px;" ng-model="member_address"></textarea>
+								<textarea class="form-control" name="member_address" required style="height:60px;" ng-model="member_address" placeholder="กรุณากรอกที่อยู่"></textarea>
 							</div>
 						</div>
 					</div>
@@ -160,7 +160,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						<div class="col-md-8">
 							<label for="name">ที่อยู่สำรอง กรณีติดต่อไม่ได้</label>
 							<div class="form-group">
-								<textarea class="form-control" name="member_address2"  style="height:60px;" ng-model="member_address2"></textarea>
+								<textarea class="form-control" name="member_address2"  style="height:60px;" ng-model="member_address2" placeholder="กรุณากรอกที่อยู่สำรอง"></textarea>
 							</div>
 						</div>
 					</div>
@@ -168,19 +168,19 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						<div class="col-md-4">
 							<label for="name">เบอร์โทรศัพท์</label>
 							<div class="form-group">
-								<input class="form-control" name="member_phone" type="text" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" autocomplete="off" ng-model="member_phone"/>
+								<input class="form-control" name="member_phone" type="text" placeholder="กรุณากรอกเบอร์โทรศัพท์" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" autocomplete="off" ng-model="member_phone"/>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<label for="name">Line ID</label>
 							<div class="form-group">
-								<input class="form-control" name="member_line_id"  type="text" placeholder="" autocomplete="off" ng-model="member_line_id"/>
+								<input class="form-control" name="member_line_id"  type="text" placeholder="กรุณากรอก ถ้ามี" autocomplete="off" ng-model="member_line_id"/>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<label for="name">Skype</label>
 							<div class="form-group">
-								<input class="form-control" name="member_skype"  type="text" placeholder="" autocomplete="off" ng-model="member_skype"/>
+								<input class="form-control" name="member_skype"  type="text" placeholder="กรุณากรอก ถ้ามี" autocomplete="off" ng-model="member_skype"/>
 							</div>
 						</div>
 					</div>
@@ -188,13 +188,13 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						<div class="col-md-4">
 							<label for="name">What App</label>
 							<div class="form-group">
-								<input class="form-control input-lg" name="member_whatapp"  type="text" placeholder="" autocomplete="off" ng-model="member_whatapp"/>
+								<input class="form-control input-lg" name="member_whatapp"  type="text" placeholder="กรุณากรอก ถ้ามี" autocomplete="off" ng-model="member_whatapp"/>
 							</div>
 						</div>
 						<div class="col-md-4">
 							<label for="name">ช่องทางการติดต่ออื่นๆ / etc.</label>
 							<div class="form-group">
-								<input class="form-control input-lg" name="member_contact_etc"  type="text" autocomplete="off"  ng-model="member_contact_etc"/>
+								<input class="form-control input-lg" name="member_contact_etc"  type="text" placeholder="กรุณากรอก ถ้ามี" autocomplete="off" ng-model="member_contact_etc"/>
 							</div>
 						</div>
 						<div class="col-md-4">

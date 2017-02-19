@@ -16,13 +16,13 @@
 								<div class="col-md-12">
 									<label for="name">หมายเลขประจำตัว</label>
 									<div class="form-group">
-										<input required class="form-control input-lg" name="user_name" type="text"  />
+										<input required class="form-control input-lg" name="user_name" type="text" placeholder="กรอกหมายเลขประจำตัว" />
 									</div>
 								</div>
 								<div class="col-md-12">
 									<label for="password">รหัสผ่าน</label>
 									<div class="form-group">
-										<input required class="form-control input-lg" name="user_pass" type="password" />
+										<input required class="form-control input-lg" name="user_pass" type="password" placeholder="กรอกรหัสผ่าน" />
 									</div>
 								</div>
 								<div class="col-md-12 text-center">
