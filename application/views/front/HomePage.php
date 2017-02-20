@@ -94,25 +94,25 @@
 								<div class="col-md-4">
 									<label for="name">ชื่อ-สกุล</label>
 									<div class="form-group">
-										<input class="form-control" name="mailName" type="text" id="name" placeholder="" autocomplete="off"/>
+										<input class="form-control" name="mailName" type="text" id="name" placeholder="กรุณากรอกชื่อ-นามสกุล" autocomplete="off"/>
 									</div>
 								</div>
 								<div class="col-md-4">
 									<label for="email">อีเมล</label>
 									<div class="form-group">
-										<input class="form-control" name="mailFrom" type="text" id="email" placeholder="" autocomplete="off"/>
+										<input class="form-control" name="mailFrom" type="text" id="email" placeholder="กรุณากรอกที่อยู่ E-mail ที่จะส่ง" autocomplete="off"/>
 									</div>
 								</div>
 								<div class="col-md-4">
 									<label for="subject">เรื่อง</label>
 									<div class="form-group">
-										<input class="form-control" name="mailSubject" type="text" id="subject" placeholder="" autocomplete="off"/>
+										<input class="form-control" name="mailSubject" type="text" id="subject" placeholder="กรุณากรอกหัวข้อเรื่อง" autocomplete="off"/>
 									</div>
 								</div>
 								<div class="col-md-12">
 									<label for="comments">ข้อความ</label>
 									<div class="form-group">
-										<textarea class="form-control" name="mailContent" cols="40" rows="3" id="comments" placeholder=""></textarea>
+										<textarea class="form-control" name="mailContent" cols="40" rows="3" id="comments" placeholder="กรุณากรอกข้อความ"></textarea>
 									</div>
 									<div id="message"></div>
 									<div>
