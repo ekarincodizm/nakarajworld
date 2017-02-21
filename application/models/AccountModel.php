@@ -137,6 +137,15 @@ class accountmodel extends CI_Model {
     // $UplineMVAmount = ($query[0]['income_percent_point']*$query[0]['income_percent_amount'])/100;
     return $query;
   }
+  public function GetMVByClassLvl1()
+  {
+    $query = $this->db
+    ->where('account_class_id', 1)
+    ->get('mlm_income_percent_setting')
+    ->result_array();
+    // $UplineMVAmount = ($query[0]['income_percent_point']*$query[0]['income_percent_amount'])/100;
+    return $query;
+  }
   public function AccountNonJoinByID($id)
   {
     $query =  $this->db
