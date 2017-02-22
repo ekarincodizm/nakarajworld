@@ -445,11 +445,11 @@ class HomePage extends CI_Controller{
 	public function SendMailTo()
 	{
 		$config['protocol']    = 'smtp';
-		$config['smtp_host']    = 'ssl://smtp.gmail.com';
+		$config['smtp_host']    = 'ssl://mail.ndwn.co.th';
 		$config['smtp_port']    = '465';
 		$config['smtp_timeout'] = '7';
-		$config['smtp_user']    = 'baramesh.x@gmail.com';
-		$config['smtp_pass']    = '11LO25ee';
+		$config['smtp_user']    = 'info@ndwn.co.th';
+		$config['smtp_pass']    = '6836zSdm4';
 		$config['charset']    = 'utf-8';
 		$config['newline']    = "\r\n";
 		$config['mailtype'] = 'text'; // or html
@@ -459,7 +459,7 @@ class HomePage extends CI_Controller{
 
 		$input = $this->input->post();
 		$this->email->from($input['mailFrom'], $input['mailName']);
-		$this->email->to('baramesh.x@gmail.com');
+		$this->email->to('info@ndwn.co.th');
 
 		$this->email->subject($input['mailSubject']);
 		$this->email->message($input['mailContent']);
