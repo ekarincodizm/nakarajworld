@@ -48,6 +48,30 @@ class HomePage extends CI_Controller{
 		$this->LoadPage($value);
 
 	}
+
+	public function emaildone() {
+		$ProductsList = $this->ProductsModel->ProductsList();
+		// print_r($ProductsList);
+		// exit();
+		$ProductsList = json_decode(json_encode($ProductsList), true);
+
+		$Config = $this->ConfigModel->Config();
+
+
+		//new function config
+		$Config = $this->ConfigModel->Config();
+		//
+		$value = array(
+			'Result' => array(
+				'ProductsList' => $ProductsList,
+				'Config' => $Config,
+			),
+			'View' => 'front/sendemail',
+		);
+		$this->LoadPage($value);
+
+	}
+
 	public function LoginPage() {
 		$value = array(
 			'Result' => array(
@@ -444,29 +468,29 @@ class HomePage extends CI_Controller{
 
 	public function SendMailTo()
 	{
-		$config['protocol']    = 'smtp';
-		$config['smtp_host']    = 'ssl://mail.ndwn.co.th';
-		$config['smtp_port']    = '465';
-		$config['smtp_timeout'] = '7';
-		$config['smtp_user']    = 'info@ndwn.co.th';
-		$config['smtp_pass']    = '6836zSdm4';
-		$config['charset']    = 'utf-8';
-		$config['newline']    = "\r\n";
-		$config['mailtype'] = 'text'; // or html
-		$config['validation'] = TRUE; // bool whether to validate email or not
-
-		$this->email->initialize($config);
-
-		$input = $this->input->post();
-		$this->email->from($input['mailFrom'], $input['mailName']);
-		$this->email->to('info@ndwn.co.th');
-
-		$this->email->subject($input['mailSubject']);
-		$this->email->message($input['mailContent']);
-
-		$this->email->send();
+		// $config['protocol']    = 'smtp';
+		// $config['smtp_host']    = 'ssl://mail.ndwn.co.th';
+		// $config['smtp_port']    = '465';
+		// $config['smtp_timeout'] = '7';
+		// $config['smtp_user']    = 'info@ndwn.co.th';
+		// $config['smtp_pass']    = '6836zSdm4';
+		// $config['charset']    = 'utf-8';
+		// $config['newline']    = "\r\n";
+		// $config['mailtype'] = 'text'; // or html
+		// $config['validation'] = TRUE; // bool whether to validate email or not
+		//
+		// $this->email->initialize($config);
+		//
+		// $input = $this->input->post();
+		// $this->email->from($input['mailFrom'], $input['mailName']);
+		// $this->email->to('info@ndwn.co.th');
+		//
+		// $this->email->subject($input['mailSubject']);
+		// $this->email->message($input['mailContent']);
+		//
+		// $this->email->send();
 
 		// echo $this->email->print_debugger();
-		redirect('/index');
+		redirect('HomePage/emaildone');
 	}
 }
