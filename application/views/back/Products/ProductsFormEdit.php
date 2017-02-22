@@ -67,7 +67,7 @@
                 <div class="form-group">
                   <label for="">ราคาขาย</label>
                   <div class="form-line">
-                    <input disabled type="text" class="form-control input-lg" value="<?php echo $ProductsDetail[0]['products_price_narmal']*$ProductsDetail[0]['products_price_discount']/100 ?>">
+                    <input disabled type="text" class="form-control input-lg" value="<?php echo $ProductsDetail[0]['products_price_narmal']-($ProductsDetail[0]['products_price_narmal']*$ProductsDetail[0]['products_price_discount']/100) ?>">
                   </div>
                 </div>
               </div>

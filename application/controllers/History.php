@@ -22,6 +22,8 @@ class history extends CI_Controller {
     $Company = $this->DashBoardModel->HistoryCompany();
     $AdviserCompany = $this->DashBoardModel->HistoryAdviserCompany();
     $Register = $this->DashBoardModel->HistoryRegister();
+    $extend = $this->DashBoardModel->Historyextend();
+
 
     $value = array(
       'Result' => array(
@@ -32,6 +34,7 @@ class history extends CI_Controller {
         'Company' => $Company,
         'AdviserCompany' => $AdviserCompany,
         'Register' => $Register,
+        'extend' => $extend,
 
       ),
       'View' => 'back/DashBoard/History'

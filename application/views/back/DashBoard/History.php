@@ -40,7 +40,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                 <h3>สรุปรายได้บริษัททั้งหมด</h3>
               </div>
               <div class="col-md-12 text-center">
-                <h4><?php echo number_format($AdviserCompany+$Company+$Sale+$Register); ?> บาท</h4>
+                <h4><?php echo number_format($AdviserCompany+$Company+$Sale+$Register+$extend); ?> บาท</h4>
               </div>
             </div>
           </div>
@@ -108,7 +108,7 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
         <div class="body bg-green">
           <div class="row">
             <div class="col-md-12 text-center">
-              <h4>สรุปยอดขายสินค้า บริษัท</h4>
+              <h4>สรุปยอดขายสินค้า</h4>
 
             </div>
             <div class="col-md-12 text-center">
@@ -125,11 +125,26 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
             <div class="body bg-green">
               <div class="row">
                 <div class="col-md-12 text-center">
-                  <h4>สรุปยอดขายสินค้า บริษัท</h4>
+                  <h4>สรุปรายได้สมัครสมาชิก</h4>
 
                 </div>
                 <div class="col-md-12 text-center">
                   <h4><?php echo number_format($Register); ?> บาท</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-offset-4 col-lg-4 col-md-4 col-sm-6 col-xs-12">
+          <div class="card">
+            <div class="body bg-green">
+              <div class="row">
+                <div class="col-md-12 text-center">
+                  <h4>สรุปรายได้ต่ออายุ</h4>
+
+                </div>
+                <div class="col-md-12 text-center">
+                  <h4><?php echo number_format($extend); ?> บาท</h4>
                 </div>
               </div>
             </div>
