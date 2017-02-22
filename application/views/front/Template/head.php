@@ -49,7 +49,15 @@
 	body {
 		font-family: 'THSarabunNew', sans-serif;
 	}
+
+	#intro {
+		background: url('<?php echo base_url('/assets/theme/front-end/images/'.$Config[0]['mlm_config_bg']) ?>') 50% 0 fixed !important;
+		width: 100%;
+		height: auto;
+	}
+
 	</style>
+
 </head>
 <body >
 	<?php $this->load->view('front/Template/menu'); ?>

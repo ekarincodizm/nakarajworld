@@ -104,7 +104,7 @@
                 <li>
                     <a href="<?php echo site_url('/BusinessSetting');?>" class=" waves-effect waves-block">
                         <i class="material-icons">tune</i>
-                        <span>ตั้งค่า</span>
+                        <span>ตารางค่าการตลาด</span>
                     </a>
                 </li>
             </ul>
@@ -169,6 +169,12 @@
                     <a href="<?php echo site_url('/Config');?>" class=" waves-effect waves-block">
                         <i class="material-icons">settings_applications</i>
                         <span>ตั้งค่าทั่วไป</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<?php echo site_url('/Config/ConfigBG');?>" class=" waves-effect waves-block">
+                        <i class="material-icons">settings_applications</i>
+                        <span>ตั้งค่าพื้นหลัง</span>
                     </a>
                 </li>
             </ul>

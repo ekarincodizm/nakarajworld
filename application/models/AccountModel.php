@@ -80,19 +80,111 @@ class accountmodel extends CI_Model {
     // $this->debuger->prevalue($data);
     // $this->debuger->prevalue($DownlineClass);
 
-    $query =  $this->db
-    ->where('downline_count_upline_id', $data['downline_count_upline_id'])
-    ->where('account_team', $data['account_team'])
-    ->where('account_level', $data['account_level'])
-    ->where('account_class_id >=', $DownlineClass)
-    ->join('mlm_account', 'mlm_downline_count.downline_count_downline_id = mlm_account.account_id')
-    ->get('mlm_downline_count')
-    ->result_array();
+    $query = array();
+    $id = $data['downline_count_upline_id'];
+    // echo "<pre>";
+    // echo "id = ".$id." <br>";
+
+    if ($id==1||$id==2||$id==3||$id==4)
+    {
+
+      if ($id==1)
+      {
+        $query =  $this->db
+        ->where('downline_count_upline_id', $data['downline_count_upline_id'])
+        ->where('account_level', $data['account_level'])
+        ->where('account_class_id >=', $DownlineClass)
+        ->join('mlm_account', 'mlm_downline_count.downline_count_downline_id = mlm_account.account_id')
+        ->get('mlm_downline_count')
+        ->result_array();
+      }
+      elseif ($id==2)
+      {
+        for ($i='A'; $i <= 'C' ; $i++) {
+          $query_team =  $this->db
+          ->where('downline_count_upline_id', $data['downline_count_upline_id'])
+          ->where('account_team', $i)
+          ->where('account_level', $data['account_level'])
+          ->where('account_class_id >=', $DownlineClass)
+          ->join('mlm_account', 'mlm_downline_count.downline_count_downline_id = mlm_account.account_id')
+          ->get('mlm_downline_count')
+          ->result_array();
+          // $this->debuger->prevalue($query);
+
+          // array_push($query, $query_team);
+          // $this->debuger->prevalue($query);
+          // echo "query <br>";
+          // print_r($query);
+          // echo "query_team <br>";
+          // print_r($query_team);
+          $arr = count($query);
+          if (count($query_team)>0) {
+            foreach ($query_team as $row) {
+              array_push($query, $row);
+              $arr++;
+            }
+          }
+
+        }
+        // echo "end";
+        //
+        // $this->debuger->prevalue($query);
+        // $query = array_push($query3);
+      }
+      elseif ($id==3)
+      {
+        for ($i='D'; $i <= 'F' ; $i++) {
+          $query_team =  $this->db
+          ->where('downline_count_upline_id', $data['downline_count_upline_id'])
+          ->where('account_team', $i)
+          ->where('account_level', $data['account_level'])
+          ->where('account_class_id >=', $DownlineClass)
+          ->join('mlm_account', 'mlm_downline_count.downline_count_downline_id = mlm_account.account_id')
+          ->get('mlm_downline_count')
+          ->result_array();
+
+          $arr = count($query);
+          foreach ($query as $row) {
+            $query[$arr] = array_push($query_team, $row);
+            $arr++;
+          }
+        }
+      }
+      elseif ($id==4)
+      {
+        for ($i='G'; $i <= 'I' ; $i++) {
+          $query_team =  $this->db
+          ->where('downline_count_upline_id', $data['downline_count_upline_id'])
+          ->where('account_team', $i)
+          ->where('account_level', $data['account_level'])
+          ->where('account_class_id >=', $DownlineClass)
+          ->join('mlm_account', 'mlm_downline_count.downline_count_downline_id = mlm_account.account_id')
+          ->get('mlm_downline_count')
+          ->result_array();
+
+          $arr = count($query);
+          foreach ($query as $row) {
+            $query[$arr] = array_push($query_team, $row);
+            $arr++;
+          }
+        }
+      }
+    }
+    else
+    {
+      $query =  $this->db
+      ->where('downline_count_upline_id', $data['downline_count_upline_id'])
+      ->where('account_team', $data['account_team'])
+      ->where('account_level', $data['account_level'])
+      ->where('account_class_id >=', $DownlineClass)
+      ->join('mlm_account', 'mlm_downline_count.downline_count_downline_id = mlm_account.account_id')
+      ->get('mlm_downline_count')
+      ->result_array();
+    }
 
     // $this->debuger->prevalue($query);
     return $query;
   }
-
   public function RepeatPerLVL($Account, $RowLvl, $DownlineClass,$RepeatClass)
   {
 

@@ -2,7 +2,7 @@
 <section class="content" ng-controller="">
   <div class="container-fluid">
     <div class="block-header">
-      <h1>เว็บไซต์</h1>
+      <h1>ตั้งค่าเว็บไซต์</h1>
     </div>
     <div class="row clearfix ">
       <div class="col-md-12">

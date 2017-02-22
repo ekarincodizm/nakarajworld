@@ -280,7 +280,7 @@ class account extends CI_Controller
   {
     // เงินที่ อัปไลน์ จะได้
     $UplineMV = $this->AccountModel->GetMVByClassLvl($DownlineClass , $lvl);
-    $UplineMVAmount= ($UplineMV[0]['income_percent_point']*$UplineMV[0]['income_percent_amount'])/100;
+     $UplineMVAmount= ($UplineMV[0]['income_percent_point']*$UplineMV[0]['income_percent_amount'])/100;
     $lot = $UplineMV[0]['income_percent_lot'];
     // $this->debuger->prevalue($UplineMVAmount);
     $journal_dividend_amount = $UplineMVAmount/$lot;;
@@ -298,7 +298,6 @@ class account extends CI_Controller
       'journal_dividend_class' => $DownlineClass,
       'journal_dividend_code' => $DIcode,
       'journal_dividend_round' => $RoundClass,
-      'journal_dividend_lvl' => $lvl,
      );
     $new_journal_dividend_id = $this->AccountModel->SaveDividend($input);
     // ลงบัญชี
@@ -346,7 +345,6 @@ class account extends CI_Controller
           'member_id' => $Adviser[0]['member_id'],
           'journal_dividend_code' => $DIcode,
           'journal_dividend_round' => $RoundClass,
-          'journal_dividend_lvl' => $lvl,
          );
         $new_journal_dividend_id = $this->AccountModel->SaveDividend($input);
         // ลงบัญชี
@@ -375,7 +373,6 @@ class account extends CI_Controller
       'journal_dividend_class' => $DownlineClass,
       'journal_dividend_code' => $DIcode,
       'journal_dividend_round' => $RoundClass,
-      'journal_dividend_lvl' => $lvl,
 
      );
     $new_journal_dividend_id = $this->AccountModel->SaveDividend($input);
