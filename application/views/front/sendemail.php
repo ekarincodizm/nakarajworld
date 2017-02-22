@@ -60,7 +60,7 @@
 													<?php else: ?>
 														ราคา
 												<?php endif; ?>
-												 <?php echo $row['products_price_narmal']-($row['products_price_narmal']*$row['products_price_discount']/100) ?>.- <br>PV : <?php echo $row['products_pv']?></a>
+												<?php echo number_format($row['products_price_narmal']-($row['products_price_narmal']*$row['products_price_discount']/100)) ?>.- <br>PV : <?php echo $row['products_pv']?></a>
 											<h3><a href="<?php echo site_url('/Store/ProductsDetail/'.$row['products_id']); ?>" class="white"><?php echo $row['products_name'] ?></a></h3>
 										</div>
 									</div>
