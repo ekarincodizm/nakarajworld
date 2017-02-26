@@ -207,6 +207,44 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 
 					<div class="row text-center">
 						<div class="col-lg-12" style="padding-top:20px">
+							<h6>กรอกข้อมูลอัปไลน์ (ถ้ามี)</h6>
+							<span class="title-separator"></span>
+						</div>
+					</div>
+					<div class="row text-center">
+						<div class="col-md-offset-2 col-md-4">
+							<label for="name">ผู้แนะนำ</label>
+							<div class="form-group">
+									<input class="form-control input-lg" name="member_adviser_name" type="text" autocomplete="off" placeholder="กรอกชื่อผู้แนะนำ"/>
+							</div>
+						</div>
+
+						<div class="col-md-offset-0 col-md-4">
+							<label for="name">รหัสผู้แนะนำ</label>
+							<div class="form-group">
+									<input class="form-control input-lg" name="member_adviser_id" type="text" autocomplete="off" placeholder="กรอกรหัสผู้แนะนำ"/>
+							</div>
+						</div>
+					</div>
+
+					<div class="row text-center">
+						<div class="col-md-offset-2 col-md-4">
+							<label for="name">อัปไลน์</label>
+							<div class="form-group">
+									<input class="form-control input-lg" name="member_upline_name" type="text" autocomplete="off" placeholder="กรอกชื่ออัปไลน์"/>
+							</div>
+						</div>
+
+						<div class="col-md-offset-0 col-md-4">
+							<label for="name">รหัสอัปไลน์</label>
+							<div class="form-group">
+									<input class="form-control input-lg" name="member_upline_id" type="text" autocomplete="off" placeholder="กรอกรหัสอัปไลน์"/>
+							</div>
+						</div>
+					</div>
+
+					<div class="row text-center">
+						<div class="col-lg-12" style="padding-top:20px">
 							<h6>รหัสผ่าน</h6>
 							<span class="title-separator"></span>
 						</div>
@@ -215,9 +253,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						<div class="col-md-offset-4 col-md-4">
 							<label for="name">รหัสผ่าน</label>
 							<div class="form-group">
-								<div class="input-group form-line">
-									<input required class="form-control input-lg" name="user_pass" type="password" autocomplete="off"/>
-								</div>
+									<input required class="form-control input-lg" name="user_pass" type="password" autocomplete="off" placeholder="กรอกรหัสผ่าน"/>
 							</div>
 						</div>
 					</div>

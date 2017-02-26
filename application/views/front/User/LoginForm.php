@@ -28,7 +28,8 @@
 								<div class="col-md-12 text-center">
 									<div class="form-group">
 									<button type="submit" class="button green rounded">เข้าสู่ระบบ</button>
-									<a href="<?php echo site_url('HomePage/CheckRegisPage'); ?>" class="button rounded">ลงทะเบียน</a>
+									<a href="<?php echo site_url('HomePage/CheckRegisPage'); ?>" class="button rounded">ลงทะเบียน</a><br>
+									<a href="<?php echo site_url('admin'); ?>"><u>สำหรับเจ้าหน้าที่</u></a>
 								</div>
 								</div>
 							</div>

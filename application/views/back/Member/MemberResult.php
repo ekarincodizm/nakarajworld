@@ -67,10 +67,10 @@ top: 0%;">
               </div>
               <div class="col-sm-offset-0 col-md-6 col-sm-6">
                 <p><strong>ข้อมูล ผู้แนะนำ</strong><br>
-                  ชื่อ-นามสกุล ......................................................<br>
-                  รหัสผู้แนะนำ ....................................................<br>
-                  ชื่ออัพไลน์ .........................................................<br>
-                  รหัส ..................................................................</p>
+                  ชื่อ-นามสกุล : <?php echo $Profile[0]['member_adviser_name'] ?><br>
+                  รหัสผู้แนะนำ : <?php echo $Profile[0]['member_adviser_id'] ?><br>
+                  ชื่ออัพไลน์ : <?php echo $Profile[0]['member_upline_name'] ?><br>
+                  รหัส : <?php echo $Profile[0]['member_upline_id'] ?></p>
                 </div>
                 <div class="col-sm-offset-0 col-md-6 col-sm-6">
                   <p><strong>ข้อมูล ผู้รับมรดกตกทอด</strong><br>
@@ -83,8 +83,8 @@ top: 0%;">
                 <div class="row">
                   <div class="col-sm-offset-0 col-md-6 col-sm-6">
                     <p><strong>ข้อมูล การติดต่อทางอีเลคทรอนิคส์</strong><br>
-                      Line ID : <strong><?php echo $Profile[0]['member_line_id'] ?></strong><br>
                       E-Mail : <strong><?php echo $Profile[0]['member_email'] ?></strong><br>
+                      Line ID : <strong><?php echo $Profile[0]['member_line_id'] ?></strong><br>
                       Skype : <strong><?php echo $Profile[0]['member_skype'] ?></strong><br>
                       WhatApp : <strong><?php echo $Profile[0]['member_whatapp'] ?></strong><br>
                       ช่องทางอื่นๆ : <strong><?php echo $Profile[0]['member_contact_etc'] ?></strong><br>
