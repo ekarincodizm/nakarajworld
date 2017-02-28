@@ -74,9 +74,9 @@ top: 0%;">
                 </div>
                 <div class="col-sm-offset-0 col-md-6 col-sm-6">
                   <p><strong>ข้อมูล ผู้รับมรดกตกทอด</strong><br>
-                    ชื่อ-นามสกุล <?php echo $Profile[0]['legacy_prefix'].$Profile[0]['legacy_firstname']." ".$Profile[0]['legacy_lastname'] ?><br>
-                    เลขบัตรประชาชน <?php echo $Profile[0]['legacy_citizen_id']?><br>
-                    วันเกิด : <b><?php echo $this->thaidate->FullDate($Profile[0]['legacy_born']) ?></b> อายุ <b><?php echo $Profile[0]['legacy_age'] ?></b> ปี<br>
+                    ชื่อ-นามสกุล : <?php echo $Profile[0]['legacy_prefix'].$Profile[0]['legacy_firstname']." ".$Profile[0]['legacy_lastname'] ?><br>
+                    เลขบัตรประชาชน : <?php echo $Profile[0]['legacy_citizen_id']?><br>
+                    วันเกิด : <b><?php echo $this->thaidate->FullDate($Profile[0]['legacy_born']) ?><br>
                     ข้อมูลติดต่อ : <?php echo $Profile[0]['legacy_email'] ?> , <?php echo $Profile[0]['legacy_line_id'] ?> , <?php echo $Profile[0]['legacy_skype'] ?>
                     , <?php echo $Profile[0]['legacy_whatapp'] ?> , <?php echo $Profile[0]['legacy_contact_etc'] ?></p>
                   </div>
