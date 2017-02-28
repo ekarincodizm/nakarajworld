@@ -248,6 +248,184 @@ $this->debuger->front_load_js('bootstrap-datetimepicker');
                 </div>
               </div>
             </div>
+            <h3>แก้ไขอัปไลน์</h3>
+            <hr>
+            <div class="row">
+              <div class="col-md-6">
+                <label for="name">ผู้แนะนำ</label>
+                <div class="form-group">
+                  <div class="input-group form-line">
+                    <input class="form-control" name="member_adviser_name" type="text" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" autocomplete="off" value="<?php echo $Profile[0]['member_phone']  ?>"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="name">รหัสผู้แนะนำ</label>
+                <div class="form-group">
+                  <div class="input-group form-line">
+
+                    <input class="form-control" name="member_adviser_id" type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['member_line_id']  ?>"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="name">อัปไลน์</label>
+                <div class="form-group">
+                  <div class="input-group form-line">
+
+                    <input class="form-control" name="member_upline_name" type="text" placeholder="" autocomplete="off"  value="<?php echo $Profile[0]['member_skype']  ?>"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="name">รหัสอัปไลน์</label>
+                <div class="form-group">
+                  <div class="input-group form-line">
+
+                    <input class="form-control" name="member_upline_id" type="text" placeholder="" autocomplete="off"  value="<?php echo $Profile[0]['member_skype']  ?>"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <h3>แก้ไข ผู้รับมรดกตกทอด</h3>
+            <hr>
+            <div class="row">
+              <div class="col-md-2">
+                <label for="name">คำนำหน้า</label>
+                <div class="form-group">
+                  <select id="legacy_prefix" name="legacy_prefix" class="form-control" >
+                    <option value="นาย">นาย</option>
+                    <option value="นาง">นาง</option>
+                    <option value="นางสาว">นางสาว</option>
+                  </select>
+                  <script type="text/javascript">
+                    $("#legacy_prefix").val("<?php echo $Profile[0]['legacy_prefix'] ?>");
+                  </script>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="name">ชื่อ</label>
+                <div class="form-group">
+                  <div class="input-group input-group-lg">
+                    <div class="form-line">
+                      <input class="form-control" name="legacy_firstname" type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['legacy_firstname']  ?>"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="name">นามสกุล</label>
+                <div class="form-group">
+                  <div class="input-group input-group-lg">
+                    <div class="form-line">
+                      <input class="form-control" name="legacy_lastname" type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['legacy_lastname']  ?>"/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-md-3">
+                <label for="name">เลขบัตรประชาชน</label>
+                <div class="form-group">
+                  <div class="input-group input-group-lg">
+                    <div class="form-line">
+                      <input class="form-control" name="legacy_citizen_id" type="text" value="<?php echo $Profile[0]['legacy_citizen_id']  ?>" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <label for="name">วันเกิด</label>
+                <div class="form-group">
+                  <div class='input-group date bootstrap-datepicker form-line' id='legacy_born_datepicker'>
+                    <input name="legacy_born" type='datetime' class="form-control"  value="<?php echo $Profile[0]['legacy_born']  ?>" >
+                    <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="name">อีเมล</label>
+                <div class="form-group ">
+                  <div class="input-group form-line">
+                    <input class="form-control" name="legacy_email" type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['legacy_email']  ?>" />
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-md-8">
+                <label for="name">ที่อยู่</label>
+                <div class="form-group">
+                  <div class="input-group form-line">
+                    <textarea class="form-control" name="legacy_address" style="height:60px;"><?php echo $Profile[0]['legacy_address'] ?></textarea>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-md-8">
+                <label for="name">ที่อยู่สำรอง กรณีติดต่อไม่ได้</label>
+                <div class="form-group">
+                  <div class="input-group form-line">
+                    <textarea class="form-control" name="legacy_address2" style="height:60px;"><?php echo $Profile[0]['legacy_address2'] ?></textarea>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-md-4">
+                <label for="name">เบอร์โทรศัพท์</label>
+                <div class="form-group">
+                  <div class="input-group form-line">
+                    <input class="form-control" name="legacy_phone" type="text" placeholder="" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" autocomplete="off" value="<?php echo $Profile[0]['legacy_phone']  ?>"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="name">Line ID</label>
+                <div class="form-group">
+                  <div class="input-group form-line">
+
+                    <input class="form-control" name="legacy_line_id" type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['legacy_line_id']  ?>"/>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="name">Skype</label>
+                <div class="form-group">
+                  <div class="input-group form-line">
+
+                    <input class="form-control" name="legacy_skype" type="text" placeholder="" autocomplete="off"  value="<?php echo $Profile[0]['legacy_skype']  ?>"/>
+                  </div>
+                </div>
+              </div>
+              </div>
+              <div class="row">
+              <div class="col-md-4">
+                <label for="name">What App</label>
+                <div class="form-group">
+                  <div class="input-group form-line">
+
+                    <input class="form-control input-lg" name="legacy_whatapp" type="text" placeholder="" autocomplete="off" value="<?php echo $Profile[0]['legacy_whatapp']  ?>" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <label for="name">ช่องทางการติดต่ออื่นๆ / etc.</label>
+                <div class="form-group">
+                  <div class="input-group form-line">
+
+                    <input class="form-control input-lg" name="legacy_contact_etc" type="text" autocomplete="off"  value="<?php echo $Profile[0]['legacy_contact_etc']  ?>"/>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
             <div class="row">
               <div class="col-md-4 col-md-offset-4 text-center">
                 <div class="form-group">

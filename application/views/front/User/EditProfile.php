@@ -151,7 +151,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 										$("#getDatePicer").val(db_born);
 									});
 
-							
+
 
 								</script>
 							</div>
@@ -219,25 +219,6 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 							</div>
 						</div>
 					</div>
-
-					<!-- <div class="row text-center">
-						<div class="col-lg-12" style="padding-top:20px">
-							<h6>รหัสผ่าน</h6>
-							<span class="title-separator"></span>
-						</div>
-					</div>
-
-					<div class="row">
-						<div class="col-md-4">
-							<label for="name">รหัสผ่าน</label>
-							<div class="form-group">
-								<div class="input-group form-line">
-
-									<input required class="form-control input-lg" name="user_pass" type="password" autocomplete="off"/>
-								</div>
-							</div>
-						</div>
-					</div> -->
 
 					</div>
 

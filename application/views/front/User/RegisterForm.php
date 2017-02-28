@@ -134,9 +134,6 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 
 									$("#getDatePicer").val(db_born);
 								});
-
-
-
 							</script>
 						</div>
 						</div>
@@ -245,6 +242,121 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 
 					<div class="row text-center">
 						<div class="col-lg-12" style="padding-top:20px">
+							<h6>กรอกข้อมูลผู้รับมรดกตกทอด (ถ้ามี)</h6>
+							<span class="title-separator"></span>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-2">
+							<label for="name">คำนำหน้า</label>
+							<div class="form-group">
+								<select name="legacy_prefix" class="form-control">
+									<option value="">-เลือก-</option>
+									<option value="นาย">นาย</option>
+									<option value="นาง">นาง</option>
+									<option value="นางสาว">นางสาว</option>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<label for="name">ชื่อ</label>
+							<div class="form-group">
+								<input class="form-control" name="legacy_firstname" type="text" placeholder="กรุณากรอกชื่อ" autocomplete="off"/>
+							</div>
+						</div>
+						<div class="col-md-6">
+							<label for="name">นามสกุล</label>
+							<div class="form-group">
+								<input class="form-control" name="legacy_lastname" type="text" placeholder="กรุณากรอกนามสกุล" autocomplete="off"/>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-offset-0 col-md-3">
+							<label for="name">เลขบัตรประชาชน</label>
+							<div class="form-group">
+								<input class="form-control" placeholder="กรุณากรอกเลขบัตรประชาชน" name="legacy_citizen_id" id="legacy_citizen_id" type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" autocomplete="off"/>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<label for="name">วันเกิด</label>
+							<div class="form-group">
+
+							<input  id="inputWithDatePicer2"  class="form-control input-medium" type="text"  data-provide="datepicker" data-date-language="th-th" placeholder="กรุณาเลือกวันเดือนปีเกิด">
+							<input  id="getDatePicer2" type="text" name="legacy_born" style="display:none">
+							<script type="text/javascript">
+								$("#inputWithDatePicer2").change(function() {
+									var born = $('#inputWithDatePicer2').data('datepicker').date;
+									var born_date = ( born.getDate() < 10 ? "0" : "" ) + born.getDate();
+									var born_month =  born.getMonth()+1;
+											born_month =  ( born_month < 10 ? "0" : "" ) + born_month;
+									var born_year = born.getFullYear();
+									var db_born = born_year+"-"+born_month+"-"+born_date;
+									console.log(db_born);
+
+									$("#getDatePicer2").val(db_born);
+								});
+							</script>
+						</div>
+						</div>
+						<div class="col-md-6">
+							<label for="name">อีเมล</label>
+							<div class="form-group">
+								<input class="form-control" name="legacy_email" type="text" placeholder="กรุณากรอก E-mail" autocomplete="off" ng-model="member_email"/>
+							</div>
+						</div>
+					</div>
+						<div class="row">
+							<div class="col-md-8">
+								<label for="name">ที่อยู่</label>
+								<div class="form-group">
+									<textarea class="form-control" name="legacy_address" style="height:60px;" placeholder="กรุณากรอกที่อยู่"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-8">
+								<label for="name">ที่อยู่สำรอง กรณีติดต่อไม่ได้</label>
+								<div class="form-group">
+									<textarea class="form-control" name="legacy_address2"  style="height:60px;" placeholder="กรุณากรอกที่อยู่สำรอง"></textarea>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<label for="name">เบอร์โทรศัพท์</label>
+								<div class="form-group">
+									<input class="form-control" name="legacy_phone" type="text" placeholder="กรุณากรอกเบอร์โทรศัพท์" oninput="this.value = this.value.replace(/[^0-9.]/g, ''); this.value = this.value.replace(/(\..*)\./g, '$1');" autocomplete="off" ng-model="member_phone"/>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<label for="name">Line ID</label>
+								<div class="form-group">
+									<input class="form-control" name="legacy_line_id"  type="text" placeholder="กรุณากรอก ถ้ามี" autocomplete="off"/>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<label for="name">Skype</label>
+								<div class="form-group">
+									<input class="form-control" name="legacy_skype"  type="text" placeholder="กรุณากรอก ถ้ามี" autocomplete="off" />
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-4">
+								<label for="name">What App</label>
+								<div class="form-group">
+									<input class="form-control" name="legacy_whatapp"  type="text" placeholder="กรุณากรอก ถ้ามี" autocomplete="off" />
+								</div>
+							</div>
+							<div class="col-md-4">
+								<label for="name">ช่องทางการติดต่ออื่นๆ / etc.</label>
+								<div class="form-group">
+									<input class="form-control" name="legacy_contact_etc"  type="text" placeholder="กรุณากรอก ถ้ามี" autocomplete="off" />
+								</div>
+							</div>
+					<div class="row text-center">
+						<div class="col-lg-12" style="padding-top:20px">
 							<h6>รหัสผ่าน</h6>
 							<span class="title-separator"></span>
 						</div>
@@ -269,9 +381,6 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 					<?php echo form_close(); ?>
 				</div>
 			<?php endif; ?>
-
-
-		</div>
 		<div class="row" id="RegisterStatus">
 			<!-- <div class="col-md-12 text-center" ng-show="<?php echo $Registered ?>">
 				<div class="loading"><img src="<?php echo base_url('/assets/image/spin.gif'); ?>" style="height: 51px;">

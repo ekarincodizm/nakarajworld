@@ -47,7 +47,7 @@ top: 0%;">
             </p></div>
             <div class="col-sm-offset-0 col-md-6 col-sm-6">
                 <?php echo $Profile[0]['member_id_card_type_name']?> : <strong><?php echo $Profile[0]['member_citizen_id']?></strong>
-                <br>ว./ด./ป.เกิด : <b><?php echo $this->thaidate->FullDate($Profile[0]['member_born']) ?></b> อายุ <b><?php echo $Profile[0]['member_age'] ?></b> ปี
+                <br>วันเกิด : <b><?php echo $this->thaidate->FullDate($Profile[0]['member_born']) ?></b> อายุ <b><?php echo $Profile[0]['member_age'] ?></b> ปี
             </div>
           </div>
           <div class="row">
@@ -74,10 +74,11 @@ top: 0%;">
                 </div>
                 <div class="col-sm-offset-0 col-md-6 col-sm-6">
                   <p><strong>ข้อมูล ผู้รับมรดกตกทอด</strong><br>
-                    ชื่อ-นามสกุล ........................................................<br>
-                    เลขบัตรประชาชน ...............................................<br>
-                    เพศ .................... ว./ด./ป.เกิด ............................<br>
-                    ข้อมูลติดต่อ .........................................................</p>
+                    ชื่อ-นามสกุล <?php echo $Profile[0]['legacy_prefix'].$Profile[0]['legacy_firstname']." ".$Profile[0]['legacy_lastname'] ?><br>
+                    เลขบัตรประชาชน <?php echo $Profile[0]['legacy_citizen_id']?><br>
+                    วันเกิด : <b><?php echo $this->thaidate->FullDate($Profile[0]['legacy_born']) ?></b> อายุ <b><?php echo $Profile[0]['legacy_age'] ?></b> ปี<br>
+                    ข้อมูลติดต่อ : <?php echo $Profile[0]['legacy_email'] ?> , <?php echo $Profile[0]['legacy_line_id'] ?> , <?php echo $Profile[0]['legacy_skype'] ?>
+                    , <?php echo $Profile[0]['legacy_whatapp'] ?> , <?php echo $Profile[0]['legacy_contact_etc'] ?></p>
                   </div>
                 </div>
                 <div class="row">
