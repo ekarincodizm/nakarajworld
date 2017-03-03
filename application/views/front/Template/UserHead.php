@@ -22,9 +22,9 @@
 	$this->debuger->front_load_css('datepicker');
 
 	$this->debuger->front_load_js('angular.min');
-	$this->debuger->front_load_js('angular-locale_th');
-	$this->debuger->front_load_js('angular-animate');
-	$this->debuger->front_load_js('angular-sanitize');
+	// $this->debuger->front_load_js('angular-locale_th');
+	// $this->debuger->front_load_js('angular-animate');
+	// $this->debuger->front_load_js('angular-sanitize');
 
 
 	$this->debuger->front_load_js('jquery.min');

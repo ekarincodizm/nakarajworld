@@ -18,14 +18,14 @@
     </div>
   </div>
 </footer>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(function () {
         $('.bootstrap-datepicker').datetimepicker({
           locale: 'th',
           format: 'DD-MM-YYYY',
         });
     });
-</script>
+</script> -->
 
 
 <script type="text/javascript">

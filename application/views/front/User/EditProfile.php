@@ -40,7 +40,7 @@ $(function(){
 
 $(":member_photo").filestyle({buttonText: "Find file"});
 </script>
-<section id="register" class="separator top" ng-controller="EditProfileCtrl">
+<section id="register" class="separator top" ng-controller="RegisterCtrl">
 	<div class="container" style="min-height: 460px;">
 		<div class="row text-center">
 			<div class="col-lg-12" style="padding-top:20px">
@@ -50,7 +50,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 		</div>
 
 		<div class="row">
-			<div class="col-lg-8 col-lg-offset-2" ng-hide="SendForm">
+			<div class="col-lg-8 col-lg-offset-2">
 
 					<!-- <form class="form-horizontal form" novalidate ng-submit="SubmitProfile()"> -->
 					<?php echo form_open_multipart('/HomePage/SubmitEditProfile'); ?>
@@ -164,21 +164,40 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 							</div>
 						</div>
 						<div class="row">
-              <div class="col-md-8">
-                <label for="name">ที่อยู่</label>
-                <div class="form-group">
-                    <textarea class="form-control" name="member_address" required style="height:60px;"><?php echo $Profile[0]['member_address'] ?></textarea>
-                </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-8">
-                <label for="name">ที่อยู่สำรอง กรณีติดต่อไม่ได้่</label>
-                <div class="form-group">
-                    <textarea class="form-control" name="member_address2"  style="height:60px;"><?php echo $Profile[0]['member_address2'] ?></textarea>
-                </div>
-              </div>
-            </div>
+							<div class="col-md-6">
+								<label for="name">ที่อยู่</label>
+								<div class="form-group">
+									<textarea class="form-control" name="member_address" required style="height:60px;" ng-model="member_address" placeholder="กรุณากรอกที่อยู่"></textarea>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<label for="name">จังหวัด</label>
+								<div class="form-group">
+									<select name="member_province" required class="form-control" ng-model="province_id" ng-change="amphurA()">
+										  <option value="">โปรดเลือกจังหวัด</option>
+										<?php foreach ($province as $row): ?>
+											<option value="<?php echo $row['province_id']?>"><?php echo $row['province_name']?></option>
+										<?php endforeach; ?>
+									</select>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<label for="name">อำเภอ</label>
+								<div class="form-group">
+									<select name="member_amphur" required class="form-control">
+										<option ng-repeat="row in amphur_listA" value="{{row.amphur_id}}">{{row.amphur_name}}</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<label for="name">ที่อยู่สำรอง กรณีติดต่อไม่ได้</label>
+								<div class="form-group">
+									<textarea class="form-control" name="member_address2"  style="height:60px;" ng-model="member_address2" placeholder="กรุณากรอกที่อยู่สำรอง"></textarea>
+								</div>
+							</div>
+						</div>
 					<div class="row">
 						<div class="col-md-4">
 							<label for="name">เบอร์โทรศัพท์</label>

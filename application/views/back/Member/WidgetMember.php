@@ -31,6 +31,8 @@
             <div class="col-md-6">
               <p> เบอร์โทร : <?php echo $Profile[0]['member_phone']; ?><br>
                 ที่อยู่ : <?php echo $Profile[0]['member_address']; ?><br>
+                จังหวัด : <?php echo $Profile[0]['province_name']; ?><br>
+                อำเภอ : <?php echo $Profile[0]['amphur_name']; ?><br>
               </p>
             </div>
             <div class="col-md-6">

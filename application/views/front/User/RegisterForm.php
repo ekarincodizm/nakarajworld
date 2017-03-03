@@ -1,45 +1,6 @@
-<script type="text/javascript">
-function readIMG(input) {
-	if (input.files && input.files[0]) {
-	var reader = new FileReader();
-		reader.onload = function (e)
-		{
-			$('#imgShow').attr('src', e.target.result);
-		}
-		reader.readAsDataURL(input.files[0]);
-		}
-	}
-$(function(){
-		$('#member_photo').change(function(){
-			var f = this.files[0];
 
-			var fty=new Array(".gif",".jpg",".jpeg",".png");
-        	var a=document.SubmitRegister.member_photo.value;
-			var permiss=0;
-			a=a.toLowerCase();
-			if(a !=""){
-				for(i=0;i<fty.length;i++){
-					if(a.lastIndexOf(fty[i])>=0){
-						permiss=1;
-						break;
-					}else{
-						continue;
-					}
-				}
-				if(permiss==0){
-					alert("อัพโหลดได้เฉพาะไฟล์ gif jpg jpeg png");
-					document.getElementById("btnRegis").disabled = true;
-				}else{
-          document.getElementById("btnRegis").disabled = false;
-        }
-			}
-		})
-	})
 
-$(":member_photo").filestyle({buttonText: "Find file"});
-</script>
-
-<section id="register" class="separator top" data-ng-controller="RegisterCtrl">
+<section id="register" class="separator top" ng-controller="RegisterCtrl">
 	<div class="container" style="min-height: 460px;">
 		<div class="row text-center">
 			<div class="col-lg-12" style="padding-top:20px">
@@ -146,15 +107,34 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-6">
 							<label for="name">ที่อยู่</label>
 							<div class="form-group">
 								<textarea class="form-control" name="member_address" required style="height:60px;" ng-model="member_address" placeholder="กรุณากรอกที่อยู่"></textarea>
 							</div>
 						</div>
+						<div class="col-md-3">
+							<label for="name">จังหวัด</label>
+							<div class="form-group">
+								<select name="member_province" required class="form-control" ng-model="province_id" ng-change="amphurA()">
+									  <option value="">โปรดเลือกจังหวัด</option>
+									<?php foreach ($province as $row): ?>
+										<option value="<?php echo $row['province_id']?>"><?php echo $row['province_name']?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+						</div>
+						<div class="col-md-3">
+							<label for="name">อำเภอ</label>
+							<div class="form-group">
+								<select name="member_amphur" required class="form-control">
+									<option ng-repeat="row in amphur_listA" value="{{row.amphur_id}}">{{row.amphur_name}}</option>
+								</select>
+							</div>
+						</div>
 					</div>
 					<div class="row">
-						<div class="col-md-8">
+						<div class="col-md-12">
 							<label for="name">ที่อยู่สำรอง กรณีติดต่อไม่ได้</label>
 							<div class="form-group">
 								<textarea class="form-control" name="member_address2"  style="height:60px;" ng-model="member_address2" placeholder="กรุณากรอกที่อยู่สำรอง"></textarea>
@@ -306,23 +286,41 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 							</div>
 						</div>
 					</div>
-						<div class="row">
-							<div class="col-md-8">
-								<label for="name">ที่อยู่</label>
-								<div class="form-group">
-									<textarea class="form-control" name="legacy_address" style="height:60px;" placeholder="กรุณากรอกที่อยู่"></textarea>
-								</div>
+					<div class="row">
+						<div class="col-md-6">
+							<label for="name">ที่อยู่</label>
+							<div class="form-group">
+								<textarea class="form-control" name="legacy_address" required style="height:60px;" ng-model="member_address" placeholder="กรุณากรอกที่อยู่"></textarea>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-8">
-								<label for="name">ที่อยู่สำรอง กรณีติดต่อไม่ได้</label>
-								<div class="form-group">
-									<textarea class="form-control" name="legacy_address2"  style="height:60px;" placeholder="กรุณากรอกที่อยู่สำรอง"></textarea>
-								</div>
+						<div class="col-md-3">
+							<label for="name">จังหวัด</label>
+							<div class="form-group">
+								<select name="legacy_province" required class="form-control" ng-model="province_id2" ng-change="amphurB()">
+									  <option value="">โปรดเลือกจังหวัด</option>
+									<?php foreach ($province as $row): ?>
+										<option value="<?php echo $row['province_id']?>"><?php echo $row['province_name']?></option>
+									<?php endforeach; ?>
+								</select>
 							</div>
 						</div>
-						<div class="row">
+						<div class="col-md-3">
+							<label for="name">อำเภอ</label>
+							<div class="form-group">
+								<select name="legacy_amphur" required class="form-control">
+									<option ng-repeat="row in amphur_listB" value="{{row.amphur_id}}">{{row.amphur_name}}</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<label for="name">ที่อยู่สำรอง กรณีติดต่อไม่ได้</label>
+							<div class="form-group">
+								<textarea class="form-control" name="legacy_address2"  style="height:60px;" ng-model="member_address2" placeholder="กรุณากรอกที่อยู่สำรอง"></textarea>
+							</div>
+						</div>
+					</div>						<div class="row">
 							<div class="col-md-4">
 								<label for="name">เบอร์โทรศัพท์</label>
 								<div class="form-group">

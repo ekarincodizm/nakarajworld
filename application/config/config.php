@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-// $config['base_url']	= 'http://www.esanstudio.com/demo/';
+// $config['base_url']	= 'http://www.ndwn.co.th/';
 $config['base_url'] = 'http://localhost/nakarajworld/';
 
 

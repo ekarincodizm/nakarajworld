@@ -1,4 +1,4 @@
-<header class="nav-down" data-ng-controller="HomePageCtrl">
+<header class="nav-down">
 	<nav class="navbar">
 				<div class="container">
 					<div class="row">

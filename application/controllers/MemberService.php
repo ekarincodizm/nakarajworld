@@ -141,4 +141,17 @@ class MemberService extends REST_Controller
 
 		$this->response($AccountDetailUpclass);
 	}
-}
+	public function amphur_post()
+	{
+		$id = $this->post();
+		// print_r($id[0]);
+		$query = $this->db
+		->where('province_id', $id[0])
+		->get('amphur')
+		->result();
+
+		$data = array('amphur_list' => $query);
+		$this->response($data, 200); // 200 being the HTTP response code
+
+		}
+	}

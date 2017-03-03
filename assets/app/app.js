@@ -1,4 +1,4 @@
-var HomePageApp = angular.module('HomePageApp', ['ngAnimate', 'ngSanitize', 'ngLocale']);
+var HomePageApp = angular.module('HomePageApp', ['ngLocale']);
 
 HomePageApp.controller('AddBookBankCtrl', function ($scope, $http) {
 
@@ -9,20 +9,20 @@ HomePageApp.controller('AddBookBankCtrl', function ($scope, $http) {
 	});
 
 	$scope.FormSubmit = function (data) {
-			console.log($scope.BookBankObject);
-			data = $scope.BookBankObject;
-			$http.post(SITE_URL + '/MemberService/AddBookBank', data).then(function (){
-				$scope.BookBankObject.bank_id = null;
-				$scope.BookBankObject.bookbank_bank_branch = null;
-				$scope.BookBankObject.bookbank_account = null;
-				$scope.BookBankObject.bookbank_number = null;
-				$http.post(SITE_URL + '/MemberService/ListBookBank', {'id':member_id}).then(function (response){
-					console.log(response.data);
-					$scope.ListBookBank = response.data;
-				},function (error){
-				});
+		console.log($scope.BookBankObject);
+		data = $scope.BookBankObject;
+		$http.post(SITE_URL + '/MemberService/AddBookBank', data).then(function (){
+			$scope.BookBankObject.bank_id = null;
+			$scope.BookBankObject.bookbank_bank_branch = null;
+			$scope.BookBankObject.bookbank_account = null;
+			$scope.BookBankObject.bookbank_number = null;
+			$http.post(SITE_URL + '/MemberService/ListBookBank', {'id':member_id}).then(function (response){
+				console.log(response.data);
+				$scope.ListBookBank = response.data;
+			},function (error){
 			});
-		} // end $scope.SubmitRegister
+		});
+	} // end $scope.SubmitRegister
 
 	// $scope.DeleteBookBank = function(member_id,bookbank_id){
 	// 	$http.post(SITE_URL + '/MemberService/DeleteBookBank', {'member_id':member_id,'bookbank_id':bookbank_id}).then(function (){
@@ -33,19 +33,17 @@ HomePageApp.controller('AddBookBankCtrl', function ($scope, $http) {
 	// 		});
 	// 	});
 	// };
-			$scope.DisableBookBank = function(member_id,bookbank_id,bookbank_status){
-				$http.post(SITE_URL + '/MemberService/DisableBookBank', {'member_id':member_id,'bookbank_id':bookbank_id,'bookbank_status':bookbank_status}).then(function (){
-					$http.post(SITE_URL + '/MemberService/ListBookBank', {'id':member_id}).then(function (response){
-						console.log(response.data);
-						$scope.ListBookBank = response.data;
-					},function (error){
-					});
-				});
-			};
+	$scope.DisableBookBank = function(member_id,bookbank_id,bookbank_status){
+		$http.post(SITE_URL + '/MemberService/DisableBookBank', {'member_id':member_id,'bookbank_id':bookbank_id,'bookbank_status':bookbank_status}).then(function (){
+			$http.post(SITE_URL + '/MemberService/ListBookBank', {'id':member_id}).then(function (response){
+				console.log(response.data);
+				$scope.ListBookBank = response.data;
+			},function (error){
+			});
+		});
+	};
 
 });
-
-
 HomePageApp.controller('PanelExtendCtrl', function ($scope, $http, $window) {
 	$http.post(SITE_URL + '/MemberService/AccountDetailExtend', {'account_id':account_id}).then(function (response){
 		// console.log("History");
@@ -60,9 +58,9 @@ HomePageApp.controller('PanelExtendCtrl', function ($scope, $http, $window) {
 	$scope.MemberExtend = function(member_id){
 		$http.post(SITE_URL + '/MemberService/AddAccountDetailExtend', {'member_id':member_id,'account_id':account_id}).then(function (response){
 			$scope.date_now = moment().format('YYY-MM-DD');
-				$scope.ListExtend = response.data.AccountDetailExtend;
-				$scope.LastListExtend = $scope.ListExtend[0];
-				$scope.accounting_id = response.data.accounting_id;
+			$scope.ListExtend = response.data.AccountDetailExtend;
+			$scope.LastListExtend = $scope.ListExtend[0];
+			$scope.accounting_id = response.data.accounting_id;
 
 		});
 	};
@@ -78,7 +76,6 @@ HomePageApp.controller('PanelExtendCtrl', function ($scope, $http, $window) {
 	// };
 
 });
-
 HomePageApp.controller('PanelUpclassCtrl', function ($scope, $http) {
 	$http.post(SITE_URL + '/MemberService/AccountDetailUpclass', {'account_id':account_id}).then(function (response){
 		// console.log("History");
@@ -100,11 +97,43 @@ HomePageApp.controller('PanelUpclassCtrl', function ($scope, $http) {
 		});
 	};
 });
-// HomePageApp.controller('ListBookBankCtrl', function ($scope, $http) {
-//
-// 	$http.post(SITE_URL + '/MemberService/ListBookBank', {'id':member_id}).then(function (response){
-// 		console.log(response.data);
-// 		$scope.ListBookBank = response.data;
-// 	},function (error){
-// 	});
-// });
+HomePageApp.controller('ListBookBankCtrl', function ($scope, $http) {
+
+	$http.post(SITE_URL + '/MemberService/ListBookBank', {'id':member_id}).then(function (response){
+		console.log(response.data);
+		$scope.ListBookBank = response.data;
+	},function (error){
+	});
+});
+HomePageApp.controller('RegisterCtrl', function ($scope, $http) {
+
+	$scope.amphurA = function(data) {
+		// console.log($scope.province_id);
+		data = $scope.province_id;
+		$http.post(SITE_URL + '/MemberService/amphur', data).then(function (response){
+			// console.log("Success");
+			console.log(response.data);
+			$scope.amphur_listA = response.data.amphur_list;
+			// console.log($scope.amphur);
+		},function (error){
+			console.log(error);
+		});
+		// });
+	}
+
+	$scope.amphurB = function(data) {
+		// console.log($scope.province_id);
+		data = $scope.province_id;
+		$http.post(SITE_URL + '/MemberService/amphur', data).then(function (response){
+			// console.log("Success");
+			console.log(response.data);
+			$scope.amphur_listB = response.data.amphur_list;
+			// console.log($scope.amphur);
+		},function (error){
+			console.log(error);
+		});
+		// });
+	}
+
+
+});

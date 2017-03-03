@@ -94,6 +94,7 @@ class HomePage extends CI_Controller{
 
 		$IDCard = $this->input->post();
 		// $this->debuger->prevalue($IDCard);
+		$province = $this->db->get('province')->result_array();
 		$duplicate = $this->HomePageModel->CheckRegis( $IDCard );
 		$duplicate = json_decode(json_encode($duplicate), true);
 		// $this->debuger->prevalue($duplicate);
@@ -119,7 +120,8 @@ class HomePage extends CI_Controller{
 			$value = array(
 				'Result' => array(
 					'Registered'=> 'false',
-					'IDCard' => $IDCard
+					'IDCard' => $IDCard,
+					'province' => $province,
 				),
 				'View' => 'front/User/RegisterForm'
 			);
@@ -403,6 +405,7 @@ class HomePage extends CI_Controller{
 		$this->LoadUserPage($value);
 	}
 	public function EditProfile() {
+		$province = $this->db->get('province')->result_array();
 		$Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
 		if ($Profile[0]['member_id_card_type']==1) {
 			$Profile[0]['member_id_card_type_name'] = 'บัตรประชาชน';
@@ -414,6 +417,7 @@ class HomePage extends CI_Controller{
 		$value = array(
 			'Result' => array(
 				'Profile' => $Profile,
+				'province' => $province,
 
 			),
 			'View' => 'front/User/EditProfile'
