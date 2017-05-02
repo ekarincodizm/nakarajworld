@@ -13,9 +13,8 @@ class homepagemodel extends CI_Model {
   public function CheckRegis($data)
   {
     $query = $this->db
-    ->where('member_id_card_type', $data['member_id_card_type'])
-    ->where('member_citizen_id', $data['member_citizen_id'])
-    ->get('mlm_member')
+    ->where('user_name', $data['member_citizen_id'])
+    ->get('mlm_user')
     ->result();
     return $query;
   }

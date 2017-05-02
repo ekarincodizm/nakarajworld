@@ -94,6 +94,7 @@ class HomePage extends CI_Controller{
 
 		$IDCard = $this->input->post();
 		// $this->debuger->prevalue($IDCard);
+		
 		$province = $this->db->get('province')->result_array();
 		$duplicate = $this->HomePageModel->CheckRegis( $IDCard );
 		$duplicate = json_decode(json_encode($duplicate), true);
