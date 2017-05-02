@@ -9,6 +9,8 @@
 	var BASE_URL = "<?php echo base_url(); ?>";
 	var SITE_URL = "<?php echo site_url(); ?>";
 	</script>
+	<link rel="stylesheet" href="<?php echo base_url('/assets/theme/front-end/bootstrap/css/bootstrap-theme.min.css')?>">
+<script src="<?php echo base_url('/assets/theme/front-end/bootstrap/js/bootstrap.min.js')?>"></script>
 	<?php
 	// $this->debuger->front_load_css('ui-bootstrap-custom-2.3.1-csp');
 	$this->debuger->front_load_css('bootstrap.min');
@@ -18,7 +20,6 @@
 	$this->debuger->front_load_css('style');
 	$this->debuger->front_load_css('thsarabunnew');
 	// $this->debuger->front_load_css('bootstrap-datetimepicker.min');
-
 
 	// $this->debuger->front_load_js('angular.min');
 	// $this->debuger->front_load_js('angular-locale_th');

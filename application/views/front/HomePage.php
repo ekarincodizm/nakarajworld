@@ -1,7 +1,7 @@
 
 <div id="wrapper"  >
 	<div id="top">
-		<section id="intro" class="separator bottom" data-speed="2" data-type="background">
+		<section id="intro" class="separator bottom img-responsive" data-speed="2" data-type="background">
 			<div class="container text-center">
 				<div class="row">
 					<div class="col-md-12">
