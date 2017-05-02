@@ -112,4 +112,19 @@ class Products extends CI_Controller{
     redirect('/Products');
 
   }
+  public function Editstatus()
+  {
+    $products_id = $this->uri->segment(3);
+    $productstatus = $this->uri->segment(4);
+
+    if ($productstatus == 0) {
+      $status = array('products_status' => 1 );
+    } else {
+      $status = array('products_status' => 0 );
+    }
+
+    $this->db->where('products_id',$products_id)->update('mlm_products',$status);
+
+    redirect('products');
+  }
 }

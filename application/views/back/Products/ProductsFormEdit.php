@@ -104,6 +104,15 @@
                 <button type="submit" class="btn btn-lg btn-success">
                   บันทึก
                 </button>
+                <?php if ($ProductsDetail[0]['products_status'] == 0): ?>
+                  <a href="<?php echo site_url('Products/Editstatus/'.$ProductsDetail[0]['products_id'].'/'.$ProductsDetail[0]['products_status']); ?>" type="submit" class="btn btn-lg btn-info" >
+                    เปิดการใช้งานสินค้านี้
+                  </a>
+                <?php else: ?>
+                  <a href="<?php echo site_url('Products/Editstatus/'.$ProductsDetail[0]['products_id'].'/'.$ProductsDetail[0]['products_status']); ?>" type="submit" class="btn btn-lg btn-danger">
+                    ปิดการใช้งานสินค้านี้
+                  </a>
+                <?php endif; ?>
               </div>
             </div>
             <?php echo form_close(); ?>

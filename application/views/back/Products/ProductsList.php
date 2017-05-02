@@ -22,7 +22,7 @@
             </div>
             <div class="row">
               <div class="col-md-12">
-                <table class="table table-hover">
+                <table class="table table-striped js-table table-hover">
                   <thead>
                     <tr>
                       <th>#</th>
@@ -46,9 +46,9 @@
                       <!-- <td><?php // echo $row['products_stock']." ".$row['products_unit'] ?></td> -->
                       <td>
                         <?php if ($row['products_status']==1): ?>
-                          เปิดใช้งาน
+                          <span class="text-success">เปิดใช้งาน</span>
                         <?php elseif ($row['products_status']==0): ?>
-                            ปิดการใช้งาน
+                            <span class="text-danger">ปิดการใช้งาน</span>
                         <?php endif; ?>
 
                       </td>

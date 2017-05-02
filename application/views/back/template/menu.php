@@ -35,7 +35,8 @@
         <div class="navbar-header">
             <a href="javascript:void(0);" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false"></a>
             <a href="javascript:void(0);" class="bars"></a>
-            <a class="navbar-brand" href="#">ADMIN - NAVA DRAGON WEALTH NETWORK CO.,LTD.</a>
+            <?php $config = $this->db->get('mlm_config')->result_array(); ?>
+            <a class="navbar-brand" href="#"><?php echo $config[0]['mlm_config_name']?></a>
         </div>
 
     </div>
@@ -192,10 +193,10 @@
 
 <div class="legal">
     <div class="copyright">
-        &copy; 2016 <a href="javascript:void(0);">AdminBSB - Material Design</a>.
+        &copy; 2016 <a href="javascript:void(0);"></a>
     </div>
     <div class="version">
-        <b>Version: </b> 1.0.4
+        <b><?php echo $config[0]['mlm_config_name']?> </b>
     </div>
 </div>
 

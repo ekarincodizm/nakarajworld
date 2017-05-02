@@ -5,7 +5,12 @@ class productsmodel extends CI_Model {
 
   public function ProductsList()
   {
-    $query = $this->db->get('mlm_products')->result();
+    $query = $this->db->order_by('products_status','DESC')->get('mlm_products')->result();
+    return $query;
+  }
+  public function ProductsListOn()
+  {
+    $query = $this->db->where('products_status',1)->get('mlm_products')->result();
     return $query;
   }
   public function ProductsDetail($id)
