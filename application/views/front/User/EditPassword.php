@@ -56,6 +56,9 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 					<?php echo form_open_multipart('/HomePage/SubmitEditPassword'); ?>
 					<input type="hidden" name="member_id" value="<?php echo $Profile[0]['member_id']  ?>">
 					<!-- <input type="hidden" name="old_pass_check" value="<?php //echo base64_encode($user[0]['member_id'])?>"> -->
+					<?php if (@$_SESSION['PWD'] == 1): ?>
+						<span class="text-danger">รหัสผ่านเก่าไม่ถูกต้อง</span>
+					<?php endif; ?>
 					<div class="row">
 						<div class="col-md-offset-2 col-md-4">
 							<label for="name">รหัาผ่านเก่า</label>

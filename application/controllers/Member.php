@@ -593,4 +593,10 @@ class Member extends CI_Controller{
     $this->AccountModel->AddAccountDetailUpclass($value);
     redirect($this->agent->referrer(), 'refresh');
   }
+  public function DeleteMember()
+  {
+    $member_id = $this->uri->segment(3);
+    $this->db->where('member_id',$member_id)->delete('mlm_member');
+    redirect('member');
+  }
 }

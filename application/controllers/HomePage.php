@@ -187,10 +187,17 @@ class HomePage extends CI_Controller{
 	public function SubmitEditPassword()
 	{
 		$PasswordForm = $this->input->post();
-		$UpdateUser['member_id'] = $PasswordForm['member_id'];
-		$UpdateUser['user_pass'] = base64_encode($PasswordForm['new_pass']);
-		$this->HomePageModel->UpdateUser( $UpdateUser );
-		$this->Logout();
+		$user = json_decode(json_encode($this->HomePageModel->LoadUser( $_SESSION['MEMBER_ID'] )), true);
+		$oldpwd = base64_encode($PasswordForm['old_pass']);
+		if ($user[0]['user_pass'] == $oldpwd) {
+			$UpdateUser['member_id'] = $PasswordForm['member_id'];
+			$UpdateUser['user_pass'] = base64_encode($PasswordForm['new_pass']);
+			$this->HomePageModel->UpdateUser( $UpdateUser );
+			$this->Logout();
+		} else {
+			@$_SESSION['PWD'] = 1;
+			redirect('HomePage/EditPassword');
+		}
 	}
 	public function SubmitProfile(){
 		$RegisterForm = $this->input->post();
@@ -268,6 +275,7 @@ class HomePage extends CI_Controller{
 				$Profile[0]['member_id_card_type_name'] = 'Work Permit';
 			}
 		}
+
 		// $this->debuger->prevalue($Profile);
 
 		$pv = $this->HomePageModel->MemberPV($_SESSION['MEMBER_ID']);

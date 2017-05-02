@@ -74,8 +74,6 @@ class homepagemodel extends CI_Model {
     ->join('province','province.province_id = mlm_member.member_province')
     ->get('mlm_member')
     ->result();
-
-
     return $query;
   }
 
