@@ -119,7 +119,8 @@ class Member extends CI_Controller{
         $i++;
       }
     }
-    // $this->debuger->prevalue($DivID);
+    // $this->debuger->prevalue($DividendID);
+
 
     $value = array(
       'Result' => array(

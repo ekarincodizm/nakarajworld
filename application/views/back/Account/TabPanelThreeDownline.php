@@ -6,6 +6,7 @@
           <th>#</th>
           <th>บัญชีนักธุรกิจอิสระ</th>
           <th>ระดับ</th>
+          <th>ชื่อ-สกุล</th>
           <th>ใต้สายงานทั้งหมด</th>
           <th>ใต้สายงาน</th>
           <th>แนะนำตรง</th>
@@ -49,6 +50,8 @@
               </td>
 
             <?php endif; ?>
+            <td><?php echo $row['member_prefix'].''.$row['member_firstname'].' '.$row['member_lastname'] ?></td>
+
             <td><?php echo $row['count_downline'] ?> รหัส</td>
 
             <td>

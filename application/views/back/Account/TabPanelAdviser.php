@@ -5,6 +5,7 @@
         <tr>
           <th>#</th>
           <th>บัญชีนักธุรกิจอิสระ</th>
+          <th>ชื่อ-สกุล</th>
           <th>ดาวน์ไลน์ทั้งหมด</th>
           <th>ดาวน์ไลน์ติดตัว</th>
           <th>แนะนำผู้อื่น</th>
@@ -17,6 +18,7 @@
           <tr>
             <td><?php echo $i; ?></td>
             <td><?php echo $row['account_team'].sprintf("%04d", $row['account_level']).sprintf("%04d", $row['account_code']); ?></td>
+            <td><?php echo $row['member_prefix'].''.$row['member_firstname'].' '.$row['member_lastname'] ?></td>
             <td><?php echo $row['count_downline'] ?> รหัส</td>
             <td>
               <?php if ($row['count_three_downline']==3): ?>
