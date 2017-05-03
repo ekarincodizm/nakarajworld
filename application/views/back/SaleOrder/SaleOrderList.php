@@ -16,7 +16,7 @@
 
             <div class="row">
               <div class="col-md-12">
-                <table class="table table-hover">
+                <table class="table js-table table-hover">
                   <thead>
                       <!-- รวมยอด -->
                     <tr>
