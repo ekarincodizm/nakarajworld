@@ -69,10 +69,11 @@ class homepagemodel extends CI_Model {
   {
     $query = $this->db
     ->where('member_id', $id)
-    ->join('amphur','amphur.amphur_id = mlm_member.member_amphur')
-    ->join('province','province.province_id = mlm_member.member_province')
+    ->join('amphur','amphur.amphur_id = mlm_member.member_amphur','left')
+    ->join('province','province.province_id = mlm_member.member_province','left')
     ->get('mlm_member')
     ->result();
+
     return $query;
   }
 
