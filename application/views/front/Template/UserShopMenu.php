@@ -2,7 +2,7 @@
   <ul  class="nav nav-pills nav-stacked nav-pills-stacked-example">
     <li role="presentation"><a href="<?php echo site_url('Store/TempList'); ?>">ตะกร้าสินค้า</a></li>
     <li role="presentation"><a href="<?php echo site_url('Store/InvoiceList'); ?>">การสั่งซื้อ</a></li>
-    <li role="presentation"><a href="<?php echo site_url('HomePage/Profile'); ?>">กลับไปยังโปรไฟล์</a></li>
+    <li role="presentation"><a href="<?php echo site_url('homepage/Profile'); ?>">กลับไปยังโปรไฟล์</a></li>
   </ul>
 </div>
 <script type="text/javascript">

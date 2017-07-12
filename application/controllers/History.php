@@ -15,14 +15,14 @@ class history extends CI_Controller {
     $this->load->view('back/template/footer');
   }
   public function index() {
-    $AllExpenses = $this->DashBoardModel->HistoryAllExpenses();
-    $Sale = $this->DashBoardModel->HistorySale();
-    $Expenses = $this->DashBoardModel->HistoryExpenses();
-    $Adviser = $this->DashBoardModel->HistoryAdviser();
-    $Company = $this->DashBoardModel->HistoryCompany();
-    $AdviserCompany = $this->DashBoardModel->HistoryAdviserCompany();
-    $Register = $this->DashBoardModel->HistoryRegister();
-    $extend = $this->DashBoardModel->Historyextend();
+    $AllExpenses = $this->Dashboard_model->HistoryAllExpenses();
+    $Sale = $this->Dashboard_model->HistorySale();
+    $Expenses = $this->Dashboard_model->HistoryExpenses();
+    $Adviser = $this->Dashboard_model->HistoryAdviser();
+    $Company = $this->Dashboard_model->HistoryCompany();
+    $AdviserCompany = $this->Dashboard_model->HistoryAdviserCompany();
+    $Register = $this->Dashboard_model->HistoryRegister();
+    $extend = $this->Dashboard_model->Historyextend();
 
 
     $value = array(

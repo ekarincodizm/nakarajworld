@@ -1,4 +1,4 @@
-<header class="nav-down" data-ng-controller="HomePageCtrl">
+<header class="nav-down" data-ng-controller="homepageCtrl">
 	<nav class="navbar">
 				<div class="container">
 					<div class="row">
@@ -17,17 +17,20 @@
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right text-center">
 								<li><a href="#top">หน้าแรก</a></li>
+								<li><a href="#intro-features">เกี่ยวกับเรา</a></li>
+								<li><a href="#contact">ติดต่อเรา</a></li>
+
 								<?php if (count($ProductsList)!=0): ?>
 
-								<li><a href="#gallery">สินค้า</a></li>
+								<li><a href="#gallery">สินค้าของเรา</a></li>
 								<?php endif; ?>
 								<!-- <li><a href="#testimonials">คำยืนยัน</a></li>
 								<li><a href="#extra-features">ใบรับรอง</a></li> -->
 								<?php if (!isset($_SESSION['MEMBER_ID'])): ?>
-									<li><a class="button green border light rounded" href="<?php echo site_url('HomePage/LoginPage');?>">เข้าสู่ระบบ</a></li>
+									<li><a class="button green border light rounded" href="<?php echo site_url('homepage/LoginPage');?>">สมาชิก</a></li>
 									<?php else: ?>
-										<li><a class="button green border light rounded" href="<?php echo site_url('HomePage/Profile');?>">ข้อมูลส่วนตัว</a></li>
-										<li><a class="button red rounded" href="<?php echo site_url('HomePage/Logout');?>">ออกจากระบบ</a></li>
+										<li><a class="button green border light rounded" href="<?php echo site_url('homepage/Profile');?>">ข้อมูลส่วนตัว</a></li>
+										<li><a class="button red rounded" href="<?php echo site_url('homepage/Logout');?>">ออกจากระบบ</a></li>
 								<?php endif; ?>
 
 							</ul>

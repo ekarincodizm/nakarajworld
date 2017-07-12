@@ -10,7 +10,7 @@
 			<div class="row">
 				<div class="col-lg-4 col-lg-offset-4" ng-hide="SendForm">
 					<div class="contactform form">
-							<?php echo form_open('/HomePage/SubmitLogin/'); ?>
+							<?php echo form_open('/homepage/SubmitLogin/'); ?>
 							<form class="form-horizontal form" ng-submit="SubmitLogin()">
 							<div class="row">
 								<div class="col-md-12">
@@ -28,7 +28,7 @@
 								<div class="col-md-12 text-center">
 									<div class="form-group">
 									<button type="submit" class="button green rounded">เข้าสู่ระบบ</button>
-									<a href="<?php echo site_url('HomePage/CheckRegisPage'); ?>" class="button rounded">ลงทะเบียน</a><br>
+									<a href="<?php echo site_url('homepage/CheckRegisPage'); ?>" class="button rounded">ลงทะเบียน</a><br>
 									<a href="<?php echo site_url('admin'); ?>"><u>สำหรับเจ้าหน้าที่</u></a>
 								</div>
 								</div>

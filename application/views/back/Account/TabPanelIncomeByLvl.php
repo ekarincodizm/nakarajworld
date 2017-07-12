@@ -23,7 +23,7 @@
            }
          }
         // $this->debuger->prevalue($MVbyLvl);
-        $MV1 = $this->AccountModel->GetMVByClassLvl1();
+        $MV1 = $this->Account_model->GetMVByClassLvl1();
         // $this->debuger->prevalue($MV1);
 
         ?>
@@ -67,7 +67,7 @@
              }
            }
           // $this->debuger->prevalue($MVbyLvl);
-          $MV1 = $this->AccountModel->GetMVByClassLvl2();
+          $MV1 = $this->Account_model->GetMVByClassLvl2();
           // $this->debuger->prevalue($MV1);
 
           ?>

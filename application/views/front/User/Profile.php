@@ -27,9 +27,9 @@
           WhatApp : <strong><?php echo $Profile[0]['member_whatapp'] ?></strong><br>
           ช่องทางการติดต่ออื่นๆ : <strong><?php echo $Profile[0]['member_contact_etc'] ?></strong><br>
           <div class="col-lg-4">
-            <a href="<?php echo site_url('HomePage/EditProfile'); ?>" class="button green rounded">แก้ไขข้อมูลส่วนตัว</a>
+            <a href="<?php echo site_url('homepage/EditProfile'); ?>" class="button green rounded">แก้ไขข้อมูลส่วนตัว</a>
             <br>
-            <a href="<?php echo site_url('HomePage/EditPassword'); ?>" class="button red rounded">แก้ไขรหัสผ่าน</a>
+            <a href="<?php echo site_url('homepage/EditPassword'); ?>" class="button red rounded">แก้ไขรหัสผ่าน</a>
           </div>
         </p>
       </div>

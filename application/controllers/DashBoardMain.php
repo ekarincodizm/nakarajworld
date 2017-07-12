@@ -15,12 +15,12 @@ class DashBoardMain extends CI_Controller {
     $this->load->view('back/template/footer');
   }
   public function index() {
-    $Group['Group1'] = $this->DashBoardModel->DashBoardGroup(1);
-    $Group['Group2'] = $this->DashBoardModel->DashBoardGroup(2);
-    $Group['Group3'] = $this->DashBoardModel->DashBoardGroup(3);
-    $Group['Group4'] = $this->DashBoardModel->DashBoardGroup(4);
+    $Group['Group1'] = $this->Dashboard_model->DashBoardGroup(1);
+    $Group['Group2'] = $this->Dashboard_model->DashBoardGroup(2);
+    $Group['Group3'] = $this->Dashboard_model->DashBoardGroup(3);
+    $Group['Group4'] = $this->Dashboard_model->DashBoardGroup(4);
 
-    $CodeTeam = $this->DashBoardModel->DashBoardTeam();
+    $CodeTeam = $this->Dashboard_model->DashBoardTeam();
     $SumAccountPerTeam = array();
     // for($i = 5 ; $i <= 13 ; $i++){
     //   $SumAccountPerTeam[$i-5] = $this->DashBoardModel->DashBoardGroupChartPer30Day($i);

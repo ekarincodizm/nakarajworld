@@ -17,14 +17,20 @@
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav navbar-right text-center">
 								<li><a href="<?php echo site_url();?>">หน้าแรก</a></li>
+								<?php if (!isset($_SESSION['MEMBER_ID'])): ?>
+								<li><a href="<?php echo BASE_URL('Member_Register.pdf');?>" target="_blank">แบบฟอร์มสมัครสมาชิก</a></li>
+							<?php endif; ?>
+
+								<?php if (isset($_SESSION['MEMBER_ID'])): ?>
 								<li><a href="<?php echo site_url('Store/TempList');?>" class="">ตะกร้าสินค้า </a></li>
+							<?php //endif; ?>
 								<!-- <li><a href="#testimonials">คำยืนยัน</a></li>
 								<li><a href="#extra-features">ใบรับรอง</a></li> -->
-								<?php if (!isset($_SESSION['MEMBER_ID'])): ?>
-									<li><a class="button green border light rounded" href="<?php echo site_url('HomePage/LoginPage');?>">เข้าสู่ระบบ</a></li>
-									<?php else: ?>
-										<li><a class="button green border light rounded" href="<?php echo site_url('HomePage/Profile');?>">ข้อมูลส่วนตัว</a></li>
-										<li><a class="button red rounded" href="<?php echo site_url('HomePage/Logout');?>">ออกจากระบบ</a></li>
+								<?php //if (!isset($_SESSION['MEMBER_ID'])): ?>
+									<!-- <li><a class="button green border light rounded" href="<?php echo site_url('homepage/LoginPage');?>">เข้าสู่ระบบ</a></li> -->
+									<?php //else: ?>
+										<li><a class="button green border light rounded" href="<?php echo site_url('homepage/Profile');?>">ข้อมูลส่วนตัว</a></li>
+										<li><a class="button red rounded" href="<?php echo site_url('homepage/Logout');?>">ออกจากระบบ</a></li>
 								<?php endif; ?>
 
 							</ul>

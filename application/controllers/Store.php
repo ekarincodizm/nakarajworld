@@ -35,7 +35,7 @@ class Store extends CI_Controller{
 	}
   public function ProductsDetail() {
     $products_id = $this->uri->segment(3);
-    $ProductsDetail =$this->ProductsModel->ProductsDetail($products_id);
+    $ProductsDetail =$this->Products_model->ProductsDetail($products_id);
     $ProductsDetail = json_decode(json_encode($ProductsDetail), true);
 
     $value = array(
@@ -56,7 +56,7 @@ class Store extends CI_Controller{
   }
 	public function AddShopTemp() {
     $products_id = $this->uri->segment(3);
-		$FindTemp =$this->ProductsModel->FindTemp($_SESSION['MEMBER_ID'],$products_id);
+		$FindTemp =$this->Products_model->FindTemp($_SESSION['MEMBER_ID'],$products_id);
 		if (count($FindTemp)>0) {
 			$input = array(
 				'shop_temp_id' => $FindTemp[0]['shop_temp_id'],
@@ -83,7 +83,7 @@ class Store extends CI_Controller{
 	}
 	public function TempList()
 	{
-		$TempList =$this->ProductsModel->TempList($_SESSION['MEMBER_ID']);
+		$TempList =$this->Products_model->TempList($_SESSION['MEMBER_ID']);
 		$TempList = json_decode(json_encode($TempList), true);
 
 		$value = array(
@@ -97,9 +97,9 @@ class Store extends CI_Controller{
 	public function CheckOut()
 	{
 		date_default_timezone_set("Asia/Bangkok");
-		$TempList =$this->ProductsModel->TempList($_SESSION['MEMBER_ID']);
+		$TempList =$this->Products_model->TempList($_SESSION['MEMBER_ID']);
 		$TempList = json_decode(json_encode($TempList), true);
-		$ShopCount = $this->ProductsModel->ShopDetailAll();
+		$ShopCount = $this->Products_model->ShopDetailAll();
 		$ShopCode = "SO".sprintf("%05d",($ShopCount+1));
 		// Detail
 		$input = array(
@@ -146,7 +146,7 @@ class Store extends CI_Controller{
 
 	public function InvoiceList()
 	{
-		$InvoiceList =$this->ProductsModel->InvoiceList($_SESSION['MEMBER_ID']);
+		$InvoiceList =$this->Products_model->InvoiceList($_SESSION['MEMBER_ID']);
 		$value = array(
 			'Result' => array(
 				'InvoiceList' => $InvoiceList,
@@ -158,7 +158,7 @@ class Store extends CI_Controller{
 	public function InvoiceDetail()
 	{
 		$InvoiceID = $this->uri->segment(3);
-		$InvoiceDetail = $this->ProductsModel->InvoiceDetail($InvoiceID);
+		$InvoiceDetail = $this->Products_model->InvoiceDetail($InvoiceID);
 		// $this->debuger->prevalue($InvoiceDetail);
 		$value = array(
 			'Result' => array(
@@ -171,7 +171,7 @@ class Store extends CI_Controller{
 	public function CancelPurchase()
 	{
 		$id = $this->uri->segment(3);
-		$this->ProductsModel->CancelInvoice($id);
+		$this->Products_model->CancelInvoice($id);
 		redirect('Store/InvoiceList');
 
 	}

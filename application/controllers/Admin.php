@@ -10,7 +10,7 @@ class Admin extends CI_Controller {
   }
 
   public function index() {
-    $Config = $this->ConfigModel->Config();
+    $Config = $this->Config_model->Config();
     $Result = array(
       'Config' => $Config,
     );
@@ -23,7 +23,7 @@ class Admin extends CI_Controller {
     $input['admin_password'] = base64_encode($input['admin_password']);
     // $this->debuger->prevalue($input);
 
-    $Admin = $this->HomePageModel->AuthenAdmin($input);
+    $Admin = $this->Homepage_model->AuthenAdmin($input);
     // $this->debuger->prevalue($Admin);
 
     if (count($Admin)>0) {
@@ -35,11 +35,11 @@ class Admin extends CI_Controller {
 
       redirect('/DashBoardMain');
     } else {
-      redirect('/Admin');
+      redirect('/admin');
     }
   }
   public function Logout() {
     session_destroy();
-    redirect('/Admin');
+    redirect('/admin');
   }
 }

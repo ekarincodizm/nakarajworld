@@ -15,7 +15,7 @@ class Member extends CI_Controller{
     $this->load->view('back/template/footer');
   }
   public function index() {
-    $MemberList = $this->MemberModel->MemberListWhithPV();
+    $MemberList = $this->Member_model->MemberListWhithPV();
     $MemberList = json_decode(json_encode($MemberList), true);
     // $this->debuger->prevalue($MemberList);
 
@@ -29,14 +29,15 @@ class Member extends CI_Controller{
   }
   public function MemberProfile() {
     $id = $this->uri->segment(3);
-    $Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $id )), true);
+    $Profile = json_decode(json_encode($this->Homepage_model->LoadProfile( $id )), true);
+//	  print_r($Profile);
     $today = getdate();
      $d1 = new DateTime($today["year"].'-'.$today["mon"].'-'.$today["mday"]);
      $d2 = new DateTime($Profile[0]['member_born']);
      $diff = $d2->diff($d1);
      $Profile[0]['member_age'] = $diff->y;
 
-    $AccountList = json_decode(json_encode($this->AccountModel->AccountByMember( $id)), true);
+    $AccountList = json_decode(json_encode($this->Account_model->AccountByMember( $id)), true);
     if ($Profile[0]['member_id_card_type']==1) {
       $Profile[0]['member_id_card_type_name'] = 'บัตรประชาชน';
     } elseif ($Profile[0]['member_id_card_type']==2) {
@@ -45,11 +46,11 @@ class Member extends CI_Controller{
       $Profile[0]['member_id_card_type_name'] = 'Work Permit';
     }
     // $this->debuger->prevalue($Profile);
-    $pv = $this->HomePageModel->MemberPV($id);
-    // $AccountList = json_decode(json_encode($this->AccountModel->AccountByMember($id)), true);
+    $pv = $this->Homepage_model->MemberPV($id);
+    // $AccountList = json_decode(json_encode($this->Account_model->AccountByMember($id)), true);
     // $this->debuger->prevalue($id);
 
-    $check_acc_id = $this->AccountingModel->GetAccountingID($id);
+    $check_acc_id = $this->Accounting_model->GetAccountingID($id);
 
     //$this->debuger->prevalue($check_acc_id);
 
@@ -62,53 +63,55 @@ class Member extends CI_Controller{
       ),
       'View' => 'back/Member/MemberProfile'
     );
+	  
+//	  $this->debuger->prevalue($value);
     $this->LoadPage($value);
   }
   public function AccountDetail() {
     $id = $this->uri->segment(3);
-    $Account = json_decode(json_encode($this->AccountModel->AccountByID( $id )), true);
-    $Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $Account[0]['member_id'] )), true);
-    $AllDownline = json_decode(json_encode($this->AccountModel->AllDownlineByAccount( $id )), true);
-    $ThreeDownline = json_decode(json_encode($this->AccountModel->ThreeDownline( $id )), true);
-    $Upline = json_decode(json_encode($this->AccountModel->AccountByID( $Account[0]['account_upline_id'])), true);
-    $Adviser = json_decode(json_encode($this->AccountModel->AccountByID( $Account[0]['account_adviser_id'])), true);
-    $AdviserList = json_decode(json_encode($this->AccountModel->AdviserList( $Account[0]['account_id'])), true);
-    $Account2 = json_decode(json_encode($this->MemberModel->MemberList()), true);
-    $MyPv = json_decode(json_encode($this->HomePageModel->MemberPV( $Account[0]['member_id'])), true);
-    $CheckFreePV = $this->HomePageModel->CheckFreePV($Account[0]['account_id']);
-    $AccountRepeat = $this->HomePageModel->Repeat($Account[0]['account_id']);
+    $Account = json_decode(json_encode($this->Account_model->AccountByID( $id )), true);
+    $Profile = json_decode(json_encode($this->Homepage_model->LoadProfile( $Account[0]['member_id'] )), true);
+    $AllDownline = json_decode(json_encode($this->Account_model->AllDownlineByAccount( $id )), true);
+    $ThreeDownline = json_decode(json_encode($this->Account_model->ThreeDownline( $id )), true);
+    $Upline = json_decode(json_encode($this->Account_model->AccountByID( $Account[0]['account_upline_id'])), true);
+    $Adviser = json_decode(json_encode($this->Account_model->AccountByID( $Account[0]['account_adviser_id'])), true);
+    $AdviserList = json_decode(json_encode($this->Account_model->AdviserList( $Account[0]['account_id'])), true);
+    $Account2 = json_decode(json_encode($this->Member_model->MemberList()), true);
+    $MyPv = json_decode(json_encode($this->Homepage_model->MemberPV( $Account[0]['member_id'])), true);
+    $CheckFreePV = $this->Homepage_model->CheckFreePV($Account[0]['account_id']);
+    $AccountRepeat = $this->Homepage_model->Repeat($Account[0]['account_id']);
     // $this->debuger->prevalue($AccountRepeat);
 
-    $PlanOneDownline = $this->AccountModel->PlanOneDownline($id, $Account[0]['account_level']);
-    $PlanOneDirectAdviser = $this->AccountModel->PlanOneDirectAdviser($id, $Account[0]['account_level']);
+    $PlanOneDownline = $this->Account_model->PlanOneDownline($id, $Account[0]['account_level']);
+    $PlanOneDirectAdviser = $this->Account_model->PlanOneDirectAdviser($id, $Account[0]['account_level']);
     // $this->debuger->prevalue($PlanOneDownline);
 
-    $JounalExtendAccount = $this->AccountModel->JounalExtendAccount( $Account[0]['account_id']);
+    $JounalExtendAccount = $this->Account_model->JounalExtendAccount( $Account[0]['account_id']);
     // $this->debuger->prevalue($JounalExtendAccount);
 
 
-    // $HistoryAccount = json_decode(json_encode($this->AccountModel->JounalExtendAccount( $Account[0]['account_id'])), true);
+    // $HistoryAccount = json_decode(json_encode($this->Account_model->JounalExtendAccount( $Account[0]['account_id'])), true);
 
     if ($Account[0]['bookbank_id']!=0) {
-      $BookbankDetail = json_decode(json_encode($this->AccountModel->BookbankDetail( $Account[0]['bookbank_id'])), true);
+      $BookbankDetail = json_decode(json_encode($this->Account_model->BookbankDetail( $Account[0]['bookbank_id'])), true);
       // $this->debuger->prevalue($BookbankDetail);
     } else {
       $BookbankDetail = 'false';
     }
-    // $BookbankList = $this->AccountModel->BookbankList( $Account[0]['member_id'] );
-    // $this->debuger->prevalue($this->AccountModel->BookbankList( $Account[0]['member_id']));
+    // $BookbankList = $this->Account_model->BookbankList( $Account[0]['member_id'] );
+    // $this->debuger->prevalue($this->Account_model->BookbankList( $Account[0]['member_id']));
     $next_account_class_id = $Account[0]['account_class_id']+1;
     $NextClass = array();
     if ($next_account_class_id!=8) {
-      $NextClass = $this->AccountModel->NextClass($next_account_class_id);
+      $NextClass = $this->Account_model->NextClass($next_account_class_id);
     }
 
     $BankList = $this->db->get('mlm_bank')->result_array();
 
 
-    $DividendID = $this->AccountingModel->DividendByID($id);
+    $DividendID = $this->Accounting_model->DividendByID($id);
     // $this->debuger->prevalue($DividendID);
-    $Class = $this->AccountModel->ClassResult();
+    $Class = $this->Account_model->ClassResult();
     //$this->debuger->prevalue($Class);
 
     $DivID = array();
@@ -152,8 +155,8 @@ class Member extends CI_Controller{
 
   public function AccountDetailExtend() {
     $id = $this->uri->segment(3);
-    $JounalExtendAccount = $this->AccountModel->JounalExtendAccount($id);
-    $HistoryAccount = $this->AccountModel->JounalExtendAccount($id);
+    $JounalExtendAccount = $this->Account_model->JounalExtendAccount($id);
+    $HistoryAccount = $this->Account_model->JounalExtendAccount($id);
   }
   public function FindAccountByAdviser() {
     $id = $this->uri->segment(3);
@@ -177,7 +180,7 @@ class Member extends CI_Controller{
       'account_level' => $account_level*1,
       'account_code' => $account_code,
     );
-    $Adviser = json_decode(json_encode($this->AccountModel->FindAccountByCode($input)), true);
+    $Adviser = json_decode(json_encode($this->Account_model->FindAccountByCode($input)), true);
 
     if (count($Adviser)>0) {
       $adviser_id = $Adviser[0]['account_id'];
@@ -193,9 +196,9 @@ class Member extends CI_Controller{
     $upline_id = $this->uri->segment(5);
 
     $Member = json_decode(json_encode($this->HomePageModel->LoadProfile($member_id)), true);
-    $AccountUpline = json_decode(json_encode($this->AccountModel->AccountByID($upline_id)), true);
-    $AccountAdviser = json_decode(json_encode($this->AccountModel->AccountByID($adviser_id)), true);
-    $DownlineList = json_decode(json_encode($this->AccountModel->AccountListByUpline($upline_id)), true);
+    $AccountUpline = json_decode(json_encode($this->Account_model->AccountByID($upline_id)), true);
+    $AccountAdviser = json_decode(json_encode($this->Account_model->AccountByID($adviser_id)), true);
+    $DownlineList = json_decode(json_encode($this->Account_model->AccountListByUpline($upline_id)), true);
     // $this->debuger->prevalue($AccountUpline);
 
     $value = array(
@@ -216,9 +219,9 @@ class Member extends CI_Controller{
     $upline_id = $this->uri->segment(5);
 
     $Member = json_decode(json_encode($this->HomePageModel->LoadProfile($member_id)), true);
-    $AccountUpline = json_decode(json_encode($this->AccountModel->AccountNonJoinByID($upline_id)), true);
-    $AccountAdviser = json_decode(json_encode($this->AccountModel->AccountNonJoinByID($adviser_id)), true);
-    $AccountListByTeam = json_decode(json_encode($this->AccountModel->AccountListByTeam($AccountUpline[0]['account_team'])), true);
+    $AccountUpline = json_decode(json_encode($this->Account_model->AccountNonJoinByID($upline_id)), true);
+    $AccountAdviser = json_decode(json_encode($this->Account_model->AccountNonJoinByID($adviser_id)), true);
+    $AccountListByTeam = json_decode(json_encode($this->Account_model->AccountListByTeam($AccountUpline[0]['account_team'])), true);
 
     //เพิ่ม Account ใหม่ และ เพิ่มการนับ downline
     $AccountInput = array(
@@ -230,7 +233,7 @@ class Member extends CI_Controller{
       'member_id' => $member_id,
     );
 
-    $new_account_id = $this->AccountModel->SaveAccount($AccountInput, $adviser_id);
+    $new_account_id = $this->Account_model->SaveAccount($AccountInput, $adviser_id);
 
     // เพิ่มการลงทะเบียนต่ออายุ ฟรี
     $expired =  Date('Y-m-d', strtotime("+365 day", strtotime(Date('Y-m-d'))));
@@ -241,7 +244,7 @@ class Member extends CI_Controller{
       'journal_extend_expired_date' => $expired,
       'journal_extend_amount' => 0,
     );
-    $new_journal_extend_id = $this->AccountModel->SaveJournalExtend($ExtendInput);
+    $new_journal_extend_id = $this->Account_model->SaveJournalExtend($ExtendInput);
 
     // เพิ่มรายการบัญชี ฟรีค่าธรรมเนียม บัญชีนักธุระกิจใหม่
     $code = "DR".DateTime::createFromFormat('U.u', microtime(true))->format("Hisu");
@@ -254,7 +257,7 @@ class Member extends CI_Controller{
       'accounting_no' => $code,
       'accounting_note' => "ฟรีค่าธรรมเนียม บัญชีนักธุระกิจใหม่"
     );
-    $new_accounting_id = $this->AccountModel->AddAccounting($AccountingInput);
+    $new_accounting_id = $this->Account_model->AddAccounting($AccountingInput);
     $this->AccountingModel->ConfirmInvoice($new_accounting_id);
 
     // ตรวจ ค่าการตลาด
@@ -290,17 +293,17 @@ class Member extends CI_Controller{
     $GoalCheck["NextAccID"] = "";
 
 
-    $ThisAccount = json_decode(json_encode($this->AccountModel->AccountNonJoinByID($upline_id)), true);
+    $ThisAccount = json_decode(json_encode($this->Account_model->AccountNonJoinByID($upline_id)), true);
     if (count($ThisAccount)>0) {
-      $AllDownline = json_decode(json_encode($this->AccountModel->AllDownlineByAccount($ThisAccount[0]['account_id'])), true);
+      $AllDownline = json_decode(json_encode($this->Account_model->AllDownlineByAccount($ThisAccount[0]['account_id'])), true);
       // print_r($AllDownline);
-      // $DownlineLit = json_decode(json_encode($this->AccountModel->AccountListByUpline($Upline[0]['account_upline_id'])), true);
+      // $DownlineLit = json_decode(json_encode($this->Account_model->AccountListByUpline($Upline[0]['account_upline_id'])), true);
       $GoalCheck["MemberID"] = $ThisAccount[0]['member_id'];
       $GoalCheck["ThisAccID"] = $ThisAccount[0]['account_id'];
       $GoalCheck["NextAccID"] = $ThisAccount[0]['account_upline_id'];
 
       foreach ($AllDownline as $row) {
-        $AccountDetail = json_decode(json_encode($this->AccountModel->AccountNonJoinByID($row['downline_count_downline_id'])), true);
+        $AccountDetail = json_decode(json_encode($this->Account_model->AccountNonJoinByID($row['downline_count_downline_id'])), true);
         // $this->debuger->prevalue($AccountDetail);
 
         // print_r($Result);
@@ -342,7 +345,7 @@ class Member extends CI_Controller{
               $text_note = 'หักผู้แนะนำ '.$income_adviser_total;
 
               // ลงบัญชี
-              $Account = json_decode(json_encode($this->AccountModel->AccountNonJoinByID($row['account_adviser_id'])), true);
+              $Account = json_decode(json_encode($this->Account_model->AccountNonJoinByID($row['account_adviser_id'])), true);
               $input = array(
                 'accounting_date' => Date('Y-m-d'),
                 'accounting_source_id' => $Account[0]['account_id'],
@@ -413,14 +416,14 @@ class Member extends CI_Controller{
       'bookbank_id' => $bookbank_id,
       'member_id' =>$member_id,
     );
-    $this->AccountModel->DeleteBookbank( $input );
+    $this->Account_model->DeleteBookbank( $input );
   }
   public function ApprovedMember()
   {
     $member_id = $this->uri->segment(3);
     $setting = $this->db->order_by('setting_id', 'DESC')->get('mlm_fee_setting')->result_array();
 
-     $maxJounalFreeId = $this->AccountModel->JounalFreeAccountAll();
+     $maxJounalFreeId = $this->Account_model->JounalFreeAccountAll();
      $maxJounalFreeId = $maxJounalFreeId+1;
 
     $input = array(
@@ -430,7 +433,7 @@ class Member extends CI_Controller{
       'journal_fee_code' => "FE".sprintf("%05d", $maxJounalFreeId),
     );
 
-    $check = $this->MemberModel->checkaccounting($member_id);
+    $check = $this->Member_model->checkaccounting($member_id);
 
     if (!empty($check)){
       redirect('/Accounting/');
@@ -455,7 +458,7 @@ class Member extends CI_Controller{
 				'accounting_tax' => 0,
 				'journals_id' => 1,
 			);
-			$this->AccountModel->AddAccounting($data);
+			$this->Account_model->AddAccounting($data);
       redirect($this->agent->referrer(), 'refresh');
 
     }
@@ -473,7 +476,7 @@ class Member extends CI_Controller{
   public function EditMember()
   {
     $member_id = $this->uri->segment(3);
-    $Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $member_id )), true);
+    $Profile = json_decode(json_encode($this->Homepage_model->LoadProfile( $member_id )), true);
 
     $value = array(
       'Result' => array(
@@ -500,7 +503,7 @@ class Member extends CI_Controller{
 
       unset($RegisterForm['user_pass'],$RegisterForm['user_pass_confirm']);
 
-			$Member = $this->HomePageModel->UpdateMember( $RegisterForm );
+			$Member = $this->Homepage_model->UpdateMember( $RegisterForm );
       $member_id = $RegisterForm['member_id'];
 
 
@@ -527,7 +530,7 @@ class Member extends CI_Controller{
     }else{
       $addPhoto['member_id'] = $member_id;
       $addPhoto['member_photo'] = 'no_profile.png';
-      $this->HomePageModel->addPhoto( $addPhoto );
+      $this->Homepage_model->addPhoto( $addPhoto );
     }
 
     redirect('/Member/MemberProfile/'.$member_id);
@@ -537,8 +540,8 @@ class Member extends CI_Controller{
     $Profile = array();
     $AccountList = array();
     if (isset($_SESSION['MEMBER_ID'])) {
-      $Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $this->uri->segment(3) )), true);
-      $AccountList = json_decode(json_encode($this->AccountModel->AccountByMember( $this->uri->segment(3))), true);
+      $Profile = json_decode(json_encode($this->Homepage_model->LoadProfile( $this->uri->segment(3) )), true);
+      $AccountList = json_decode(json_encode($this->Account_model->AccountByMember( $this->uri->segment(3))), true);
       if ($Profile[0]['member_id_card_type']==1) {
         $Profile[0]['member_id_card_type_name'] = 'บัตรประชาชน';
       } elseif ($Profile[0]['member_id_card_type']==2) {
@@ -580,7 +583,7 @@ class Member extends CI_Controller{
   {
     $account_id = $this->uri->segment(3);
     $member_id = $this->uri->segment(4);
-    // $MyAccountClass = json_decode(json_encode($this->AccountModel->AccountByID( $input,$id )), true);
+    // $MyAccountClass = json_decode(json_encode($this->Account_model->AccountByID( $input,$id )), true);
     $time =  Date('Y-m-d');
     $value = array(
       'point_value' => 4000,
@@ -591,13 +594,13 @@ class Member extends CI_Controller{
       'account_id' => $account_id,
     );
     // $this->debuger->prevalue($value);
-    $this->AccountModel->AddAccountDetailUpclass($value);
+    $this->Account_model->AddAccountDetailUpclass($value);
     redirect($this->agent->referrer(), 'refresh');
   }
   public function DeleteMember()
   {
     $member_id = $this->uri->segment(3);
     $this->db->where('member_id',$member_id)->delete('mlm_member');
-    redirect('member');
+    redirect('Member');
   }
 }

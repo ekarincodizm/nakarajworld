@@ -89,7 +89,7 @@
 				<div class="col-lg-12">
 					<div class="contactform form">
 						<!-- <form method="post" action="contact-form.php" name="contactform" id="contactform"> -->
-						<?php echo form_open('/HomePage/SendMailTo'); ?>
+						<?php echo form_open('/homepage/SendMailTo'); ?>
 							<div class="row">
 								<div class="col-md-4">
 									<label for="name">ชื่อ-สกุล</label>

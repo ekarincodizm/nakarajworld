@@ -15,8 +15,8 @@ class Permission extends CI_Controller{
     $this->load->view('back/template/footer');
   }
   public function index() {
-    $SuperAdmin = $this->PermissionModel->SuperAdmin();
-    $TeamAdmin = $this->PermissionModel->TeamAdmin();
+    $SuperAdmin = $this->Permission_model->SuperAdmin();
+    $TeamAdmin = $this->Permission_model->TeamAdmin();
     // $this->debuger->prevalue($SuperAdmin);
 
     $value = array(
@@ -36,7 +36,7 @@ class Permission extends CI_Controller{
 
     $AdminType = $this->uri->segment(3);
     $MemberID = $this->uri->segment(4);
-    $this->PermissionModel->UpdateAdmin($AdminForm);
+    $this->Permission_model->UpdateAdmin($AdminForm);
     redirect($this->agent->referrer(), 'refresh');
 
   }

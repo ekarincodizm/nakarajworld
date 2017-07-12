@@ -1,8 +1,8 @@
 <div id="userMenu" class="bs-example" data-example-id="simple-nav-stacked">
   <ul  class="nav nav-pills nav-stacked nav-pills-stacked-example">
-    <li role="presentation"><a href="<?php echo site_url('HomePage/AccountList'); ?>">เครือข่าย</a></li>
-    <li role="presentation"><a href="<?php echo site_url('HomePage/IncomeList'); ?>">เงินปันผล</a></li>
-    <li role="presentation"><a href="<?php echo site_url('HomePage/Profile'); ?>">กลับไปยังโปรไฟล์</a></li>
+    <li role="presentation"><a href="<?php echo site_url('homepage/AccountList'); ?>">เครือข่าย</a></li>
+    <li role="presentation"><a href="<?php echo site_url('homepage/IncomeList'); ?>">เงินปันผล</a></li>
+    <li role="presentation"><a href="<?php echo site_url('homepage/Profile'); ?>">กลับไปยังโปรไฟล์</a></li>
   </ul>
 </div>
 <script type="text/javascript">

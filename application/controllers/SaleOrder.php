@@ -24,7 +24,7 @@ class SaleOrder extends CI_Controller{
   }
 
   public function index() {
-    $SaleOrderList = $this->ProductsModel->SaleOrderList();
+    $SaleOrderList = $this->Products_model->SaleOrderList();
     $value = array(
       'Result' => array(
         'SaleOrderList' => $SaleOrderList
@@ -67,8 +67,8 @@ class SaleOrder extends CI_Controller{
   public function resultTemplateSaleOrder()
 {
   $InvoiceID = $this->uri->segment(3);
-  $AccountingDetail = $this->AccountingModel->AccountingDetail($InvoiceID);
-  $Config = $this->ConfigModel->Config();
+  $AccountingDetail = $this->Accounting_model->AccountingDetail($InvoiceID);
+  $Config = $this->Config_model->Config();
   //$this->debuger->prevalue($AccountingDetail);
   $value = array(
     'Result' => array(
@@ -83,8 +83,8 @@ class SaleOrder extends CI_Controller{
 public function resultTemplateFee()
 {
 $InvoiceID = $this->uri->segment(3);
-$AccountingDetail = $this->AccountingModel->AccountingDetail($InvoiceID);
-$Config = $this->ConfigModel->Config();
+$AccountingDetail = $this->Accounting_model->AccountingDetail($InvoiceID);
+$Config = $this->Config_model->Config();
 //$this->debuger->prevalue($AccountingDetail);
 
 $value = array(
@@ -117,9 +117,9 @@ $this->LoadDoc($value);
 public function resultTemplateDividend()
 {
   $InvoiceID = $this->uri->segment(3);
-  $AccountingDetail = $this->AccountingModel->AccountingDetail($InvoiceID);
+  $AccountingDetail = $this->Accounting_model->AccountingDetail($InvoiceID);
   //$this->debuger->prevalue($AccountingDetail);
-  $Config = $this->ConfigModel->Config();
+  $Config = $this->Config_model->Config();
 
 
   $value = array(

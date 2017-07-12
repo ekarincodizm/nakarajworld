@@ -1,6 +1,6 @@
 <?php
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-class HomePage extends CI_Controller{
+class Homepage extends CI_Controller{
 	public function __construct() {
 		parent::__construct();
 
@@ -23,20 +23,21 @@ class HomePage extends CI_Controller{
 
 	// public function index(){
 	// 	$Setting['config'] = $this->SettingModel->Setting();
-	// 	$this->load->view('HomePage',$Setting);
+	// 	$this->load->view('homepage',$Setting);
 	// }
 
 	public function index() {
-		$ProductsList = $this->ProductsModel->ProductsListOn();
+//		echo("Home Page");
+		$ProductsList = $this->Products_model->products_list_on();
 		// print_r($ProductsList);
 		// exit();
 		$ProductsList = json_decode(json_encode($ProductsList), true);
 
-		$Config = $this->ConfigModel->Config();
+		$Config = $this->Config_model->Config();
 
 
 		//new function config
-		$Config = $this->ConfigModel->Config();
+		$Config = $this->Config_model->Config();
 		//
 		$value = array(
 			'Result' => array(
@@ -50,16 +51,16 @@ class HomePage extends CI_Controller{
 	}
 
 	public function emaildone() {
-		$ProductsList = $this->ProductsModel->ProductsList();
+		$ProductsList = $this->Products_model->ProductsList();
 		// print_r($ProductsList);
 		// exit();
 		$ProductsList = json_decode(json_encode($ProductsList), true);
 
-		$Config = $this->ConfigModel->Config();
+		$Config = $this->Config_model->Config();
 
 
 		//new function config
-		$Config = $this->ConfigModel->Config();
+		$Config = $this->Config_model->Config();
 		//
 		$value = array(
 			'Result' => array(
@@ -94,9 +95,9 @@ class HomePage extends CI_Controller{
 
 		$IDCard = $this->input->post();
 		// $this->debuger->prevalue($IDCard);
-		
+
 		$province = $this->db->get('province')->result_array();
-		$duplicate = $this->HomePageModel->CheckRegis( $IDCard );
+		$duplicate = $this->Homepage_model->CheckRegis( $IDCard );
 		$duplicate = json_decode(json_encode($duplicate), true);
 		// $this->debuger->prevalue($duplicate);
 		if ($IDCard['member_id_card_type']==1) {
@@ -149,23 +150,23 @@ class HomePage extends CI_Controller{
 			$UpdateUser['user_pass'] = base64_encode($RegisterForm['user_pass']);
 
 			if($RegisterForm['user_pass']!='' && $RegisterForm['user_pass_confirm']!=''){
-				$this->HomePageModel->UpdateUser( $UpdateUser );
+				$this->Homepage_model->UpdateUser( $UpdateUser );
 			}
 
 			unset($RegisterForm['user_pass'],$RegisterForm['user_pass_confirm']);
 
-			$Member = $this->HomePageModel->UpdateMember( $RegisterForm );
+			$Member = $this->Homepage_model->UpdateMember( $RegisterForm );
 			$member_id = $RegisterForm['member_id'];
 
 		} else {
-			$Member = $this->HomePageModel->AddMember( $RegisterForm );
+			$Member = $this->Homepage_model->AddMember( $RegisterForm );
 			$Member = json_decode(json_encode($Member), true);
 			$value = array(
 				'user_name' => $Member[0]['member_citizen_id'],
 				'user_pass' => base64_encode($Member[0]['member_phone']),
 				'member_id' => $Member[0]['member_id'],
 			);
-			$User = $this->HomePageModel->AddUser( $value );
+			$User = $this->Homepage_model->AddUser( $value );
 			$member_id = $Member[0]['member_id'];
 		}
 
@@ -175,29 +176,29 @@ class HomePage extends CI_Controller{
 			copy($_FILES["member_photo"]["tmp_name"],"assets/image/profile/".$new_file);
 			$addPhoto['member_id'] = $member_id;
 			$addPhoto['member_photo'] = $new_file;
-			$this->HomePageModel->addPhoto( $addPhoto );
+			$this->Homepage_model->addPhoto( $addPhoto );
 		}else{
 			$addPhoto['member_id'] = $member_id;
 			$addPhoto['member_photo'] = 'no_profile.png';
-			$this->HomePageModel->addPhoto( $addPhoto );
+			$this->Homepage_model->addPhoto( $addPhoto );
 		}
 
-		redirect('HomePage/Profile');
+		redirect('homepage/Profile');
 
 	}
 	public function SubmitEditPassword()
 	{
 		$PasswordForm = $this->input->post();
-		$user = json_decode(json_encode($this->HomePageModel->LoadUser( $_SESSION['MEMBER_ID'] )), true);
+		$user = json_decode(json_encode($this->Homepage_model->LoadUser( $_SESSION['MEMBER_ID'] )), true);
 		$oldpwd = base64_encode($PasswordForm['old_pass']);
 		if ($user[0]['user_pass'] == $oldpwd) {
 			$UpdateUser['member_id'] = $PasswordForm['member_id'];
 			$UpdateUser['user_pass'] = base64_encode($PasswordForm['new_pass']);
-			$this->HomePageModel->UpdateUser( $UpdateUser );
+			$this->Homepage_model->UpdateUser( $UpdateUser );
 			$this->Logout();
 		} else {
 			@$_SESSION['PWD'] = 1;
-			redirect('HomePage/EditPassword');
+			redirect('homepage/EditPassword');
 		}
 	}
 	public function SubmitProfile(){
@@ -206,14 +207,14 @@ class HomePage extends CI_Controller{
 		$AddUser['user_pass'] = base64_encode($RegisterForm['user_pass']);
 		unset($RegisterForm['user_pass']);
 
-		$Member = $this->HomePageModel->AddMember( $RegisterForm );
+		$Member = $this->Homepage_model->AddMember( $RegisterForm );
 		$Member = json_decode(json_encode($Member), true);
 		$value = array(
 			'user_name' => $Member[0]['member_citizen_id'],
 			'user_pass' => $AddUser['user_pass'],
 			'member_id' => $Member[0]['member_id'],
 		);
-		$User = $this->HomePageModel->AddUser( $value );
+		$User = $this->Homepage_model->AddUser( $value );
 
 		$_SESSION['MEMBER_ID'] = $Member[0]['member_id'];
 		$IDCard = array(
@@ -246,11 +247,11 @@ class HomePage extends CI_Controller{
 			move_uploaded_file($_FILES["member_photo"]["tmp_name"],"assets/image/profile/".$new_file);
 			$addPhoto['member_id'] = $member_id;
 			$addPhoto['member_photo'] = $new_file;
-			$this->HomePageModel->addPhoto( $addPhoto );
+			$this->Homepage_model->addPhoto( $addPhoto );
 		}else{
 			$addPhoto['member_id'] = $member_id;
 			$addPhoto['member_photo'] = 'no_profile.png';
-			$this->HomePageModel->addPhoto( $addPhoto );
+			$this->Homepage_model->addPhoto( $addPhoto );
 		}
 	}
 	public function Profile() {
@@ -258,15 +259,15 @@ class HomePage extends CI_Controller{
 		// $ProfileDateOfBirth = array();
 		$AccountList = array();
 		if (isset($_SESSION['MEMBER_ID'])) {
-			$Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
-			// $ProfileDateOfBirth = json_decode(json_encode($this->HomePageModel->LoadProfileDateOfBirth( $_SESSION['MEMBER_ID'] )), true);
+			$Profile = json_decode(json_encode($this->Homepage_model->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
+			// $ProfileDateOfBirth = json_decode(json_encode($this->Homepage_model->LoadProfileDateOfBirth( $_SESSION['MEMBER_ID'] )), true);
 			$today = getdate();
 			$d1 = new DateTime($today["year"].'-'.$today["mon"].'-'.$today["mday"]);
 			$d2 = new DateTime($Profile[0]['member_born']);
 			$diff = $d2->diff($d1);
 			$Profile[0]['member_age'] = $diff->y;
 
-			$AccountList = json_decode(json_encode($this->AccountModel->AccountByMember( $_SESSION['MEMBER_ID'])), true);
+			$AccountList = json_decode(json_encode($this->Account_model->AccountByMember( $_SESSION['MEMBER_ID'])), true);
 			//$Profile[0]['member_born'] = $ProfileDateOfBirth[0]['member_born'];
 			if ($Profile[0]['member_id_card_type']==1) {
 				$Profile[0]['member_id_card_type_name'] = 'บัตรประชาชน';
@@ -279,7 +280,7 @@ class HomePage extends CI_Controller{
 
 		// $this->debuger->prevalue($Profile);
 
-		$pv = $this->HomePageModel->MemberPV($_SESSION['MEMBER_ID']);
+		$pv = $this->Homepage_model->MemberPV($_SESSION['MEMBER_ID']);
 
 		$value = array(
 			'Result' => array(
@@ -297,8 +298,8 @@ class HomePage extends CI_Controller{
 		$Profile = array();
 		$AccountList = array();
 		if (isset($_SESSION['MEMBER_ID'])) {
-			$Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
-			$AccountList = json_decode(json_encode($this->AccountModel->AccountByMember( $_SESSION['MEMBER_ID'])), true);
+			$Profile = json_decode(json_encode($this->Homepage_model->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
+			$AccountList = json_decode(json_encode($this->Account_model->AccountByMember( $_SESSION['MEMBER_ID'])), true);
 		}
 		$value = array(
 			'Result' => array(
@@ -313,8 +314,8 @@ class HomePage extends CI_Controller{
 		$Profile = array();
 		$IncomeAccounting = array();
 		if (isset($_SESSION['MEMBER_ID'])) {
-			$Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
-			$IncomeAccounting = json_decode(json_encode($this->AccountingModel->IncomeAccounting( $_SESSION['MEMBER_ID'])), true);
+			$Profile = json_decode(json_encode($this->Homepage_model->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
+			$IncomeAccounting = json_decode(json_encode($this->Accounting_model->IncomeAccounting( $_SESSION['MEMBER_ID'])), true);
 			//$this->debuger->prevalue($IncomeAccounting);
 		}
 		$value = array(
@@ -330,51 +331,51 @@ class HomePage extends CI_Controller{
 		$Profile = array();
 		$AccountList = array();
 		if (isset($_SESSION['MEMBER_ID'])) {
-			$Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
+			$Profile = json_decode(json_encode($this->Homepage_model->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
 		}
 		$id = $this->uri->segment(3);
-		$Account = json_decode(json_encode($this->AccountModel->AccountByID( $id )), true);
-		$Profile2 = json_decode(json_encode($this->HomePageModel->LoadProfile( $Account[0]['member_id'] )), true);
-		$AllDownline = json_decode(json_encode($this->AccountModel->AllDownlineByAccount( $id )), true);
-		$ThreeDownline = json_decode(json_encode($this->AccountModel->ThreeDownline( $id )), true);
-		$Upline = json_decode(json_encode($this->AccountModel->AccountByID( $Account[0]['account_upline_id'])), true);
-		$Adviser = json_decode(json_encode($this->AccountModel->AccountByID( $Account[0]['account_adviser_id'])), true);
-		$AdviserList = json_decode(json_encode($this->AccountModel->AdviserList( $Account[0]['account_id'])), true);
-		$Account2 = json_decode(json_encode($this->MemberModel->MemberList()), true);
-		$MyPv = json_decode(json_encode($this->HomePageModel->MemberPV( $Account[0]['member_id'])), true);
-		$CheckFreePV = $this->HomePageModel->CheckFreePV($Account[0]['account_id']);
+		$Account = json_decode(json_encode($this->Account_model->AccountByID( $id )), true);
+		$Profile2 = json_decode(json_encode($this->Homepage_model->LoadProfile( $Account[0]['member_id'] )), true);
+		$AllDownline = json_decode(json_encode($this->Account_model->AllDownlineByAccount( $id )), true);
+		$ThreeDownline = json_decode(json_encode($this->Account_model->ThreeDownline( $id )), true);
+		$Upline = json_decode(json_encode($this->Account_model->AccountByID( $Account[0]['account_upline_id'])), true);
+		$Adviser = json_decode(json_encode($this->Account_model->AccountByID( $Account[0]['account_adviser_id'])), true);
+		$AdviserList = json_decode(json_encode($this->Account_model->AdviserList( $Account[0]['account_id'])), true);
+		$Account2 = json_decode(json_encode($this->Member_model->MemberList()), true);
+		$MyPv = json_decode(json_encode($this->Homepage_model->MemberPV( $Account[0]['member_id'])), true);
+		$CheckFreePV = $this->Homepage_model->CheckFreePV($Account[0]['account_id']);
 
 
 		//$this->debuger->prevalue($MyPv);
 
-		$PlanOneDownline = $this->AccountModel->PlanOneDownline($id, $Account[0]['account_level']);
-		$PlanOneDirectAdviser = $this->AccountModel->PlanOneDirectAdviser($id, $Account[0]['account_level']);
+		$PlanOneDownline = $this->Account_model->PlanOneDownline($id, $Account[0]['account_level']);
+		$PlanOneDirectAdviser = $this->Account_model->PlanOneDirectAdviser($id, $Account[0]['account_level']);
 		// $this->debuger->prevalue($PlanOneDownline);
 
-		$JounalExtendAccount = $this->AccountModel->JounalExtendAccount( $Account[0]['account_id']);
+		$JounalExtendAccount = $this->Account_model->JounalExtendAccount( $Account[0]['account_id']);
 		// $this->debuger->prevalue($JounalExtendAccount);
 
 
-		// $HistoryAccount = json_decode(json_encode($this->AccountModel->JounalExtendAccount( $Account[0]['account_id'])), true);
+		// $HistoryAccount = json_decode(json_encode($this->Account_model->JounalExtendAccount( $Account[0]['account_id'])), true);
 
 		if ($Account[0]['bookbank_id']!=0) {
-			$BookbankDetail = json_decode(json_encode($this->AccountModel->BookbankDetail( $Account[0]['bookbank_id'])), true);
+			$BookbankDetail = json_decode(json_encode($this->Account_model->BookbankDetail( $Account[0]['bookbank_id'])), true);
 			// $this->debuger->prevalue($BookbankDetail);
 		} else {
 			$BookbankDetail = 'false';
 		}
-		// $BookbankList = $this->AccountModel->BookbankList( $Account[0]['member_id'] );
-		// $this->debuger->prevalue($this->AccountModel->BookbankList( $Account[0]['member_id']));
+		// $BookbankList = $this->Account_model->BookbankList( $Account[0]['member_id'] );
+		// $this->debuger->prevalue($this->Account_model->BookbankList( $Account[0]['member_id']));
 		$next_account_class_id = $Account[0]['account_class_id']+1;
 		$NextClass = array();
 		if ($next_account_class_id!=8) {
-			$NextClass = $this->AccountModel->NextClass($next_account_class_id);
+			$NextClass = $this->Account_model->NextClass($next_account_class_id);
 		}
 
 		$BankList = $this->db->get('mlm_bank')->result_array();
 
 
-		$DividendID = $this->AccountingModel->DividendByID($id);
+		$DividendID = $this->Accounting_model->DividendByID($id);
 		// $this->debuger->prevalue($DividendID);
 
 		$DivID = array();
@@ -415,7 +416,7 @@ class HomePage extends CI_Controller{
 	}
 	public function EditProfile() {
 		$province = $this->db->get('province')->result_array();
-		$Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
+		$Profile = json_decode(json_encode($this->Homepage_model->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
 		if ($Profile[0]['member_id_card_type']==1) {
 			$Profile[0]['member_id_card_type_name'] = 'บัตรประชาชน';
 		} elseif ($Profile[0]['member_id_card_type']==2) {
@@ -434,8 +435,8 @@ class HomePage extends CI_Controller{
 		$this->LoadUserPage($value);
 	}
 	public function EditPassword() {
-		$UserPass = $this->HomePageModel->LoadUser( $_SESSION['MEMBER_ID'] );
-		$Profile = json_decode(json_encode($this->HomePageModel->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
+		$UserPass = $this->Homepage_model->LoadUser( $_SESSION['MEMBER_ID'] );
+		$Profile = json_decode(json_encode($this->Homepage_model->LoadProfile( $_SESSION['MEMBER_ID'] )), true);
 		if ($Profile[0]['member_id_card_type']==1) {
 			$Profile[0]['member_id_card_type_name'] = 'บัตรประชาชน';
 		} elseif ($Profile[0]['member_id_card_type']==2) {
@@ -454,7 +455,7 @@ class HomePage extends CI_Controller{
 	}
 	public function Logout() {
 		session_destroy();
-		redirect('/HomePage');
+		redirect('/homepage');
 	}
 	public function TemplatePrintRegister() {
 		$this->load->view('front/User/TemplatePrintRegister');
@@ -465,7 +466,7 @@ class HomePage extends CI_Controller{
 	public function SubmitLogin()
 	{
 		$data = $this->input->post();
-		$User = $this->HomePageModel->AuthenUser( $data );
+		$User = $this->Homepage_model->AuthenUser( $data );
 		if (empty($User))
 		{
 			redirect($this->agent->referrer(), 'refresh');
@@ -474,7 +475,7 @@ class HomePage extends CI_Controller{
 			$UserArr = json_decode(json_encode($User), true);
 			$_SESSION['MEMBER_ID'] = $UserArr[0]['member_id'];
 			// $this->response(array('status' => true, 'User' => $User));
-			redirect('HomePage/Profile');
+			redirect('homepage/Profile');
 
 		}
 	}
@@ -488,7 +489,7 @@ class HomePage extends CI_Controller{
 		$config['smtp_user']    = 'info@ndwn.co.th';
 		$config['smtp_pass']    = '6836zSdm4';
 		$config['charset']    = 'utf-8';
-		$config['newline']    = "\r\n";
+		$config['newline']    = "/r/n";
 		$config['mailtype'] = 'text'; // or html
 		$config['validation'] = TRUE; // bool whether to validate email or not
 
@@ -504,6 +505,6 @@ class HomePage extends CI_Controller{
 		$this->email->send();
 
 		// echo $this->email->print_debugger();
-		redirect('HomePage/emaildone');
+		redirect('homepage/emaildone');
 	}
 }

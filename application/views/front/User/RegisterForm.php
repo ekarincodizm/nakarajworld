@@ -12,7 +12,7 @@
 			<?php if ($Registered!="true"): ?>
 				<div class="col-lg-8 col-lg-offset-2" >
 					<!-- <form class="form-horizontal form" novalidate ng-submit="SubmitProfile()"> -->
-					<?php echo form_open_multipart('/HomePage/SubmitProfile'); ?>
+					<?php echo form_open_multipart('/homepage/SubmitProfile'); ?>
 
 					<div class="row">
 						<div class="col-md-2">

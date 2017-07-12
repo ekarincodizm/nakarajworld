@@ -19,7 +19,7 @@ class SaleOrderHistory extends CI_Controller{
     $for_date = isset($_POST['for_date'])?$_POST['for_date']:'';
     $to_date = isset($_POST['to_date'])?$_POST['to_date']:'';
     // $SaleOrderHistory = $this->ProductsModel->SaleOrderHistory();
-    $SaleOrderHistory = $this->ProductsModel->SaleOrderHistory($for_date,$to_date);
+    $SaleOrderHistory = $this->Products_model->SaleOrderHistory($for_date,$to_date);
     // $this->debuger->prevalue($SaleOrderHistory);
     //new function SwishSearch
 

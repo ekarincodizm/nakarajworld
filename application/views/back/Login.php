@@ -34,14 +34,14 @@
         <div class="card">
             <div class="body">
 
-                <?php echo form_open('/Admin/AuthenAdmin'); ?>
+                <?php echo form_open('/admin/AuthenAdmin'); ?>
                     <!-- <div class="msg">Register a new membership</div> -->
                     <div class="input-group">
                         <span class="input-group-addon">
                             <i class="material-icons">person</i>
                         </span>
                         <div class="form-line">
-                            <input type="text" class="form-control" name="admin_username"  required placeholder="กรอกรหัสผู้ดูแล" autofocus="" aria-required="true">
+                            <input type="text" class="form-control" name="admin_username"  required placeholder="กรอกรหัสผู้ดูแล" autofocus aria-required="true">
                         </div>
                     </div>
                     <div class="input-group">

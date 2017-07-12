@@ -22,7 +22,7 @@ class Config extends CI_Controller{
 
   public function index() {
     $Config_id = $this->uri->segment(3);
-    $ConfigDetail =$this->ConfigModel->Config($Config_id);
+    $ConfigDetail =$this->Config_model->Config($Config_id);
     $ConfigDetail = json_decode(json_encode($ConfigDetail), true);
 
     $value = array(
@@ -36,7 +36,7 @@ class Config extends CI_Controller{
 
   public function ConfigBG() {
     $Config_id = $this->uri->segment(3);
-    $ConfigDetail =$this->ConfigModel->Config($Config_id);
+    $ConfigDetail =$this->Config_model->Config($Config_id);
     $ConfigDetail = json_decode(json_encode($ConfigDetail), true);
 
     $value = array(
@@ -50,7 +50,7 @@ class Config extends CI_Controller{
 
   public function ConfigDetail() {
     $Config_id = $this->uri->segment(3);
-    $ConfigDetail =$this->ConfigModel->Config($Config_id);
+    $ConfigDetail =$this->Config_model->Config($Config_id);
     $ConfigDetail = json_decode(json_encode($ConfigDetail), true);
 
     $value = array(
@@ -71,7 +71,7 @@ class Config extends CI_Controller{
       'mlm_config_id' => $_POST['mlm_config_id'],
       'mlm_config_detail' => $_POST['mlm_config_detail'],
     );
-    $this->ConfigModel->UpdateConfig($input);
+    $this->Config_model->UpdateConfig($input);
 
     redirect('/Config/ConfigDetail');
 
@@ -84,13 +84,13 @@ class Config extends CI_Controller{
       'mlm_config_id' => $_POST['mlm_config_id'],
       'shop_config' => $_POST['shop_config'],
     );
-    $this->ConfigModel->UpdateConfig($input);
+    $this->Config_model->UpdateConfig($input);
     redirect('/Config/ShopConfig');
   }
 
   public function ShopConfig() {
     $Config_id = $this->uri->segment(3);
-    $ConfigDetail =$this->ConfigModel->Config($Config_id);
+    $ConfigDetail =$this->Config_model->Config($Config_id);
     $ConfigDetail = json_decode(json_encode($ConfigDetail), true);
 
     $value = array(
@@ -132,7 +132,7 @@ class Config extends CI_Controller{
       'mlm_config_address' => $_POST['mlm_config_address'],
       'mlm_config_logo' => $new_file,
     );
-    $this->ConfigModel->UpdateConfig($input);
+    $this->Config_model->UpdateConfig($input);
 
     redirect('/Config');
 
@@ -163,7 +163,7 @@ class Config extends CI_Controller{
       'mlm_config_id' => $_POST['mlm_config_id'],
       'mlm_config_bg' => $new_file,
     );
-    $this->ConfigModel->UpdateConfig($input);
+    $this->Config_model->UpdateConfig($input);
 
     redirect('/Config/ConfigBG');
   }

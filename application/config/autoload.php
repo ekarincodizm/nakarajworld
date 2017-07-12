@@ -108,15 +108,15 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array( 'HomePageModel',
-                            'MemberModel',
-                            'AccountModel',
-                            'AccountingModel',
-                            'BusinessSettingModel',
-                            'ProductsModel',
-                            'DashBoardModel',
-                            'PermissionModel',
-                            'ConfigModel');
+$autoload['model'] = array( 'Homepage_model',
+                            'Member_model',
+                            'Account_model',
+                            'Accounting_model',
+                            'Business_setting_model',
+                            'Products_model',
+                            'Dashboard_model',
+                            'Permission_model',
+                            'Config_model');
 
 
 /* End of file autoload.php */

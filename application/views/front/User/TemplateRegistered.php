@@ -9,7 +9,7 @@
         <img class="pull-left" src="<?php echo base_url('assets/theme/front-end/images/laurel-wreath-right.png')?>" alt="Laurel Wreath" width="35" height="73">
       </div>
       <p class="lead">บัญชีนักธุรกิจอิสระ</p>
-      <a href="<?php echo site_url('HomePage/AccountList'); ?>" class="button green rounded">ดูบัญชีทั้งหมด</a>
+      <a href="<?php echo site_url('homepage/AccountList'); ?>" class="button green rounded">ดูบัญชีทั้งหมด</a>
     </div>
   </div>
 

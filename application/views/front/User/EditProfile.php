@@ -53,7 +53,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 			<div class="col-lg-8 col-lg-offset-2">
 
 					<!-- <form class="form-horizontal form" novalidate ng-submit="SubmitProfile()"> -->
-					<?php echo form_open_multipart('/HomePage/SubmitEditProfile'); ?>
+					<?php echo form_open_multipart('/homepage/SubmitEditProfile'); ?>
 					<input type="hidden" name="member_id" value="<?php echo $Profile[0]['member_id']  ?>">
 						<div class="row">
 							<div class="col-md-2">

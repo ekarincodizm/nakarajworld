@@ -10,7 +10,7 @@
 		<div class="row">
 			<div class="col-lg-4 col-lg-offset-4">
 				<div class="contactform form">
-					<?php echo form_open('/HomePage/CheckRegis'); ?>
+					<?php echo form_open('/homepage/CheckRegis'); ?>
 					<!-- , ส่วนที่เอาออก array('id' => "FindUser", 'name' => "FindUser", 'novalidate'=>'') -->
 					<!-- <form name="FindUser" class="form-horizontal" novalidate ng-submit="CheckRegis()"> -->
 						<div class="row">

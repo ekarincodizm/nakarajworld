@@ -15,7 +15,7 @@ class Products extends CI_Controller{
     $this->load->view('back/template/footer');
   }
   public function index() {
-    $ProductsList = $this->ProductsModel->ProductsList();
+    $ProductsList = $this->Products_model->ProductsList();
     $ProductsList = json_decode(json_encode($ProductsList), true);
 
     $value = array(
@@ -37,7 +37,7 @@ class Products extends CI_Controller{
   }
   public function EditProducts() {
     $products_id = $this->uri->segment(3);
-    $ProductsDetail =$this->ProductsModel->ProductsDetail($products_id);
+    $ProductsDetail =$this->Products_model->ProductsDetail($products_id);
     $ProductsDetail = json_decode(json_encode($ProductsDetail), true);
 
     $value = array(
@@ -75,7 +75,7 @@ class Products extends CI_Controller{
 
         'products_code' => "P".$ProductsCode,
       );
-      $this->ProductsModel->AddProducts($input);
+      $this->Products_model->AddProducts($input);
     } else {
 
       if ($_FILES["products_image"]["name"]!='') {
@@ -106,7 +106,7 @@ class Products extends CI_Controller{
         'products_update_date' => Date('Y-m-d H:i:s'),
         'products_code' => $_POST['products_code'],
       );
-      $this->ProductsModel->UpdateProducts($input);
+      $this->Products_model->UpdateProducts($input);
 
     }
     redirect('/Products');
@@ -125,6 +125,6 @@ class Products extends CI_Controller{
 
     $this->db->where('products_id',$products_id)->update('mlm_products',$status);
 
-    redirect('products');
+    redirect('Products');
   }
 }

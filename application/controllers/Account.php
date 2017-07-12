@@ -20,7 +20,7 @@ class account extends CI_Controller
 
   public function index()
   {
-    $AccountList = json_decode(json_encode($this->AccountModel->AllAccountList()), true);
+    $AccountList = json_decode(json_encode($this->Account_model->AllAccountList()), true);
     $value = array(
       'Result' => array(
         'AccountList' => $AccountList,
@@ -32,7 +32,7 @@ class account extends CI_Controller
   public function AccountPermission()
   {
     $input = $this->input->post();
-    $this->AccountingModel->Account_Transfer($input);
+    $this->Accounting_model->Account_Transfer($input);
     redirect($this->agent->referrer(), 'refresh');
   }
 
@@ -67,8 +67,8 @@ class account extends CI_Controller
     $upline_id = $this->uri->segment(5);
 
     // ดึงรายละเอียดของ อัปไลน์
-    $Upline = $this->AccountModel->FindAccountByID($upline_id);
-    $AccountListByTeam = $this->AccountModel->CountAccountTeam($Upline[0]['account_team']);
+    $Upline = $this->Account_model->FindAccountByID($upline_id);
+    $AccountListByTeam = $this->Account_model->CountAccountTeam($Upline[0]['account_team']);
     //เพิ่ม Account ใหม่ และ เพิ่มการนับ downline
     $account_level = $Upline[0]['account_level']+1;
     $AccountInput = array(
@@ -80,7 +80,7 @@ class account extends CI_Controller
       'member_id' => $member_id,
     );
 
-    $new_account_id = $this->AccountModel->SaveAccount($AccountInput, $adviser_id);
+    $new_account_id = $this->Account_model->SaveAccount($AccountInput, $adviser_id);
 
     $this->FreeExtend($new_account_id, $member_id);
     // จบการบันทึก บัญชีใหม่ และ ลงบัญชีเงินได้ เรียบร้อย (ฟรีค่าธรรมเนียม)
@@ -111,11 +111,11 @@ class account extends CI_Controller
     $account_id = $this->uri->segment(3);
     $member_id = $this->uri->segment(4);
     // Use PV
-    $MyAccountClass = $this->AccountModel->FindAccountByID( $account_id );
+    $MyAccountClass = $this->Account_model->FindAccountByID( $account_id );
 
     $next_account_class_id = $MyAccountClass[0]['account_class_id']+1;
     $NextClass = array();
-    $NextClass = $this->AccountModel->NextClass($next_account_class_id);
+    $NextClass = $this->Account_model->NextClass($next_account_class_id);
     //$this->debuger->prevalue($NextClass);
     $time =  Date('Y-m-d');
     $value = array(
@@ -127,11 +127,11 @@ class account extends CI_Controller
       'account_id' => $account_id,
     );
 
-    $this->AccountModel->AddAccountDetailUpclass($value);
+    $this->Account_model->AddAccountDetailUpclass($value);
 
     // UpgradeAccount
-    $Upline = $this->AccountModel->UpgradeAccount($account_id);
-    $ThisAccount = $this->AccountModel->FindAccountByID($account_id);
+    $Upline = $this->Account_model->UpgradeAccount($account_id);
+    $ThisAccount = $this->Account_model->FindAccountByID($account_id);
     $RoundClass = 0;
     $this->CheckMarketingValue($Upline, $ThisAccount[0]['account_class_id'] ,$RoundClass);
     redirect($this->agent->referrer(), 'refresh');
@@ -161,7 +161,7 @@ class account extends CI_Controller
     // Add Repeat
     $AccountRound = $this->HomePageModel->AccountRepeat($account_id,$class_id);
     $RoundClass = $AccountRound+1;
-    $NextClass = $this->AccountModel->NextClass($class_id);
+    $NextClass = $this->Account_model->NextClass($class_id);
 
     $time =  Date('Y-m-d');
     $value = array(
@@ -170,7 +170,7 @@ class account extends CI_Controller
       'account_repeat_round' => $RoundClass,
       'account_id' => $account_id,
     );
-    $this->AccountModel->AddRepeat($value);
+    $this->Account_model->AddRepeat($value);
 
     //Used PV
     $value = array(
@@ -181,11 +181,11 @@ class account extends CI_Controller
       'member_id' => $member_id,
       'account_id' => $account_id,
     );
-    $this->AccountModel->AddAccountDetailUpclass($value);
+    $this->Account_model->AddAccountDetailUpclass($value);
 
     //UpgradeAccount
-    $ThisAccount = $this->AccountModel->FindAccountByID($account_id);
-    $Upline = $this->AccountModel->FindAccountByID($ThisAccount[0]['account_upline_id']);
+    $ThisAccount = $this->Account_model->FindAccountByID($account_id);
+    $Upline = $this->Account_model->FindAccountByID($ThisAccount[0]['account_upline_id']);
     $this->CheckMarketingValue($Upline, $class_id,$RoundClass);
     redirect($this->agent->referrer(), 'refresh');
   }
@@ -213,7 +213,7 @@ class account extends CI_Controller
       // echo $lvlDown;
       // echo "<br>";
 
-      // $FindGoal = $this->AccountModel->GetGoalClassLvl($Account[0]['account_class_id'] , $lvlDown);
+      // $FindGoal = $this->Account_model->GetGoalClassLvl($Account[0]['account_class_id'] , $lvlDown);
       //
       // $goal = $FindGoal[0]['income_percent_goal']; // เป้าหมายการครบ เริ่มจาก 3
       // $this->debuger->prevalue($goal);
@@ -228,7 +228,7 @@ class account extends CI_Controller
         if ( count($Account)>0 ) { // ในกรณีที่ถึง รหัสของบริษัท แล้วจะไม่มีเกินขึ้นไปอีก
           // MV = MarketingValue // นับ จำนวน รหัสที่ class ตรงกัน ใน
           // print_r($Account);
-          $FindGoal = $this->AccountModel->GetGoalClassLvl($DownlineClass , $lvlDown);
+          $FindGoal = $this->Account_model->GetGoalClassLvl($DownlineClass , $lvlDown);
           $goal = $FindGoal[0]['income_percent_goal'];
           $NextAccount = $this->CheckMVPerLevel($Account, $lvlDown, $goal, $DownlineClass, $i,$RoundClass);
           // $this->debuger->prevalue($NextAccount);
@@ -248,9 +248,9 @@ class account extends CI_Controller
     $ThisAccount = $Account;
     // นับ Downline
     if ($RoundClass!='' && $RoundClass!=0) {
-      $Downline = $this->AccountModel->RepeatPerLVL($ThisAccount, $lvlDown, $DownlineClass, $RoundClass);
+      $Downline = $this->Account_model->RepeatPerLVL($ThisAccount, $lvlDown, $DownlineClass, $RoundClass);
     } else {
-      $Downline = $this->AccountModel->DownlinePerLVL($ThisAccount, $lvlDown, $DownlineClass);
+      $Downline = $this->Account_model->DownlinePerLVL($ThisAccount, $lvlDown, $DownlineClass);
     }
 
     // echo "<script>";
@@ -273,20 +273,20 @@ class account extends CI_Controller
         $this->UplineDividend($ThisAccount, $lvlDown, $DownlineClass, $i, $goal,$RoundClass);
       }
     }
-    $NextAccount = $this->AccountModel->FindAccountByID($ThisAccount[0]['account_upline_id']);
+    $NextAccount = $this->Account_model->FindAccountByID($ThisAccount[0]['account_upline_id']);
     return $NextAccount;
   }
   public function UplineDividend($Upline, $lvl, $DownlineClass, $i, $goal,$RoundClass)
   {
     // เงินที่ อัปไลน์ จะได้
-    $UplineMV = $this->AccountModel->GetMVByClassLvl($DownlineClass , $lvl);
+    $UplineMV = $this->Account_model->GetMVByClassLvl($DownlineClass , $lvl);
      $UplineMVAmount= ($UplineMV[0]['income_percent_point']*$UplineMV[0]['income_percent_amount'])/100;
     $lot = $UplineMV[0]['income_percent_lot'];
     // $this->debuger->prevalue($UplineMVAmount);
     $journal_dividend_amount = $UplineMVAmount/$lot;;
     // ลงค่าการตลาด ให้ Upline
 
-    $FindDICode = $this->AccountModel->FindDividend();
+    $FindDICode = $this->Account_model->FindDividend();
     $DIcode = "DI".sprintf("%05d",($FindDICode+1));
 
     // $this->debuger->prevalue($DIcode);
@@ -299,7 +299,7 @@ class account extends CI_Controller
       'journal_dividend_code' => $DIcode,
       'journal_dividend_round' => $RoundClass,
      );
-    $new_journal_dividend_id = $this->AccountModel->SaveDividend($input);
+    $new_journal_dividend_id = $this->Account_model->SaveDividend($input);
     // ลงบัญชี
     $code = "DR".DateTime::createFromFormat('U.u', microtime(true))->format("Hisu");
 
@@ -312,19 +312,19 @@ class account extends CI_Controller
       'accounting_status' => 2,
       // 'accounting_note' => "ค่าการตลาด บริษัท"
     );
-    $new_accounting_id = $this->AccountModel->AddAccounting($AccountingInput);
+    $new_accounting_id = $this->Account_model->AddAccounting($AccountingInput);
   }
   public function AdviserDividend($Downline, $Upline, $lvl, $DownlineClass,$RoundClass)
   {
     // เงินที่ อัปไลน์ จะได้
-    $UplineMV = $this->AccountModel->GetMVByClassLvl($DownlineClass , $lvl);
+    $UplineMV = $this->Account_model->GetMVByClassLvl($DownlineClass , $lvl);
      $UplineMVAmount= ($UplineMV[0]['income_percent_point']*$UplineMV[0]['income_percent_amount'])/100;
     $lot = $UplineMV[0]['income_percent_lot'];
 
     foreach ($Downline as $row) {
       if ($row['account_upline_id'] != $row['account_adviser_id']) { // เช็คว่า ผู้ที่แนะนำ กับผู้ที่เป็น อัปไลน์ เป็นคนเดียวกันไหม
         // ดึงข้อมูล Adviser
-        $Adviser = $this->AccountModel->FindAccountByID($row['account_adviser_id']);
+        $Adviser = $this->Account_model->FindAccountByID($row['account_adviser_id']);
         $AdviserClass = $Adviser[0]['account_class_id'];
         $DownlineClass = $row['account_class_id'];
         // เช็ค Adviser กับ Downline เป็น แผนไหน (NORMAL หรือมากกว่า) เพื่อระบุเงิน Adviser
@@ -336,7 +336,7 @@ class account extends CI_Controller
         //หักค่า Adviser
         $UplineMVAmount = $UplineMVAmount - $AdviserMVAmount;
         // ลงค่าการตลาด
-        $FindDICode = $this->AccountModel->FindDividend();
+        $FindDICode = $this->Account_model->FindDividend();
         $DIcode = "DI".sprintf("%05d",($FindDICode+1));
         $input = array(
           'journal_dividend_amount' => $AdviserMVAmount,
@@ -346,7 +346,7 @@ class account extends CI_Controller
           'journal_dividend_code' => $DIcode,
           'journal_dividend_round' => $RoundClass,
          );
-        $new_journal_dividend_id = $this->AccountModel->SaveDividend($input);
+        $new_journal_dividend_id = $this->Account_model->SaveDividend($input);
         // ลงบัญชี
         $code = "DR".DateTime::createFromFormat('U.u', microtime(true))->format("Hisu");
         $input = array(
@@ -363,7 +363,7 @@ class account extends CI_Controller
     } // End foreach
 
     // ลงค่าการตลาด ให้ Upline
-    $FindDICode = $this->AccountModel->FindDividend();
+    $FindDICode = $this->Account_model->FindDividend();
     $DIcode = "DI".sprintf("%05d",($FindDICode+1));
     $input = array(
       'journal_dividend_amount' => $UplineMVAmount,
@@ -375,7 +375,7 @@ class account extends CI_Controller
       'journal_dividend_round' => $RoundClass,
 
      );
-    $new_journal_dividend_id = $this->AccountModel->SaveDividend($input);
+    $new_journal_dividend_id = $this->Account_model->SaveDividend($input);
     // ลงบัญชี
     $code = "DR".DateTime::createFromFormat('U.u', microtime(true))->format("Hisu");
     $input = array(
@@ -393,7 +393,7 @@ class account extends CI_Controller
   {
     // เพิ่มการลงทะเบียนต่ออายุ ฟรี
     $expired =  Date('Y-m-d', strtotime("+365 day", strtotime(Date('Y-m-d'))));
-    $FindEXCode = $this->AccountModel->JounalExtendAccountAll();
+    $FindEXCode = $this->Account_model->JounalExtendAccountAll();
     $EXcode = "EX".sprintf("%05d",($FindEXCode+1));
     $ExtendInput = array(
       'account_id' => $new_account_id,
@@ -403,7 +403,7 @@ class account extends CI_Controller
       'journal_extend_amount' => 0,
       'journal_extend_code' => $EXcode,
     );
-    $new_journal_extend_id = $this->AccountModel->SaveJournalExtend($ExtendInput);
+    $new_journal_extend_id = $this->Account_model->SaveJournalExtend($ExtendInput);
 
     // เพิ่มรายการบัญชี ฟรีค่าธรรมเนียม บัญชีนักธุระกิจใหม่
     $code = "DR".DateTime::createFromFormat('U.u', microtime(true))->format("Hisu");
@@ -415,7 +415,7 @@ class account extends CI_Controller
       'accounting_no' => $code,
       'accounting_note' => "ฟรีค่าธรรมเนียม บัญชีนักธุระกิจใหม่",
     );
-    $new_accounting_id = $this->AccountModel->AddAccounting($AccountingInput);
+    $new_accounting_id = $this->Account_model->AddAccounting($AccountingInput);
     $this->AccountingModel->ConfirmInvoice($new_accounting_id);
   }
 }

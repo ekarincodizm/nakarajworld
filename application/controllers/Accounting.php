@@ -18,7 +18,7 @@ class Accounting extends CI_Controller{
   public function index($fromDate="", $toDate ="") {
     $AccountingList = array();
     if ($fromDate != "" && $toDate != "") {
-      $AccountingList = $this->AccountingModel->AccountingByDuration($fromDate, $toDate);
+      $AccountingList = $this->Accounting_model->AccountingByDuration($fromDate, $toDate);
     }
 
     $value = array(
@@ -44,7 +44,7 @@ class Accounting extends CI_Controller{
   public function DetailSaleOrder()
   {
     $accounting_id = $this->uri->segment(3);
-    $AccountingDetail = $this->AccountingModel->DetailSaleOrder($accounting_id);
+    $AccountingDetail = $this->Accounting_model->DetailSaleOrder($accounting_id);
     //$this->debuger->prevalue($AccountingDetail);
 
     $value = array(
@@ -59,7 +59,7 @@ class Accounting extends CI_Controller{
   public function AccountingDetail()
   {
     $accounting_id = $this->uri->segment(3);
-    $AccountingDetail = $this->AccountingModel->AccountingDetail($accounting_id);
+    $AccountingDetail = $this->Accounting_model->AccountingDetail($accounting_id);
     //$this->debuger->prevalue($AccountingDetail);
 
     $value = array(
@@ -76,7 +76,7 @@ class Accounting extends CI_Controller{
     $accounting_id = $this->uri->segment(3);
     $member_id = $this->uri->segment(4);
 
-    $this->AccountingModel->ConfirmInvoiceAndEnableProfile($accounting_id, $member_id);
+    $this->Accounting_model->ConfirmInvoiceAndEnableProfile($accounting_id, $member_id);
 
     redirect($this->agent->referrer(), 'refresh');
   }
@@ -100,7 +100,7 @@ class Accounting extends CI_Controller{
   public function ConfirmInvoice()
   {
     $accounting_id = $this->uri->segment(3);
-    $this->AccountingModel->ConfirmInvoice($accounting_id);
+    $this->Accounting_model->ConfirmInvoice($accounting_id);
     redirect($this->agent->referrer(), 'refresh');
   }
 
@@ -114,8 +114,8 @@ class Accounting extends CI_Controller{
       'accounting_source_id' => $this->uri->segment(5),
     );
 
-    $this->AccountingModel->ConfirmOrder($input);
-    $this->AccountingModel->ConfirmInvoice($accounting_id);
+    $this->Accounting_model->ConfirmOrder($input);
+    $this->Accounting_model->ConfirmInvoice($accounting_id);
     redirect($this->agent->referrer(), 'refresh');
   }
 
@@ -129,7 +129,7 @@ class Accounting extends CI_Controller{
   public function ConfirmDividend()
   {
     $accounting_id = $this->uri->segment(3);
-    $this->AccountingModel->ConfirmDividend($accounting_id);
+    $this->Accounting_model->ConfirmDividend($accounting_id);
     redirect($this->agent->referrer(), 'refresh');
   }
 }
