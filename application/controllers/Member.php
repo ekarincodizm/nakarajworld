@@ -63,7 +63,7 @@ class Member extends CI_Controller{
       ),
       'View' => 'back/Member/MemberProfile'
     );
-	  
+
 //	  $this->debuger->prevalue($value);
     $this->LoadPage($value);
   }

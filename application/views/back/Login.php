@@ -34,7 +34,7 @@
         <div class="card">
             <div class="body">
 
-                <?php echo form_open('/admin/AuthenAdmin'); ?>
+                <?php echo form_open('/Admin/AuthenAdmin'); ?>
                     <!-- <div class="msg">Register a new membership</div> -->
                     <div class="input-group">
                         <span class="input-group-addon">

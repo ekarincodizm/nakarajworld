@@ -68,9 +68,10 @@ class Homepage_model extends CI_Model {
   public function LoadProfile($id)
   {
     $query = $this->db
-    ->where('member_id', $id)
+    ->where('mlm_member.member_id', $id)
     ->join('amphur','amphur.amphur_id = mlm_member.member_amphur', 'left')
     ->join('province','province.province_id = mlm_member.member_province', 'left')
+    ->join('mlm_user','mlm_user.member_id = mlm_member.member_id', 'left')
     ->get('mlm_member')
     ->result();
     return $query;

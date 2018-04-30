@@ -21,6 +21,7 @@
             <div class="col-md-12">
               <p>
                 <?php echo $Profile[0]['member_id_card_type_name']; ?> : <?php echo $Profile[0]['member_citizen_id']; ?> <br>
+                <span style="color:red;">รหัสผ่าน : <?php echo base64_decode($Profile[0]['user_pass']); ?></span><br>
                 วันเกิด : <?php echo $this->thaidate->FullDate($Profile[0]['member_born']); ?><br>
                 อายุ : <?php echo $Profile[0]['member_age']; ?> ปี<br>
               </p>

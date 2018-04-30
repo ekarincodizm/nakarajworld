@@ -167,14 +167,14 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 							<div class="col-md-6">
 								<label for="name">ที่อยู่</label>
 								<div class="form-group">
-									<textarea class="form-control" name="member_address" required style="height:60px;" ng-model="member_address" placeholder="กรุณากรอกที่อยู่"></textarea>
+									<textarea class="form-control" name="member_address" required style="height:60px;" placeholder="กรุณากรอกที่อยู่"><?php echo $Profile[0]['member_address']?></textarea>
 								</div>
 							</div>
 							<div class="col-md-3">
 								<label for="name">จังหวัด</label>
 								<div class="form-group">
 									<select name="member_province" required class="form-control" ng-model="province_id" ng-change="amphurA()">
-										  <option value="">โปรดเลือกจังหวัด</option>
+											<option value="<?php echo $Profile[0]['province_id']?>"><?php echo $Profile[0]['province_name']?>(เดิม)</option>
 										<?php foreach ($province as $row): ?>
 											<option value="<?php echo $row['province_id']?>"><?php echo $row['province_name']?></option>
 										<?php endforeach; ?>
@@ -185,6 +185,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 								<label for="name">อำเภอ</label>
 								<div class="form-group">
 									<select name="member_amphur" required class="form-control">
+										<option value="<?php echo $Profile[0]['amphur_id']?>"><?php echo $Profile[0]['amphur_name']?>(เดิม)</option>
 										<option ng-repeat="row in amphur_listA" value="{{row.amphur_id}}">{{row.amphur_name}}</option>
 									</select>
 								</div>
@@ -194,7 +195,7 @@ $(":member_photo").filestyle({buttonText: "Find file"});
 							<div class="col-md-12">
 								<label for="name">ที่อยู่สำรอง กรณีติดต่อไม่ได้</label>
 								<div class="form-group">
-									<textarea class="form-control" name="member_address2"  style="height:60px;" ng-model="member_address2" placeholder="กรุณากรอกที่อยู่สำรอง"></textarea>
+									<textarea class="form-control" name="member_address2"  style="height:60px;" placeholder="กรุณากรอกที่อยู่สำรอง"><?php echo $Profile[0]['member_address2']?></textarea>
 								</div>
 							</div>
 						</div>

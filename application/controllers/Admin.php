@@ -35,11 +35,11 @@ class Admin extends CI_Controller {
 
       redirect('/DashBoardMain');
     } else {
-      redirect('/admin');
+      redirect('/Admin');
     }
   }
   public function Logout() {
     session_destroy();
-    redirect('/admin');
+    redirect('/Admin');
   }
 }
